@@ -788,17 +788,17 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <span class="text-xs text-blue-600 font-semibold block">Regressor R² Score</span>
-              <span id="ml-reg-r2" class="text-2xl font-bold text-blue-900 font-mono">0.684</span>
+              <span id="ml-reg-r2" class="text-2xl font-bold text-blue-900 font-mono">—</span>
               <span class="text-xs text-slate-500 block mt-0.5">Test set evaluation</span>
             </div>
             <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
               <span class="text-xs text-emerald-600 font-semibold block">Mean Absolute Error (MAE)</span>
-              <span id="ml-reg-mae" class="text-2xl font-bold text-emerald-900 font-mono">1,124</span>
+              <span id="ml-reg-mae" class="text-2xl font-bold text-emerald-900 font-mono">—</span>
               <span class="text-xs text-slate-500 block mt-0.5">Fatalities error bounds</span>
             </div>
             <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
               <span class="text-xs text-purple-600 font-semibold block">Classifier Accuracy</span>
-              <span id="ml-clf-acc" class="text-2xl font-bold text-purple-900 font-mono">78.4%</span>
+              <span id="ml-clf-acc" class="text-2xl font-bold text-purple-900 font-mono">—</span>
               <span class="text-xs text-slate-500 block mt-0.5">3-class severity ratio</span>
             </div>
             <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
@@ -908,6 +908,44 @@
             <li><strong>2020 onward:</strong> 36 administrative units reporting. Dadra & Nagar Haveli and Daman & Diu merged into a single UT (effective 26 Jan 2020). Ladakh established as a separate reporting UT.</li>
             <li>Historical boundary lines are preserved exactly as published by the Government of India without synthetic reconstruction.</li>
           </ul>
+        </div>
+      </div>
+
+      <!-- Uploaded research-audit files -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="border-b border-slate-100 pb-3 mb-4">
+          <span class="text-xs font-bold text-violet-600 uppercase tracking-wider">Uploaded Audit Trail</span>
+          <h2 class="text-base font-bold text-slate-900">Research Dataset Register, Issues & Availability Matrix</h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Direct visualization of the uploaded audit CSVs: dataset readiness, parameter final status, availability coverage and open audit issues.
+          </p>
+        </div>
+        <div id="audit-summary-cards" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+          <div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2">Datasets by Readiness</h3>
+            <div id="plot-audit-ready" class="h-64 w-full"></div>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2">Parameters by Final Status</h3>
+            <div id="plot-audit-params" class="h-64 w-full"></div>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2">Audit Issues by Severity</h3>
+            <div id="plot-audit-issues" class="h-64 w-full"></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2">Dataset Register (uploaded)</h3>
+            <div class="mb-2"><input id="audit-register-search" placeholder="Search register..." class="w-full text-xs border border-slate-300 rounded px-2 py-1.5"></div>
+            <div id="table-audit-register" class="h-80 overflow-auto text-xs"></div>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-slate-700 mb-2">Open Audit Issues (uploaded)</h3>
+            <div class="mb-2"><input id="audit-issues-search" placeholder="Search issues..." class="w-full text-xs border border-slate-300 rounded px-2 py-1.5"></div>
+            <div id="table-audit-issues" class="h-80 overflow-auto text-xs"></div>
+          </div>
         </div>
       </div>
 

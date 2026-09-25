@@ -48,6 +48,34 @@ def get_supporting():
     return jsonify({"status": "success", **supporting_store.summary()})
 
 
+@app.route('/api/register', methods=['GET'])
+def get_register():
+    """Dataset register + analysis-ready inventory (uploaded audit CSVs)."""
+    out = {"status": "success", "register": [], "analysis_ready": []}
+    for key, fname in (("register", "data/DATASET_REGISTER.csv"),
+                       ("analysis_ready", "data/ANALYSIS_READY_DATASETS.csv")):
+        if os.path.exists(fname):
+            try:
+                out[key] = pd.read_csv(fname, dtype=str, keep_default_na=False).to_dict(orient='records')
+            except Exception as e:
+                out[key] = {"error": str(e)}
+    return jsonify(out)
+
+
+@app.route('/api/audit-files', methods=['GET'])
+def get_audit_files():
+    """Audit issues + cleaning log (uploaded audit CSVs)."""
+    out = {"status": "success", "issues": [], "cleaning_log": []}
+    for key, fname in (("issues", "data/RESEARCH_AUDIT_ISSUES.csv"),
+                       ("cleaning_log", "data/DATA_CLEANING_LOG.csv")):
+        if os.path.exists(fname):
+            try:
+                out[key] = pd.read_csv(fname, dtype=str, keep_default_na=False).to_dict(orient='records')
+            except Exception as e:
+                out[key] = {"error": str(e)}
+    return jsonify(out)
+
+
 @app.route('/api/availability', methods=['GET'])
 def get_availability():
     """Research audit matrices (parameter status + availability) if present."""

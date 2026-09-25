@@ -31,6 +31,7 @@ async function initializeApp() {
   await loadAuditReport();
   await loadVariableRegistryAndCatalog();
   await loadWeatherTab();
+  await loadResearchAudit();
 }
 
 function setupEventListeners() {
@@ -901,12 +902,12 @@ function displayMLResults(data) {
   if (emptyState) emptyState.classList.add('hidden');
   if (metricsCont) metricsCont.classList.remove('hidden');
 
-  if (data.regression && data.regression.metrics) {
-    setText('ml-reg-r2', data.regression.metrics.r2);
-    setText('ml-reg-mae', Number(data.regression.metrics.mae).toLocaleString());
+  if (data.regression && typeof data.regression.r2_score !== 'undefined') {
+    setText('ml-reg-r2', data.regression.r2_score);
+    setText('ml-reg-mae', Number(data.regression.mae).toLocaleString());
 
     // Feature importance
-    const fi = data.regression.feature_importance;
+    const fi = data.regression.feature_importances;
     const fiContainer = document.getElementById('plot-feature-importance');
     if (fiContainer && fi) {
       const trace = {
@@ -925,8 +926,8 @@ function displayMLResults(data) {
     }
   }
 
-  if (data.classification && data.classification.metrics) {
-    setText('ml-clf-acc', `${Math.round(data.classification.metrics.accuracy * 100)}%`);
+  if (data.classification && typeof data.classification.accuracy !== 'undefined') {
+    setText('ml-clf-acc', `${data.classification.accuracy}%`);
   }
 
   if (data.clustering && data.clustering.cluster_profiles) {
@@ -934,8 +935,8 @@ function displayMLResults(data) {
     if (clusterContainer) {
       const profiles = data.clustering.cluster_profiles;
       const trace = {
-        x: profiles.map(p => `Cluster ${p.cluster}`),
-        y: profiles.map(p => p.mean_accidents),
+        x: profiles.map(p => `Cluster ${p.cluster_id}`),
+        y: profiles.map(p => p.avg_accidents),
         type: 'bar',
         marker: { color: ['#60A5FA', '#34D399', '#F87171'] }
       };
@@ -980,6 +981,93 @@ async function loadAuditReport() {
     }
   } catch (err) {
     console.error('Error loading audit report:', err);
+  }
+}
+
+// ==========================================
+// RESEARCH AUDIT FILES TAB (uploaded CSVs)
+// ==========================================
+
+function countBy(rows, key) {
+  const m = {};
+  (rows || []).forEach(r => {
+    const k = (r[key] || 'Unspecified').toString().trim() || 'Unspecified';
+    m[k] = (m[k] || 0) + 1;
+  });
+  return m;
+}
+
+function renderCountBars(containerId, counts, color, xlabel) {
+  const el = document.getElementById(containerId);
+  if (!el || window.Plotly === undefined) return;
+  const keys = Object.keys(counts);
+  if (!keys.length) {
+    el.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs">No records in uploaded file.</div>';
+    return;
+  }
+  Plotly.newPlot(el, [{ x: keys, y: keys.map(k => counts[k]), type: 'bar', marker: { color } }],
+    { ...commonLayout, xaxis: { title: xlabel || '', tickangle: -18 }, yaxis: { title: 'Count' } },
+    { responsive: true, displayModeBar: false });
+}
+
+function wireTableSearch(inputId, tableId, rows) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('input', () => {
+    renderDataTable(document.getElementById(tableId), filterRows(rows, input.value));
+  });
+}
+
+function filterRows(rows, q) {
+  q = (q || '').toLowerCase().trim();
+  if (!q) return rows;
+  return rows.filter(r => Object.values(r).join(' ').toLowerCase().includes(q));
+}
+
+let auditRegisterRows = [];
+let auditIssueRows = [];
+
+async function loadResearchAudit() {
+  try {
+    const [resReg, resIss, resAvail] = await Promise.all([
+      fetch('/api/register'), fetch('/api/audit-files'), fetch('/api/availability')
+    ]);
+    const reg = await resReg.json();
+    const iss = await resIss.json();
+    const avail = await resAvail.json();
+
+    auditRegisterRows = Array.isArray(reg.register) ? reg.register : [];
+    const readyRows = Array.isArray(reg.analysis_ready) ? reg.analysis_ready : [];
+    auditIssueRows = Array.isArray(iss.issues) ? iss.issues : [];
+    const paramRows = Array.isArray(avail.parameter_status) ? avail.parameter_status : [];
+
+    // Summary cards
+    const cards = document.getElementById('audit-summary-cards');
+    if (cards) {
+      const ready = readyRows.filter(r => (r.Analysis_Ready_Status || '').startsWith('READY')).length;
+      const blocked = readyRows.filter(r => (r.Analysis_Ready_Status || '').includes('NOT_READY') || (r.Analysis_Ready_Status || '').includes('BLOCKED')).length;
+      const paramsReady = paramRows.filter(r => (r.Final_Status_for_Analysis || '') === 'READY_FOR_ANALYSIS').length;
+      const openIss = auditIssueRows.filter(r => (r.Status || '').toLowerCase() !== 'resolved').length;
+      const card = (label, val, cls) => `<div class="rounded-lg border p-3 ${cls}"><span class="text-xs font-semibold block">${label}</span><span class="text-2xl font-bold font-mono">${val}</span></div>`;
+      cards.innerHTML =
+        card('Datasets analysis-ready', ready, 'bg-emerald-50 border-emerald-200 text-emerald-900') +
+        card('Datasets blocked (PDF-only)', blocked, 'bg-rose-50 border-rose-200 text-rose-900') +
+        card('Parameters ready', paramsReady + ' / ' + paramRows.length, 'bg-blue-50 border-blue-200 text-blue-900') +
+        card('Audit issues tracked', openIss, 'bg-amber-50 border-amber-200 text-amber-900');
+    }
+
+    renderCountBars('plot-audit-ready', countBy(readyRows, 'Analysis_Ready_Status'), '#10B981', 'Readiness');
+    renderCountBars('plot-audit-params', countBy(paramRows, 'Final_Status_for_Analysis'), '#2563EB', 'Final status');
+    renderCountBars('plot-audit-issues', countBy(auditIssueRows, 'Severity'), '#F59E0B', 'Severity');
+
+    const regTable = document.getElementById('table-audit-register');
+    if (regTable) renderDataTable(regTable, auditRegisterRows);
+    const issTable = document.getElementById('table-audit-issues');
+    if (issTable) renderDataTable(issTable, auditIssueRows);
+    wireTableSearch('audit-register-search', 'table-audit-register', auditRegisterRows);
+    wireTableSearch('audit-issues-search', 'table-audit-issues', auditIssueRows);
+  } catch (err) {
+    console.error('Error loading research audit:', err);
   }
 }
 
