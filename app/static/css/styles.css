@@ -1,0 +1,131 @@
+/* Custom Styling for MoRTH Indian Road Accident Analytics Platform */
+:root {
+  --navy-header: #0B1528;
+  --navy-accent: #1E293B;
+  --primary-blue: #2563EB;
+  --border-color: #E2E8F0;
+  --bg-main: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-dark: #0F172A;
+  --text-muted: #64748B;
+  --badge-green: #10B981;
+  --badge-amber: #F59E0B;
+  --badge-red: #EF4444;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styling matching reference screenshot */
+.header-navy {
+  background-color: var(--navy-header);
+  border-bottom: 1px solid #1E293B;
+}
+
+.badge-research {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.badge-verified {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-isolated {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: #93C5FD;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.badge-records {
+  background-color: #1E293B;
+  color: #E2E8F0;
+  border: 1px solid #334155;
+}
+
+/* Rounded Cards */
+.dashboard-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* KPI Cards */
+.kpi-card {
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+.kpi-blue::before { background-color: #2563EB; }
+.kpi-red::before { background-color: #DC2626; }
+.kpi-amber::before { background-color: #EA580C; }
+.kpi-purple::before { background-color: #7C3AED; }
+.kpi-slate::before { background-color: #475569; }
+.kpi-gold::before { background-color: #D97706; }
+.kpi-teal::before { background-color: #0D9488; }
+
+/* Filter Controls */
+.filter-select {
+  font-size: 0.825rem;
+  border-radius: 6px;
+  border-color: #CBD5E1;
+}
+
+/* Tabs */
+.nav-tab-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid transparent;
+  color: #64748B;
+  transition: all 0.15s ease;
+}
+
+.nav-tab-btn.active {
+  color: #2563EB;
+  border-bottom-color: #2563EB;
+  font-weight: 600;
+}
+
+/* Print Friendly formatting */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF;
+    color: #000000;
+  }
+  .dashboard-card {
+    box-shadow: none;
+    border: 1px solid #94A3B8;
+    break-inside: avoid;
+  }
+}
