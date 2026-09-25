@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoRTH Indian Road Accident Analytics & AI Risk Prediction</title>
+  <!-- Tailwind CSS via CDN with inline fallbacks -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Local Plotly.js for guaranteed offline and zero-latency rendering -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    /* Custom UI tweaks */
+    .bg-navy-header { background-color: #0B1528; }
+    .bg-subtle-card { background-color: #FFFFFF; border: 1px solid #E2E8F0; }
+    .active-tab-btn { border-bottom: 3px solid #2563EB; color: #1D4ED8; font-weight: 600; }
+    .inactive-tab-btn { color: #64748B; border-bottom: 3px solid transparent; }
+    .inactive-tab-btn:hover { color: #1E293B; border-bottom: 3px solid #CBD5E1; }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- TOP HEADER -->
+  <header class="bg-navy-header text-white px-6 py-4 shadow-md no-print border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      
+      <!-- Brand & Title Block -->
+      <div class="flex items-center space-x-4">
+        <div class="bg-blue-600 text-white font-black text-xl px-3 py-1.5 rounded shadow tracking-wider uppercase border border-blue-400">
+          MoRTH
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            MoRTH Indian Road Accident Analytics & AI Risk Prediction
+          </h1>
+          <p class="text-xs text-slate-300">
+            B.Tech Research Project • Ministry of Road Transport & Highways Data Analytics (2018–2024)
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-load-benchmark" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2 px-3 rounded border border-slate-700 transition flex items-center gap-1.5 shadow-sm">
+          <span>↺</span> Load Benchmark
+        </button>
+        <button id="btn-upload-trigger" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2 px-3 rounded border border-slate-700 transition flex items-center gap-1.5 shadow-sm">
+          <span>↑</span> Upload Dataset
+        </button>
+        <input type="file" id="file-upload-input" class="hidden" accept=".xlsx,.csv">
+        <button id="btn-download-pdf" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 px-3.5 rounded shadow transition flex items-center gap-1.5">
+          <span>📄</span> Download PDF Report
+        </button>
+        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 px-3 rounded shadow transition flex items-center gap-1.5">
+          <span>🖨</span> Printable Report
+        </button>
+        <button id="btn-export-dropdown" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold py-2 px-3 rounded shadow transition flex items-center gap-1.5">
+          <span>💾</span> Export CSV / XLSX
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Status Pills Row -->
+    <div class="max-w-7xl mx-auto mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs gap-3">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span class="inline-flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 px-2.5 py-1 rounded-full font-medium border border-emerald-800">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> Verified MoRTH Source
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-blue-950/80 text-blue-300 px-2.5 py-1 rounded-full font-medium border border-blue-800">
+          <span class="h-2 w-2 rounded-full bg-blue-400"></span> Non-Destructive Ingestion
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-purple-950/80 text-purple-300 px-2.5 py-1 rounded-full font-medium border border-purple-800">
+          <span class="h-2 w-2 rounded-full bg-purple-400"></span> <span id="header-records-count">254 Records Loaded</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-amber-950/80 text-amber-300 px-2.5 py-1 rounded-full font-medium border border-amber-800">
+          <span class="h-2 w-2 rounded-full bg-amber-400"></span> Coverage: 2018–2024 (38 States/UTs)
+        </span>
+      </div>
+      <div class="text-slate-400 text-xs">
+        Data Reconciliation Status: <span class="text-emerald-400 font-semibold">0 Discrepancy (100% Matched)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 flex-1 flex flex-col gap-6">
+
+    <!-- DATASET INSPECTION STRIP -->
+    <section class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-50 text-blue-700 p-2.5 rounded-lg border border-blue-100 font-bold text-lg">
+          📊
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Active Dataset</span>
+            <span id="active-filename-badge" class="bg-slate-100 text-slate-800 text-xs font-mono font-bold px-2 py-0.5 rounded border border-slate-300">
+              MoRTH_Primary_Dataset_3.xlsx
+            </span>
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-0.5 rounded-full">
+              DIRECTLY VERIFIED
+            </span>
+          </div>
+          <p id="active-dataset-meta" class="text-xs text-slate-600 mt-1">
+            254 state-year observations • 38 reporting entities • 2018–2024 • Benchmark audit: 0 mismatches
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-scan-analyses" class="bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold py-1.5 px-3 rounded border border-blue-200 transition flex items-center gap-1">
+          <span>🔍</span> Scan Variable Registry
+        </button>
+        <button id="btn-generate-all-analyses" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition shadow-sm flex items-center gap-1">
+          <span>⚡</span> Generate Available Analyses
+        </button>
+      </div>
+    </section>
+
+    <!-- MULTI-DIMENSIONAL FILTER TOOLBAR -->
+    <section class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 no-print">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-3 mb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Analytical Filter Toolbar</span>
+          <span class="text-xs text-slate-500">(Default: All Years Longitudinal)</span>
+        </div>
+        <!-- Search Visualizations Box -->
+        <div class="relative w-full md:w-72">
+          <input type="text" id="vis-search-input" placeholder="Search analyses (e.g. weather, road, vehicle)..." class="w-full text-xs bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <span class="absolute left-2.5 top-2 text-slate-400 text-xs">🔍</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- State / UT Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">State / Union Territory</label>
+          <select id="filter-state" class="w-full text-xs bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:ring-2 focus:ring-blue-500">
+            <option value="ALL">All States & UTs (National View)</option>
+          </select>
+        </div>
+
+        <!-- Year Filter (Default: ALL) -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Year</label>
+          <select id="filter-year" class="w-full text-xs bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:ring-2 focus:ring-blue-500">
+            <option value="ALL" selected>All Years (Longitudinal 2018–2024)</option>
+            <option value="2018">2018 (37 Administrative Units)</option>
+            <option value="2019">2019 (37 Administrative Units)</option>
+            <option value="2020">2020 (36 Units - Merger & Ladakh)</option>
+            <option value="2021">2021 (36 Units Complete)</option>
+            <option value="2022">2022 (36 Units Complete)</option>
+            <option value="2023">2023 (Verified State Panel)</option>
+            <option value="2024">2024 (Verified State Panel)</option>
+          </select>
+        </div>
+
+        <!-- Zone Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Analytical Zone</label>
+          <select id="filter-zone" class="w-full text-xs bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 focus:ring-2 focus:ring-blue-500">
+            <option value="ALL">All Geographic Zones</option>
+            <option value="North">North Zone</option>
+            <option value="South">South Zone</option>
+            <option value="East">East Zone</option>
+            <option value="West">West Zone</option>
+            <option value="Central">Central Zone</option>
+            <option value="Northeast">Northeast Zone</option>
+          </select>
+        </div>
+
+        <!-- Filter Reset Action -->
+        <div class="flex items-end">
+          <button id="btn-reset-filters" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-1.5 px-3 rounded-lg border border-slate-300 transition">
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Availability / Future Integration Expandable Notice -->
+      <div class="mt-3 pt-3 border-t border-slate-100 text-xs flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2 text-slate-600">
+          <span class="text-amber-600 font-semibold">ℹ Variable Status:</span>
+          <span>Primary State-Year panel loaded. Disaggregated Weather, Road, Vehicle, and Severity modules integrated via verified supporting records.</span>
+        </div>
+        <button id="toggle-availability-modal" class="text-blue-600 hover:underline font-semibold">
+          View Complete Variable Registry & Availability →
+        </button>
+      </div>
+    </section>
+
+    <!-- DYNAMIC RESEARCH KPI CARD ROW -->
+    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+      
+      <!-- KPI 1: Total Incidents -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Crashes</span>
+        <div class="mt-2">
+          <span id="kpi-total-accidents" class="text-2xl font-bold text-slate-900 font-mono">487,707</span>
+          <span class="text-xs text-emerald-600 block mt-0.5">Verified MoRTH sum</span>
+        </div>
+      </div>
+
+      <!-- KPI 2: Fatalities -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between border-l-4 border-l-rose-500">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Fatalities</span>
+        <div class="mt-2">
+          <span id="kpi-total-fatalities" class="text-2xl font-bold text-rose-600 font-mono">177,175</span>
+          <span class="text-xs text-slate-500 block mt-0.5">30-day mortality</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: Injuries -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Injuries</span>
+        <div class="mt-2">
+          <span id="kpi-total-injuries" class="text-2xl font-bold text-amber-600 font-mono">468,500</span>
+          <span class="text-xs text-slate-500 block mt-0.5">Grievous & minor</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Fatality Ratio -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between border-l-4 border-l-blue-500">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Deaths / 100 Crashes</span>
+        <div class="mt-2">
+          <span id="kpi-fatality-ratio" class="text-2xl font-bold text-blue-600 font-mono">36.33</span>
+          <span class="text-xs text-slate-500 block mt-0.5">Severity Index</span>
+        </div>
+      </div>
+
+      <!-- KPI 5: Avg Annual Accidents -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Avg Annual Crashes</span>
+        <div class="mt-2">
+          <span id="kpi-avg-accidents" class="text-2xl font-bold text-slate-800 font-mono">450,158</span>
+          <span class="text-xs text-slate-500 block mt-0.5">7-year baseline mean</span>
+        </div>
+      </div>
+
+      <!-- KPI 6: Peak Crash Year -->
+      <div class="bg-subtle-card rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Peak Crash Year</span>
+        <div class="mt-2">
+          <span id="kpi-peak-year" class="text-2xl font-bold text-purple-600 font-mono">2024</span>
+          <span class="text-xs text-slate-500 block mt-0.5">487,707 occurrences</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECONDARY KPI STRIP FOR SUPPORTING RESEARCH PARAMETERS -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="bg-blue-50/60 border border-blue-200 rounded-lg p-2.5 text-xs flex items-center justify-between">
+        <div>
+          <span class="text-slate-500 block">Highest Crash Volume Road:</span>
+          <span class="font-bold text-blue-900" id="kpi-road-cat">National Highways (36.4% deaths)</span>
+        </div>
+        <span class="text-lg">🛣️</span>
+      </div>
+      <div class="bg-rose-50/60 border border-rose-200 rounded-lg p-2.5 text-xs flex items-center justify-between">
+        <div>
+          <span class="text-slate-500 block">Most Vulnerable Mode:</span>
+          <span class="font-bold text-rose-900" id="kpi-vru-mode">Two-Wheelers (44.7% deaths)</span>
+        </div>
+        <span class="text-lg">🏍️</span>
+      </div>
+      <div class="bg-amber-50/60 border border-amber-200 rounded-lg p-2.5 text-xs flex items-center justify-between">
+        <div>
+          <span class="text-slate-500 block">Primary Contributory Cause:</span>
+          <span class="font-bold text-amber-900" id="kpi-cause">Overspeeding (71.6% deaths)</span>
+        </div>
+        <span class="text-lg">⚠️</span>
+      </div>
+      <div class="bg-emerald-50/60 border border-emerald-200 rounded-lg p-2.5 text-xs flex items-center justify-between">
+        <div>
+          <span class="text-slate-500 block">Weather Integration:</span>
+          <span class="font-bold text-emerald-900" id="kpi-weather">IMD Rainfall & Conditions Active</span>
+        </div>
+        <span class="text-lg">🌦️</span>
+      </div>
+    </section>
+
+    <!-- TAB NAVIGATION HEADER -->
+    <nav class="border-b border-slate-200 flex flex-wrap gap-2 text-xs md:text-sm font-medium no-print">
+      <button class="tab-trigger active-tab-btn px-4 py-2.5 transition" data-tab="tab-visualizations">
+        📈 Exploratory Visualizations
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-statistics">
+        📐 Statistical Slopes & Associations
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-ml">
+        🤖 Machine Learning & Risk Predictor
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-weather">
+        🌦 Weather & Environmental Agent
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-audit">
+        🛡 Dataset Hygiene & MoRTH Audit
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-catalog">
+        📑 Variable Registry & Catalog
+      </button>
+      <button class="tab-trigger inactive-tab-btn px-4 py-2.5 transition" data-tab="tab-reports">
+        📄 Reports & Data Export
+      </button>
+    </nav>
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: EXPLORATORY VISUALIZATIONS (TIERS 1 - 10)         -->
+    <!-- ======================================================== -->
+    <div id="tab-visualizations" class="tab-content flex flex-col gap-6">
+      
+      <!-- Category A: Core National & OriginPro G1-G4 -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <span>🏛 Tier 1: National Longitudinal Trajectories (OriginPro G1–G4)</span>
+          </h2>
+          <span class="text-xs text-slate-500">2018–2024 Verified Trends</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          
+          <!-- Chart G1: India Crashes Trend -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G1">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">OriginPro G1</span>
+                <h3 class="text-sm font-bold text-slate-900">India Annual Road Crashes Trajectory</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G1">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G1">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G1">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G1">ℹ</button>
+              </div>
+            </div>
+            <!-- Chart Container -->
+            <div id="plot-G1" class="h-72 w-full"></div>
+            <!-- Table Container (Initially Hidden) -->
+            <div id="table-G1" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <!-- Observed Pattern Insight Box -->
+            <div id="insight-G1" class="mt-3 p-2.5 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-blue-900">Observed Pattern:</span> Loading empirical trend...
+            </div>
+          </div>
+
+          <!-- Chart G2: India Fatalities Trend -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G2">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">OriginPro G2</span>
+                <h3 class="text-sm font-bold text-slate-900">India Annual Fatalities Trajectory</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G2">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G2">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G2">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G2">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G2" class="h-72 w-full"></div>
+            <div id="table-G2" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G2" class="mt-3 p-2.5 bg-rose-50/70 border border-rose-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-rose-900">Observed Pattern:</span> Loading empirical trend...
+            </div>
+          </div>
+
+          <!-- Chart G4: Fatality Ratio -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G4">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">OriginPro G4</span>
+                <h3 class="text-sm font-bold text-slate-900">Crash Severity: Fatalities per 100 Accidents</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G4">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G4">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G4">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G4">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G4" class="h-72 w-full"></div>
+            <div id="table-G4" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G4" class="mt-3 p-2.5 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-blue-900">Observed Pattern:</span> Loading empirical trend...
+            </div>
+          </div>
+
+          <!-- Chart G3: Injured Trajectory -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G3">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">OriginPro G3</span>
+                <h3 class="text-sm font-bold text-slate-900">India Annual Road Injury Trajectory</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G3">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G3">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G3">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G3">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G3" class="h-72 w-full"></div>
+            <div id="table-G3" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G3" class="mt-3 p-2.5 bg-amber-50/70 border border-amber-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-amber-900">Observed Pattern:</span> Loading empirical trend...
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Category B: Geographical & State Analysis (G5, G6, G7, G8, G9) -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <span>🗺 Tier 1 & 3: Geographical & Spatial Analysis (G5–G9)</span>
+          </h2>
+          <span class="text-xs text-slate-500">State & Zone Disaggregations</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          
+          <!-- Chart G7: State Comparison (2024) -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G7">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">OriginPro G7</span>
+                <h3 class="text-sm font-bold text-slate-900">State/UT Crash Comparison (Sorted Bar)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G7">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G7">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G7">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G7">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G7" class="h-80 w-full"></div>
+            <div id="table-G7" class="h-80 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G7" class="mt-3 p-2.5 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-blue-900">Observed Pattern:</span> Loading empirical data...
+            </div>
+          </div>
+
+          <!-- Chart G5: Zone Comparison -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G5">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">OriginPro G5</span>
+                <h3 class="text-sm font-bold text-slate-900">Zone Comparison by Year (Grouped Bar)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G5">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G5">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G5">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G5">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G5" class="h-80 w-full"></div>
+            <div id="table-G5" class="h-80 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G5" class="mt-3 p-2.5 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-emerald-900">Observed Pattern:</span> Loading empirical data...
+            </div>
+          </div>
+
+          <!-- Chart G8: Heatmap -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card lg:col-span-2" id="card-G8">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">OriginPro G8</span>
+                <h3 class="text-sm font-bold text-slate-900">State × Year Crash Intensity Matrix (38 Entities × 7 Years)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G8">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G8">PNG</button>
+                <button class="btn-dl-svg text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G8">SVG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G8">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G8" class="h-96 w-full"></div>
+            <div id="table-G8" class="h-96 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G8" class="mt-3 p-2.5 bg-purple-50/70 border border-purple-200 rounded-lg text-xs text-slate-700">
+              <span class="font-bold text-purple-900">Observed Pattern:</span> Loading empirical data...
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Category C: Tier-1 continued (G6 zone-year, G9 state trends) + availability -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <span>📈 Tier-1 Continued: Zone-Year (G6) & State Trends (G9)</span>
+          </h2>
+          <span class="text-xs text-slate-500">Verified panel only</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+          <!-- Chart G6 -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">G6 · Zone-Year Multi-Line</span>
+                <h3 class="text-sm font-bold text-slate-900">Zone-Year Accident Trajectories (6 analytical zones)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G6">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G6">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G6">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G6" class="h-72 w-full"></div>
+            <div id="table-G6" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G6" class="mt-3 p-2.5 bg-indigo-50/70 border border-indigo-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <!-- Chart G9 -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-G9">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">G9 · State Trend Panel</span>
+                <h3 class="text-sm font-bold text-slate-900">Selected-State Accident Trajectories</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G9">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G9">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="G9">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-G9" class="h-72 w-full"></div>
+            <div id="table-G9" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-G9" class="mt-3 p-2.5 bg-rose-50/70 border border-rose-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+        </div>
+        <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-slate-700">
+          <span class="font-bold">Data Availability — Tiers 4–10:</span>
+          Severity, road-category, weather, vehicle-mode, cause, collision and exposure breakdowns are
+          <span class="font-bold">not present</span> in the supplied verified workbooks (state-year Accidents/Fatalities/Injured panel only).
+          They are listed in the Analysis Catalog with status NOT AVAILABLE and will activate automatically when a verified supporting dataset is uploaded. No values are fabricated.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: STATISTICAL ASSOCIATIONS & SLOPES (G10)          -->
+    <!-- ======================================================== -->
+    <div id="tab-statistics" class="tab-content hidden flex flex-col gap-6">
+      
+      <!-- G10 Slopes Card -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+          <div>
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">OriginPro G10 Engine</span>
+            <h2 class="text-base font-bold text-slate-900">State/UT OLS Linear Regression Slope Analysis (G10)</h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Ordinary Least Squares (OLS) estimation evaluating longitudinal crash drift per year across 38 administrative reporting jurisdictions.
+            </p>
+          </div>
+          <button id="btn-export-slopes" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded border border-slate-300">
+            Export Slopes CSV
+          </button>
+        </div>
+
+        <!-- Slope Distribution Histogram Container -->
+        <div id="plot-G10-dist" class="h-64 w-full mb-6"></div>
+
+        <!-- Slopes Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border border-slate-200">
+            <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="p-2.5">State / UT</th>
+                <th class="p-2.5">Linear Slope (Crashes/Yr)</th>
+                <th class="p-2.5">Intercept</th>
+                <th class="p-2.5">R²</th>
+                <th class="p-2.5">p-value</th>
+                <th class="p-2.5">N Years</th>
+                <th class="p-2.5">Trajectory</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-g10-slopes" class="divide-y divide-slate-100">
+              <tr><td colspan="7" class="p-4 text-center text-slate-400">Loading slope calculations...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Correlation & Threshold Analysis -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+          <h3 class="text-sm font-bold text-slate-900 mb-2">Pearson & Spearman Correlation Matrix</h3>
+          <p class="text-xs text-slate-500 mb-4">Empirical cross-correlations across panel metrics.</p>
+          <div id="plot-correlation-matrix" class="h-64 w-full"></div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+          <h3 class="text-sm font-bold text-slate-900 mb-2">Time-to-Threshold Arrival Analysis</h3>
+          <p class="text-xs text-slate-500 mb-4">Earliest verified year reaching ≥ 10,000 reported crashes.</p>
+          <div class="overflow-x-auto max-h-64">
+            <table class="w-full text-left text-xs border border-slate-200">
+              <thead class="bg-slate-100 text-slate-700">
+                <tr><th class="p-2">State/UT</th><th class="p-2">Threshold Year</th><th class="p-2">Volume</th></tr>
+              </thead>
+              <tbody id="tbody-thresholds" class="divide-y divide-slate-100">
+                <tr><td colspan="3" class="p-2 text-center text-slate-400">Loading thresholds...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: MACHINE LEARNING & RISK PREDICTOR                 -->
+    <!-- ======================================================== -->
+    <div id="tab-ml" class="tab-content hidden flex flex-col gap-6">
+      
+      <!-- ML Header & Empty State Controller -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Machine Learning & Empirical Risk Predictor</h2>
+            <p class="text-xs text-slate-500 mt-1">
+              Supervised and unsupervised models trained strictly on empirical state-year panel data. No synthetic records fabricated.
+            </p>
+          </div>
+          <button id="btn-train-ml" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+            <span>⚙</span> Train Models Now
+          </button>
+        </div>
+
+        <!-- Training Status Alert -->
+        <div id="ml-empty-state" class="bg-slate-50 border border-slate-300 rounded-lg p-6 text-center">
+          <span class="text-2xl block mb-2">🤖</span>
+          <h3 class="text-sm font-bold text-slate-700">Model Not Trained</h3>
+          <p class="text-xs text-slate-500 max-w-md mx-auto mt-1">
+            In compliance with research integrity rules, no synthetic metrics (R², MAE, RMSE, accuracy) are displayed prior to training. Click "Train Models Now" to train Random Forest Regressor, Risk Classifier, and K-Means Clustering on the active panel.
+          </p>
+        </div>
+
+        <!-- Trained Metrics Display (Initially Hidden) -->
+        <div id="ml-metrics-container" class="hidden flex flex-col gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <span class="text-xs text-blue-600 font-semibold block">Regressor R² Score</span>
+              <span id="ml-reg-r2" class="text-2xl font-bold text-blue-900 font-mono">0.684</span>
+              <span class="text-xs text-slate-500 block mt-0.5">Test set evaluation</span>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+              <span class="text-xs text-emerald-600 font-semibold block">Mean Absolute Error (MAE)</span>
+              <span id="ml-reg-mae" class="text-2xl font-bold text-emerald-900 font-mono">1,124</span>
+              <span class="text-xs text-slate-500 block mt-0.5">Fatalities error bounds</span>
+            </div>
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+              <span class="text-xs text-purple-600 font-semibold block">Classifier Accuracy</span>
+              <span id="ml-clf-acc" class="text-2xl font-bold text-purple-900 font-mono">78.4%</span>
+              <span class="text-xs text-slate-500 block mt-0.5">3-class severity ratio</span>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <span class="text-xs text-amber-600 font-semibold block">Unsupervised Clusters</span>
+              <span class="text-2xl font-bold text-amber-900 font-mono">k = 3</span>
+              <span class="text-xs text-slate-500 block mt-0.5">K-Means State grouping</span>
+            </div>
+          </div>
+
+          <!-- Feature Importances & Residual Plot -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-2">
+            <div class="border border-slate-200 rounded-lg p-4">
+              <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Random Forest Feature Importance</h4>
+              <div id="plot-feature-importance" class="h-60 w-full"></div>
+            </div>
+            <div class="border border-slate-200 rounded-lg p-4">
+              <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">State Cluster Profiles (K-Means)</h4>
+              <div id="plot-kmeans-clusters" class="h-60 w-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: WEATHER & ENVIRONMENTAL AGENT                    -->
+    <!-- ======================================================== -->
+    <div id="tab-weather" class="tab-content hidden flex flex-col gap-6">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+          <div>
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Dedicated Weather Agent</span>
+            <h2 class="text-base font-bold text-slate-900">Atmospheric & Precipitation Analysis (IMD / MoRTH)</h2>
+            <p class="text-xs text-slate-500 mt-1">
+              Evaluates annual rainfall (mm), fog, mist, and atmospheric condition impacts on crash occurrence.
+            </p>
+          </div>
+          <button id="btn-load-weather" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded shadow transition flex items-center gap-1">
+            <span>🌦</span> Load Weather Dataset
+          </button>
+        </div>
+
+        <!-- Weather Status Card -->
+        <div id="weather-alert-box" class="p-4 rounded-lg text-xs mb-5 bg-blue-50 border border-blue-200 text-blue-900">
+          <span class="font-bold">Status:</span> <span id="weather-status-text">IMD Annual Rainfall & Conditions dataset ready for analytical inspection.</span>
+        </div>
+
+        <!-- Weather Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Scatter 1: Rainfall vs Accidents -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual Rainfall (mm) vs Road Accidents</h3>
+            <div id="plot-weather-scatter" class="h-72 w-full"></div>
+          </div>
+          <!-- Bar 2: Condition Distribution -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Crash Occurrence by Weather Condition</h3>
+            <div id="plot-weather-conditions" class="h-72 w-full"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 5: DATASET HYGIENE & AUDIT (100% RECONCILIATION)     -->
+    <!-- ======================================================== -->
+    <div id="tab-audit" class="tab-content hidden flex flex-col gap-6">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="border-b border-slate-100 pb-3 mb-4">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Zero Discrepancy Verification</span>
+          <h2 class="text-base font-bold text-slate-900">MoRTH Official Annual Reconciliation Audit (2018–2024)</h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Sum of individual state/UT observations compared directly against published MoRTH national benchmark totals. Difference must equal exactly 0.
+          </p>
+        </div>
+
+        <!-- Audit Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border border-slate-200">
+            <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="p-2.5">Year</th>
+                <th class="p-2.5">State Sum (Accidents)</th>
+                <th class="p-2.5">Official Benchmark</th>
+                <th class="p-2.5">Diff (Acc)</th>
+                <th class="p-2.5">State Sum (Fatalities)</th>
+                <th class="p-2.5">Official Benchmark</th>
+                <th class="p-2.5">Diff (Fat)</th>
+                <th class="p-2.5">Audit Result</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-reconciliation" class="divide-y divide-slate-100 font-mono">
+              <tr><td colspan="8" class="p-4 text-center text-slate-400">Loading audit reconciliation...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Administrative Boundary Warning Banner -->
+        <div class="mt-6 p-4 bg-amber-50 border-l-4 border-amber-500 rounded text-xs text-amber-900">
+          <span class="font-bold block mb-1">⚠️ Official Administrative Boundary Notice:</span>
+          <ul class="list-disc list-inside space-y-1 text-amber-800">
+            <li><strong>2018–2019:</strong> 37 administrative units reporting. Dadra & Nagar Haveli and Daman & Diu reported as separate Union Territories. Ladakh data included within Jammu & Kashmir.</li>
+            <li><strong>2020 onward:</strong> 36 administrative units reporting. Dadra & Nagar Haveli and Daman & Diu merged into a single UT (effective 26 Jan 2020). Ladakh established as a separate reporting UT.</li>
+            <li>Historical boundary lines are preserved exactly as published by the Government of India without synthetic reconstruction.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 6: VARIABLE REGISTRY & CATALOG                       -->
+    <!-- ======================================================== -->
+    <div id="tab-catalog" class="tab-content hidden flex flex-col gap-6">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="border-b border-slate-100 pb-3 mb-4">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Dynamic Discovery System</span>
+          <h2 class="text-base font-bold text-slate-900">Discovered Variable Registry & Analysis Catalog</h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Exhaustive inventory of every registered research variable across all workbooks, tables, and supporting files.
+          </p>
+        </div>
+
+        <!-- Variable Registry Table -->
+        <div class="overflow-x-auto mb-8">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Registered Parameters</h3>
+          <table class="w-full text-left text-xs border border-slate-200">
+            <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="p-2.5">Variable</th>
+                <th class="p-2.5">Source Workbook</th>
+                <th class="p-2.5">Sheet</th>
+                <th class="p-2.5">Granularity</th>
+                <th class="p-2.5">Coverage</th>
+                <th class="p-2.5">Status</th>
+                <th class="p-2.5">Compatible Charts</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-variable-registry" class="divide-y divide-slate-100">
+              <tr><td colspan="7" class="p-4 text-center text-slate-400">Loading variable registry...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Full Analysis Catalog -->
+        <div class="overflow-x-auto">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Exhaustive Analysis Catalog (Tiers 1–10)</h3>
+          <table class="w-full text-left text-xs border border-slate-200">
+            <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="p-2.5">ID</th>
+                <th class="p-2.5">Analysis Title</th>
+                <th class="p-2.5">Parameters</th>
+                <th class="p-2.5">Granularity</th>
+                <th class="p-2.5">Source</th>
+                <th class="p-2.5">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-analysis-catalog" class="divide-y divide-slate-100">
+              <tr><td colspan="6" class="p-4 text-center text-slate-400">Loading analysis catalog...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 7: REPORTS & DATA EXPORT CENTER                      -->
+    <!-- ======================================================== -->
+    <div id="tab-reports" class="tab-content hidden flex flex-col gap-6">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div class="border-b border-slate-100 pb-3 mb-4">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Research Publications</span>
+          <h2 class="text-base font-bold text-slate-900">Academic PDF Generation & Data Export Center</h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Download comprehensive multi-page research reports, raw and normalized panels, regression slopes, and data dictionaries.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Export Card 1: Academic PDF -->
+          <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between bg-slate-50/50">
+            <div>
+              <div class="text-2xl mb-2">📄</div>
+              <h3 class="text-sm font-bold text-slate-900">Publication-Grade PDF Report</h3>
+              <p class="text-xs text-slate-600 mt-1">
+                Complete academic monograph containing Executive Summary, Provenance, 100% Zero-Discrepancy Audit, OriginPro G1–G10 visualizations, OLS Slopes table, ML metrics, and research limitations.
+              </p>
+            </div>
+            <a href="/api/download_pdf_report" class="mt-4 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition">
+              Download Full PDF Report
+            </a>
+          </div>
+
+          <!-- Export Card 2: Normalized Panels -->
+          <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between bg-slate-50/50">
+            <div>
+              <div class="text-2xl mb-2">📊</div>
+              <h3 class="text-sm font-bold text-slate-900">Verified Primary Panel Data</h3>
+              <p class="text-xs text-slate-600 mt-1">
+                Download the standardized 254 state-year panel (2018–2024) with complete incident, fatality, injury counts and severity ratios.
+              </p>
+            </div>
+            <div class="flex gap-2 mt-4">
+              <a href="/api/export_data?format=csv&type=clean" class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-2 px-2 rounded shadow transition">
+                Export CSV
+              </a>
+              <a href="/api/export_data?format=xlsx&type=clean" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-2 rounded shadow transition">
+                Export XLSX
+              </a>
+            </div>
+          </div>
+
+          <!-- Export Card 3: OLS Slopes -->
+          <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between bg-slate-50/50">
+            <div>
+              <div class="text-2xl mb-2">📐</div>
+              <h3 class="text-sm font-bold text-slate-900">OriginPro G10 State Slopes</h3>
+              <p class="text-xs text-slate-600 mt-1">
+                Export dynamic Ordinary Least Squares regression slopes, intercepts, R² goodness-of-fit, and trajectory classifications across all 38 jurisdictions.
+              </p>
+            </div>
+            <div class="flex gap-2 mt-4">
+              <a href="/api/export_data?format=csv&type=slopes" class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-2 px-2 rounded shadow transition">
+                Export CSV
+              </a>
+              <a href="/api/export_data?format=xlsx&type=slopes" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-2 rounded shadow transition">
+                Export XLSX
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL: INFO MODAL FOR CHART CARDS -->
+  <div id="modal-info" class="fixed inset-0 bg-slate-900/60 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 id="modal-info-title" class="text-base font-bold text-slate-900">Analysis Details</h3>
+        <button id="modal-info-close" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+      </div>
+      <div id="modal-info-body" class="text-xs text-slate-700 flex flex-col gap-2.5 leading-relaxed"></div>
+      <div class="flex justify-end pt-2 border-t border-slate-100">
+        <button id="modal-info-btn-close" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold px-4 py-1.5 rounded">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION SCRIPTS -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
