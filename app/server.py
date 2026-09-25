@@ -31,6 +31,7 @@ discovery_agent = DataDiscoveryAgent(data_dir="data")
 join_agent = JoinCompatibilityAgent()
 weather_agent = WeatherAgent(data_dir="data")
 vis_agent = VisualizationAgent(loader, weather_agent)
+supporting_store = vis_agent.supporting
 ml_pipeline = SafetyMLPipeline()
 
 # Cache discovery on boot
@@ -39,6 +40,28 @@ discovery_agent.discover_all()
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/supporting', methods=['GET'])
+def get_supporting():
+    """Registry of drop-in supporting CSVs (data/supporting_csv/)."""
+    supporting_store.refresh()
+    return jsonify({"status": "success", **supporting_store.summary()})
+
+
+@app.route('/api/availability', methods=['GET'])
+def get_availability():
+    """Research audit matrices (parameter status + availability) if present."""
+    out = {"status": "success", "parameter_status": [], "data_availability": []}
+    for key, fname in (("parameter_status", "data/PARAMETER_FINAL_STATUS.csv"),
+                       ("data_availability", "data/DATA_AVAILABILITY.csv")):
+        if os.path.exists(fname):
+            try:
+                df = pd.read_csv(fname, dtype=str, keep_default_na=False)
+                out[key] = df.to_dict(orient='records')
+            except Exception as e:
+                out[key] = {"error": str(e)}
+    return jsonify(out)
+
 
 @app.route('/api/metadata', methods=['GET'])
 def get_metadata():
@@ -67,6 +90,7 @@ def get_metadata():
             "zones": zones
         },
         "discovery": discovery_summary,
+        "supporting": supporting_store.summary(),
         "weather_status": weather_agent.check_status()
     })
 

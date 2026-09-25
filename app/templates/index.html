@@ -543,10 +543,143 @@
 
         </div>
         <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-slate-700">
-          <span class="font-bold">Data Availability — Tiers 4–10:</span>
-          Severity, road-category, weather, vehicle-mode, cause, collision and exposure breakdowns are
-          <span class="font-bold">not present</span> in the supplied verified workbooks (state-year Accidents/Fatalities/Injured panel only).
-          They are listed in the Analysis Catalog with status NOT AVAILABLE and will activate automatically when a verified supporting dataset is uploaded. No values are fabricated.
+          <span class="font-bold">Supporting modules (Tiers 4–10):</span>
+          cards below activate automatically when the matching MoRTH CSV is placed in
+          <code class="bg-amber-100 px-1 rounded">data/supporting_csv/</code>.
+          Missing files show the exact expected filename — no values are fabricated.
+        </div>
+      </div>
+
+      <!-- Category D: Supporting modules (collision / violation / road-user / exposure / licence / safety / cities) -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <span>🔬 Supporting Modules — auto-activates from data/supporting_csv/</span>
+          </h2>
+          <span class="text-xs text-slate-500">MoRTH AR 2024 tables</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-VH-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">VH-01 · Road-User Fatalities</span>
+                <h3 class="text-sm font-bold text-slate-900">Deaths by Road-User Category (2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="VH-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="VH-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="VH-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-VH-01" class="h-72 w-full"></div>
+            <div id="table-VH-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-VH-01" class="mt-3 p-2.5 bg-rose-50/70 border border-rose-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-CS-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">CS-01 · Violations / Causes</span>
+                <h3 class="text-sm font-bold text-slate-900">Fatalities by Traffic Violation (2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CS-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CS-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CS-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-CS-01" class="h-72 w-full"></div>
+            <div id="table-CS-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-CS-01" class="mt-3 p-2.5 bg-amber-50/70 border border-amber-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-CL-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">CL-01 · Collision Types</span>
+                <h3 class="text-sm font-bold text-slate-900">Crashes by Collision Configuration (2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CL-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CL-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CL-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-CL-01" class="h-72 w-full"></div>
+            <div id="table-CL-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-CL-01" class="mt-3 p-2.5 bg-indigo-50/70 border border-indigo-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-EX-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">EX-01 · Exposure</span>
+                <h3 class="text-sm font-bold text-slate-900">Deaths per 10k Vehicles & Vehicle Density</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="EX-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="EX-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="EX-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-EX-01" class="h-72 w-full"></div>
+            <div id="table-EX-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-EX-01" class="mt-3 p-2.5 bg-purple-50/70 border border-purple-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-DL-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">DL-01 · Licence Status</span>
+                <h3 class="text-sm font-bold text-slate-900">Crashes by Driver Licence Status (2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="DL-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="DL-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="DL-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-DL-01" class="h-72 w-full"></div>
+            <div id="table-DL-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-DL-01" class="mt-3 p-2.5 bg-teal-50/70 border border-teal-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card" id="card-SD-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider">SD-01 · Safety Devices</span>
+                <h3 class="text-sm font-bold text-slate-900">Helmet / Seat-Belt Non-Use Toll (2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="SD-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="SD-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="SD-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-SD-01" class="h-72 w-full"></div>
+            <div id="table-SD-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-SD-01" class="mt-3 p-2.5 bg-cyan-50/70 border border-cyan-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col chart-card lg:col-span-2" id="card-CT-01">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">CT-01 · Million-Plus Cities</span>
+                <h3 class="text-sm font-bold text-slate-900">50 Cities: Accidents & Fatalities (2023–2024)</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="btn-toggle-table text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CT-01">Table</button>
+                <button class="btn-dl-png text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CT-01">PNG</button>
+                <button class="btn-info text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded" data-target="CT-01">ℹ</button>
+              </div>
+            </div>
+            <div id="plot-CT-01" class="h-72 w-full"></div>
+            <div id="table-CT-01" class="h-72 w-full overflow-auto hidden text-xs"></div>
+            <div id="insight-CT-01" class="mt-3 p-2.5 bg-emerald-50/70 border border-emerald-200 rounded-lg text-xs text-slate-700"></div>
+          </div>
+
         </div>
       </div>
 

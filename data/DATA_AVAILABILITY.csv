@@ -1,0 +1,75 @@
+Group,Parameter,India_Level,State_Level,District_Level,City_Level,Police_Station_Level,Coordinates_Level,Years_Available,Machine_Readable,Notes
+A-AccidentIdentification,Accident/Case ID,NO,NO,NO,NO,NO (eDAR restricted),NO,—,NO,eDAR-iRAD portal has IDs but access restricted
+A-AccidentIdentification,FIR number,NO,NO,NO,NO,NO,NO,—,NO,PII — not released; only academic MoU access
+A-AccidentIdentification,Accident date (exact),NO,NO,NO,NO,NO,NO,—,NO,Only month-bucket via NCRB
+A-AccidentIdentification,Accident date (month),YES,YES (NCRB PDF),NO,YES (NCRB PDF),NO,NO,2024,NO (PDF only),NCRB Table 1A.5
+A-AccidentIdentification,Accident time (hour bucket),YES (MoRTH chart 7.4),YES (NCRB PDF),NO,YES (NCRB PDF),NO,NO,2024,PARTIAL (MoRTH chart only),8 time-buckets of 3 hours
+A-AccidentIdentification,Accident location (address/road-segment/km-marker),NO,NO,NO,NO,YES (BTP),NO,BTP 2018-2023,PARTIAL,Bengaluru station-wise only; NH blackspot NH+km markers (no coords)
+A-AccidentIdentification,Latitude/Longitude,NO,NO,NO,NO,NO,NO,—,NO,NOT PUBLIC ANYWHERE. eDAR has coords but restricted
+B-Geography,India total,YES,—,—,—,—,—,2014-2024,YES,MoRTH annual CSV
+B-Geography,State/UT,YES,YES,—,—,—,—,2020-2024,YES,MoRTH CSV (36 entities)
+B-Geography,District,—,—,"PARTIAL (TN, KA)",—,—,—,TN 2021-2023; KA 2022-2024 (PDF),TN=YES (CSV); KA=NO (PDF only),Only TN publishes district-wise CSV
+B-Geography,City (Million-Plus),—,—,—,YES (50 cities),—,—,"2023, 2024",YES,MoRTH CSV
+B-Geography,Police jurisdiction/Station,NO,NO,NO,YES (Bengaluru),YES (BTP),NO,2018-2023,YES (BTP CSV),Bengaluru only
+C-AccidentSeverity,Total Accidents,YES,YES,PARTIAL (TN),YES (50),YES (BTP),NO,2014-2024,YES,—
+C-AccidentSeverity,Fatal accidents,YES,YES (MoRTH PDF ch4),NO,NO,YES (BTP),NO,2020-2024,PARTIAL,BTP CSV has fatal cases; state-wise fatal-accidents in MoRTH PDF only
+C-AccidentSeverity,Non-fatal accidents,DERIVABLE (Total - Fatal),DERIVABLE (Total - Fatal),DERIVABLE (TN),DERIVABLE,YES (BTP - Non-Fatal column),NO,2020-2024,PARTIAL,Compute as Total - Fatal accidents
+C-AccidentSeverity,Persons Killed,YES,YES,PARTIAL (TN),YES (50),YES (BTP),NO,2014-2024,YES,VERIFIED — sum of states = India total exactly
+C-AccidentSeverity,Persons Injured,YES,YES (total only),NO,YES (50),YES (BTP),NO,2014-2024,YES,State-wise grievous vs minor NOT published
+C-AccidentSeverity,Grievous Injured,YES (MoRTH PDF ch8),NO,NO,NO,NO,NO,2024,NO (PDF only),"India total only, not state-wise"
+C-AccidentSeverity,Minor Injured,YES (MoRTH PDF ch8),NO,NO,NO,NO,NO,2024,NO (PDF only),"India total only, not state-wise"
+D-Temporal,Year,YES,YES,PARTIAL (TN),YES,YES (BTP),—,2014-2024,YES,—
+D-Temporal,Month,YES,YES (NCRB PDF),NO,YES (NCRB PDF),NO,—,2024,NO (PDF),NCRB Table 1A.5
+D-Temporal,Day of week,NO,NO,NO,NO,NO,—,—,NO,NOT PUBLISHED anywhere
+D-Temporal,Hour of day (bucket),YES (MoRTH),YES (NCRB PDF),NO,YES (NCRB PDF),NO,—,2024,PARTIAL,8 time-buckets of 3 hours each
+D-Temporal,Holiday/Festival period,DERIVABLE,DERIVABLE,NO,DERIVABLE,NO,—,2024,—,Map NCRB month-wise to festival calendar
+E-Seasonal,Meteorological season,DERIVABLE,DERIVABLE,NO,DERIVABLE,NO,—,2024,—,IMD 4-season: Winter(Dec-Feb)/Pre-monsoon(Mar-May)/Monsoon(Jun-Sep)/Post-monsoon(Oct-Nov)
+E-Seasonal,Regional season,—,DERIVABLE,NO,DERIVABLE,NO,—,2024,—,State-specific season mapping
+F-WeatherEnvironment,Daily rainfall (gridded),YES,INTEGRABLE,INTEGRABLE,INTEGRABLE,INTEGRABLE,INTEGRABLE,1901-2024,YES (NetCDF),IMD 0.25° gridded; spatial-join to accident location
+F-WeatherEnvironment,District rainfall,YES,YES,YES (rolling),—,—,—,current rolling only,NO (HTML),No historical archive — IMD DSP paid for archive
+F-WeatherEnvironment,Temperature,YES (1° grid),—,NO,—,—,INTEGRABLE,1951-2024 gridded / station via DSP,PARTIAL,Station-level via IMD DSP paid
+F-WeatherEnvironment,Humidity,NO,NO,NO,NO,—,INTEGRABLE,—,NO,Via IMD DSP paid portal only
+F-WeatherEnvironment,Visibility/Fog,NO,NO,NO,NO,—,INTEGRABLE,—,NO,Via IMD DSP paid only; CPCB PM2.5 as proxy
+F-WeatherEnvironment,Wind speed,NO,NO,NO,NO,—,INTEGRABLE,—,NO,Via IMD DSP paid only
+F-WeatherEnvironment,Extreme weather event,YES (PDF bulletins),PARTIAL,PARTIAL,—,—,—,rolling,NO,IMD + CWC bulletins — PDF only
+F-WeatherEnvironment,Air Quality (PM2.5 proxy),YES,—,NO,PARTIAL (560 stations),—,—,2015 onward (varies),YES (via mirrors),CPCB + Sameer app + Vayuayan archive
+G-Road,NH/SH/Expressway/Other,YES (MoRTH),YES (NCRB PDF),NO,—,—,—,2024,PARTIAL,NCRB Table 1A.7 PDF only
+G-Road,Road length,YES,—,—,—,—,—,2014-2022,YES,NA for 2023-24
+G-Road,Road surface/feature/junction,YES (MoRTH PDF ch6),—,NO,—,—,—,2024,NO (PDF only),"MoRTH ch6 has road-feature, junction-type India tables"
+G-Road,Road width/lanes/median/shoulder/lighting,NO,NO,NO,NO,—,—,—,NO,NOT PUBLISHED — would need NHAI road inventory (not public)
+H-Vehicle,Vehicle type involved,YES (matrix),NO,NO,YES (50 cities × mode),—,—,"2023, 2024",YES,9-class taxonomy per MoRTH
+H-Vehicle,Registered vehicles (exposure),YES,PARTIAL (VAHAN bulk not free),NO,—,—,—,2014-2022,YES (India total only),VAHAN bulk access restricted
+H-Vehicle,Vehicle age/defect/manoeuvre/overloading,NO,NO,NO,NO,—,—,—,NO,"NOT PUBLISHED (eDAR has it, restricted)"
+I-Driver,Licence status,YES,NO,NO,NO,—,—,2020-2024,YES,4 categories: Valid/Learner/Without/Not known
+I-Driver,Driver age/gender,YES (NCRB Table 1.2 all accidental deaths),YES (NCRB PDF),NO,YES (NCRB PDF),—,—,2024,NO (PDF only),NCRB covers all accidental deaths — combine with 1A.4 for road-specific
+I-Driver,Driver experience,NO,NO,NO,NO,—,—,—,NO,NOT PUBLISHED
+I-Driver,Alcohol/Drug,YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,MoRTH cause category 'Drunken driving/consumption of alcohol & drug'
+I-Driver,Mobile phone use,YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,MoRTH cause category
+I-Driver,Overspeeding,YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,Dominant cause — 70.28% of 2024 fatalities
+I-Driver,Wrong-side/Lane indiscipline,YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,—
+I-Driver,Red light jumping,YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,—
+I-Driver,Fatigue/Dangerous driving/Overtaking (Others),YES (bundled in 'Others'),NO,NO,YES (bundled in 'Others'),—,—,"2023, 2024",YES,Cannot be separated from 'Others' category
+J-AccidentCause,Cause (MoRTH taxonomy),YES,NO,NO,YES (50 cities),—,—,"2023, 2024",YES,6 categories: Over-speeding/Drunk/Wrong-side/Red-light/Mobile/Others
+J-AccidentCause,"Cause (NCRB taxonomy, broader)",YES,YES (NCRB PDF),NO,YES (NCRB PDF),—,—,2024,NO (PDF only),NCRB Table 1A.9 — broader categories include weather/mechanical
+K-CollisionType,Type of collision,YES,NO,NO,NO,—,—,"2023, 2024",YES,9 categories: Hit&Run/Parked/Hit-Back/Hit-Side/Run-off/Fixed-object/Overturn/Head-on/Others
+L-Safety,Helmet non-use,YES,NO,NO,NO,—,—,"2023, 2024",YES,Killed/Injured × Driver/Passenger
+L-Safety,Seatbelt non-use,YES,NO,NO,NO,—,—,"2023, 2024",YES,Killed/Injured × Driver/Passenger
+L-Safety,Child restraint/Airbag/Reflective clothing,NO,NO,NO,NO,—,—,—,NO,NOT PUBLISHED
+M-Exposure,Population,YES,YES,YES (Census 2011),—,—,—,Census 2011 + projections,YES,Census 2021 NOT conducted; projections used
+M-Exposure,Registered vehicles,YES,PARTIAL (VAHAN bulk not free),NO,—,—,—,2014-2022,YES (India total),VAHAN bulk state-wise not freely downloadable
+M-Exposure,Road length,YES,—,—,—,—,—,2014-2022,YES,NA for 2023-24
+M-Exposure,AADT/VKT/Passenger-km,NO,NO,NO,NO,—,—,—,NO,NOT PUBLISHED
+N-PoliceEnforcement,Police jurisdiction,NO,NO,NO,YES (Bengaluru),YES (BTP),—,2018-2023,YES (BTP CSV),Bengaluru only
+N-PoliceEnforcement,FIR classification,YES (NCRB),YES (NCRB PDF),NO,YES (NCRB PDF),NO,—,2024,NO (PDF),NCRB classifies as 'Traffic Accidents' vs 'Accidental Deaths'
+N-PoliceEnforcement,Enforcement activity,NO,NO,NO,NO,—,—,—,NO,State police PDFs only; not standardised
+O-CityData,50 cities accidents/killed/injured,—,—,—,YES (50),—,—,"2023, 2024",YES,MoRTH CSV
+O-CityData,City fatalities by mode,—,—,—,YES (50 × 9 modes),—,—,2024,YES,MoRTH CSV 12
+O-CityData,City fatalities by violation,—,—,—,YES (50 × 6 violations),—,—,2024,YES,MoRTH CSV 13
+P-GISSpatial,Accident coordinates,NO,NO,NO,NO,NO,NO,—,NO,NOT PUBLIC — eDAR has coords but restricted
+P-GISSpatial,Blackspot list (NH+km),YES,—,PARTIAL (Dataful),—,—,NO,2016-2022,PARTIAL,"13,795 blackspots; NH+km markers; NO coordinates"
+P-GISSpatial,Blackspot coordinates,NO,NO,NO,NO,NO,NO,—,NO,"NOT PUBLIC — list exists, coords do not"
+P-GISSpatial,Road network vector,YES (Bhuvan),—,—,—,—,—,current,YES (registration required),Bhuvan + OpenStreetMap
+P-GISSpatial,District boundary vector,YES,—,YES (Census 2011),—,—,—,Census 2011,YES,Bhuvan; some newly-created districts missing
+Q-HistoricalGeography,Telangana formation (2014),VERIFIED,VERIFIED,—,—,—,—,—,—,See GEOGRAPHY_CROSSWALK.csv
+Q-HistoricalGeography,J&K reorganisation (2019),VERIFIED,VERIFIED,—,—,—,—,—,—,See GEOGRAPHY_CROSSWALK.csv
+Q-HistoricalGeography,DN&H Daman&Diu merger (2020),VERIFIED,VERIFIED,—,—,—,—,—,—,See GEOGRAPHY_CROSSWALK.csv

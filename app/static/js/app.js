@@ -302,7 +302,7 @@ function setText(id, val) {
  * Renders all Tier 1 through Tier 10 visualizations with guaranteed error isolation.
  */
 async function renderAllVisualizations() {
-  const chartList = ['G1', 'G2', 'G4', 'G3', 'G7', 'G5', 'G6', 'G8', 'G9'];
+  const chartList = ['G1', 'G2', 'G4', 'G3', 'G7', 'G5', 'G6', 'G8', 'G9', 'VH-01', 'CS-01', 'CL-01', 'EX-01', 'DL-01', 'SD-01', 'CT-01'];
   for (const id of chartList) {
     await renderSingleChart(id);
   }
@@ -352,6 +352,13 @@ async function renderSingleChart(analysisId) {
     else if (analysisId === 'G8') renderG8(plotContainer, payload.data);
     else if (analysisId === 'G9') renderG9(plotContainer, payload.data);
     else if (analysisId === 'G10') renderG10(plotContainer, payload.data);
+    else if (analysisId === 'VH-01') renderVehicle(plotContainer, payload.data);
+    else if (analysisId === 'CS-01') renderCause(plotContainer, payload.data);
+    else if (analysisId === 'CL-01') renderCollision(plotContainer, payload.data);
+    else if (analysisId === 'EX-01') renderExposure(plotContainer, payload.data);
+    else if (analysisId === 'DL-01') renderCategoryBars(plotContainer, payload.data, 'categories', 'accidents', 'Crashes by Licence Status (2024)', '#6366F1');
+    else if (analysisId === 'SD-01') renderSupportingTable(plotContainer, payload.data);
+    else if (analysisId === 'CT-01') renderSupportingTable(plotContainer, payload.data);
 
   } catch (err) {
     console.error(`Error rendering chart ${analysisId}:`, err);
@@ -692,6 +699,28 @@ function renderCause(container, data) {
     yaxis: { autorange: 'reversed' }
   };
   Plotly.newPlot(container, [trace], layout, { responsive: true, displayModeBar: false });
+}
+
+function renderCollision(container, data) {
+  const t1 = { x: data.collision_types, y: data.accidents, name: 'Accidents', type: 'bar', marker: { color: '#6366F1' } };
+  const t2 = { x: data.collision_types, y: data.fatalities, name: 'Fatalities', type: 'bar', marker: { color: '#E11D48' } };
+  Plotly.newPlot(container, [t1, t2], { ...commonLayout, barmode: 'group', xaxis: { title: 'Collision configuration', tickangle: -20 }, yaxis: { title: 'Count (2024)', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
+}
+
+function renderExposure(container, data) {
+  const traces = [];
+  if (data.fatalities_per_10k_vehicles) traces.push({ x: data.years, y: data.fatalities_per_10k_vehicles, name: 'Deaths / 10k vehicles', type: 'scatter', mode: 'lines+markers', line: { color: '#8B5CF6', width: 2.5 } });
+  if (data.vehicle_density) traces.push({ x: data.years, y: data.vehicle_density, name: 'Vehicles / km', type: 'scatter', mode: 'lines+markers', line: { color: '#10B981', width: 2.5 }, yaxis: 'y2' });
+  Plotly.newPlot(container, traces, { ...commonLayout, xaxis: { title: 'Year', tickmode: 'linear', dtick: 1 }, yaxis: { title: 'Deaths / 10k vehicles' }, yaxis2: { title: 'Vehicles / km', overlaying: 'y', side: 'right' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
+}
+
+function renderCategoryBars(container, data, labelKey, valueKey, title, color) {
+  Plotly.newPlot(container, [{ x: data[labelKey], y: data[valueKey], type: 'bar', marker: { color: color || '#6366F1' } }], { ...commonLayout, xaxis: { title: title, tickangle: -15 }, yaxis: { title: 'Count', tickformat: ',' } }, { responsive: true, displayModeBar: false });
+}
+
+function renderSupportingTable(container, data) {
+  renderDataTable(container, data.table || []);
+  container.classList.remove('hidden');
 }
 
 function renderSeverity(container, data) {

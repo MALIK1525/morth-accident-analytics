@@ -6,11 +6,13 @@ and generates empirical 'Observed Pattern' scientific insights.
 """
 import pandas as pd
 import numpy as np
+from app.data_pipeline.supporting_loader import SupportingDataStore
 
 class VisualizationAgent:
-    def __init__(self, data_loader, weather_agent=None):
+    def __init__(self, data_loader, weather_agent=None, supporting_store=None):
         self.loader = data_loader
         self.weather_agent = weather_agent
+        self.supporting = supporting_store or SupportingDataStore()
         self.catalog = []
         self._build_catalog()
 
@@ -301,14 +303,69 @@ class VisualizationAgent:
                 "status": "NOT AVAILABLE",
                 "formula": "Accidents / (Population / 100,000); Fatalities / (Vehicles / 10,000)",
                 "limitations": "Registered vehicles reflect cumulative registrations, not active fleet on roads."
+            },
+
+            # DRIVER LICENCE (MoRTH AR 2024 Table 5)
+            {
+                "id": "DL-01",
+                "tier": "Tier 8 - Driver Factors",
+                "category": "Cause Analysis",
+                "title": "Crashes by Driver Licence Status (Valid / Learner / Without Valid DL)",
+                "explanation": "Distribution of crashes by the licence status of the driver involved.",
+                "chart_type": "Bar Chart",
+                "parameters": ["Licence_Status", "Accidents"],
+                "source": "MoRTH AR 2024 Table 5 CSV (drop into data/supporting_csv/)",
+                "coverage": "2020–2024 on load",
+                "granularity": "India-Year-Category",
+                "status": "NOT AVAILABLE",
+                "formula": "Police-reported licence status counts",
+                "limitations": "'Not known' bucket reflects hit-and-run/unsolved cases."
+            },
+
+            # SAFETY DEVICE NON-USE (MoRTH AR 2024 Table 6)
+            {
+                "id": "SD-01",
+                "tier": "Tier 7 - Safety Behaviour",
+                "category": "Vehicle Analysis",
+                "title": "Deaths from Helmet / Seat-Belt Non-Use (Driver vs Passenger)",
+                "explanation": "Persons killed and injured where helmet or seat-belt was not used.",
+                "chart_type": "Grouped Bar Chart",
+                "parameters": ["Category", "No-Helmet-Killed", "No-SeatBelt-Killed"],
+                "source": "MoRTH AR 2024 Table 6 CSV (drop into data/supporting_csv/)",
+                "coverage": "2024 on load",
+                "granularity": "India-Year-Category",
+                "status": "NOT AVAILABLE",
+                "formula": "Reported non-use counts among casualties",
+                "limitations": "Attributes outcome to device non-use as recorded by police."
+            },
+
+            # CITIES (MoRTH AR 2024 Tables 11-13)
+            {
+                "id": "CT-01",
+                "tier": "Tier 3 - Cities",
+                "category": "Geographic Analysis",
+                "title": "50 Million-Plus Cities: Accidents & Fatalities (2023–2024)",
+                "explanation": "City-level crash and fatality comparison across 50 million-plus cities.",
+                "chart_type": "Bar Chart + Table",
+                "parameters": ["City", "Accidents", "Killed"],
+                "source": "MoRTH AR 2024 Table 11 CSV (drop into data/supporting_csv/)",
+                "coverage": "2023–2024 on load",
+                "granularity": "City-Year",
+                "status": "NOT AVAILABLE",
+                "formula": "City police-reported counts",
+                "limitations": "City boundaries differ from districts; Delhi is both state and city."
             }
         ]
 
     def get_catalog(self):
+        self.supporting.refresh()
+        self.supporting.refresh_catalog_statuses(self.catalog)
         return self.catalog
 
     def generate_visualization(self, analysis_id, filters=None):
         """Generates exact chart specifications, formatted data payloads, and empirical insights."""
+        self.supporting.refresh()
+        self.supporting.refresh_catalog_statuses(self.catalog)
         entry = next((c for c in self.catalog if c["id"] == analysis_id), None)
         if not entry:
             return {"error": f"Analysis ID {analysis_id} not found in catalog."}
@@ -350,6 +407,14 @@ class VisualizationAgent:
             return self._generate_collision(entry, filters)
         elif analysis_id == "EX-01":
             return self._generate_exposure(entry, filters)
+        elif analysis_id == "DL-01":
+            return self._generate_licence(entry, filters)
+        elif analysis_id == "SD-01":
+            return self._generate_safety(entry, filters)
+        elif analysis_id.startswith("CT-"):
+            return self._generate_cities(entry, filters)
+        elif analysis_id == "VH-02":
+            return self._generate_cities(entry, filters)
         else:
             return {"error": f"Renderer not implemented for {analysis_id}"}
 
@@ -573,48 +638,17 @@ class VisualizationAgent:
             "insight": insight
         }
 
-    def _generate_severity(self, entry, filters):
-        import os
-        path = "data/supporting_severity_breakdown.csv"
-        df = pd.read_csv(path)
-        years = df['Year'].astype(int).tolist()
-        
-        table = df.to_dict(orient='records')
-        insight = "Fatal crashes consistently represent ~30% to 33% of total occurrences across the 7-year study period."
+    def _supporting_table(self, schema):
+        reg = self.supporting.get(schema)
+        if not reg:
+            return None, None
+        return reg['table'], reg
 
-        return {
-            "meta": entry,
-            "data": {
-                "years": years,
-                "fatal": df['Fatal_Accidents'].astype(int).tolist(),
-                "grievous": df['Grievous_Injury_Accidents'].astype(int).tolist(),
-                "minor": df['Minor_Injury_Accidents'].astype(int).tolist(),
-                "non_injury": df['Non_Injury_Accidents'].astype(int).tolist(),
-                "table": table
-            },
-            "insight": insight
-        }
+    def _generate_severity(self, entry, filters):
+        return {"error": "Severity breakdown (Fatal/Grievous/Minor/Non-injury) is India-level PDF-only in the supplied audit (MoRTH Table 8). No machine-readable severity CSV loaded. Drop the extracted table into data/supporting_csv/ to activate."}
 
     def _generate_road(self, entry, filters):
-        df = pd.read_csv("data/supporting_road_category.csv")
-        # 2024 snapshot
-        sub = df[df['Year'] == 2024]
-        cats = sub['Road_Category'].tolist()
-        accidents = sub['Accidents'].astype(int).tolist()
-        fatalities = sub['Fatalities'].astype(int).tolist()
-        
-        insight = "National Highways constitute ~33% of all road crashes but account for 36.4% of total fatalities in 2024 due to higher vehicular speeds."
-
-        return {
-            "meta": entry,
-            "data": {
-                "categories": cats,
-                "accidents": accidents,
-                "fatalities": fatalities,
-                "table": df.to_dict(orient='records')
-            },
-            "insight": insight
-        }
+        return {"error": "Road-category (NH/SH/Other) machine-readable data not loaded. NCRB Table 1A.7 exists as PDF-only per the project audit. Drop the extracted CSV into data/supporting_csv/ to activate."}
 
     def _generate_weather(self, entry, filters):
         if not self.weather_agent:
@@ -632,80 +666,92 @@ class VisualizationAgent:
         }
 
     def _generate_vehicle(self, entry, filters):
-        df = pd.read_csv("data/supporting_vehicle_mode.csv")
-        sub = df[df['Year'] == 2024]
-        modes = sub['Vehicle_Mode'].tolist()
-        fatalities = sub['Fatalities'].astype(int).tolist()
-        shares = [round(float(s), 2) for s in sub['Fatalities_Share_pct']]
-
-        insight = "Two-wheelers represent 44.7% and pedestrians represent 19.7% of all road fatalities, meaning Vulnerable Road Users (VRUs) account for over 64% of total road deaths in India."
-
+        table, reg = self._supporting_table('road_user')
+        if table is None:
+            return {"error": "Road-user fatality CSV not loaded. Expected file: 07_road_accidents_2024_fatality_road_user.csv in data/supporting_csv/."}
+        sub = table[table['Year'] == 2024]
+        modes = sub['Category'].tolist()
+        fatalities = [int(x) if pd.notnull(x) else 0 for x in sub['Killed']]
+        total = sum(fatalities) or 1
+        shares = [round(f * 100.0 / total, 2) for f in fatalities]
+        top = modes[int(np.argmax(fatalities))] if modes else 'n/a'
         return {
             "meta": entry,
-            "data": {
-                "modes": modes,
-                "fatalities": fatalities,
-                "shares": shares,
-                "table": df.to_dict(orient='records')
-            },
-            "insight": insight
+            "data": {"modes": modes, "fatalities": fatalities, "shares": shares,
+                     "table": table.to_dict(orient='records')},
+            "insight": f"In 2024, {top} accounted for the largest share of road fatalities ({max(shares)}% of {total:,} deaths in the loaded file {reg['filename']})."
         }
 
     def _generate_cause(self, entry, filters):
-        df = pd.read_csv("data/supporting_cause_factors.csv")
-        sub = df[df['Year'] == 2024]
-        causes = sub['Cause'].tolist()
-        fatalities = sub['Fatalities'].astype(int).tolist()
-        shares = [round(float(s), 2) for s in sub['Percentage_Fatalities']]
-
-        insight = "Overspeeding accounts for 71.6% of all recorded fatalities, followed by driving on the wrong side (5.3%) and drunk driving (2.1%)."
-
+        table, reg = self._supporting_table('violation')
+        if table is None:
+            return {"error": "Violation/cause CSV not loaded. Expected file: 04_road_accidents_2024_type_of_violation.csv in data/supporting_csv/."}
+        sub = table[table['Year'] == 2024]
+        causes = sub['Category'].tolist()
+        fatalities = [int(x) if pd.notnull(x) else 0 for x in sub['Killed']]
+        total = sum(fatalities) or 1
+        shares = [round(f * 100.0 / total, 2) for f in fatalities]
+        top = causes[int(np.argmax(fatalities))] if causes else 'n/a'
         return {
             "meta": entry,
-            "data": {
-                "causes": causes,
-                "fatalities": fatalities,
-                "shares": shares,
-                "table": df.to_dict(orient='records')
-            },
-            "insight": insight
+            "data": {"causes": causes, "fatalities": fatalities, "shares": shares,
+                     "table": table.to_dict(orient='records')},
+            "insight": f"In 2024, {top} accounted for the largest fatality share ({max(shares)}%) in the loaded file {reg['filename']}."
         }
 
     def _generate_collision(self, entry, filters):
-        df = pd.read_csv("data/supporting_collision_types.csv")
-        sub = df[df['Year'] == 2024]
-        types = sub['Collision_Type'].tolist()
-        accidents = sub['Accidents'].astype(int).tolist()
-        fatalities = sub['Fatalities'].astype(int).tolist()
-
-        insight = "Hit-from-back (20.0%) and head-on collisions (18.5%) represent the most prevalent collision types on Indian highways."
-
+        table, reg = self._supporting_table('collision')
+        if table is None:
+            return {"error": "Collision-type CSV not loaded. Expected file: 03_road_accidents_2024_type_of_collision.csv in data/supporting_csv/."}
+        sub = table[table['Year'] == 2024]
+        types = sub['Category'].tolist()
+        accidents = [int(x) if pd.notnull(x) else 0 for x in sub['Accidents']]
+        fatalities = [int(x) if pd.notnull(x) else 0 for x in sub['Killed']]
+        top = types[int(np.argmax(accidents))] if types else 'n/a'
         return {
             "meta": entry,
-            "data": {
-                "collision_types": types,
-                "accidents": accidents,
-                "fatalities": fatalities,
-                "table": df.to_dict(orient='records')
-            },
-            "insight": insight
+            "data": {"collision_types": types, "accidents": accidents, "fatalities": fatalities,
+                     "table": table.to_dict(orient='records')},
+            "insight": f"In 2024, {top} was the most frequent collision configuration in the loaded file {reg['filename']}."
         }
 
     def _generate_exposure(self, entry, filters):
-        df = pd.read_csv("data/supporting_exposure_metrics.csv")
-        years = df['Year'].astype(int).tolist()
-        acc_per_100k = [round(float(x), 2) for x in df['Accidents_per_100k_Pop']]
-        fat_per_10k_veh = [round(float(x), 2) for x in df['Fatalities_per_10k_Vehicles']]
+        table, reg = self._supporting_table('exposure')
+        if table is None:
+            return {"error": "Exposure CSV not loaded. Expected file: 14_road_accidents_registrations_density_2014_24.csv in data/supporting_csv/."}
+        table = table.sort_values('Year')
+        years = table['Year'].astype(int).tolist()
+        rate_col = next((c for c in table.columns if 'per 10' in c.lower() and 'vehicle' in c.lower()), None)
+        dens_col = next((c for c in table.columns if 'dens' in c.lower()), None)
+        data = {"years": years, "table": table.to_dict(orient='records')}
+        if rate_col:
+            data['fatalities_per_10k_vehicles'] = [float(x) if pd.notnull(x) else None for x in table[rate_col]]
+        if dens_col:
+            data['vehicle_density'] = [float(x) if pd.notnull(x) else None for x in table[dens_col]]
+        return {"meta": entry, "data": data,
+                "insight": f"Exposure series loaded from {reg['filename']}; values shown only for years with published denominators."}
 
-        insight = "While total accident counts grew, fatalities per 10,000 registered vehicles decreased from 5.77 (2018) to 4.72 (2024) due to rapid vehicle fleet expansion."
+    def _generate_licence(self, entry, filters):
+        table, reg = self._supporting_table('licence')
+        if table is None:
+            return {"error": "Licence-type CSV not loaded. Expected file: 05_road_accidents_2024_type_of_license.csv in data/supporting_csv/."}
+        sub = table[table['Year'] == 2024]
+        return {"meta": entry,
+                "data": {"categories": sub['Category'].tolist(),
+                         "accidents": [int(x) if pd.notnull(x) else 0 for x in sub['Accidents']],
+                         "table": table.to_dict(orient='records')},
+                "insight": f"Licence distribution for 2024 from {reg['filename']}."}
 
-        return {
-            "meta": entry,
-            "data": {
-                "years": years,
-                "accidents_per_100k_pop": acc_per_100k,
-                "fatalities_per_10k_vehicles": fat_per_10k_veh,
-                "table": df.to_dict(orient='records')
-            },
-            "insight": insight
-        }
+    def _generate_safety(self, entry, filters):
+        table, reg = self._supporting_table('safety_device')
+        if table is None:
+            return {"error": "Safety-device CSV not loaded. Expected file: 06_road_accidents_2024_safety_device.csv in data/supporting_csv/."}
+        return {"meta": entry, "data": {"table": table.to_dict(orient='records')},
+                "insight": f"Helmet/seat-belt non-use toll for 2024 from {reg['filename']}."}
+
+    def _generate_cities(self, entry, filters):
+        table, reg = self._supporting_table('cities_overview')
+        if table is None:
+            return {"error": "City CSV not loaded. Expected file: 11_road_accidents_2024_cities_accidents_fatalities.csv in data/supporting_csv/."}
+        return {"meta": entry, "data": {"table": table.to_dict(orient='records')},
+                "insight": f"50 million-plus cities comparison from {reg['filename']}."}
