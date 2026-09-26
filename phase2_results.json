@@ -1,0 +1,58 @@
+{
+ "date": "2026-09-26",
+ "morth": {
+  "entities": 38,
+  "obs": 254
+ },
+ "raw_files": [],
+ "population": {
+  "status": "NOT AVAILABLE FROM VERIFIED DATA",
+  "reason": "MoRTH site blocked direct PDF download (SPA); data.gov.in JS-only; MoHFW projection report Tables 8/11/14 identified as source, extraction pending."
+ },
+ "vehicles": {
+  "status": "NOT AVAILABLE FROM VERIFIED DATA",
+  "reason": "RTYB state-wise tables (Annex 3.1/3.2) identified; direct download blocked; extraction pending."
+ },
+ "road_length": {
+  "status": "NOT AVAILABLE FROM VERIFIED DATA",
+  "reason": "Basic Road Statistics state-wise tables identified; direct download blocked; extraction pending."
+ },
+ "join": {
+  "matched": 0,
+  "unmatched_morth": 0,
+  "unmatched_exposure": 0,
+  "duplicates": 0,
+  "status": "NOT_ATTEMPTED_NO_FILES"
+ },
+ "india_regression": {
+  "accidents": {
+   "N": 7,
+   "slope": 6724.68,
+   "intercept": -13141778.68,
+   "r2": 0.1217,
+   "p": 0.44319512239446374,
+   "ci": [
+    -9112.58,
+    22561.94
+   ],
+   "flag": "APPROX_STABLE"
+  },
+  "fatalities": {
+   "N": 7,
+   "slope": 4166.64,
+   "intercept": -8259715.5,
+   "r2": 0.4694,
+   "p": 0.08941286645023283,
+   "ci": [
+    283.31,
+    8049.97
+   ],
+   "flag": "INCREASING"
+  }
+ },
+ "normalized_rows": 0,
+ "correlations": "NOT COMPUTED \u2014 no verified denominator joined.",
+ "within_state": "NOT COMPUTED \u2014 no verified denominator joined.",
+ "sensitivity_2020": "Retained; split trends from Phase 1 apply (post-2020 acc slope +24,509.6, R2 0.869).",
+ "injury": "State-level normalization 2018-2022 only when denominators arrive; 2023/24 state injuries never estimated."
+}
