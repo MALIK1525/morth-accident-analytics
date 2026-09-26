@@ -1,0 +1,8 @@
+Model,Train_N,Test_N,Train_Period,Test_Period,Features,RMSE,MAE,R2
+Naive,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",1053.3289202740586,555.5,0.9965837916914327
+Linear,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",4820.187775231346,4530.570315564607,0.9284607732345033
+Ridge,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",4846.402702478013,4561.8103189299345,0.927680515100359
+RandomForest,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",2450.799488555433,1196.6572857142855,0.98150595585619
+GradientBoosting,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",1700.097830980643,911.1154737326507,0.9911005297740387
+HistGradientBoosting,105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",4829.096588396593,2521.8616584576885,0.9281960870435619
+"KNN(k=5, supervised)",105,70,targets 2020-2022,targets 2023-2024,"lag-only + Year + Zone (no state dummies, no future)",7011.466947630452,4498.445714285713,0.8486319869851274

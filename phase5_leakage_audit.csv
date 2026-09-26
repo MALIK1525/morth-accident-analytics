@@ -1,0 +1,12 @@
+Feature,Source_Year,Target_Year,Available_Before_Target,Leakage_Risk,Decision
+Lag1_Acc / Lag2_Acc,t-1 / t-2,target t,yes,none,INCLUDE
+Lag1_Fat / Lag2_Fat,t-1 / t-2,target t,yes,none,INCLUDE
+Pop_t (RGI projection),target year,target t,yes — RGI report published 2020; projection not observed outcome,low,INCLUDE with documented assumption
+Lag1_Pop / Pop_Growth,t-1 / t..t-1,target t,yes (Pop_Growth uses target-year projection — same assumption as Pop_t),low,INCLUDE with assumption
+Lag1_AccLakh / Lag1_FatLakh,t-1,target t,yes,none,INCLUDE
+Year (target year),target t,target t,yes — calendar year is known,none,INCLUDE
+Zone one-hot,static,any,yes,none,INCLUDE
+Target-year accidents/fatalities,t,t,NO,direct target leak,EXCLUDE
+Phase-4 full-period slopes,2018-24,t<2024,NO,future-derived,EXCLUDE
+Road length (2021-22 only),2021-22,any,would restrict to targets 2022-23,coverage,EXCLUDE from main set
+Vehicles / weather / GIS,—,—,unavailable,—,EXCLUDE

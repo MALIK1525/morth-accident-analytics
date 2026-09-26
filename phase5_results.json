@@ -1,0 +1,336 @@
+{
+ "best_ml": "GradientBoosting",
+ "comparison": [
+  {
+   "Model": "Naive",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 1053.3289202740586,
+   "MAE": 555.5,
+   "R2": 0.9965837916914327
+  },
+  {
+   "Model": "Linear",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 4820.187775231346,
+   "MAE": 4530.570315564607,
+   "R2": 0.9284607732345033
+  },
+  {
+   "Model": "Ridge",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 4846.402702478013,
+   "MAE": 4561.8103189299345,
+   "R2": 0.927680515100359
+  },
+  {
+   "Model": "RandomForest",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 2450.799488555433,
+   "MAE": 1196.6572857142855,
+   "R2": 0.98150595585619
+  },
+  {
+   "Model": "GradientBoosting",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 1700.097830980643,
+   "MAE": 911.1154737326507,
+   "R2": 0.9911005297740387
+  },
+  {
+   "Model": "HistGradientBoosting",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 4829.096588396593,
+   "MAE": 2521.8616584576885,
+   "R2": 0.9281960870435619
+  },
+  {
+   "Model": "KNN(k=5, supervised)",
+   "Train_N": 105,
+   "Test_N": 70,
+   "Train_Period": "targets 2020-2022",
+   "Test_Period": "targets 2023-2024",
+   "Features": "lag-only + Year + Zone (no state dummies, no future)",
+   "RMSE": 7011.466947630452,
+   "MAE": 4498.445714285713,
+   "R2": 0.8486319869851274
+  }
+ ],
+ "walkforward": [
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "Naive",
+   "RMSE": 1934.8964313368301,
+   "MAE": 1154.142857142857,
+   "R2": 0.982783175276961
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "Linear",
+   "RMSE": 6242.634405625341,
+   "MAE": 3874.8486543781846,
+   "R2": 0.8207853889215921
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "Ridge",
+   "RMSE": 3849.724165682972,
+   "MAE": 2445.3041236282784,
+   "R2": 0.9318451388460505
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "RandomForest",
+   "RMSE": 3774.8814445922862,
+   "MAE": 2168.252285714286,
+   "R2": 0.9344693849685026
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "GradientBoosting",
+   "RMSE": 3324.724434236732,
+   "MAE": 2071.4601527416485,
+   "R2": 0.94916662777795
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "HistGradientBoosting",
+   "RMSE": 14790.923873036436,
+   "MAE": 11183.084897959185,
+   "R2": -0.006070036037208126
+  },
+  {
+   "Val_Year": 2021,
+   "Train_Targets": "2020-2020",
+   "N_train": 35,
+   "Model": "KNN(k=5, supervised)",
+   "RMSE": 7438.6356684542625,
+   "MAE": 4217.062857142858,
+   "R2": 0.7455372669701843
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "Naive",
+   "RMSE": 2867.2405848530693,
+   "MAE": 1452.6285714285714,
+   "R2": 0.9712757633800847
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "Linear",
+   "RMSE": 7529.918377371812,
+   "MAE": 4313.299598020972,
+   "R2": 0.8018925708604849
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "Ridge",
+   "RMSE": 5635.977456360239,
+   "MAE": 3644.0545926956624,
+   "R2": 0.8890164226057722
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "RandomForest",
+   "RMSE": 5798.758403228599,
+   "MAE": 3233.028,
+   "R2": 0.882512880860119
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "GradientBoosting",
+   "RMSE": 5490.265720016534,
+   "MAE": 3060.094955266648,
+   "R2": 0.8946809451043877
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "HistGradientBoosting",
+   "RMSE": 7323.676954440037,
+   "MAE": 4208.6973133572155,
+   "R2": 0.8125961175857208
+  },
+  {
+   "Val_Year": 2022,
+   "Train_Targets": "2020-2021",
+   "N_train": 70,
+   "Model": "KNN(k=5, supervised)",
+   "RMSE": 8777.26766733247,
+   "MAE": 5387.09142857143,
+   "R2": 0.7308224039925948
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "Naive",
+   "RMSE": 1290.2055982339737,
+   "MAE": 683.9142857142857,
+   "R2": 0.99478441559774
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "Linear",
+   "RMSE": 3610.8300967838195,
+   "MAE": 3370.118095089445,
+   "R2": 0.9591493245968048
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "Ridge",
+   "RMSE": 3767.8692493430162,
+   "MAE": 3555.2485069803733,
+   "R2": 0.9555187706719237
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "RandomForest",
+   "RMSE": 2637.772645484931,
+   "MAE": 1260.9177142857145,
+   "R2": 0.9781998313069271
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "GradientBoosting",
+   "RMSE": 1830.4232010839603,
+   "MAE": 944.0791409138366,
+   "R2": 0.9895024450226283
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "HistGradientBoosting",
+   "RMSE": 4430.38682644867,
+   "MAE": 2287.094255166756,
+   "R2": 0.9385009470418857
+  },
+  {
+   "Val_Year": 2023,
+   "Train_Targets": "2020-2022",
+   "N_train": 105,
+   "Model": "KNN(k=5, supervised)",
+   "RMSE": 7294.362372917085,
+   "MAE": 4572.948571428571,
+   "R2": 0.8332907095275275
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "Naive",
+   "RMSE": 744.5623834556395,
+   "MAE": 427.0857142857143,
+   "R2": 0.998321942585778
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "Linear",
+   "RMSE": 2565.9526336037316,
+   "MAE": 2451.0182121247713,
+   "R2": 0.9800702475574282
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "Ridge",
+   "RMSE": 2638.75535982864,
+   "MAE": 2539.798628775777,
+   "R2": 0.978923286573038
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "RandomForest",
+   "RMSE": 1411.8942741660435,
+   "MAE": 780.4177142857146,
+   "R2": 0.9939659488452371
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "GradientBoosting",
+   "RMSE": 2325.018621741093,
+   "MAE": 1061.719957918407,
+   "R2": 0.9836372044135913
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "HistGradientBoosting",
+   "RMSE": 3268.083060533561,
+   "MAE": 1785.0566762056646,
+   "R2": 0.9676711091108705
+  },
+  {
+   "Val_Year": 2024,
+   "Train_Targets": "2020-2023",
+   "N_train": 140,
+   "Model": "KNN(k=5, supervised)",
+   "RMSE": 4846.632802501724,
+   "MAE": 3218.0228571428574,
+   "R2": 0.9288975004332277
+  }
+ ]
+}
