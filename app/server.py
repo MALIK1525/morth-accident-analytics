@@ -164,13 +164,23 @@ def get_kpis():
         peak_acc_yr = "N/A"
         peak_fat_yr = "N/A"
 
-    # Injuries
+    # Injuries: sum of state-wise values actually present in scope.
+    # State-wise injured is verified only through 2022; 2023-2024 rows are null
+    # and contribute nothing (never zero-filled, never reconstructed).
     if not df.empty:
-        # Sum non-null injured
         valid_inj = df[pd.to_numeric(df['Injured'], errors='coerce').notnull()]
-        total_injuries = int(valid_inj['Injured'].astype(int).sum()) if not valid_inj.empty else "N/A"
+        if valid_inj.empty:
+            total_injuries = "N/A"
+            injuries_coverage = "State-wise injured unpublished for the selected period (verified through 2022 only)."
+        else:
+            total_injuries = int(valid_inj['Injured'].astype(int).sum())
+            cov_years = sorted(valid_inj['Year'].unique().tolist())
+            injuries_coverage = (f"Cumulative sum of state-wise injured "
+                                 f"({cov_years[0]}–{cov_years[-1]} in scope). "
+                                 f"2023–2024 state-wise unpublished; India totals 462,825 / 471,441 shown only in India-level views.")
     else:
         total_injuries = 0
+        injuries_coverage = "No records in scope."
 
     return jsonify({
         "status": "success",
@@ -178,6 +188,7 @@ def get_kpis():
             "total_incidents": total_accidents,
             "fatalities": total_fatalities,
             "injuries": total_injuries,
+            "injuries_coverage": injuries_coverage,
             "fatality_ratio": fatality_ratio,
             "avg_annual_accidents": avg_annual_acc,
             "avg_annual_fatalities": avg_annual_fat,

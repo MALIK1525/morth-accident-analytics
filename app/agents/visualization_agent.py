@@ -465,12 +465,24 @@ class VisualizationAgent:
         }
 
     def _generate_g3(self, entry, filters):
-        # Known India-level totals for injuries
-        years = [2018, 2019, 2020, 2021, 2022, 2023, 2024]
-        injured = [464715, 449360, 348279, 386452, 443366, 462100, 468500]
-        notes = ["State panel verified", "State panel verified", "MoRTH National Total", "MoRTH National Total", "MoRTH National Total", "Parliamentary reply aggregate", "Provisional aggregate"]
-
-        insight = f"Road crash injuries peaked at 464,715 in 2018 before dropping to 348,279 in 2020, subsequently recovering towards 468,500 by 2024."
+        from app.data_pipeline.loader import OFFICIAL_INDIA_BENCHMARKS
+        df = self.loader.get_clean_df().copy()
+        df['Inj_num'] = pd.to_numeric(df['Injured'], errors='coerce')
+        years, injured, notes = [], [], []
+        for y in sorted(df['Year'].unique().tolist()):
+            sub = df[df['Year'] == y]['Inj_num'].dropna()
+            if len(sub):
+                years.append(int(y))
+                injured.append(int(sub.sum()))
+                notes.append('State panel sum (verified)')
+            else:
+                val = OFFICIAL_INDIA_BENCHMARKS.get(int(y), {}).get('Injured')
+                if val:
+                    years.append(int(y))
+                    injured.append(int(val))
+                    notes.append('India total only; state-wise unpublished')
+        insight = (f"State-panel injuries totalled {injured[0]:,} in {years[0]} and {injured[4]:,} in {years[4]}; "
+                   f"2023–2024 shown as India-level totals only ({injured[-2]:,}, {injured[-1]:,}) since state-wise data is unpublished.")
 
         return {
             "meta": entry,

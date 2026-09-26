@@ -287,6 +287,8 @@ async function updateKPIs() {
       setText('kpi-total-accidents', Number(kpis.total_incidents).toLocaleString());
       setText('kpi-total-fatalities', Number(kpis.fatalities).toLocaleString());
       setText('kpi-total-injuries', typeof kpis.injuries === 'number' ? Number(kpis.injuries).toLocaleString() : kpis.injuries);
+      const injNote = document.getElementById('kpi-injuries-note');
+      if (injNote && kpis.injuries_coverage) { injNote.innerText = kpis.injuries_coverage.split('.')[0] + '.'; injNote.title = kpis.injuries_coverage; }
       setText('kpi-fatality-ratio', kpis.fatality_ratio);
       setText('kpi-avg-accidents', Number(kpis.avg_annual_accidents).toLocaleString());
       setText('kpi-peak-year', kpis.peak_accident_year);
