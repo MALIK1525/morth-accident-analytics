@@ -1,0 +1,16 @@
+{
+ "fixed_effects": {
+  "spec": "Acc_per_Lakh_Pop ~ Year + state FE (within estimator, DIRECT joins, states N>=3)",
+  "N": 245,
+  "entities": 35,
+  "year_coef": 0.027743804341757026,
+  "se": 0.3880154170281242,
+  "ci": [
+   -0.7371606074064347,
+   0.7926482160899488
+  ],
+  "p": 0.9430664335882875,
+  "within_R2": 0.9103780433940781,
+  "note": "Descriptive decomposition only; FE is not causal identification. SEs not clustered (few periods); interpret cautiously."
+ }
+}
