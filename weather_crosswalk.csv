@@ -1,0 +1,2 @@
+Weather_Name,Weather_ID,MoRTH_Name,MoRTH_Entity,Year,Mapping_Type,Transformation,Confidence,Reason,Source
+IMD 0.25-deg grid cell,lon/lat cell,TBD per state,TBD,2018-2024,UNRESOLVED,area-weighted state mean (proposed),UNRESOLVED,no verified state-boundary polygon file in repo,IMD RF25 grids (verified) + boundary TBD

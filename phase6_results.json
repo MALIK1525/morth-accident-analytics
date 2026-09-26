@@ -1,0 +1,42 @@
+{
+ "rain_days": [
+  {
+   "Year": 2018,
+   "Days": 365,
+   "Days_OK": true
+  },
+  {
+   "Year": 2019,
+   "Days": 365,
+   "Days_OK": true
+  },
+  {
+   "Year": 2020,
+   "Days": 366,
+   "Days_OK": true
+  },
+  {
+   "Year": 2021,
+   "Days": 365,
+   "Days_OK": true
+  },
+  {
+   "Year": 2022,
+   "Days": 365,
+   "Days_OK": true
+  },
+  {
+   "Year": 2023,
+   "Days": 365,
+   "Days_OK": true
+  },
+  {
+   "Year": 2024,
+   "Days": 366,
+   "Days_OK": true
+  }
+ ],
+ "temp_validated": true,
+ "join": "NOT PERFORMED",
+ "outcome": "VERIFIED_PENDING_BOUNDARIES"
+}
