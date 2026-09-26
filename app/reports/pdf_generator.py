@@ -311,9 +311,10 @@ def generate_pdf_report(clean_df, audit_summary, g10_df=None, ml_metrics=None):
     
     if ml_metrics:
         ml_box = (
-            f"<b>Model Architecture:</b> {ml_metrics.get('model', 'Random Forest')}<br/>"
-            f"<b>Training Evaluation:</b> R² = {ml_metrics.get('r2', '0.684')} | "
-            f"MAE = {ml_metrics.get('mae', '1,124')}<br/>"
+            f"<b>Model Architecture:</b> {ml_metrics.get('model', 'See ML tab for chronological evaluation')}<br/>"
+            f"<b>Training Evaluation (test period):</b> R² = {ml_metrics.get('r2', 'not trained in this session')} | "
+            f"MAE = {ml_metrics.get('mae', 'not trained in this session')}"
+            + (f" | RMSE = {ml_metrics['rmse']}" if ml_metrics.get('rmse') else "") + "<br/>"
             f"<i>Caveat: Empirical prediction does not establish causation. Results reflect fitted associations across aggregate panels.</i>"
         )
         story.append(Paragraph(ml_box, callout_style))
@@ -365,11 +366,18 @@ def generate_academic_pdf(clean_df, g10_df=None, ml_pipeline=None):
         })
 
     ml_metrics = None
-    if ml_pipeline and ml_pipeline.is_trained:
-        ml_metrics = {
-            'model': 'Random Forest Regressor & Classifier',
-            'r2': '0.684',
-            'mae': '1,124'
-        }
+    if ml_pipeline and getattr(ml_pipeline, 'is_trained', False):
+        comp = getattr(ml_pipeline, 'comparison', []) or []
+        trained = [m for m in comp if m.get('trained')]
+        best = min(trained, key=lambda m: m['rmse']) if trained else None
+        design = getattr(ml_pipeline, 'design', {}) or {}
+        if best:
+            ml_metrics = {
+                'model': f"{best['model']} (test {design.get('test_period', '2023-2024')}; "
+                         f"best overall incl. baseline: {design.get('best_overall', 'n/a')})",
+                'r2': str(best['r2']),
+                'mae': f"{best['mae']:,}",
+                'rmse': str(best['rmse']),
+            }
 
     return generate_pdf_report(clean_df, audit_summary, g10_df=g10_df, ml_metrics=ml_metrics)

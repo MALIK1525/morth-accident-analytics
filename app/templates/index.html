@@ -733,7 +733,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
           <h3 class="text-sm font-bold text-slate-900 mb-2">Pearson & Spearman Correlation Matrix</h3>
-          <p class="text-xs text-slate-500 mb-4">Empirical cross-correlations across panel metrics.</p>
+          <p class="text-xs text-slate-500 mb-4">Empirical cross-correlations across panel metrics. Correlation describes association, not causation.</p>
           <div id="plot-correlation-matrix" class="h-64 w-full"></div>
         </div>
 
@@ -749,6 +749,35 @@
                 <tr><td colspan="3" class="p-2 text-center text-slate-400">Loading thresholds...</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- YoY + fatality slopes -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+          <h3 class="text-sm font-bold text-slate-900 mb-2">India Year-over-Year Change (verified totals)</h3>
+          <p class="text-xs text-slate-500 mb-4">Absolute and percentage change in national accidents and fatalities.</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border border-slate-200">
+              <thead class="bg-slate-100 text-slate-700">
+                <tr><th class="p-2">Year</th><th class="p-2">Δ Accidents</th><th class="p-2">Δ Acc %</th><th class="p-2">Δ Fatalities</th><th class="p-2">Δ Fat %</th></tr>
+              </thead>
+              <tbody id="tbody-yoy" class="divide-y divide-slate-100 font-mono">
+                <tr><td colspan="5" class="p-2 text-center text-slate-400">Loading YoY...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+          <h3 class="text-sm font-bold text-slate-900 mb-2">Methodology & Fatality Slopes</h3>
+          <div id="fatality-slopes-summary" class="text-xs text-slate-700 mb-3">Loading...</div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600">
+            <span class="font-bold">Method:</span> per-state OLS (Accidents ~ Year; Fatalities ~ Year).
+            Slope = fitted crashes/year; R² = variance explained; p = slope t-test.
+            Labels are neutral (Increasing / Decreasing / Approximately stable) by slope-vs-error rule.
+            <span class="font-bold">Statistical results describe association/trend and do not establish causation.</span>
           </div>
         </div>
       </div>
@@ -865,7 +894,15 @@
 
         <!-- Weather Status Card -->
         <div id="weather-alert-box" class="p-4 rounded-lg text-xs mb-5 bg-blue-50 border border-blue-200 text-blue-900">
-          <span class="font-bold">Status:</span> <span id="weather-status-text">IMD Annual Rainfall & Conditions dataset ready for analytical inspection.</span>
+          <span class="font-bold">Status:</span> <span id="weather-status-text">Checking weather data readiness...</span>
+        </div>
+
+        <div class="p-4 rounded-lg text-xs mb-5 bg-slate-50 border border-slate-200 text-slate-700">
+          <span class="font-bold">Data-readiness — required to activate:</span>
+          IMD gridded rainfall + Tmax/Tmin (NetCDF, 0.25°) → state-boundary spatial aggregation →
+          STATE_WEATHER_ANNUAL_2018_2024 → validated (State, Year) join to MoRTH panel.
+          Humidity / visibility / wind / fog have no verified source and stay unavailable.
+          See WEATHER_METHODOLOGY.md. No weather values are synthesised.
         </div>
 
         <!-- Weather Charts -->

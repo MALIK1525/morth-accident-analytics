@@ -154,7 +154,7 @@ function setupEventListeners() {
       try {
         const res = await fetch('/api/weather/load', { method: 'POST' });
         const data = await res.json();
-        alert(data.message || 'Weather dataset loaded.');
+        alert(data.message || data.error || 'Weather dataset response received.');
         await loadWeatherTab();
       } catch (err) {
         alert('Weather loading error: ' + err.message);
@@ -168,6 +168,14 @@ function setupEventListeners() {
     btnGenAll.addEventListener('click', async () => {
       await renderAllVisualizations();
       alert('All eligible analyses have been verified and generated.');
+    });
+  }
+
+  // Export Slopes CSV
+  const btnSlopes = document.getElementById('btn-export-slopes');
+  if (btnSlopes) {
+    btnSlopes.addEventListener('click', () => {
+      window.location.href = '/api/export_data?format=csv&type=slopes';
     });
   }
 
@@ -827,6 +835,27 @@ async function loadG10Slopes() {
           `;
           tbodyThresh.appendChild(tr);
         });
+      }
+
+      // YoY India table
+      const tbodyYoy = document.getElementById('tbody-yoy');
+      if (tbodyYoy && data.yoy_india) {
+        tbodyYoy.innerHTML = '';
+        data.yoy_india.forEach(y => {
+          const tr = document.createElement('tr');
+          const f = v => (v === null || v === undefined) ? '—' : (typeof v === 'number' && Math.abs(v) < 100 && v % 1 !== 0 ? v : Number(v).toLocaleString());
+          tr.innerHTML = `<td class="p-2 font-bold">${y.year}</td><td class="p-2">${f(y.acc_abs)}</td><td class="p-2">${f(y.acc_pct)}</td><td class="p-2">${f(y.fat_abs)}</td><td class="p-2">${f(y.fat_pct)}</td>`;
+          tbodyYoy.appendChild(tr);
+        });
+      }
+
+      // Fatality slopes summary
+      const fatSum = document.getElementById('fatality-slopes-summary');
+      if (fatSum && data.fatality_slopes_summary) {
+        const s = data.fatality_slopes_summary;
+        fatSum.innerHTML = `Fatality slopes across ${s.total_states} jurisdictions: ` +
+          `<b>${s.increasing} increasing</b>, <b>${s.decreasing} decreasing</b>, mean slope ${s.mean_slope} deaths/year. ` +
+          `Accident slopes — increasing: ${data.slopes_summary.increasing}, decreasing: ${data.slopes_summary.decreasing}.`;
       }
     }
   } catch (err) {
