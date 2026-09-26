@@ -1,0 +1,39 @@
+State_UT,Zone,N,slope_acc,r2_acc,p_acc,ci_acc,flag_acc,acc_2018,acc_2024,abs_change,pct_change
+Andaman & Nicobar Islands,South,7,-18.96,0.5862,0.04482,"(np.float64(-37.28), np.float64(-0.65))",DECREASING,254.0,135.0,-119.0,-46.85
+Andhra Pradesh,South,7,-610.71,0.5613,0.05256,"(np.float64(-1231.35), np.float64(9.92))",DECREASING,24475.0,19557.0,-4918.0,-20.09
+Arunachal Pradesh,Northeast,7,6.89,0.0741,0.55486,"(np.float64(-21.12), np.float64(34.91))",APPROX_STABLE,277.0,277.0,0.0,0.0
+Assam,Northeast,7,-93.93,0.1012,0.48689,"(np.float64(-415.76), np.float64(227.9))",APPROX_STABLE,8248.0,7848.0,-400.0,-4.85
+Bihar,East,7,364.5,0.5943,0.04247,"(np.float64(18.26), np.float64(710.74))",INCREASING,9600.0,11610.0,2010.0,20.94
+Chandigarh,North,7,-21.75,0.5416,0.05933,"(np.float64(-44.75), np.float64(1.25))",DECREASING,316.0,169.0,-147.0,-46.52
+Chhattisgarh,Central,7,133.57,0.0748,0.55277,"(np.float64(-406.34), np.float64(673.48))",APPROX_STABLE,13864.0,14857.0,993.0,7.16
+Dadra & Nagar Haveli,West,2,,,,None,INSUFFICIENT_N,80.0,,,
+Dadra & Nagar Haveli and Daman & Diu,West,5,14.6,0.3763,0.27113,"(np.float64(-19.93), np.float64(49.13))",APPROX_STABLE,,152.0,,
+Daman & Diu,West,2,,,,None,INSUFFICIENT_N,76.0,,,
+Delhi,North,7,-23.29,0.0043,0.88909,"(np.float64(-431.27), np.float64(384.7))",APPROX_STABLE,6515.0,5657.0,-858.0,-13.17
+Goa,West,7,-129.75,0.3821,0.13899,"(np.float64(-319.42), np.float64(59.92))",APPROX_STABLE,3709.0,2682.0,-1027.0,-27.69
+Gujarat,West,7,-306.57,0.159,0.37551,"(np.float64(-1117.0), np.float64(503.86))",APPROX_STABLE,18769.0,15588.0,-3181.0,-16.95
+Haryana,North,7,-152.14,0.2625,0.23969,"(np.float64(-445.28), np.float64(141.0))",APPROX_STABLE,11238.0,9806.0,-1432.0,-12.74
+Himachal Pradesh,North,7,-133.71,0.6461,0.02937,"(np.float64(-247.48), np.float64(-19.95))",DECREASING,3110.0,2156.0,-954.0,-30.68
+Jammu & Kashmir,North,7,61.64,0.0785,0.54282,"(np.float64(-181.16), np.float64(304.45))",APPROX_STABLE,5978.0,5808.0,-170.0,-2.84
+Jharkhand,East,7,13.29,0.0064,0.86462,"(np.float64(-177.01), np.float64(203.58))",APPROX_STABLE,5394.0,5196.0,-198.0,-3.67
+Karnataka,South,7,543.32,0.0958,0.49924,"(np.float64(-1375.06), np.float64(2461.71))",APPROX_STABLE,41707.0,43062.0,1355.0,3.25
+Kerala,South,7,1998.29,0.3191,0.18641,"(np.float64(-1357.61), np.float64(5354.18))",APPROX_STABLE,40181.0,48834.0,8653.0,21.54
+Ladakh,North,7,62.29,0.6983,0.01922,"(np.float64(15.22), np.float64(109.35))",INCREASING,0.0,264.0,,
+Lakshadweep,South,7,-0.25,0.1361,0.41542,"(np.float64(-0.97), np.float64(0.47))",APPROX_STABLE,3.0,0.0,-3.0,-100.0
+Madhya Pradesh,Central,7,1224.93,0.4388,0.10497,"(np.float64(-367.71), np.float64(2817.57))",APPROX_STABLE,51397.0,56669.0,5272.0,10.26
+Maharashtra,West,7,508.96,0.0742,0.55448,"(np.float64(-1557.56), np.float64(2575.49))",APPROX_STABLE,35717.0,36118.0,401.0,1.12
+Manipur,Northeast,7,-49.21,0.6394,0.03089,"(np.float64(-91.7), np.float64(-6.73))",DECREASING,601.0,299.0,-302.0,-50.25
+Meghalaya,Northeast,7,-31.29,0.4344,0.10731,"(np.float64(-72.32), np.float64(9.75))",APPROX_STABLE,399.0,269.0,-130.0,-32.58
+Mizoram,Northeast,7,12.96,0.7059,0.01796,"(np.float64(3.34), np.float64(22.58))",INCREASING,53.0,118.0,65.0,122.64
+Nagaland,Northeast,7,-36.57,0.1704,0.3573,"(np.float64(-129.32), np.float64(56.18))",APPROX_STABLE,430.0,129.0,-301.0,-70.0
+Odisha,East,7,251.46,0.4295,0.11007,"(np.float64(-81.73), np.float64(584.66))",APPROX_STABLE,11262.0,12375.0,1113.0,9.88
+Puducherry,South,7,-16.21,0.0248,0.73575,"(np.float64(-133.0), np.float64(100.58))",APPROX_STABLE,1597.0,1431.0,-166.0,-10.39
+Punjab,North,7,-11.36,0.0035,0.89998,"(np.float64(-232.2), np.float64(209.48))",APPROX_STABLE,6428.0,6063.0,-365.0,-5.68
+Rajasthan,North,7,579.04,0.3504,0.16148,"(np.float64(-327.36), np.float64(1485.43))",APPROX_STABLE,21743.0,24838.0,3095.0,14.23
+Sikkim,Northeast,7,0.71,0.0039,0.89407,"(np.float64(-12.39), np.float64(13.82))",APPROX_STABLE,180.0,149.0,-31.0,-17.22
+Tamil Nadu,South,7,859.21,0.0743,0.55421,"(np.float64(-2626.87), np.float64(4345.3))",APPROX_STABLE,67279.0,67526.0,247.0,0.37
+Telangana,South,7,585.04,0.3764,0.14288,"(np.float64(-280.7), np.float64(1450.78))",APPROX_STABLE,22230.0,25986.0,3756.0,16.9
+Tripura,Northeast,7,1.11,0.0014,0.93729,"(np.float64(-33.3), np.float64(35.52))",APPROX_STABLE,552.0,578.0,26.0,4.71
+Uttar Pradesh,North,7,781.39,0.1727,0.35383,"(np.float64(-1184.79), np.float64(2747.57))",APPROX_STABLE,42568.0,46052.0,3484.0,8.18
+Uttarakhand,North,7,76.71,0.4474,0.10037,"(np.float64(-21.29), np.float64(174.72))",INCREASING,1468.0,1747.0,279.0,19.01
+West Bengal,East,7,288.86,0.3288,0.17834,"(np.float64(-185.59), np.float64(763.3))",APPROX_STABLE,12705.0,13702.0,997.0,7.85
