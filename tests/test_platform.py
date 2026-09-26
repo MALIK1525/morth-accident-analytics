@@ -72,25 +72,25 @@ class TestPlatformAgents(unittest.TestCase):
         catalog = vis_agent.get_catalog()
         self.assertGreaterEqual(len(catalog), 10)
 
-        # Test core graphs
-        for gid in ['G1', 'G2', 'G4', 'G7', 'G8', 'G10', 'RD-01', 'VH-01', 'CS-01', 'SV-01']:
+        # Test core graphs (verified panel only; supporting tiers stay honestly unavailable)
+        for gid in ['G1', 'G2', 'G4', 'G7', 'G8', 'G10']:
             payload = vis_agent.generate_visualization(gid)
             self.assertNotIn('error', payload, f"Failed generating {gid}")
             self.assertIn('data', payload)
             self.assertIn('insight', payload)
+        for gid in ['RD-01', 'VH-01', 'CS-01', 'SV-01']:
+            payload = vis_agent.generate_visualization(gid)
+            self.assertIn('error', payload, f"{gid} should stay unavailable without supporting files")
 
     def test_05_weather_agent(self):
-        """Confirm Weather Agent loads IMD weather records safely and produces analytics."""
+        """Weather stays honestly unavailable: no IMD files exist in this workspace."""
         wx_agent = WeatherAgent(data_dir="data")
         status = wx_agent.check_status()
         self.assertIn('file_available', status)
-        
-        # Ingest weather
-        res = wx_agent.load_weather_dataset(self.clean_df)
-        self.assertTrue(res['success'])
+        self.assertFalse(status['file_available'])
+        self.assertFalse(status['loaded'])
         analytics = wx_agent.get_weather_analytics(self.clean_df)
-        self.assertEqual(analytics['status'], "AVAILABLE")
-        self.assertGreater(len(analytics['rainfall_vs_accidents']), 0)
+        self.assertEqual(analytics['status'], "UNAVAILABLE")
 
     def test_06_statistical_slopes_g10(self):
         """Confirm OriginPro G10 OLS slopes are computed for all 38 reporting jurisdictions."""
@@ -104,12 +104,15 @@ class TestPlatformAgents(unittest.TestCase):
         """Confirm ML Pipeline trains without error and produces valid test evaluations."""
         ml = SafetyMLPipeline()
         self.assertFalse(ml.is_trained)
-        reg_res = ml.train_fatalities_regressor(self.clean_df)
-        self.assertIn('metrics', reg_res)
-        self.assertGreater(reg_res['metrics']['r2'], 0.5)
+        res = ml.train_forecast_comparison(self.clean_df, split_year=2022)
+        self.assertEqual(res['status'], 'success')
+        self.assertTrue(ml.is_trained)
+        self.assertTrue(any('Naive' in m['model'] for m in res['comparison']))
+        rf = next(m for m in res['comparison'] if m['model'] == 'Random Forest Regressor')
+        self.assertGreater(rf['r2'], 0.5)
 
         clf_res = ml.train_risk_classifier(self.clean_df)
-        self.assertIn('metrics', clf_res)
+        self.assertIn('accuracy', clf_res)
 
         clust_res = ml.train_state_clustering(self.clean_df)
         self.assertEqual(len(clust_res['cluster_profiles']), 3)
@@ -124,7 +127,7 @@ class TestPlatformAgents(unittest.TestCase):
         res = self.client.post('/api/kpis', json={"state": "ALL", "year": "ALL", "zone": "ALL"})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
-        self.assertEqual(data['kpis']['total_incidents'], 487707) # Total across panel
+        self.assertEqual(data['kpis']['total_incidents'], 3141577) # Sum across 2018-2024 panel
 
         # G1 Visualization
         res = self.client.post('/api/visualization/G1', json={})

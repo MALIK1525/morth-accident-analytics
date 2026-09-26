@@ -785,6 +785,7 @@
 
         <!-- Trained Metrics Display (Initially Hidden) -->
         <div id="ml-metrics-container" class="hidden flex flex-col gap-5">
+          <div id="ml-design-banner" class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700"></div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <span class="text-xs text-blue-600 font-semibold block">Regressor R² Score</span>
@@ -815,9 +816,28 @@
               <div id="plot-feature-importance" class="h-60 w-full"></div>
             </div>
             <div class="border border-slate-200 rounded-lg p-4">
-              <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">State Cluster Profiles (K-Means)</h4>
+              <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">State Cluster Profiles (K-Means, unsupervised)</h4>
               <div id="plot-kmeans-clusters" class="h-60 w-full"></div>
             </div>
+          </div>
+
+          <!-- Model comparison -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Model Comparison — test period 2023–2024 (primary metric: RMSE)</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border border-slate-200">
+                <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                  <tr><th class="p-2">Model</th><th class="p-2">Trained?</th><th class="p-2">MAE</th><th class="p-2">RMSE</th><th class="p-2">R²</th><th class="p-2">MAPE %</th></tr>
+                </thead>
+                <tbody id="tbody-ml-comparison" class="divide-y divide-slate-100 font-mono"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Actual vs predicted -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Actual vs Predicted — best trained model (test states)</h4>
+            <div id="plot-avp" class="h-72 w-full"></div>
           </div>
         </div>
       </div>

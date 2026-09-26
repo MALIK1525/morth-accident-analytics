@@ -902,12 +902,12 @@ function displayMLResults(data) {
   if (emptyState) emptyState.classList.add('hidden');
   if (metricsCont) metricsCont.classList.remove('hidden');
 
-  if (data.regression && typeof data.regression.r2_score !== 'undefined') {
-    setText('ml-reg-r2', data.regression.r2_score);
+  if (data.regression && typeof data.regression.r2 !== 'undefined') {
+    setText('ml-reg-r2', data.regression.r2);
     setText('ml-reg-mae', Number(data.regression.mae).toLocaleString());
 
     // Feature importance
-    const fi = data.regression.feature_importances;
+    const fi = data.feature_importances || (data.regression && data.regression.feature_importances);
     const fiContainer = document.getElementById('plot-feature-importance');
     if (fiContainer && fi) {
       const trace = {
@@ -947,6 +947,44 @@ function displayMLResults(data) {
       };
       Plotly.newPlot(clusterContainer, [trace], layout, { responsive: true, displayModeBar: false });
     }
+  }
+
+  // Design banner
+  const banner = document.getElementById('ml-design-banner');
+  if (banner && data.design) {
+    const d = data.design;
+    banner.innerHTML = `<span class="font-bold">Experimental design:</span> ${d.task}. ` +
+      `Train ${d.train_period} (n=${d.n_train}), test ${d.test_period} (n=${d.n_test}). ` +
+      `Features use only pre-year history — no leakage. Best overall: <b>${d.best_overall}</b>; best trained: <b>${d.best_trained}</b>.`;
+  }
+
+  // Comparison table
+  const tbody = document.getElementById('tbody-ml-comparison');
+  if (tbody && Array.isArray(data.comparison)) {
+    tbody.innerHTML = '';
+    data.comparison.forEach(m => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="p-2 font-semibold text-slate-800">${m.model}</td>` +
+        `<td class="p-2">${m.trained ? 'yes' : 'baseline'}</td><td class="p-2">${m.mae}</td>` +
+        `<td class="p-2 font-bold">${m.rmse}</td><td class="p-2">${m.r2}</td><td class="p-2">${m.mape}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Actual vs predicted (best trained or first)
+  const avp = document.getElementById('plot-avp');
+  if (avp && Array.isArray(data.actual_vs_predicted) && data.actual_vs_predicted.length && Array.isArray(data.comparison) && data.comparison.length) {
+    const trained = data.comparison.filter(m => m.trained);
+    const best = (trained.length ? trained : data.comparison).reduce((a, b) => (a.rmse <= b.rmse ? a : b));
+    const key = 'Predicted_' + best.model;
+    const rows = data.actual_vs_predicted.filter(r => typeof r[key] !== 'undefined');
+    const actual = rows.map(r => r.Actual);
+    const pred = rows.map(r => r[key]);
+    const lo = Math.min(...actual, ...pred), hi = Math.max(...actual, ...pred);
+    Plotly.newPlot(avp, [
+      { x: actual, y: pred, mode: 'markers', type: 'scatter', name: best.model, marker: { color: '#2563EB', size: 7 }, text: rows.map(r => `${r.State_UT} ${r.Year}`) },
+      { x: [lo, hi], y: [lo, hi], mode: 'lines', type: 'scatter', name: 'Perfect prediction', line: { dash: 'dash', color: '#94A3B8' } }
+    ], { ...commonLayout, xaxis: { title: 'Actual accidents', tickformat: ',' }, yaxis: { title: 'Predicted accidents', tickformat: ',' } }, { responsive: true, displayModeBar: false });
   }
 }
 

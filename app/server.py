@@ -271,7 +271,16 @@ def get_statistical_analysis():
     df = loader.get_clean_df()
     corr = compute_correlation_matrix(df)
     slopes = compute_state_slopes_g10(df)
+    fat_slopes = compute_state_slopes_g10(df, metric='Fatalities')
     thresholds = compute_time_to_threshold(df, threshold=10000)
+    # India-level year-over-year change (verified totals)
+    india = df.groupby('Year').agg(acc=('Accidents', 'sum'), fat=('Fatalities', 'sum')).sort_index()
+    yoy = [{'year': int(y),
+            'acc_abs': int(india['acc'].loc[y] - india['acc'].shift(1).loc[y]) if y != india.index.min() else None,
+            'acc_pct': round(float((india['acc'].loc[y] / india['acc'].shift(1).loc[y] - 1) * 100), 2) if y != india.index.min() else None,
+            'fat_abs': int(india['fat'].loc[y] - india['fat'].shift(1).loc[y]) if y != india.index.min() else None,
+            'fat_pct': round(float((india['fat'].loc[y] / india['fat'].shift(1).loc[y] - 1) * 100), 2) if y != india.index.min() else None}
+           for y in india.index]
     return jsonify({
         "status": "success",
         "correlation": corr,
@@ -281,21 +290,33 @@ def get_statistical_analysis():
             "decreasing": int((slopes['Linear_Slope_per_Year'] < 0).sum()),
             "mean_slope": round(float(slopes['Linear_Slope_per_Year'].mean()), 2)
         },
+        "fatality_slopes_summary": {
+            "total_states": len(fat_slopes),
+            "increasing": int((fat_slopes['Linear_Slope_per_Year'] > 0).sum()),
+            "decreasing": int((fat_slopes['Linear_Slope_per_Year'] < 0).sum()),
+            "mean_slope": round(float(fat_slopes['Linear_Slope_per_Year'].mean()), 2)
+        },
+        "yoy_india": yoy,
         "time_to_threshold_10k": thresholds
     })
 
 @app.route('/api/train_ml', methods=['POST'])
 def train_ml():
-    """Trains the Machine Learning models on empirical State-Year observations."""
+    """Chronological time-series evaluation: 2018-2022 train, 2023-2024 test."""
     df = loader.get_clean_df()
-    reg_results = ml_pipeline.train_fatalities_regressor(df)
+    forecast = ml_pipeline.train_forecast_comparison(df, split_year=2022)
     clf_results = ml_pipeline.train_risk_classifier(df)
     clust_results = ml_pipeline.train_state_clustering(df, n_clusters=3)
 
     return jsonify({
         "status": "success",
-        "message": "Models trained successfully on empirical state-year panel observations.",
-        "regression": reg_results,
+        "message": "Chronological evaluation complete (train 2018-2022, test 2023-2024).",
+        "design": forecast.get('design', {}),
+        "comparison": forecast.get('comparison', []),
+        "actual_vs_predicted": forecast.get('actual_vs_predicted', []),
+        "residuals_best": forecast.get('residuals_best', []),
+        "regression": ml_pipeline.reg_metrics,
+        "feature_importances": ml_pipeline.feature_importances,
         "classification": clf_results,
         "clustering": clust_results
     })
@@ -304,7 +325,9 @@ def train_ml():
 def get_ml_status():
     return jsonify({
         "is_trained": ml_pipeline.is_trained,
-        "models": ["RandomForestRegressor", "RandomForestClassifier", "KMeans"]
+        "models": ["NaiveBaseline", "LinearRegression", "Ridge", "KNNRegressor",
+                   "RandomForestRegressor", "GradientBoostingRegressor",
+                   "RandomForestClassifier", "KMeans"]
     })
 
 @app.route('/api/audit_details', methods=['GET'])

@@ -79,10 +79,13 @@ def test_ml_pipeline_execution():
     loader = DatasetLoader(data_dir="data")
     loader.load_benchmark()
     ml = SafetyMLPipeline()
-    reg_metrics = ml.train_fatality_regressor(loader.clean_data)
-    assert reg_metrics['r2_score'] > 0.5
-    assert reg_metrics['mae'] > 0
-    assert 'Accidents_num' in reg_metrics['feature_importances']
+    res = ml.train_forecast_comparison(loader.clean_data, split_year=2022)
+    assert res['status'] == 'success'
+    assert any('Naive' in m['model'] for m in res['comparison'])
+    rf = next(m for m in res['comparison'] if m['model'] == 'Random Forest Regressor')
+    assert rf['r2'] > 0.5
+    assert rf['mae'] > 0
+    assert 'lag1_accidents' in res['feature_importances']
 
     clf_metrics = ml.train_risk_classifier(loader.clean_data)
     assert clf_metrics['accuracy'] > 50.0
@@ -114,10 +117,10 @@ def test_api_endpoints(client):
     assert r_kpis.status_code == 200
     assert r_kpis.json['kpis']['total_incidents'] > 0
 
-    r_t1 = client.post('/api/tier1_graphs', json={})
+    r_t1 = client.post('/api/visualization/G1', json={})
     assert r_t1.status_code == 200
-    assert len(r_t1.json['g1_accidents']) == 7
+    assert len(r_t1.json['payload']['data']['values']) == 7
 
     r_slopes = client.get('/api/g10_slopes')
     assert r_slopes.status_code == 200
-    assert len(r_slopes.json['table']) == 38
+    assert len(r_slopes.json['slopes']) == 38
