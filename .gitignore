@@ -3,3 +3,8 @@ __pycache__/
 uploads/*
 !uploads/.gitkeep
 .env
+# Large raw research binaries: preserved on the research computer, not stored on GitHub.
+# Provenance retained via manifests + methodology docs; website uses derived CSVs.
+phase7_raw/
+server_err.log
+server_out.log
