@@ -6,5 +6,8 @@ uploads/*
 # Large raw research binaries: preserved on the research computer, not stored on GitHub.
 # Provenance retained via manifests + methodology docs; website uses derived CSVs.
 phase7_raw/
+phase6_raw/weather/IMD/*.nc
+phase2_raw/population/*.pdf
+phase2_raw/road_length/*.pdf
 server_err.log
 server_out.log
