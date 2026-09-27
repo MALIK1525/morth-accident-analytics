@@ -243,5 +243,6 @@ class DataDiscoveryAgent:
             "total_variables": len(self.variable_registry),
             "available_parameters": sorted(list(self.available_parameters)),
             "unavailable_parameters": self.unavailable_parameters,
+            "variable_registry": self.variable_registry,
             "workbooks": list(self.workbooks_indexed.keys())
         }

@@ -1,0 +1,14 @@
+Finding_ID,Domain,Finding,Evidence,N,Statistical_Method,P_Value,FDR_Status,Effect_Size,Interpretation
+F01,India,"Accidents rose 470403 (2018) to 487707 (2024), +3.7%, with 2020 dip to 372181 then recovery",phase1_india.csv,7,descript,-,-,+17204,+3.7%; 2020 structural break; no causal attribution
+F02,India,"Fatalities rose 157593 to 177175 (+12.4%), outpacing accidents",phase1_india.csv,7,descript,-,-,+19582,+12.4%; severity rose
+F03,Severity,India fatalities/100 accidents 33.50 to 36.33 (+2.83 pts),phase9_india_severity.csv,7,descript,-,-,+2.83,ratio not population rate
+F04,Weather,Rainfall pooled vs accidents r=-0.234 (p 2.9e-4); vs fatalities r=-0.376 (p 2.5e-9); FDR-sig,phase8_pooled_associations.csv,236,Pearson+Spearman,2.9e-4/2.5e-9,FDR-sig,-0.234/-0.376,pooled scale-confounded; observational
+F05,Weather,Tmax pooled vs accidents r=+0.452 (p 2.7e-13); vs fatalities +0.498; FDR-sig,phase8_pooled_associations.csv,236,Pearson,2.7e-13,FDR-sig,+0.452/+0.498,observational; no causality
+F06,Weather,Within-state: rainfall-accidents negative in 73.5% of states; Tmax positive in 88.2%; low power,phase8_within_state_associations.csv,408,within-state r,mixed,n/a,directional,N<=7 per state
+F07,Weather,2020 exclusion changes no direction; max |dR|=0.033,phase8_2020_sensitivity.csv,236,sensitivity,-,-,stable,not 2020-driven
+F08,Severity,"34 state severity slopes tested; 9 survive BH-FDR (8 rising, Kerala falling)",phase9_severity_fdr.csv,34,OLS+BH-FDR,see CSV,9/34 sig,e.g. +2.32/yr Chhattisgarh,N=7; wide CIs; no ranking
+F09,Severity,"Weather-severity: all |r|<0.07, p>0.29 - insufficient evidence",phase9_weather_severity.csv,233,Pearson,0.29-0.98,n/a,null,non-finding reported
+F10,Injury,State injuries verified 2018-2022 only (179 cells); 2023-24 state N/A; India 2018-24 verified,phase9_injury_coverage.csv,179,coverage,-,-,75 missing,never filled
+F11,ML,Naive RMSE 1053.3 beats best trained GBR on 2023-24 test (N=70),phase5_model_comparison.csv,70,chronological RMSE,-,-,naive wins,persistence dominates; no deployment claim
+F12,Exposure,Pop-normalized 2018-24 (254 rows); road-normalized 2021-22 only (68 rows); vehicles N/A,phase3 outputs,254,descript,-,-,-,RGI projections; no Census 2021
+F13,Methods,"Equal-cell weather weighting validated (area sens <=0.6%, overlap <=2.7%); 18 exclusions verified",phase7_final_numbers.json,252,sensitivity,-,-,Status B,islands/legacy excluded

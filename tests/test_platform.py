@@ -83,14 +83,15 @@ class TestPlatformAgents(unittest.TestCase):
             self.assertIn('error', payload, f"{gid} should stay unavailable without supporting files")
 
     def test_05_weather_agent(self):
-        """Weather stays honestly unavailable: no IMD files exist in this workspace."""
+        """Weather uses the validated Phase 7 IMD join (236 usable state-years)."""
         wx_agent = WeatherAgent(data_dir="data")
         status = wx_agent.check_status()
         self.assertIn('file_available', status)
-        self.assertFalse(status['file_available'])
-        self.assertFalse(status['loaded'])
+        self.assertTrue(status['file_available'])
+        self.assertEqual(status['status'], 'AVAILABLE')
+        self.assertEqual(status['usable_state_years'], 236)
         analytics = wx_agent.get_weather_analytics(self.clean_df)
-        self.assertEqual(analytics['status'], "UNAVAILABLE")
+        self.assertEqual(analytics['status'], "AVAILABLE")
 
     def test_06_statistical_slopes_g10(self):
         """Confirm OriginPro G10 OLS slopes are computed for all 38 reporting jurisdictions."""

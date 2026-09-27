@@ -881,10 +881,11 @@
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
           <div>
-            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Dedicated Weather Agent</span>
-            <h2 class="text-base font-bold text-slate-900">Atmospheric & Precipitation Analysis (IMD / MoRTH)</h2>
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Weather & Environmental Analysis</span>
+            <h2 class="text-base font-bold text-slate-900">Association between verified IMD weather variables and road accident outcomes</h2>
             <p class="text-xs text-slate-500 mt-1">
-              Evaluates annual rainfall (mm), fog, mist, and atmospheric condition impacts on crash occurrence.
+              Observed associations only — not causal evidence. Humidity / visibility / fog / wind
+              have no verified source and stay unavailable.
             </p>
           </div>
           <button id="btn-load-weather" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded shadow transition flex items-center gap-1">
@@ -895,14 +896,48 @@
         <!-- Weather Status Card -->
         <div id="weather-alert-box" class="p-4 rounded-lg text-xs mb-5 bg-blue-50 border border-blue-200 text-blue-900">
           <span class="font-bold">Status:</span> <span id="weather-status-text">Checking weather data readiness...</span>
+          <div id="weather-status-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-1 mt-2 text-blue-900"></div>
+        </div>
+
+        <!-- Weather KPI cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Avg annual rainfall</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-rain">…</div>
+            <div class="text-[11px] text-slate-500" id="weather-kpi-rain-sub">mm, current selection</div>
+          </div>
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Avg annual Tmax</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-tmax">…</div>
+            <div class="text-[11px] text-slate-500">°C, current selection</div>
+          </div>
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Avg annual Tmin</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-tmin">…</div>
+            <div class="text-[11px] text-slate-500">°C, current selection</div>
+          </div>
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Weather observations</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-obs">…</div>
+            <div class="text-[11px] text-slate-500">usable state-years in selection</div>
+          </div>
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">States represented</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-states">…</div>
+            <div class="text-[11px] text-slate-500">in current selection</div>
+          </div>
+          <div class="border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Years represented</div>
+            <div class="text-lg font-bold text-slate-900" id="weather-kpi-years">…</div>
+            <div class="text-[11px] text-slate-500">in current selection</div>
+          </div>
         </div>
 
         <div class="p-4 rounded-lg text-xs mb-5 bg-slate-50 border border-slate-200 text-slate-700">
-          <span class="font-bold">Data-readiness — required to activate:</span>
-          IMD gridded rainfall + Tmax/Tmin (NetCDF, 0.25°) → state-boundary spatial aggregation →
-          STATE_WEATHER_ANNUAL_2018_2024 → validated (State, Year) join to MoRTH panel.
-          Humidity / visibility / wind / fog have no verified source and stay unavailable.
-          See WEATHER_METHODOLOGY.md. No weather values are synthesised.
+          <span class="font-bold">How weather data is integrated:</span>
+          IMD gridded rainfall and temperature data are spatially aggregated to state level using the
+          project's validated boundary workflow and then joined to the MoRTH state-year accident panel.
+          <span id="weather-coverage-line"></span>
         </div>
 
         <!-- Weather Charts -->
@@ -911,12 +946,55 @@
           <div class="border border-slate-200 rounded-lg p-4">
             <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual Rainfall (mm) vs Road Accidents</h3>
             <div id="plot-weather-scatter" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1" id="stat-weather-scatter"></p>
           </div>
-          <!-- Bar 2: Condition Distribution -->
+          <!-- Bar 2: Rainfall vs Fatalities -->
           <div class="border border-slate-200 rounded-lg p-4">
-            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Crash Occurrence by Weather Condition</h3>
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual Rainfall (mm) vs Fatalities</h3>
             <div id="plot-weather-conditions" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1" id="stat-weather-conditions"></p>
           </div>
+          <!-- Scatter 3: Tmax vs Accidents -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual Mean Tmax (°C) vs Road Accidents</h3>
+            <div id="plot-weather-tmax" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1" id="stat-weather-tmax"></p>
+          </div>
+          <!-- Scatter 4: Tmin vs Fatalities -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual Mean Tmin (°C) vs Fatalities</h3>
+            <div id="plot-weather-tmin" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1" id="stat-weather-tmin"></p>
+          </div>
+          <!-- Trend -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Annual weather trend by state (2018–2024)</h3>
+            <div id="plot-weather-trend" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1">Rainfall (mm, solid) and mean Tmax (°C, dashed) per state-year. Select a state or zone to focus.</p>
+          </div>
+          <!-- Heatmap -->
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">State × Year weather heatmap
+              <select id="weather-var-select" class="ml-2 text-xs font-normal border border-slate-300 rounded px-1 py-0.5">
+                <option value="rainfall_mm">Rainfall (mm)</option>
+                <option value="tmax_c">Tmax (°C)</option>
+                <option value="tmin_c">Tmin (°C)</option>
+              </select>
+            </h3>
+            <div id="plot-weather-heatmap" class="h-72 w-full"></div>
+            <p class="text-[11px] text-slate-500 mt-1">Blank cells = no verified value (never zero).</p>
+          </div>
+        </div>
+        <!-- Correlation panel -->
+        <div class="border border-slate-200 rounded-lg p-4 mt-5">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Pooled Observational Associations (not causal)</h3>
+          <div id="weather-correlation-table" class="text-xs text-slate-600">Loading...</div>
+          <p class="text-[11px] text-slate-500 mt-2">Source: India Meteorological Department (IMD), gridded rainfall/temperature data; spatially aggregated to state level using the project's validated boundary workflow.</p>
+        </div>
+        <!-- Severity note -->
+        <div class="border border-slate-200 rounded-lg p-4 mt-5">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Weather × Severity</h3>
+          <div id="weather-severity-note" class="text-xs text-slate-600">Weather × severity analysis is not available at sufficient verified state-level coverage.</div>
         </div>
       </div>
 

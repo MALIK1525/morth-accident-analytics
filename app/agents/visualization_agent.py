@@ -601,7 +601,14 @@ class VisualizationAgent:
 
     def _generate_g9(self, entry, filters):
         df = self.loader.get_clean_df()
-        illustrative = ['Tamil Nadu', 'Madhya Pradesh', 'Uttar Pradesh', 'Kerala', 'Karnataka', 'Maharashtra', 'Gujarat', 'Rajasthan']
+        f = filters or {}
+        # Honor state filter: single state -> that state only; zone filter narrows set
+        if f.get('state') and f['state'] != 'ALL':
+            illustrative = [f['state']] if f['state'] in df['State_UT'].unique() else []
+        elif f.get('zone') and f['zone'] != 'ALL':
+            illustrative = sorted(df[df['Zone'] == f['zone']]['State_UT'].unique().tolist())
+        else:
+            illustrative = ['Tamil Nadu', 'Madhya Pradesh', 'Uttar Pradesh', 'Kerala', 'Karnataka', 'Maharashtra', 'Gujarat', 'Rajasthan']
         sub = df[df['State_UT'].isin(illustrative)]
         
         series = []

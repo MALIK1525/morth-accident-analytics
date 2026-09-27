@@ -1,0 +1,13 @@
+Outcome,Weather,N,Entities,Coef,SE,CI95,p,State_FE,Year_FE,Note
+Accidents,Annual_Rainfall_mm,236,34,-1.206,0.5131,"[-2.2169, -0.1952]",0.0196,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Accidents,Annual_Mean_Tmax_C,236,34,948.0622,321.0442,"[315.5559, 1580.5685]",0.00347,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Accidents,Annual_Mean_Tmin_C,236,34,741.7061,414.0537,"[-74.0433, 1557.4555]",0.0745,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fatalities,Annual_Rainfall_mm,236,34,-0.1646,0.1514,"[-0.4629, 0.1337]",0.278,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fatalities,Annual_Mean_Tmax_C,236,34,233.6318,94.3834,"[47.682, 419.5816]",0.014,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fatalities,Annual_Mean_Tmin_C,236,34,459.2755,118.1473,"[226.5071, 692.0439]",0.000132,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Acc_perlakh,Annual_Rainfall_mm,236,34,-0.0093,0.0026,"[-0.0144, -0.0041]",0.000437,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Acc_perlakh,Annual_Mean_Tmax_C,236,34,6.534,1.6228,"[3.3369, 9.7311]",7.65e-05,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Acc_perlakh,Annual_Mean_Tmin_C,236,34,6.0395,2.1027,"[1.8968, 10.1823]",0.00445,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fat_perlakh,Annual_Rainfall_mm,236,34,-0.0008,0.0005,"[-0.0018, 0.0002]",0.106,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fat_perlakh,Annual_Mean_Tmax_C,236,34,1.2555,0.3073,"[0.6502, 1.8609]",6.03e-05,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered
+Fat_perlakh,Annual_Mean_Tmin_C,236,34,1.8261,0.3875,"[1.0626, 2.5896]",4.2e-06,yes,no (descriptive within-estimator),observational; not causal identification; SEs unclustered

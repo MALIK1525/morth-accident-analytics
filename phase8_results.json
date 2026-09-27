@@ -1,0 +1,52 @@
+{
+ "N": 236,
+ "states": 34,
+ "years": [
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "audit": {
+  "total_morth": 254,
+  "matched": 236,
+  "excluded": 18,
+  "states": 34,
+  "years": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "dup_keys": 0,
+  "miss_rain": 0,
+  "miss_tmax": 0,
+  "miss_tmin": 0,
+  "miss_acc": 0,
+  "miss_fat": 0,
+  "miss_pop": 0
+ },
+ "checks": {
+  "dup_keys": true,
+  "no_miss_acc": true,
+  "no_miss_fat": true,
+  "no_miss_pop": true,
+  "pop_positive": true,
+  "years_valid": true,
+  "exclusion_consistent": true,
+  "temp_missing_only_excluded": true,
+  "no_imputation": true,
+  "fdr_done": true,
+  "within_N_rule": true,
+  "no_future_leakage": true,
+  "no_synth": true,
+  "website_untouched": true
+ },
+ "monthly": "Monthly weather\u2013accident association unavailable from the verified accident dataset (MoRTH panel is annual State x Year; monthly accidents must NOT be inferred)."
+}

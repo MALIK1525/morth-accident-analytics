@@ -1,0 +1,13 @@
+Family,Tag,raw_p,FDR_p,Significant_after_FDR
+Rainfall,A,0.000293,0.0004,True
+Rainfall,B,2.49e-09,0.0,True
+Rainfall,G,1.78e-05,0.0,True
+Rainfall,H,0.0052,0.0052,True
+Tmax,C,2.73e-13,0.0,True
+Tmax,D,3.33e-16,0.0,True
+Tmax,I,0.0127,0.0127,True
+Tmax,J,3.86e-08,0.0,True
+Tmin,E,6.49e-09,0.0,True
+Tmin,F,8.75e-08,0.0,True
+Tmin,K,6.58e-05,0.0001,True
+Tmin,L,3e-05,0.0,True

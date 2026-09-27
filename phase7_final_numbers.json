@@ -1,0 +1,13 @@
+{
+ "total_cells": 17415,
+ "assigned": 4651,
+ "full_inside": 3356,
+ "partial": 1295,
+ "area_max_rel_pct": 0.596,
+ "area_mean_rel_pct": 0.09444537815126051,
+ "overlap_max_rel_pct": 2.679,
+ "overlap_mean_rel_pct": 0.7087100840336136,
+ "andaman_intersecting": 53,
+ "andaman_valid_day0": 0,
+ "andaman_nearest_valid_km": 1287.1
+}

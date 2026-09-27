@@ -1,0 +1,5 @@
+"State_UT","Year","Accidents","Fatalities","Boundary_STATE","Annual_Rainfall_mm","Annual_Mean_Tmax_C","Annual_Mean_Tmin_C","Valid_Rainfall_Days","Valid_Tmax_Days","Valid_Tmin_Days","Rainfall_Coverage_pct","Tmax_Coverage_pct","Rain_Cells","Temp_Cells","Boundary_Vintage","Aggregation_Method","Quality_Status","Source","_merge","Join_Status"
+"Dadra & Nagar Haveli","2018","80","54","","","","","","","","","","","","","","","","left_only","UNRESOLVED_LEGACY_NO_POLYGON"
+"Daman & Diu","2018","76","35","","","","","","","","","","","","","","","","left_only","UNRESOLVED_LEGACY_NO_POLYGON"
+"Dadra & Nagar Haveli","2019","68","49","","","","","","","","","","","","","","","","left_only","UNRESOLVED_LEGACY_NO_POLYGON"
+"Daman & Diu","2019","69","28","","","","","","","","","","","","","","","","left_only","UNRESOLVED_LEGACY_NO_POLYGON"

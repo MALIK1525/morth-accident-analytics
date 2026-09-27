@@ -1,0 +1,12 @@
+{
+ "annual_verified": 238,
+ "annual_total": 252,
+ "morth_matched": 250,
+ "morth_unmatched": 4,
+ "final_validation": {
+  "status": "B",
+  "area_max_rel_pct": 0.596,
+  "overlap_max_rel_pct": 2.679,
+  "andaman_valid_cells": 0
+ }
+}

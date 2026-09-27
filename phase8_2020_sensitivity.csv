@@ -1,0 +1,13 @@
+Tag,X,Y,N_full,Pearson_full,p_full,N_no2020,Pearson_no2020,p_no2020,Direction_change
+A,Annual_Rainfall_mm,Accidents,236,-0.234,0.000293,202,-0.228,0.00109,no
+B,Annual_Rainfall_mm,Fatalities,236,-0.376,2.49e-09,202,-0.378,2.82e-08,no
+C,Annual_Mean_Tmax_C,Accidents,236,0.452,2.73e-13,202,0.45,1.83e-11,no
+D,Annual_Mean_Tmax_C,Fatalities,236,0.498,3.33e-16,202,0.5,3.69e-14,no
+E,Annual_Mean_Tmin_C,Accidents,236,0.366,6.49e-09,202,0.367,7.52e-08,no
+F,Annual_Mean_Tmin_C,Fatalities,236,0.34,8.75e-08,202,0.342,6.42e-07,no
+G,Annual_Rainfall_mm,Acc_perlakh,236,0.275,1.78e-05,202,0.283,4.59e-05,no
+H,Annual_Rainfall_mm,Fat_perlakh,236,-0.181,0.0052,202,-0.183,0.00927,no
+I,Annual_Mean_Tmax_C,Acc_perlakh,236,0.162,0.0127,202,0.139,0.0492,no
+J,Annual_Mean_Tmax_C,Fat_perlakh,236,0.348,3.86e-08,202,0.315,5.03e-06,no
+K,Annual_Mean_Tmin_C,Acc_perlakh,236,0.257,6.58e-05,202,0.237,0.000667,no
+L,Annual_Mean_Tmin_C,Fat_perlakh,236,0.268,3e-05,202,0.24,0.000595,no

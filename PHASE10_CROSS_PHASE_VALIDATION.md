@@ -1,0 +1,21 @@
+# Phase 10 cross-phase validation
+- 1_india_acc: PASS
+- 2_india_fat: PASS
+- 3_india_inj: PASS
+- 4_state_acc: PASS
+- 5_state_fat: PASS
+- 6_poplakh: PASS
+- 7_road_years: PASS
+- 8_weather_N: PASS
+- 9_sev_formula: PASS
+- 10_inj_stop2022: PASS
+- 11_no2324_fab: PASS
+- 12_ML: PASS
+- 13_wx_assoc: PASS
+- 14_sev_stats: PASS
+- 15_FDR: PASS
+- 16_no_contra: PASS
+- 17_traceable: PASS
+- 18_no_causal: PASS
+- 19_no_rank: PASS
+- 20_no_fab: PASS

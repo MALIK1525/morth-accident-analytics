@@ -1,0 +1,16 @@
+# Phase 9 validation
+- uniqueness: PASS
+- acc_totals: PASS
+- india_sev: PASS
+- zone_agg: PASS
+- pop_positive: PASS
+- injury_coverage: PASS
+- no_2324_state_inj: PASS
+- slope_N_rule: PASS
+- fdr_done: PASS
+- s20_done: PASS
+- no_dup_join: PASS
+- no_synth: PASS
+- no_impute: PASS
+- units_labeled: PASS
+- years_ok: PASS

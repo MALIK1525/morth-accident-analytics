@@ -1,0 +1,4 @@
+X,Y,N,Pearson_r,Pearson_p,Spearman_rho,Spearman_p,Label
+Annual_Rainfall_mm,Fatalities_per_100_Accidents,233,-0.058,0.376,-0.024,0.713,Exploratory weather-severity association
+Annual_Mean_Tmax_C,Fatalities_per_100_Accidents,233,0.002,0.976,-0.081,0.217,Exploratory weather-severity association
+Annual_Mean_Tmin_C,Fatalities_per_100_Accidents,233,-0.069,0.293,-0.147,0.0251,Exploratory weather-severity association

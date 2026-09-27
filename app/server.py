@@ -210,21 +210,21 @@ def get_kpis():
 @app.route('/api/catalog', methods=['GET'])
 def get_catalog():
     """Returns the full Analysis Catalog."""
-    return jsonify({
+    return jsonify(_json_safe({
         "status": "success",
         "catalog": vis_agent.get_catalog()
-    })
+    }))
 
 @app.route('/api/visualization/<analysis_id>', methods=['POST', 'GET'])
 def get_visualization(analysis_id):
     """Generates the exact visualization payload and insight."""
     filters = request.get_json() if request.is_json else {}
     payload = vis_agent.generate_visualization(analysis_id, filters)
-    return jsonify({
+    return jsonify(_json_safe({
         "status": "success" if "error" not in payload else "error",
         "analysis_id": analysis_id,
         "payload": payload
-    })
+    }))
 
 @app.route('/api/generate_all_analyses', methods=['POST'])
 def generate_all_analyses():
@@ -244,16 +244,35 @@ def generate_all_analyses():
 
 @app.route('/api/weather/status', methods=['GET'])
 def get_weather_status():
-    return jsonify(weather_agent.check_status())
+    return jsonify(_json_safe(weather_agent.check_status()))
 
 @app.route('/api/weather/load', methods=['POST'])
 def load_weather():
     res = weather_agent.load_weather_dataset(loader.get_clean_df())
-    return jsonify(res)
+    return jsonify(_json_safe(res))
 
 @app.route('/api/weather/analytics', methods=['GET'])
 def get_weather_analytics():
-    return jsonify(weather_agent.get_weather_analytics(loader.get_clean_df()))
+    return jsonify(_json_safe(weather_agent.get_weather_analytics(loader.get_clean_df())))
+
+@app.route('/api/weather/annual', methods=['POST', 'GET'])
+def get_weather_annual():
+    filters = request.get_json() if request.is_json else {}
+    return jsonify(_json_safe(weather_agent.get_annual(filters)))
+
+@app.route('/api/weather/state', methods=['GET'])
+def get_weather_state():
+    state = request.args.get('state', 'ALL')
+    year = request.args.get('year')
+    return jsonify(_json_safe(weather_agent.get_state(state, year)))
+
+@app.route('/api/weather/correlation', methods=['GET'])
+def get_weather_correlation():
+    return jsonify(_json_safe(weather_agent.get_correlation()))
+
+@app.route('/api/weather/metadata', methods=['GET'])
+def get_weather_metadata():
+    return jsonify(_json_safe(weather_agent.get_metadata()))
 
 @app.route('/api/join_check', methods=['POST'])
 def check_join():
@@ -267,6 +286,22 @@ def check_join():
 def get_join_inventory():
     return jsonify(join_agent.get_supported_inventory_decisions())
 
+def _json_safe(obj):
+    """Convert NaN/Infinity to None so frontend gets valid JSON (null, never 0)."""
+    if isinstance(obj, float) and (obj != obj or obj in (float('inf'), float('-inf'))):
+        return None
+    if isinstance(obj, dict):
+        return {k: _json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_json_safe(v) for v in obj]
+    try:
+        import math
+        if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+            return None
+    except Exception:
+        pass
+    return obj
+
 @app.route('/api/g10_slopes', methods=['GET'])
 def get_g10_slopes():
     df = loader.get_clean_df()
@@ -274,7 +309,7 @@ def get_g10_slopes():
     return jsonify({
         "status": "success",
         "count": len(slope_df),
-        "slopes": slope_df.to_dict(orient='records')
+        "slopes": _json_safe(slope_df.to_dict(orient='records'))
     })
 
 @app.route('/api/statistical_analysis', methods=['GET'])
@@ -292,7 +327,7 @@ def get_statistical_analysis():
             'fat_abs': int(india['fat'].loc[y] - india['fat'].shift(1).loc[y]) if y != india.index.min() else None,
             'fat_pct': round(float((india['fat'].loc[y] / india['fat'].shift(1).loc[y] - 1) * 100), 2) if y != india.index.min() else None}
            for y in india.index]
-    return jsonify({
+    return jsonify(_json_safe({
         "status": "success",
         "correlation": corr,
         "slopes_summary": {
@@ -309,7 +344,7 @@ def get_statistical_analysis():
         },
         "yoy_india": yoy,
         "time_to_threshold_10k": thresholds
-    })
+    }))
 
 @app.route('/api/train_ml', methods=['POST'])
 def train_ml():
@@ -319,7 +354,7 @@ def train_ml():
     clf_results = ml_pipeline.train_risk_classifier(df)
     clust_results = ml_pipeline.train_state_clustering(df, n_clusters=3)
 
-    return jsonify({
+    return jsonify(_json_safe({
         "status": "success",
         "message": "Chronological evaluation complete (train 2018-2022, test 2023-2024).",
         "design": forecast.get('design', {}),
@@ -330,7 +365,7 @@ def train_ml():
         "feature_importances": ml_pipeline.feature_importances,
         "classification": clf_results,
         "clustering": clust_results
-    })
+    }))
 
 @app.route('/api/ml_status', methods=['GET'])
 def get_ml_status():
@@ -368,14 +403,14 @@ def get_audit_details():
             "result": "MATCH" if (diff_acc == 0 and diff_fat == 0) else "MISMATCH"
         })
 
-    return jsonify({
+    return jsonify(_json_safe({
         "status": "success",
         "total_checks": len(reconciliation),
         "zero_mismatch": all(r['result'] == 'MATCH' for r in reconciliation),
         "reconciliation": reconciliation,
         "validation_rows": validation_rows,
         "provenance_rows": provenance_rows
-    })
+    }))
 
 @app.route('/api/download_pdf_report', methods=['GET'])
 def download_pdf_report():

@@ -1,0 +1,15 @@
+# Phase 8 validation
+- dup_keys: PASS
+- no_miss_acc: PASS
+- no_miss_fat: PASS
+- no_miss_pop: PASS
+- pop_positive: PASS
+- years_valid: PASS
+- exclusion_consistent: PASS
+- temp_missing_only_excluded: PASS
+- no_imputation: PASS
+- fdr_done: PASS
+- within_N_rule: PASS
+- no_future_leakage: PASS
+- no_synth: PASS
+- website_untouched: PASS

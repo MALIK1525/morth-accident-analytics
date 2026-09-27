@@ -1,0 +1,15 @@
+{
+ "audit": {
+  "N": 254,
+  "states": 38,
+  "dup": 0,
+  "inj_valid": 179,
+  "inj_missing": 75
+ },
+ "checks_passed": 15,
+ "checks_total": 15,
+ "india_sev18": 33.5,
+ "india_sev24": 36.33,
+ "fdr_sig": 9,
+ "fdr_n": 34
+}

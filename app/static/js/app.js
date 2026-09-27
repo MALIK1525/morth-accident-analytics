@@ -237,6 +237,7 @@ async function onFilterChange() {
 
   await updateKPIs();
   await renderAllVisualizations();
+  await loadWeatherTab();
 }
 
 async function fetchMetadata() {
@@ -422,7 +423,11 @@ function setupCardControls(id, payload) {
     btnSvg.onclick = () => {
       const plot = document.getElementById(`plot-${id}`);
       if (window.Plotly && plot) {
-        Plotly.downloadImage(plot, { format: 'svg', filename: `MoRTH_${id}_Vector` });
+        Plotly.downloadImage(plot, { format: 'svg', filename: `MoRTH_${id}_Vector` }).catch((err) => {
+          alert('SVG export failed in this browser (' + (err && err.message ? err.message : err) + '). PNG export remains available.');
+        });
+      } else {
+        alert('SVG export unavailable: chart library not loaded. PNG export remains available.');
       }
     };
   }
@@ -869,58 +874,171 @@ async function loadG10Slopes() {
 // WEATHER TAB LOADER
 // ==========================================
 
+function setWeatherKpi(id, val, naReason) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = (val === null || val === undefined || Number.isNaN(val)) ? ('N/A' + (naReason ? ' — ' + naReason : '')) : val;
+}
+
 async function loadWeatherTab() {
   try {
-    const res = await fetch('/api/weather/analytics');
-    const data = await res.json();
+    const f = ((typeof appState !== 'undefined') && appState.filters)
+      ? appState.filters : { state: 'ALL', year: 'ALL', zone: 'ALL' };
+    const statusRes = await fetch('/api/weather/status');
+    const status = await statusRes.json();
     const statusText = document.getElementById('weather-status-text');
+    const statusGrid = document.getElementById('weather-status-grid');
+    const corrBox = document.getElementById('weather-correlation-table');
 
-    if (data.status === 'AVAILABLE') {
-      if (statusText) statusText.innerText = 'IMD Annual Rainfall & Conditions dataset active and verified (2018–2024).';
-      
-      // Scatter plot
-      const scatterContainer = document.getElementById('plot-weather-scatter');
-      if (scatterContainer && data.rainfall_vs_accidents) {
-        const pts = data.rainfall_vs_accidents;
-        const trace = {
-          x: pts.map(p => p.rainfall_mm),
-          y: pts.map(p => p.accidents),
-          text: pts.map(p => `${p.state} (${p.year})`),
-          mode: 'markers',
-          type: 'scatter',
-          marker: { size: 8, color: '#0284C7', opacity: 0.8 }
-        };
-        const layout = {
-          ...commonLayout,
-          xaxis: { title: 'Annual Precipitation (IMD Rainfall mm)' },
-          yaxis: { title: 'Annual Road Accidents', tickformat: ',' }
-        };
-        Plotly.newPlot(scatterContainer, [trace], layout, { responsive: true, displayModeBar: false });
+    if (status.status !== 'AVAILABLE' && status.status !== 'PARTIALLY_AVAILABLE') {
+      if (statusText) statusText.innerText = status.message || 'Weather dataset currently awaiting ingestion.';
+      if (statusGrid) statusGrid.innerHTML = '';
+      for (const id of ['plot-weather-scatter', 'plot-weather-conditions', 'plot-weather-tmax', 'plot-weather-tmin', 'plot-weather-trend', 'plot-weather-heatmap']) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<div class="p-3 text-center text-slate-400">Source data not included in this deployment.</div>';
       }
+      for (const id of ['weather-kpi-rain', 'weather-kpi-tmax', 'weather-kpi-tmin', 'weather-kpi-obs', 'weather-kpi-states', 'weather-kpi-years']) setWeatherKpi(id, null, 'no verified data');
+      if (corrBox) corrBox.innerText = 'No verified data available for this selection.';
+      return;
+    }
+    if (statusText) statusText.innerText = status.message || 'AVAILABLE';
+    if (statusGrid) {
+      const row = (k, v) => `<div><span class="font-semibold">${k}:</span> ${v}</div>`;
+      statusGrid.innerHTML =
+        row('Status', status.status) +
+        row('Source', 'India Meteorological Department (IMD)') +
+        row('Variables', 'Rainfall, Mean Tmax, Mean Tmin') +
+        row('Coverage', status.temporal_coverage || '2018–2024') +
+        row('Spatial processing', 'State-level aggregation, validated boundary workflow') +
+        row('Joined observations', `${status.usable_state_years} usable, ${status.excluded_rows} excluded`) +
+        row('Available', 'Rainfall / Tmax / Tmin') +
+        row('Unavailable', 'Humidity, Visibility, Fog, Wind') +
+        row('Resolution', status.spatial_resolution || '');
+    }
+    const covLine = document.getElementById('weather-coverage-line');
+    if (covLine) covLine.innerText = ` Coverage 2018–2024; ${status.usable_state_years} usable state-year joins, ${status.excluded_rows} excluded. Humidity / Visibility / Fog / Wind: unavailable.`;
 
-      // Condition distribution
-      const condContainer = document.getElementById('plot-weather-conditions');
-      if (condContainer && data.condition_distribution) {
-        const trace = {
-          x: data.condition_distribution.map(c => c.Weather_Condition),
-          y: data.condition_distribution.map(c => c.Observations),
-          type: 'bar',
-          marker: { color: '#0D9488' }
-        };
-        const layout = {
-          ...commonLayout,
-          xaxis: { title: 'Atmospheric Condition' },
-          yaxis: { title: 'Recorded State-Year Observations' }
-        };
-        Plotly.newPlot(condContainer, [trace], layout, { responsive: true, displayModeBar: false });
+    // Single filtered fetch reused by every chart (no duplicate requests).
+    const res = await fetch('/api/weather/annual', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(f)
+    });
+    const data = await res.json();
+    const rows = data.rows || [];
+    const pts = rows.filter(p => p.available && p.accidents != null);
+
+    // KPIs (dynamic; N/A with reason when incalculable).
+    const mean = (a) => a.length ? (a.reduce((s, v) => s + v, 0) / a.length) : null;
+    const rain = pts.map(p => p.rainfall_mm).filter(v => v != null);
+    const tmax = pts.map(p => p.tmax_c).filter(v => v != null);
+    const tmin = pts.map(p => p.tmin_c).filter(v => v != null);
+    setWeatherKpi('weather-kpi-rain', rain.length ? Math.round(mean(rain)).toLocaleString('en-IN') : null, 'no verified rows in selection');
+    setWeatherKpi('weather-kpi-tmax', tmax.length ? mean(tmax).toFixed(1) : null, 'no verified rows in selection');
+    setWeatherKpi('weather-kpi-tmin', tmin.length ? mean(tmin).toFixed(1) : null, 'no verified rows in selection');
+    setWeatherKpi('weather-kpi-obs', pts.length ? pts.length.toLocaleString('en-IN') : null, 'no verified rows in selection');
+    setWeatherKpi('weather-kpi-states', pts.length ? new Set(pts.map(p => p.state)).size : null, 'no verified rows in selection');
+    setWeatherKpi('weather-kpi-years', pts.length ? new Set(pts.map(p => p.year)).size : null, 'no verified rows in selection');
+
+    // Full-sample pooled stats for annotation (observational).
+    let corrMap = {};
+    try {
+      const rc = await (await fetch('/api/weather/correlation')).json();
+      if (rc.status === 'AVAILABLE') {
+        for (const a of rc.associations) if (a.status === 'OK') corrMap[a.x + '|' + a.y] = a;
+        if (corrBox) {
+          corrBox.innerHTML = '<table class="w-full text-left border-collapse"><thead><tr class="border-b">'
+            + '<th class="py-1 pr-2">X vs Y</th><th class="py-1 pr-2">N</th>'
+            + '<th class="py-1 pr-2">Pearson r</th><th class="py-1 pr-2">p</th>'
+            + '<th class="py-1 pr-2">Spearman ρ</th></tr></thead><tbody>'
+            + rc.associations.map(a => a.status === 'OK'
+              ? `<tr class="border-b"><td class="py-1 pr-2">${a.x.replace('Annual_','').replace('_',' ')} vs ${a.y}</td><td class="py-1 pr-2">${a.n}</td><td class="py-1 pr-2">${a.pearson_r.toFixed(3)}</td><td class="py-1 pr-2">${a.pearson_p.toExponential(1)}</td><td class="py-1 pr-2">${a.spearman_rho.toFixed(3)}</td></tr>`
+              : `<tr class="border-b"><td class="py-1 pr-2" colspan="5">${a.x} vs ${a.y}: insufficient data</td></tr>`).join('')
+            + '</tbody></table><p class="text-[11px] text-slate-500 mt-1">Observed association only — not causal evidence.</p>';
+        }
+      } else if (corrBox) { corrBox.innerText = 'No verified data available for this selection.'; }
+    } catch (e) { if (corrBox) corrBox.innerText = 'Unable to load this visualization.'; }
+
+    const statLine = (xKey, yKey) => {
+      const a = corrMap[xKey + '|' + yKey];
+      return a ? `Observed association — not causal evidence. Full-sample pooled: r = ${a.pearson_r.toFixed(3)}, p = ${a.pearson_p.toExponential(1)}, N = ${a.n}.` : '';
+    };
+
+    const scatter = (elId, statId, xFn, xTitle, yFn, yTitle, color) => {
+      const el = document.getElementById(elId);
+      const st = document.getElementById(statId);
+      if (!el) return;
+      if (!pts.length) { el.innerHTML = '<div class="p-3 text-center text-slate-400">No verified weather data is available for this selection.</div>'; if (st) st.innerText = ''; return; }
+      const xp = pts.map(xFn), yp = pts.map(yFn);
+      if (xp.some(v => typeof v !== 'number') || yp.some(v => typeof v !== 'number')) {
+        el.innerHTML = '<div class="p-3 text-center text-slate-400">Unable to load this weather visualization.</div>'; return;
       }
-    } else {
-      if (statusText) statusText.innerText = data.message || 'Weather dataset currently awaiting ingestion.';
+      Plotly.newPlot(el, [{
+        x: xp, y: yp,
+        text: pts.map(p => `${p.state} (${p.year}) — Rainfall ${p.rainfall_mm} mm, Tmax ${p.tmax_c} °C, Tmin ${p.tmin_c} °C`),
+        mode: 'markers', type: 'scatter',
+        marker: { size: 8, color, opacity: 0.8 }
+      }], { ...commonLayout, xaxis: { title: xTitle }, yaxis: { title: yTitle, tickformat: ',' } },
+        { responsive: true, displayModeBar: false });
+    };
+    scatter('plot-weather-scatter', 'stat-weather-scatter', p => p.rainfall_mm, 'Annual Rainfall (mm)', p => p.accidents, 'Annual Road Accidents', '#0284C7');
+    const stS = document.getElementById('stat-weather-scatter'); if (stS) stS.innerText = statLine('Annual_Rainfall_mm', 'Accidents');
+    scatter('plot-weather-conditions', 'stat-weather-conditions', p => p.rainfall_mm, 'Annual Rainfall (mm)', p => p.fatalities, 'Annual Fatalities', '#0D9488');
+    const stC = document.getElementById('stat-weather-conditions'); if (stC) stC.innerText = statLine('Annual_Rainfall_mm', 'Fatalities');
+    scatter('plot-weather-tmax', 'stat-weather-tmax', p => p.tmax_c, 'Annual Mean Tmax (°C)', p => p.accidents, 'Annual Road Accidents', '#DC2626');
+    const stT = document.getElementById('stat-weather-tmax'); if (stT) stT.innerText = statLine('Annual_Mean_Tmax_C', 'Accidents');
+    scatter('plot-weather-tmin', 'stat-weather-tmin', p => p.tmin_c, 'Annual Mean Tmin (°C)', p => p.fatalities, 'Annual Fatalities', '#7C3AED');
+    const stN = document.getElementById('stat-weather-tmin'); if (stN) stN.innerText = statLine('Annual_Mean_Tmin_C', 'Fatalities');
+
+    // Trend: one line per state in scope (cap 10), rainfall solid + Tmax dashed.
+    const trendEl = document.getElementById('plot-weather-trend');
+    if (trendEl) {
+      const states = [...new Set(pts.map(p => p.state))].sort();
+      if (!states.length) { trendEl.innerHTML = '<div class="p-3 text-center text-slate-400">No verified weather data is available for this selection.</div>'; }
+      else {
+        const shown = states.slice(0, 10);
+        const traces = [];
+        for (const s of shown) {
+          const sp = pts.filter(p => p.state === s).sort((a, b) => a.year - b.year);
+          traces.push({ x: sp.map(p => p.year), y: sp.map(p => p.rainfall_mm), name: s + ' rain', mode: 'lines+markers', type: 'scatter' });
+          traces.push({ x: sp.map(p => p.year), y: sp.map(p => p.tmax_c), name: s + ' Tmax', mode: 'lines', type: 'scatter', line: { dash: 'dash' }, yaxis: 'y2' });
+        }
+        Plotly.newPlot(trendEl, traces, { ...commonLayout,
+          xaxis: { title: 'Year' }, yaxis: { title: 'Rainfall (mm)' },
+          yaxis2: { title: 'Tmax (°C)', overlaying: 'y', side: 'right' },
+          showlegend: shown.length <= 4,
+          annotations: shown.length < states.length ? [{ text: `Showing ${shown.length} of ${states.length} states — filter to focus`, showarrow: false, x: 0.5, y: 1.08, xref: 'paper', yref: 'paper' }] : []
+        }, { responsive: true, displayModeBar: false });
+      }
+    }
+
+    // Heatmap: State × Year.
+    const heatEl = document.getElementById('plot-weather-heatmap');
+    const varSel = document.getElementById('weather-var-select');
+    if (heatEl) {
+      const key = varSel ? varSel.value : 'rainfall_mm';
+      const states = [...new Set(rows.map(p => p.state))].sort();
+      const years = [...new Set(rows.map(p => p.year))].sort((a, b) => a - b);
+      const lookup = {}; for (const p of rows) lookup[p.state + '|' + p.year] = p[key];
+      const z = states.map(s => years.map(y => { const v = lookup[s + '|' + y]; return (typeof v === 'number') ? v : null; }));
+      if (!states.length) { heatEl.innerHTML = '<div class="p-3 text-center text-slate-400">No verified weather data is available for this selection.</div>'; }
+      else {
+        Plotly.newPlot(heatEl, [{ x: years, y: states, z, type: 'heatmap', hoverongaps: false,
+          hovertemplate: 'State %{y}<br>Year %{x}<br>Value %{z}<extra></extra>' }],
+          { ...commonLayout, xaxis: { title: 'Year' }, yaxis: { title: 'State', automargin: true } },
+          { responsive: true, displayModeBar: false });
+      }
     }
   } catch (err) {
     console.error('Error loading weather analytics:', err);
+    const statusText = document.getElementById('weather-status-text');
+    if (statusText) statusText.innerText = 'Unable to load this weather visualization.';
   }
 }
+
+(function wireWeatherVarSelect() {
+  document.addEventListener('change', (e) => {
+    if (e.target && e.target.id === 'weather-var-select') loadWeatherTab();
+  });
+})();
 
 // ==========================================
 // ML TRAINING DISPLAY

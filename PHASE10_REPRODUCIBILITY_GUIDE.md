@@ -1,0 +1,3 @@
+# Reproducibility guide — see PHASE10_BTECH_REPORT_OUTLINE.md (condensed guide at end).
+
+Full references: scripts phase1_analysis.py, phase2b_extraction.py, phase2c_geography_vehicle.py, phase2d_join.py, phase3_normalized_analysis.py, phase4_analysis.py, phase5_ml_analysis.py, phase6_weather_validation.py, phase7_weather_spatial_aggregation.py, phase7_final_validation.py, phase8_analysis.py, phase9a_data.py, phase9b_stats.py, phase10a_validate.py, phase10b_tables.py. Raw: phase2_raw/, phase6_raw/weather/IMD (21 files), phase7_raw/boundaries/SOI. Manifests: PHASE2_RAW_SOURCE_MANIFEST.md, PHASE2C_RAW_SOURCE_MANIFEST.md, phase manifests in workbooks. Order P1→P10; exclusions via Join_Status/Quality_Status; NV never filled; website untouched.
