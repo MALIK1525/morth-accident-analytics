@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-type-of-license.csv
+- Module: DL-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, Table 3.2 (Road accidents by type of license, 2020-2024). Values are accident counts (Total row matches published India accident totals each year).
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; yearly totals reconcile with published India accident figures (e.g. 2024 = 487,707)
+- Coverage: 2020-2024, India
+- Variables: accidents by licence status (Valid licence, Learner, Without valid licence, Not known)
+- Transformation: none (bare year columns interpreted as accident counts, documented in loader)
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-type-of-license.csv): 01af31df77d3ce01115d7d03b63c4566ed6cb8f74bd7b74ddf689d92eb6210d2

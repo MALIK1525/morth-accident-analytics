@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-type-of-violation.csv
+- Module: CS-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, Table 3.1 (Road accidents by type of traffic rules violation, 2023 and 2024)
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; 2024 killed sum reconciles exactly with published India fatalities (177,175). All-India population (NOT NH-only).
+- Coverage: 2023-2024, India
+- Variables: accidents / fatalities / injuries by traffic-rule violation (Over-speeding, Drunken driving, Wrong side, Red light, Mobile phone, Others)
+- Transformation: none (loader drops the 'All India' total row so it is not treated as a cause category)
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-type-of-violation.csv): 53de6a7c9cffb5ebe5c535a77209f11458c7c44004152967311d1caf7cf4929d

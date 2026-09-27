@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-cities-accidents-fatalities.csv
+- Module: CT-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, Section 6 million-plus cities tables (50 cities; accidents/killed/injured 2023-2024 with rankings). City classification per source.
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; 50 city records present; Delhi 2024 killed = 1,551 (largest) face-valid
+- Coverage: 2023-2024, 50 million-plus cities
+- Variables: accidents / killed / injured + rankings per city per year
+- Transformation: none
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-cities-accidents-fatalities.csv): b3f7c6af31d5838fcba974c8c22974c4186a6f768531269c2c1d7accf2f696de

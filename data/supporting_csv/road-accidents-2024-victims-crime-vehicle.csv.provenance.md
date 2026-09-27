@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-victims-crime-vehicle.csv
+- Module: VH-02
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, victim x crime-vehicle matrix annexure (2024 killed). Row label = victim road-user; column = crime (causing) vehicle.
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; matrix grand total = 177,175 matches published India fatalities
+- Coverage: 2024, India
+- Variables: killed by victim road-user x causing-vehicle pair
+- Transformation: tidied from wide matrix to long form by the loader; Total row excluded
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-victims-crime-vehicle.csv): 00f300a763d905fc215e13ec87e0aae16cd8911b26addd2989729152c7383c70

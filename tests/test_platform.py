@@ -78,7 +78,13 @@ class TestPlatformAgents(unittest.TestCase):
             self.assertNotIn('error', payload, f"Failed generating {gid}")
             self.assertIn('data', payload)
             self.assertIn('insight', payload)
-        for gid in ['RD-01', 'VH-01', 'CS-01', 'SV-01']:
+        # Phase 2.7: verified MoRTH AR 2024 supporting CSVs are loaded, so
+        # VH-01/CS-01 are AVAILABLE; modules without verified files stay unavailable.
+        for gid in ['VH-01', 'CS-01']:
+            payload = vis_agent.generate_visualization(gid)
+            self.assertNotIn('error', payload, f"{gid} should be available with verified supporting files")
+            self.assertIn('data', payload)
+        for gid in ['RD-01', 'SV-01']:
             payload = vis_agent.generate_visualization(gid)
             self.assertIn('error', payload, f"{gid} should stay unavailable without supporting files")
 

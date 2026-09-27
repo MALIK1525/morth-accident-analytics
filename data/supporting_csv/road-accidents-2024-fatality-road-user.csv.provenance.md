@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-fatality-road-user.csv
+- Module: VH-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, road-user fatality table (persons killed by road-user category, 2023 and 2024)
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; 2024 category sum = 177,175 matches published India fatalities exactly
+- Coverage: 2023-2024, India
+- Variables: persons killed by road-user category (Pedestrian, Bicycles, Two-wheelers, Auto-Rickshaws, Cars/Taxis/Vans/LMVs, Trucks/Lorries, Buses, Other NMV, Others)
+- Transformation: none (share rows excluded at parse time)
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-fatality-road-user.csv): f6c4674f66e39501cb2f1e5e3cd252ebfb704566b07c3a4e114944b9332a32bf

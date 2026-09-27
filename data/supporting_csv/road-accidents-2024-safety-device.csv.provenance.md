@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-safety-device.csv
+- Module: SD-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, Table 3.3 (Persons killed and injured due to non-use of safety devices - helmets and seatbelts). Values are killed/injured counts for non-use, NOT shares of all deaths.
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; face-validity checked (Drivers + Passengers = Total for each column)
+- Coverage: 2024, India
+- Variables: killed/injured without helmet and without seatbelt, driver vs passenger
+- Transformation: none
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-safety-device.csv): 4982105731a07a81ce6a8b393c35d3063fa8b75786dcff729c94f97ea63949dd

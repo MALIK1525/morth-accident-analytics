@@ -151,7 +151,7 @@ class SupportingDataStore:
             self.unrecognized.append({'filename': fname, 'reason': f'unreadable: {e}'})
             return
         df = _norm_cols(df)
-        for schema, parser in [
+        parsers = [
             ('collision', self._parse_category_years),
             ('violation', self._parse_category_years),
             ('road_user', self._parse_category_years),
@@ -165,7 +165,30 @@ class SupportingDataStore:
             ('states_accidents', self._parse_states),
             ('states_fatalities', self._parse_states),
             ('annual_totals', self._parse_annual),
-        ]:
+        ]
+        # Filename hints disambiguate generic Category x Year tables
+        # (collision / violation / road-user share the same shape).
+        low = fname.lower()
+        hints = []
+        if 'collision' in low:
+            hints.append('collision')
+        if 'violation' in low or 'cause' in low:
+            hints.append('violation')
+        if 'road-user' in low or 'road_user' in low or 'fatality' in low:
+            hints.append('road_user')
+        if 'licen' in low:
+            hints.append('licence')
+        if 'safety' in low or 'helmet' in low or 'seat' in low:
+            hints.append('safety_device')
+        if 'victim' in low or 'crime' in low:
+            hints.append('victim_crime_matrix')
+        if 'cit' in low:
+            hints += ['cities_overview', 'cities_mode', 'cities_violation']
+        if 'registration' in low or 'density' in low or 'exposure' in low:
+            hints.append('exposure')
+        if hints:
+            parsers = sorted(parsers, key=lambda p: hints.index(p[0]) if p[0] in hints else len(hints))
+        for schema, parser in parsers:
             if schema in self.registry:
                 continue
             try:
@@ -201,16 +224,25 @@ class SupportingDataStore:
             inj = _find_col(df, str(y), 'injur')
             if acc or kil or inj:
                 out[y] = (acc, kil, inj)
+                continue
+            # Fallback: bare year column (e.g. licence tables where the single
+            # value column per year holds accident counts). Only when no other
+            # year-descriptor columns exist for that year.
+            bare = [c for c in df.columns if str(c).strip() == str(y)]
+            others = [c for c in df.columns if c not in bare and str(y) in str(c)]
+            if bare and all('change' in str(c).lower() or 'share' in str(c).lower() for c in others):
+                out[y] = (bare[0], None, None)
         return out
 
     def _parse_category_years(self, df, fname):
         """Generic Category x Year (accidents/killed/injured) parser for
         collision / violation / road-user / licence tables."""
         data, first = self._data_rows(df)
-        # drop Total rows (kept separately for validation)
+        # drop Total rows (kept separately for validation); 'All India' is the
+        # MoRTH total row in violation tables.
         totals = data[data[first].str.strip().str.lower() == 'total']
-        data = data[data[first].str.strip().str.lower() != 'total']
-        ymap = self._year_cols(df)
+        data = data[~data[first].str.strip().str.lower().isin(('total', 'all india'))]
+        ymap = self._year_cols(df, years=(2020, 2021, 2022, 2023, 2024))
         if not ymap or data.empty:
             return None
         # sanity: first column must look categorical (non-numeric labels)
@@ -258,6 +290,8 @@ class SupportingDataStore:
             if len(df.columns) < 6 or len(df) < 5:
                 return None
         data, first = self._data_rows(df)
+        # drop the 'Total' summary row so it is not treated as a victim class
+        data = data[~data[first].str.strip().str.lower().isin(('total',))]
         if data.empty or len(df.columns) < 4:
             return None
         # tidy: melt wide matrix
@@ -273,16 +307,21 @@ class SupportingDataStore:
         if 'city' not in low:
             return None
         data, first = self._data_rows(df)
-        data = data[~data[first].str.strip().str.lower().isin(('total', 'sl no', 's.no'))]
+        # city names may sit in a 'City' column rather than the first column
+        # (e.g. leading 'Sl No' column).
+        name_col = _find_col(df, 'city') or first
+        data = data[~data[name_col].str.strip().str.lower().isin(('total', 'sl no', 's.no'))]
         if data.empty:
             return None
         rows = []
         for _, r in data.iterrows():
-            city = str(r[first]).strip()
+            city = str(r[name_col]).strip()
             if not city or city.replace('.', '').isdigit():
                 continue
             base = {'City': city}
-            for c in df.columns[1:]:
+            for c in df.columns:
+                if c == name_col:
+                    continue
                 cl = c.lower()
                 y = 2024 if '2024' in c else (2023 if '2023' in c else None)
                 val = parse_indian_int(r[c])

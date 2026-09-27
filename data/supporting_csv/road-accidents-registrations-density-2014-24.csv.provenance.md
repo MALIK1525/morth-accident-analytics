@@ -1,0 +1,12 @@
+# Provenance - road-accidents-registrations-density-2014-24.csv
+- Module: EX-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, decadal-trends table family (cf. Table 1.7(a)): accidents, deaths, injuries, registered vehicles, road length 2014-2024; death rate per 10,000 vehicles; vehicle density. 2023-2024 vehicle/road-length cells are NA in source; (P) = provisional.
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; accident/death/injury columns reconcile with published India totals; NA cells preserved as null, never zero
+- Coverage: 2014-2024, India
+- Variables: accidents/deaths/injuries (000), registered vehicles (000), road length (000 km), death rate per 10k vehicles, vehicle density
+- Transformation: none (NA and (P) markers parsed by loader; no imputation)
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-registrations-density-2014-24.csv): 67eee8a8a426afd9315dc5a439cf1febf2f4b5116ab7d006f9b05136ac0a9912

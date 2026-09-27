@@ -1,0 +1,12 @@
+# Provenance - road-accidents-2024-type-of-collision.csv
+- Module: CL-01
+- Source_Organization: Ministry of Road Transport and Highways (MoRTH), Government of India
+- Report: MoRTH Road Accidents in India 2024, Table 1.5 (Road accidents by type of collision, 2024 vis-a-vis 2023)
+- Original_Publisher: http://morth.gov.in (Road Accidents in India 2024 PDF)
+- Mirror_URL: https://data.opencity.in/dataset/road-accidents-in-india-2024 (OpenCity CKAN; extraction mirror attributing source morth.gov.in)
+- Mirror_Status: third-party extraction; 2024 accident/killed sums reconcile exactly with published India totals (487,707 / 177,175)
+- Coverage: 2023-2024, India (all-India)
+- Variables: accidents / fatalities / injuries by collision type
+- Transformation: none (loader parses Indian comma format; share rows excluded at parse time)
+- Verification_Status: VERIFIED-MIRROR
+- SHA256 (road-accidents-2024-type-of-collision.csv): ac56605ed9dd58b19261a99ea5247f372da9f2fbfa7a051d5bed65d0ad02ce74
