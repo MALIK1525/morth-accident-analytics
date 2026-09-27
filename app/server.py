@@ -16,6 +16,7 @@ from app.agents.discovery_agent import DataDiscoveryAgent
 from app.agents.join_agent import JoinCompatibilityAgent
 from app.agents.visualization_agent import VisualizationAgent
 from app.agents.weather_agent import WeatherAgent
+from app.agents.upload_workspace import UploadWorkspace, ALLOWED_EXTENSIONS
 from app.analytics.statistics import compute_linear_trend, compute_state_slopes_g10, compute_correlation_matrix, compute_time_to_threshold
 from app.analytics.ml_models import SafetyMLPipeline
 from app.reports.pdf_generator import generate_academic_pdf
@@ -30,6 +31,7 @@ loader = DatasetLoader(benchmark_path="data/MoRTH_Primary_Dataset_3.xlsx")
 discovery_agent = DataDiscoveryAgent(data_dir="data")
 join_agent = JoinCompatibilityAgent()
 weather_agent = WeatherAgent(data_dir="data")
+workspace = UploadWorkspace()  # Mode B: uploaded-dataset workspace (never touches Mode A)
 vis_agent = VisualizationAgent(loader, weather_agent)
 supporting_store = vis_agent.supporting
 ml_pipeline = SafetyMLPipeline()
@@ -452,8 +454,15 @@ def export_data():
         csv_str = df.to_csv(index=False)
         return send_file(io.BytesIO(csv_str.encode('utf-8')), mimetype='text/csv', as_attachment=True, download_name=f"{filename}.csv")
 
+@app.errorhandler(413)
+def too_large(e):
+    return jsonify({"status": "error",
+                    "message": "File is too large. Maximum upload size is 32 MB."}), 413
+
+
 @app.route('/api/upload_dataset', methods=['POST'])
 def upload_dataset():
+    """Mode B upload: validated, session-scoped, never modifies Mode A."""
     if 'file' not in request.files:
         return jsonify({"status": "error", "message": "No file attached."}), 400
     file = request.files['file']
@@ -461,14 +470,127 @@ def upload_dataset():
         return jsonify({"status": "error", "message": "No filename specified."}), 400
 
     filename = secure_filename(file.filename)
-    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(save_path)
+    if not filename or filename.startswith('.'):
+        return jsonify({"status": "error", "message": "Unsafe filename rejected."}), 400
+    ext = os.path.splitext(filename)[1].lower()
+    if ext not in ALLOWED_EXTENSIONS:
+        return jsonify({"status": "error",
+                        "message": f"Unsupported file type '{ext}'. Supported: CSV, XLSX, JSON."}), 400
 
-    res = loader.load_user_file(save_path)
+    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    try:
+        file.save(save_path)
+        size = os.path.getsize(save_path)
+        ws_inspect = workspace.load_file(save_path, filename, file_size=size)
+        res = loader.load_user_file(save_path, filename)
+    except ValueError as e:
+        try:
+            os.remove(save_path)
+        except OSError:
+            pass
+        return jsonify({"status": "error", "message": str(e)}), 400
+    except Exception:
+        try:
+            os.remove(save_path)
+        except OSError:
+            pass
+        return jsonify({"status": "error",
+                        "message": "Unable to detect tabular data in this file."}), 400
+
     # Re-trigger discovery
     discovery_agent.discover_all()
 
-    return jsonify(res)
+    return jsonify({"status": "success",
+                    "message": ("Uploaded datasets are analyzed separately and do not "
+                                "modify the verified MoRTH research dataset."),
+                    "dataset_mode": "upload",
+                    "filename": filename,
+                    "inspection": ws_inspect,
+                    "audit": res})
+
+
+@app.route('/api/dataset/status', methods=['GET'])
+def dataset_status():
+    out = loader.dataset_status()
+    out["workspace_loaded"] = workspace.has_dataset
+    out["workspace_filename"] = workspace.filename
+    return jsonify({"status": "success", **out})
+
+
+@app.route('/api/dataset/inspect', methods=['GET'])
+def dataset_inspect():
+    return jsonify(workspace.inspect())
+
+
+@app.route('/api/dataset/mapping', methods=['GET'])
+def dataset_mapping_get():
+    return jsonify(workspace.get_mapping())
+
+
+@app.route('/api/dataset/mapping', methods=['POST'])
+def dataset_mapping_set():
+    body = request.get_json(silent=True) or {}
+    try:
+        mapping = workspace.set_mapping(body.get("parameter"), body.get("column"))
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+    return jsonify({"status": "success", "mapping": mapping})
+
+
+@app.route('/api/dataset/quality', methods=['GET'])
+def dataset_quality():
+    return jsonify(workspace.quality_report())
+
+
+@app.route('/api/dataset/clean', methods=['POST'])
+def dataset_clean():
+    try:
+        return jsonify(workspace.build_clean())
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+
+
+@app.route('/api/dataset/readiness', methods=['GET'])
+def dataset_readiness():
+    return jsonify(workspace.readiness())
+
+
+@app.route('/api/dataset/switch', methods=['POST'])
+def dataset_switch():
+    body = request.get_json(silent=True) or {}
+    try:
+        res = loader.switch_mode(body.get("mode"))
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+    discovery_agent.discover_all()
+    return jsonify({"status": "success", **res})
+
+
+@app.route('/api/dataset/export', methods=['GET'])
+def dataset_export():
+    """Export the cleaned uploaded (Mode B) table; never the benchmark."""
+    if not workspace.has_dataset:
+        return jsonify({"status": "error",
+                        "message": "No uploaded dataset available."}), 404
+    try:
+        clean = workspace.build_clean()
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+    df = workspace.raw_df.copy()
+    fmt = request.args.get("format", "csv").lower()
+    base = os.path.splitext(workspace.filename or "uploaded")[0]
+    if fmt == "xlsx":
+        out = io.BytesIO()
+        with pd.ExcelWriter(out, engine="openpyxl") as writer:
+            df.to_excel(writer, index=False, sheet_name="CLEAN")
+            pd.DataFrame({"step": clean["cleaning_log"]}).to_excel(
+                writer, index=False, sheet_name="CLEANING_LOG")
+        out.seek(0)
+        return send_file(out, mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                         as_attachment=True, download_name=f"{base}_cleaned.xlsx")
+    csv_str = df.to_csv(index=False)
+    return send_file(io.BytesIO(csv_str.encode("utf-8")), mimetype="text/csv",
+                     as_attachment=True, download_name=f"{base}_cleaned.csv")
 
 @app.route('/api/load_benchmark', methods=['POST'])
 def load_benchmark():

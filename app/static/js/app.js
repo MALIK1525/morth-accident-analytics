@@ -32,6 +32,7 @@ async function initializeApp() {
   await loadVariableRegistryAndCatalog();
   await loadWeatherTab();
   await loadResearchAudit();
+  await loadDatasetWorkspace();
 }
 
 function setupEventListeners() {
@@ -99,9 +100,14 @@ function setupEventListeners() {
       if (!fileInput.files || !fileInput.files[0]) return;
       const formData = new FormData();
       formData.append('file', fileInput.files[0]);
+      fileInput.value = '';
       try {
         const res = await fetch('/api/upload_dataset', { method: 'POST', body: formData });
         const data = await res.json();
+        if (!res.ok || data.status === 'error') {
+          alert(data.message || 'Upload failed.');
+          return;
+        }
         alert(data.message || 'Dataset uploaded.');
         await initializeApp();
       } catch (err) {
@@ -109,6 +115,23 @@ function setupEventListeners() {
       }
     });
   }
+
+  // Dataset mode switching (Verified MoRTH <-> Uploaded)
+  const btnModeBench = document.getElementById('btn-mode-benchmark');
+  const btnModeUp = document.getElementById('btn-mode-upload');
+  const switchMode = async (mode) => {
+    try {
+      const res = await fetch('/api/dataset/switch', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode })
+      });
+      const data = await res.json();
+      if (!res.ok || data.status === 'error') { alert(data.message || 'Switch failed.'); return; }
+      await initializeApp();
+    } catch (err) { alert('Switch failed: ' + err.message); }
+  };
+  if (btnModeBench) btnModeBench.addEventListener('click', () => switchMode('benchmark'));
+  if (btnModeUp) btnModeUp.addEventListener('click', () => switchMode('upload'));
 
   // PDF download
   const btnPdf = document.getElementById('btn-download-pdf');
@@ -1309,4 +1332,66 @@ async function loadVariableRegistryAndCatalog() {
   } catch (err) {
     console.error('Error loading variable registry:', err);
   }
+}
+
+
+// ================= DATASET WORKSPACE (Website Phase 2) =================
+async function loadDatasetWorkspace() {
+  const badge = document.getElementById('dataset-mode-badge');
+  try {
+    const sRes = await fetch('/api/dataset/status');
+    const s = await sRes.json();
+    if (badge && s.status === 'success') {
+      if (s.active_mode === 'upload') {
+        badge.textContent = 'Uploaded Dataset — ' + (s.active_filename || 'unknown');
+        badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800';
+      } else {
+        badge.textContent = 'Verified MoRTH Research Dataset';
+        badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800';
+      }
+    }
+    if (!s.workspace_loaded) return;
+  } catch (err) { console.error('Workspace status failed:', err); return; }
+
+  const esc = (v) => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  try {
+    const iRes = await fetch('/api/dataset/inspect');
+    const insp = await iRes.json();
+    const inspEl = document.getElementById('workspace-inspection');
+    if (inspEl && insp.status === 'success') {
+      const miss = Object.entries(insp.missing_by_column || {}).filter(([, v]) => v > 0)
+        .map(([k, v]) => `${esc(k)}: ${v}`).join(', ') || 'none';
+      inspEl.innerHTML = `<div class="grid grid-cols-2 gap-x-4 gap-y-1">
+        <div><b>File:</b> ${esc(insp.filename)}</div><div><b>Type:</b> ${esc(insp.file_type)}</div>
+        <div><b>Rows:</b> ${insp.rows}</div><div><b>Columns:</b> ${insp.columns}</div>
+        <div><b>Duplicates:</b> ${insp.duplicate_rows}</div>
+        <div><b>Years:</b> ${esc((insp.year_coverage || []).join(', ') || 'none detected')}</div>
+        <div class="col-span-2"><b>Missing:</b> ${miss}</div></div>`;
+    }
+    const mRes = await fetch('/api/dataset/mapping');
+    const mp = await mRes.json();
+    const mpEl = document.getElementById('workspace-mapping');
+    if (mpEl && mp.status === 'success') {
+      const rows = Object.entries(mp.mapping).map(([p, e]) =>
+        `<tr class="border-t border-slate-100"><td class="py-1 pr-2 font-semibold">${esc(p)}</td>` +
+        `<td class="py-1 pr-2">${esc(e.column || '—')}</td>` +
+        `<td class="py-1">${esc(e.status === 'Mapped' ? ('? ' + e.confidence) : ('? ' + (e.reason || 'Unmapped')))}</td></tr>`).join('');
+      mpEl.innerHTML = `<table class="w-full"><tbody>${rows}</tbody></table>`;
+    }
+    const qRes = await fetch('/api/dataset/quality');
+    const q = await qRes.json();
+    const qEl = document.getElementById('workspace-quality');
+    if (qEl && q.status === 'success') {
+      const checks = Object.entries(q.checks || {}).map(([k, v]) => `${esc(k)}: ${esc(Array.isArray(v) ? v.join(' ? ') : v)}`).join('<br>');
+      qEl.innerHTML = `<div><b>Rows:</b> ${q.rows} • <b>Duplicates:</b> ${q.duplicate_rows}</div><div class="mt-1">${checks || 'no checks'}</div>`;
+    }
+    const rRes = await fetch('/api/dataset/readiness');
+    const r = await rRes.json();
+    const rEl = document.getElementById('workspace-readiness');
+    if (rEl && r.status === 'success') {
+      rEl.innerHTML = Object.entries(r.families).map(([f, v]) =>
+        `<div class="flex items-start gap-2 py-0.5"><span>${v.status === 'AVAILABLE' ? '?' : '?'}</span>` +
+        `<span><b>${esc(f)}</b> — ${esc(v.status)}<br><span class="text-slate-400">${esc(v.reason)}</span></span></div>`).join('');
+    }
+  } catch (err) { console.error('Workspace load failed:', err); }
 }

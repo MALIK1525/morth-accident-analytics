@@ -66,6 +66,12 @@ class DatasetLoader:
         self.data_dictionary = []
         self.active_filename = ""
         self.is_benchmark = False
+        # Mode A/B separation (Website Phase 2): the verified benchmark is cached
+        # and never overwritten by user uploads.
+        self.active_mode = "benchmark"
+        self._benchmark_cache = None  # dict snapshot of Mode A state
+        self._upload_cache = None  # dict snapshot of Mode B state
+        self.uploaded_filename = None
 
         # Automatically load benchmark
         target_bench = benchmark_path if benchmark_path else os.path.join(self.data_dir, "MoRTH_Primary_Dataset_3.xlsx")
@@ -142,9 +148,22 @@ class DatasetLoader:
         return self.audit_summary
 
     def load_user_upload(self, filepath, original_filename=None):
-        """Safely loads a user-uploaded CSV or Excel file without destructive overwriting."""
+        """Loads a user-uploaded CSV/Excel/JSON file into the Mode B slot.
+
+        The verified benchmark (Mode A) is preserved untouched; uploads never
+        modify it. Supports .csv, .xlsx/.xls and .json."""
+        # Preserve Mode A on first upload.
+        if self.is_benchmark and self._benchmark_cache is None and self.clean_data is not None:
+            self._benchmark_cache = {
+                "raw_data": self.raw_data.copy(),
+                "clean_data": self.clean_data.copy(),
+                "active_filename": self.active_filename,
+                "audit_summary": dict(self.audit_summary) if isinstance(self.audit_summary, dict) else self.audit_summary,
+            }
         self.active_filename = original_filename or os.path.basename(filepath)
+        self.uploaded_filename = self.active_filename
         self.is_benchmark = False
+        self.active_mode = "upload"
         
         ext = os.path.splitext(filepath)[1].lower()
         if ext in ['.xlsx', '.xls']:
@@ -157,8 +176,14 @@ class DatasetLoader:
             raw_df = xl.parse(sheet_to_use)
         elif ext == '.csv':
             raw_df = pd.read_csv(filepath)
+        elif ext == '.json':
+            raw_df = pd.read_json(filepath)
+            if isinstance(raw_df, pd.Series):
+                raw_df = raw_df.to_frame().T
         else:
-            raise ValueError(f"Unsupported file format: {ext}. Only CSV and Excel supported.")
+            raise ValueError(f"Unsupported file format: {ext}. Only CSV, Excel and JSON supported.")
+        if raw_df is None or raw_df.empty or len(raw_df.columns) == 0:
+            raise ValueError("Dataset contains no usable rows.")
             
         self.raw_data = raw_df.copy()
         
@@ -177,6 +202,13 @@ class DatasetLoader:
             
         self.clean_data = mapped_df
         self.audit_summary = self.run_quality_audit()
+        self._upload_cache = {
+            "raw_data": self.raw_data.copy(),
+            "clean_data": self.clean_data.copy(),
+            "active_filename": self.active_filename,
+            "column_mapping": dict(getattr(self, "column_mapping", {})),
+            "audit_summary": dict(self.audit_summary) if isinstance(self.audit_summary, dict) else self.audit_summary,
+        }
         return self.audit_summary
 
     def _auto_map_columns(self, df):
@@ -339,4 +371,54 @@ class DatasetLoader:
         return self.load_user_upload(filepath, original_filename)
 
     def reset_to_benchmark(self):
+        if self.active_mode == "upload" and self.clean_data is not None:
+            self._upload_cache = {
+                "raw_data": self.raw_data.copy() if self.raw_data is not None else None,
+                "clean_data": self.clean_data.copy(),
+                "active_filename": self.active_filename,
+                "column_mapping": dict(getattr(self, "column_mapping", {})),
+                "audit_summary": dict(self.audit_summary) if isinstance(self.audit_summary, dict) else self.audit_summary,
+            }
+        if self._benchmark_cache is not None:
+            self.raw_data = self._benchmark_cache["raw_data"].copy()
+            self.clean_data = self._benchmark_cache["clean_data"].copy()
+            self.active_filename = self._benchmark_cache["active_filename"]
+            self.audit_summary = self._benchmark_cache["audit_summary"]
+            self.is_benchmark = True
+            self.active_mode = "benchmark"
+            return self.audit_summary
         return self.load_benchmark()
+
+    def switch_mode(self, mode):
+        """Switch the active dataset without destroying either one."""
+        if mode == "benchmark":
+            self.reset_to_benchmark()
+            return {"status": "success", "active_mode": "benchmark",
+                    "filename": self.active_filename}
+        if mode == "upload":
+            if self._upload_cache is None and self.active_mode != "upload":
+                raise ValueError("No uploaded dataset available.")
+            if self.active_mode != "upload" and self._upload_cache is not None:
+                self.raw_data = (self._upload_cache["raw_data"].copy()
+                                 if self._upload_cache["raw_data"] is not None else None)
+                self.clean_data = self._upload_cache["clean_data"].copy()
+                self.active_filename = self._upload_cache["active_filename"]
+                self.uploaded_filename = self.active_filename
+                self.column_mapping = self._upload_cache["column_mapping"]
+                self.audit_summary = self._upload_cache["audit_summary"]
+            self.active_mode = "upload"
+            self.is_benchmark = False
+            self.active_filename = self.uploaded_filename
+            return {"status": "success", "active_mode": "upload",
+                    "filename": self.active_filename}
+        raise ValueError("Mode must be 'benchmark' or 'upload'.")
+
+    def dataset_status(self):
+        return {
+            "active_mode": self.active_mode,
+            "benchmark_filename": (self._benchmark_cache["active_filename"]
+                                   if self._benchmark_cache else self.active_filename),
+            "benchmark_preserved": self._benchmark_cache is not None or self.is_benchmark,
+            "uploaded_filename": self.uploaded_filename,
+            "active_filename": self.active_filename,
+        }

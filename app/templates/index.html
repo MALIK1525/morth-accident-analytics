@@ -52,7 +52,7 @@
         <button id="btn-upload-trigger" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2 px-3 rounded border border-slate-700 transition flex items-center gap-1.5 shadow-sm">
           <span>↑</span> Upload Dataset
         </button>
-        <input type="file" id="file-upload-input" class="hidden" accept=".xlsx,.csv">
+        <input type="file" id="file-upload-input" class="hidden" accept=".xlsx,.xls,.csv,.json">
         <button id="btn-download-pdf" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 px-3.5 rounded shadow transition flex items-center gap-1.5">
           <span>📄</span> Download PDF Report
         </button>
@@ -120,6 +120,40 @@
         <button id="btn-generate-all-analyses" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition shadow-sm flex items-center gap-1">
           <span>⚡</span> Generate Available Analyses
         </button>
+      </div>
+    </section>
+
+    <!-- DATASET WORKSPACE (Website Phase 2: reusable upload platform) -->
+    <section id="dataset-workspace" class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Dataset Workspace</span>
+          <p class="text-xs text-slate-500 mt-0.5">Uploaded datasets are analyzed separately and do not modify the verified MoRTH research dataset. Supported formats: CSV, XLSX, JSON (max 32 MB).</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500">Active dataset:</span>
+          <span id="dataset-mode-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">Verified MoRTH Research Dataset</span>
+          <button id="btn-mode-benchmark" class="text-xs font-semibold py-1 px-2.5 rounded border border-slate-300 bg-slate-50 hover:bg-slate-100">○ Verified MoRTH</button>
+          <button id="btn-mode-upload" class="text-xs font-semibold py-1 px-2.5 rounded border border-slate-300 bg-slate-50 hover:bg-slate-100">○ Uploaded Dataset</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div>
+          <h4 class="text-xs font-bold text-slate-700 mb-1.5">Dataset Inspection</h4>
+          <div id="workspace-inspection" class="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3">No uploaded dataset. Upload a CSV, XLSX or JSON file to inspect it here.</div>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-700 mb-1.5">Analysis Readiness</h4>
+          <div id="workspace-readiness" class="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3">Readiness appears after upload.</div>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-700 mb-1.5">Variable Mapping <span class="font-normal text-slate-400">(click a row to correct)</span></h4>
+          <div id="workspace-mapping" class="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3 max-h-64 overflow-auto">Mapping appears after upload.</div>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-700 mb-1.5">Data Quality &amp; Cleaning Log</h4>
+          <div id="workspace-quality" class="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3 max-h-64 overflow-auto">Quality report appears after upload.</div>
+        </div>
       </div>
     </section>
 
