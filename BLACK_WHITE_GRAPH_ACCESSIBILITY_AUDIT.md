@@ -54,3 +54,10 @@ chart-configuration level (symbols/dashes/patterns present in every multi-series
   still called it. `bwStyle()` restored; all 18 call sites verified defined-before-use.
   Added `BW_ML_STYLE` mapping (Linear/Ridge/RF/GBR/KNN) for future multi-model traces.
   G1 kept single-series clean (no forced multi-style). Colors unchanged everywhere.
+- v4 (this commit): colorful distinct-per-graph styling + filter fallback. G1 area fill;
+  VH-01 h-bar converted to donut (same values, per-slice colors + dark outlines, outside
+  labels). Weather trend/scatter styling untouched per request. New shared
+  `renderChartById` dispatcher so the filter fallback renders identically to the main
+  path. When a filter selection has no verified records, the card now retries once with
+  unfiltered scope and shows the all-data view + honest note instead of a dead
+  "Analysis Notice". No data, aggregation, filtering logic, or research wording changed.

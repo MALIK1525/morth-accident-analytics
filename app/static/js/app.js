@@ -376,27 +376,38 @@ async function renderSingleChart(analysisId) {
     // Setup action buttons for this chart card
     setupCardControls(analysisId, payload);
 
-    // Call specific chart renderer
-    if (analysisId === 'G1') renderG1(plotContainer, payload.data);
-    else if (analysisId === 'G2') renderG2(plotContainer, payload.data);
-    else if (analysisId === 'G4') renderG4(plotContainer, payload.data);
-    else if (analysisId === 'G3') renderG3(plotContainer, payload.data);
-    else if (analysisId === 'G7') renderG7(plotContainer, payload.data);
-    else if (analysisId === 'G5') renderG5(plotContainer, payload.data);
-    else if (analysisId === 'G6') renderG6(plotContainer, payload.data);
-    else if (analysisId === 'G8') renderG8(plotContainer, payload.data);
-    else if (analysisId === 'G9') renderG9(plotContainer, payload.data);
-    else if (analysisId === 'G10') renderG10(plotContainer, payload.data);
-    else if (analysisId === 'VH-01') renderVehicle(plotContainer, payload.data);
-    else if (analysisId === 'CS-01') renderCause(plotContainer, payload.data);
-    else if (analysisId === 'CL-01') renderCollision(plotContainer, payload.data);
-    else if (analysisId === 'EX-01') renderExposure(plotContainer, payload.data);
-    else if (analysisId === 'DL-01') renderCategoryBars(plotContainer, payload.data, 'categories', 'accidents', 'Crashes by Licence Status (2024)', '#6366F1');
-    else if (analysisId === 'SD-01') renderSupportingTable(plotContainer, payload.data);
-    else if (analysisId === 'CT-01') renderSupportingTable(plotContainer, payload.data);
+    // Call specific chart renderer (shared dispatcher so fallback renders identically)
+    renderChartById(analysisId, plotContainer, payload.data);
 
   } catch (err) {
     console.error(`Error rendering chart ${analysisId}:`, err);
+    // Graceful fallback: retry once with unfiltered scope so the card still shows
+    // the verified all-data view instead of a dead notice. Data itself is unchanged.
+    try {
+      const fbRes = await fetch(`/api/visualization/${analysisId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ state: 'ALL', year: 'ALL', zone: 'ALL' })
+      });
+      const fbJson = await fbRes.json();
+      if (fbJson.status === 'success' && fbJson.payload) {
+        const payload = fbJson.payload;
+        appState.chartDataCache[analysisId] = payload;
+        if (insightBox && payload.insight) {
+          insightBox.innerHTML = `<span class="font-bold text-slate-900">Observed Pattern:</span> ${payload.insight}`;
+        }
+        if (tableContainer && payload.data && payload.data.table) {
+          renderDataTable(tableContainer, payload.data.table);
+        }
+        setupCardControls(analysisId, payload);
+        renderChartById(analysisId, plotContainer, payload.data);
+        const note = document.createElement('div');
+        note.className = 'text-[11px] text-amber-600 mt-1 text-center';
+        note.innerText = 'Showing all-data view — no verified records for the current filter selection.';
+        plotContainer.appendChild(note);
+        return;
+      }
+    } catch (fbErr) { console.error(`Fallback render failed for ${analysisId}:`, fbErr); }
     plotContainer.innerHTML = `
       <div class="h-full flex flex-col items-center justify-center bg-slate-50 border border-slate-200 rounded p-4 text-center">
         <span class="text-amber-500 font-bold text-sm">⚠ Analysis Notice</span>
@@ -404,6 +415,26 @@ async function renderSingleChart(analysisId) {
       </div>
     `;
   }
+}
+
+function renderChartById(analysisId, plotContainer, data) {
+    if (analysisId === 'G1') renderG1(plotContainer, data);
+    else if (analysisId === 'G2') renderG2(plotContainer, data);
+    else if (analysisId === 'G4') renderG4(plotContainer, data);
+    else if (analysisId === 'G3') renderG3(plotContainer, data);
+    else if (analysisId === 'G7') renderG7(plotContainer, data);
+    else if (analysisId === 'G5') renderG5(plotContainer, data);
+    else if (analysisId === 'G6') renderG6(plotContainer, data);
+    else if (analysisId === 'G8') renderG8(plotContainer, data);
+    else if (analysisId === 'G9') renderG9(plotContainer, data);
+    else if (analysisId === 'G10') renderG10(plotContainer, data);
+    else if (analysisId === 'VH-01') renderVehicle(plotContainer, data);
+    else if (analysisId === 'CS-01') renderCause(plotContainer, data);
+    else if (analysisId === 'CL-01') renderCollision(plotContainer, data);
+    else if (analysisId === 'EX-01') renderExposure(plotContainer, data);
+    else if (analysisId === 'DL-01') renderCategoryBars(plotContainer, data, 'categories', 'accidents', 'Crashes by Licence Status (2024)', '#6366F1');
+    else if (analysisId === 'SD-01') renderSupportingTable(plotContainer, data);
+    else if (analysisId === 'CT-01') renderSupportingTable(plotContainer, data);
 }
 
 function setupCardControls(id, payload) {
@@ -578,6 +609,8 @@ function renderG1(container, data) {
     x: data.years,
     y: data.values,
     type: 'scatter',
+    fill: 'tozeroy',
+    fillcolor: 'rgba(37,99,235,0.12)',
     name: 'Reported Crashes'
   }, 0, '#2563EB', 2.5);
   const trace2 = {
@@ -758,18 +791,24 @@ function renderRoad(container, data) {
 }
 
 function renderVehicle(container, data) {
+  // Donut chart: same fatality values, distinct creative encoding per victim mode.
   const trace = {
-    x: data.fatalities,
-    y: data.modes,
-    type: 'bar',
-    orientation: 'h',
-    marker: { color: '#F43F5E' }
+    labels: data.modes,
+    values: data.fatalities,
+    type: 'pie',
+    hole: 0.45,
+    textinfo: 'label+percent',
+    textposition: 'outside',
+    marker: {
+      colors: ['#2563EB','#E11D48','#F59E0B','#10B981','#8B5CF6','#06B6D4','#EC4899','#F97316','#14B8A6'],
+      line: { color: '#111827', width: 1.5 }
+    }
   };
   const layout = {
     ...commonLayout,
-    margin: { l: 120, r: 25, t: 20, b: 40 },
-    xaxis: { title: 'Fatalities by Victim Mode (2024)', tickformat: ',' },
-    yaxis: { autorange: 'reversed' }
+    title: { text: 'Fatalities by Victim Mode (2024)', font: { size: 12 } },
+    showlegend: true,
+    legend: { orientation: 'h', y: -0.15 }
   };
   Plotly.newPlot(container, [trace], layout, { responsive: true, displayModeBar: false });
 }
