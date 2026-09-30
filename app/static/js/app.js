@@ -540,9 +540,24 @@ const BW_STATE_STYLE = {
   'Gujarat': { symbol: 'triangle-down', dash: 'dash' },
   'Rajasthan': { symbol: 'hexagon', dash: 'solid' }
 };
+function bwStyle(i) {
+  return {
+    symbol: BW_SYMBOLS[i % BW_SYMBOLS.length],
+    dash: BW_DASHES[i % BW_DASHES.length],
+    pattern: BW_PATTERNS[(i + 1) % BW_PATTERNS.length]
+  };
+}
+const BW_ML_STYLE = {
+  'Linear Regression': { symbol: 'circle', dash: 'solid' },
+  'Ridge': { symbol: 'square', dash: 'dash' },
+  'Random Forest': { symbol: 'triangle-up', dash: 'dot' },
+  'Gradient Boosting': { symbol: 'diamond', dash: 'dashdot' },
+  'KNN': { symbol: 'star', dash: 'longdash' },
+  'KNN Regression': { symbol: 'star', dash: 'longdash' }
+};
 function bwStyleFor(name, i) {
-  const fixed = BW_ZONE_STYLE[name] || BW_STATE_STYLE[name];
-  if (fixed) return { ...fixed, pattern: BW_PATTERNS[i % BW_PATTERNS.length] };
+  const fixed = BW_ZONE_STYLE[name] || BW_STATE_STYLE[name] || BW_ML_STYLE[name];
+  if (fixed) return { ...fixed, pattern: BW_PATTERNS[(i + 1) % BW_PATTERNS.length] };
   return bwStyle(i);
 }
 function bwLine(trace, i, color, width) {
@@ -563,7 +578,7 @@ function renderG1(container, data) {
     x: data.years,
     y: data.values,
     type: 'scatter',
-    name: 'Reported Crashes (circle, solid)'
+    name: 'Reported Crashes'
   }, 0, '#2563EB', 2.5);
   const trace2 = {
     x: data.years,

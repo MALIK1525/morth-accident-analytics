@@ -45,3 +45,12 @@ Tests: 66/66 PASS. `node --check app.js` PASS.
 No research values, calculations, APIs, or analytical logic changed (visual encoding only).
 Browser render check: unavailable in this environment (no headed browser); validated at
 chart-configuration level (symbols/dashes/patterns present in every multi-series trace).
+
+## Fix history
+- v1 (5c83e37): added centralized BW style system; G6/G9 index-based symbols.
+- v2 (2ba23e1): deterministic name-keyed zone/state mappings; pushed to deploy-slim+main.
+- v3 (this commit): FIXED `bwStyle is not defined` runtime error affecting G1/G5 —
+  root cause was v2 replacing the `bwStyle()` definition while `bwLine`/`bwBar`/`bwStyleFor`
+  still called it. `bwStyle()` restored; all 18 call sites verified defined-before-use.
+  Added `BW_ML_STYLE` mapping (Linear/Ridge/RF/GBR/KNN) for future multi-model traces.
+  G1 kept single-series clean (no forced multi-style). Colors unchanged everywhere.
