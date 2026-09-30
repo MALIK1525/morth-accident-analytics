@@ -519,16 +519,36 @@ const commonLayout = {
   hovermode: 'x unified'
 };
 
+const BW_SYMBOLS = ['circle','square','triangle-up','diamond','x','cross','star','pentagon','hexagon','triangle-down'];
+const BW_DASHES = ['solid','dash','dot','dashdot','longdash','longdashdot'];
+const BW_PATTERNS = ['','/','\\','.','x','-','+','|'];
+function bwStyle(i) {
+  return {
+    symbol: BW_SYMBOLS[i % BW_SYMBOLS.length],
+    dash: BW_DASHES[i % BW_DASHES.length],
+    pattern: BW_PATTERNS[i % BW_PATTERNS.length]
+  };
+}
+function bwLine(trace, i, color, width) {
+  const s = bwStyle(i);
+  trace.mode = trace.mode || 'lines+markers';
+  trace.line = { ...(trace.line || {}), color, width: width || 2.5, dash: s.dash };
+  trace.marker = { ...(trace.marker || {}), size: 9, symbol: s.symbol, color, line: { color: '#111827', width: 1.2 } };
+  return trace;
+}
+function bwBar(trace, i, color) {
+  const s = bwStyle(i);
+  trace.marker = { ...(trace.marker || {}), color, line: { color: '#111827', width: 1.2 }, pattern: { shape: s.pattern, fillmode: 'overlay', fgcolor: 'rgba(0,0,0,0.35)', size: 6, solidity: 0.4 } };
+  return trace;
+}
+
 function renderG1(container, data) {
-  const trace1 = {
+  const trace1 = bwLine({
     x: data.years,
     y: data.values,
     type: 'scatter',
-    mode: 'lines+markers',
-    name: 'Reported Crashes',
-    line: { color: '#2563EB', width: 2.5 },
-    marker: { size: 6, color: '#1D4ED8' }
-  };
+    name: 'Reported Crashes (circle, solid)'
+  }, 0, '#2563EB', 2.5);
   const trace2 = {
     x: data.years,
     y: data.fitted_trend,
@@ -629,12 +649,12 @@ function renderG7(container, data) {
 }
 
 function renderG5(container, data) {
-  const traces = data.series.map((s, idx) => ({
+  const traces = data.series.map((s, idx) => bwBar({
     x: data.years,
     y: s.values,
     name: s.zone,
     type: 'bar'
-  }));
+  }, idx, ['#1F2937','#4B5563','#6B7280','#9CA3B8','#111827','#374151'][idx % 6]));
 
   const layout = {
     ...commonLayout,
@@ -652,7 +672,7 @@ function renderG8(container, data) {
     x: data.years,
     y: data.states,
     type: 'heatmap',
-    colorscale: 'Blues',
+    colorscale: 'Greys',
     colorbar: { title: 'Crashes' }
   };
   const layout = {
@@ -666,13 +686,13 @@ function renderG8(container, data) {
 
 function renderG6(container, data) {
   const palette = ['#2563EB','#E11D48','#F59E0B','#10B981','#8B5CF6','#06B6D4'];
-  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.zone || s.name, type: 'scatter', mode: 'lines+markers', line: { color: palette[i % palette.length], width: 2 }, marker: { size: 5 } }));
+  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.zone || s.name, type: 'scatter', mode: 'lines+markers', line: { color: palette[i % palette.length], width: 2.5, dash: BW_DASHES[i % BW_DASHES.length] }, marker: { size: 9, symbol: BW_SYMBOLS[i % BW_SYMBOLS.length], color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }));
   Plotly.newPlot(container, traces, { ...commonLayout, xaxis: { title: 'Year', tickmode: 'linear', dtick: 1 }, yaxis: { title: 'Accidents', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
 }
 
 function renderG9(container, data) {
   const palette = ['#2563EB','#E11D48','#F59E0B','#10B981','#8B5CF6','#06B6D4','#EC4899','#14B8A6'];
-  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.state || s.name, type: 'scatter', mode: 'lines+markers', line: { width: 2, color: palette[i % palette.length] }, marker: { size: 5 } }));
+  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.state || s.name, type: 'scatter', mode: 'lines+markers', line: { width: 2.5, color: palette[i % palette.length], dash: BW_DASHES[i % BW_DASHES.length] }, marker: { size: 9, symbol: BW_SYMBOLS[i % BW_SYMBOLS.length], color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }));
   Plotly.newPlot(container, traces, { ...commonLayout, xaxis: { title: 'Year', tickmode: 'linear', dtick: 1 }, yaxis: { title: 'Accidents', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
 }
 
@@ -741,8 +761,8 @@ function renderCause(container, data) {
 }
 
 function renderCollision(container, data) {
-  const t1 = { x: data.collision_types, y: data.accidents, name: 'Accidents', type: 'bar', marker: { color: '#6366F1' } };
-  const t2 = { x: data.collision_types, y: data.fatalities, name: 'Fatalities', type: 'bar', marker: { color: '#E11D48' } };
+  const t1 = bwBar({ x: data.collision_types, y: data.accidents, name: 'Accidents (///)', type: 'bar' }, 0, '#1F2937');
+  const t2 = bwBar({ x: data.collision_types, y: data.fatalities, name: 'Fatalities (xxx)', type: 'bar' }, 3, '#6B7280');
   Plotly.newPlot(container, [t1, t2], { ...commonLayout, barmode: 'group', xaxis: { title: 'Collision configuration', tickangle: -20 }, yaxis: { title: 'Count (2024)', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
 }
 
@@ -763,10 +783,10 @@ function renderSupportingTable(container, data) {
 }
 
 function renderSeverity(container, data) {
-  const trace1 = { x: data.years, y: data.fatal, name: 'Fatal', type: 'bar', marker: { color: '#DC2626' } };
-  const trace2 = { x: data.years, y: data.grievous, name: 'Grievous Injury', type: 'bar', marker: { color: '#EA580C' } };
-  const trace3 = { x: data.years, y: data.minor, name: 'Minor Injury', type: 'bar', marker: { color: '#FBBF24' } };
-  const trace4 = { x: data.years, y: data.non_injury, name: 'Non-Injury', type: 'bar', marker: { color: '#94A3B8' } };
+  const trace1 = bwBar({ x: data.years, y: data.fatal, name: 'Fatal (///)', type: 'bar' }, 0, '#1F2937');
+  const trace2 = bwBar({ x: data.years, y: data.grievous, name: 'Grievous Injury (xxx)', type: 'bar' }, 3, '#4B5563');
+  const trace3 = bwBar({ x: data.years, y: data.minor, name: 'Minor Injury (...)', type: 'bar' }, 2, '#9CA3B8');
+  const trace4 = bwBar({ x: data.years, y: data.non_injury, name: 'Non-Injury (---)', type: 'bar' }, 4, '#D1D5DB');
 
   const layout = {
     ...commonLayout,
@@ -841,7 +861,7 @@ async function loadG10Slopes() {
           x: keys,
           y: keys,
           type: 'heatmap',
-          colorscale: 'Viridis',
+          colorscale: 'Greys',
           zmin: -1,
           zmax: 1
         };
@@ -1021,8 +1041,8 @@ async function loadWeatherTab() {
         const traces = [];
         for (const s of shown) {
           const sp = pts.filter(p => p.state === s).sort((a, b) => a.year - b.year);
-          traces.push({ x: sp.map(p => p.year), y: sp.map(p => p.rainfall_mm), name: s + ' rain', mode: 'lines+markers', type: 'scatter' });
-          traces.push({ x: sp.map(p => p.year), y: sp.map(p => p.tmax_c), name: s + ' Tmax', mode: 'lines', type: 'scatter', line: { dash: 'dash' }, yaxis: 'y2' });
+          traces.push(bwLine({ x: sp.map(p => p.year), y: sp.map(p => p.rainfall_mm), name: s + ' rain (circle, solid)', type: 'scatter' }, 0, '#1F2937'));
+          traces.push({ x: sp.map(p => p.year), y: sp.map(p => p.tmax_c), name: s + ' Tmax (x, dashed)', mode: 'lines+markers', type: 'scatter', line: { dash: 'dash', color: '#6B7280', width: 2.5 }, marker: { size: 9, symbol: 'x', color: '#6B7280', line: { color: '#111827', width: 1.2 } }, yaxis: 'y2' });
         }
         Plotly.newPlot(trendEl, traces, { ...commonLayout,
           xaxis: { title: 'Year' }, yaxis: { title: 'Rainfall (mm)' },
@@ -1154,7 +1174,7 @@ function displayMLResults(data) {
     const pred = rows.map(r => r[key]);
     const lo = Math.min(...actual, ...pred), hi = Math.max(...actual, ...pred);
     Plotly.newPlot(avp, [
-      { x: actual, y: pred, mode: 'markers', type: 'scatter', name: best.model, marker: { color: '#2563EB', size: 7 }, text: rows.map(r => `${r.State_UT} ${r.Year}`) },
+      { x: actual, y: pred, mode: 'markers', type: 'scatter', name: best.model, marker: { color: '#111827', size: 9, symbol: 'circle-open', line: { color: '#111827', width: 1.5 } }, text: rows.map(r => `${r.State_UT} ${r.Year}`) },
       { x: [lo, hi], y: [lo, hi], mode: 'lines', type: 'scatter', name: 'Perfect prediction', line: { dash: 'dash', color: '#94A3B8' } }
     ], { ...commonLayout, xaxis: { title: 'Actual accidents', tickformat: ',' }, yaxis: { title: 'Predicted accidents', tickformat: ',' } }, { responsive: true, displayModeBar: false });
   }
@@ -1343,7 +1363,7 @@ async function loadDatasetWorkspace() {
     const s = await sRes.json();
     if (badge && s.status === 'success') {
       if (s.active_mode === 'upload') {
-        badge.textContent = 'Uploaded Dataset — ' + (s.active_filename || 'unknown');
+        badge.textContent = 'Uploaded Dataset ï¿½ ' + (s.active_filename || 'unknown');
         badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800';
       } else {
         badge.textContent = 'Verified MoRTH Research Dataset';
@@ -1374,7 +1394,7 @@ async function loadDatasetWorkspace() {
     if (mpEl && mp.status === 'success') {
       const rows = Object.entries(mp.mapping).map(([p, e]) =>
         `<tr class="border-t border-slate-100"><td class="py-1 pr-2 font-semibold">${esc(p)}</td>` +
-        `<td class="py-1 pr-2">${esc(e.column || '—')}</td>` +
+        `<td class="py-1 pr-2">${esc(e.column || 'ï¿½')}</td>` +
         `<td class="py-1">${esc(e.status === 'Mapped' ? ('? ' + e.confidence) : ('? ' + (e.reason || 'Unmapped')))}</td></tr>`).join('');
       mpEl.innerHTML = `<table class="w-full"><tbody>${rows}</tbody></table>`;
     }
@@ -1383,7 +1403,7 @@ async function loadDatasetWorkspace() {
     const qEl = document.getElementById('workspace-quality');
     if (qEl && q.status === 'success') {
       const checks = Object.entries(q.checks || {}).map(([k, v]) => `${esc(k)}: ${esc(Array.isArray(v) ? v.join(' ? ') : v)}`).join('<br>');
-      qEl.innerHTML = `<div><b>Rows:</b> ${q.rows} • <b>Duplicates:</b> ${q.duplicate_rows}</div><div class="mt-1">${checks || 'no checks'}</div>`;
+      qEl.innerHTML = `<div><b>Rows:</b> ${q.rows} ï¿½ <b>Duplicates:</b> ${q.duplicate_rows}</div><div class="mt-1">${checks || 'no checks'}</div>`;
     }
     const rRes = await fetch('/api/dataset/readiness');
     const r = await rRes.json();
@@ -1391,7 +1411,7 @@ async function loadDatasetWorkspace() {
     if (rEl && r.status === 'success') {
       rEl.innerHTML = Object.entries(r.families).map(([f, v]) =>
         `<div class="flex items-start gap-2 py-0.5"><span>${v.status === 'AVAILABLE' ? '?' : '?'}</span>` +
-        `<span><b>${esc(f)}</b> — ${esc(v.status)}<br><span class="text-slate-400">${esc(v.reason)}</span></span></div>`).join('');
+        `<span><b>${esc(f)}</b> ï¿½ ${esc(v.status)}<br><span class="text-slate-400">${esc(v.reason)}</span></span></div>`).join('');
     }
   } catch (err) { console.error('Workspace load failed:', err); }
 }
