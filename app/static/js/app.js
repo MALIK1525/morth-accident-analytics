@@ -522,12 +522,28 @@ const commonLayout = {
 const BW_SYMBOLS = ['circle','square','triangle-up','diamond','x','cross','star','pentagon','hexagon','triangle-down'];
 const BW_DASHES = ['solid','dash','dot','dashdot','longdash','longdashdot'];
 const BW_PATTERNS = ['','/','\\','.','x','-','+','|'];
-function bwStyle(i) {
-  return {
-    symbol: BW_SYMBOLS[i % BW_SYMBOLS.length],
-    dash: BW_DASHES[i % BW_DASHES.length],
-    pattern: BW_PATTERNS[i % BW_PATTERNS.length]
-  };
+const BW_ZONE_STYLE = {
+  'Central': { symbol: 'circle', dash: 'solid' },
+  'East': { symbol: 'square', dash: 'dash' },
+  'North': { symbol: 'triangle-up', dash: 'dot' },
+  'Northeast': { symbol: 'diamond', dash: 'dashdot' },
+  'South': { symbol: 'star', dash: 'longdash' },
+  'West': { symbol: 'x', dash: 'longdashdot' }
+};
+const BW_STATE_STYLE = {
+  'Tamil Nadu': { symbol: 'circle', dash: 'solid' },
+  'Madhya Pradesh': { symbol: 'square', dash: 'dash' },
+  'Uttar Pradesh': { symbol: 'triangle-up', dash: 'dot' },
+  'Kerala': { symbol: 'diamond', dash: 'dashdot' },
+  'Karnataka': { symbol: 'star', dash: 'longdash' },
+  'Maharashtra': { symbol: 'x', dash: 'longdashdot' },
+  'Gujarat': { symbol: 'triangle-down', dash: 'dash' },
+  'Rajasthan': { symbol: 'hexagon', dash: 'solid' }
+};
+function bwStyleFor(name, i) {
+  const fixed = BW_ZONE_STYLE[name] || BW_STATE_STYLE[name];
+  if (fixed) return { ...fixed, pattern: BW_PATTERNS[i % BW_PATTERNS.length] };
+  return bwStyle(i);
 }
 function bwLine(trace, i, color, width) {
   const s = bwStyle(i);
@@ -686,13 +702,13 @@ function renderG8(container, data) {
 
 function renderG6(container, data) {
   const palette = ['#2563EB','#E11D48','#F59E0B','#10B981','#8B5CF6','#06B6D4'];
-  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.zone || s.name, type: 'scatter', mode: 'lines+markers', line: { color: palette[i % palette.length], width: 2.5, dash: BW_DASHES[i % BW_DASHES.length] }, marker: { size: 9, symbol: BW_SYMBOLS[i % BW_SYMBOLS.length], color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }));
+  const traces = (data.series || []).map((s, i) => { const st = bwStyleFor(s.zone || s.name, i); return { x: data.years, y: s.values, name: s.zone || s.name, type: 'scatter', mode: 'lines+markers', line: { color: palette[i % palette.length], width: 2.5, dash: st.dash }, marker: { size: 9, symbol: st.symbol, color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }; });
   Plotly.newPlot(container, traces, { ...commonLayout, xaxis: { title: 'Year', tickmode: 'linear', dtick: 1 }, yaxis: { title: 'Accidents', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
 }
 
 function renderG9(container, data) {
   const palette = ['#2563EB','#E11D48','#F59E0B','#10B981','#8B5CF6','#06B6D4','#EC4899','#14B8A6'];
-  const traces = (data.series || []).map((s, i) => ({ x: data.years, y: s.values, name: s.state || s.name, type: 'scatter', mode: 'lines+markers', line: { width: 2.5, color: palette[i % palette.length], dash: BW_DASHES[i % BW_DASHES.length] }, marker: { size: 9, symbol: BW_SYMBOLS[i % BW_SYMBOLS.length], color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }));
+  const traces = (data.series || []).map((s, i) => { const st = bwStyleFor(s.state || s.name, i); return { x: data.years, y: s.values, name: s.state || s.name, type: 'scatter', mode: 'lines+markers', line: { width: 2.5, color: palette[i % palette.length], dash: st.dash }, marker: { size: 9, symbol: st.symbol, color: palette[i % palette.length], line: { color: '#111827', width: 1.2 } } }; });
   Plotly.newPlot(container, traces, { ...commonLayout, xaxis: { title: 'Year', tickmode: 'linear', dtick: 1 }, yaxis: { title: 'Accidents', tickformat: ',' }, legend: { orientation: 'h', y: 1.15 } }, { responsive: true, displayModeBar: false });
 }
 

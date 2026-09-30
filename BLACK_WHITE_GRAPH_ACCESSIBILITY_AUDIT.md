@@ -5,6 +5,16 @@ Centralized style in `app/static/js/app.js`: `BW_SYMBOLS` (10 Plotly symbols),
 helpers `bwStyle` / `bwLine` (marker symbol + dash + 9px marker + dark outline)
 and `bwBar` (hatch pattern + dark outline). Color retained as supplementary only.
 
+Deterministic mappings (name-keyed, order-independent):
+- G6 zones: Central=circle+solid, East=square+dash, North=triangle-up+dot,
+  Northeast=diamond+dashdot, South=star+longdash, West=x+longdashdot (6/6 distinct symbols, 6/6 distinct dashes — verified programmatically).
+- G9 states: Tamil Nadu=circle+solid, Madhya Pradesh=square+dash,
+  Uttar Pradesh=triangle-up+dot, Kerala=diamond+dashdot, Karnataka=star+longdash,
+  Maharashtra=x+longdashdot, Gujarat=triangle-down+dash, Rajasthan=hexagon+solid
+  (8/8 distinct symbol+dash combos — verified programmatically).
+- G6/G9 trace builders bind `st.symbol`/`st.dash` per series name with fallback to
+  index-based style for any other series — verified in source.
+
 | Graph/page | Type | Series | Marker | Line | Hatch | Legend | B/W OK | Data changed | Logic changed |
 |---|---|---|---|---|---|---|---|---|---|
 | G1 India crashes | lines | 2 (Reported circle/solid; OLS trend dashed) | yes | yes | n/a | yes | yes | NO | NO |
