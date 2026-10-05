@@ -1,0 +1,6 @@
+source,mechanism,auth,verified_status,notes
+OpenCity CKAN,package_search API (6 keyword queries),none,WORKING 55 datasets on first live scan,open CC/public data
+data.gov.in,catalog API,DATA_GOV_IN_API_KEY env,awaiting_key without key,never hammered without key
+MoRTH publications page,content-hash change detection,none,WORKING fetched+hashed Oct 2026,morth.nic.in/en/road-accident-in-india
+NCRB ADSI page,content-hash change detection,none,SOURCE_UNAVAILABLE (bot-blocked),manual-review card shown
+PIB announcements,no verified machine feed,n/a,manual-check card,link to pib.gov.in

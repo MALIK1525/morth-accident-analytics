@@ -218,6 +218,79 @@ function fillIncidentFilter() {
   sel.innerHTML = '<option value="">All</option>' + cats.map(c => `<option>${c}</option>`).join('');
   sel.value = cur;
 }
+let watchData = { datasets: [], pages: [] };
+
+async function loadWatch(force) {
+  const box = document.getElementById('watch-items');
+  const scanEl = document.getElementById('watch-scan');
+  try {
+    box.innerHTML = 'Scanning official sources…';
+    const res = await fetch('/api/live/watch/scan' + (force ? '?refresh=1' : ''));
+    const data = await res.json();
+    if (data.status !== 'success') throw new Error('empty');
+    watchData = data;
+    scanEl.innerText = 'Last scan: ' + data.scanned_at + (data.cached ? ' (cached)' : '') +
+      ` — ${data.counts.new} new, ${data.counts.updated} updated, ${data.counts.total} tracked`;
+    fillWatchSourceFilter();
+    drawWatch();
+  } catch (e) {
+    console.error('Data Watch failed:', e);
+    box.innerHTML = 'Source temporarily unavailable. Previous results (if any) are not shown as current.';
+  }
+}
+
+function watchItems() {
+  const pages = (watchData.pages || []).map(p => ({ ...p, kind: 'page' }));
+  const dss = (watchData.datasets || []).map(d => ({ ...d, kind: 'dataset' }));
+  return pages.concat(dss);
+}
+
+function fillWatchSourceFilter() {
+  const sel = document.getElementById('wflt-src');
+  const cur = sel.value;
+  const srcs = [...new Set(watchItems().map(i => i.source))].sort();
+  sel.innerHTML = '<option value="">All</option>' + srcs.map(s => `<option>${s}</option>`).join('');
+  sel.value = cur;
+}
+
+function drawWatch() {
+  const box = document.getElementById('watch-items');
+  const fS = document.getElementById('wflt-src').value;
+  const fT = document.getElementById('wflt-status').value;
+  const fR = document.getElementById('wflt-rel').value;
+  const fV = document.getElementById('wflt-vin').value;
+  const dot = { NEW: '🆕', UPDATED: '🔄', KNOWN: '✓', SOURCE_UNAVAILABLE: '🔴' };
+  const list = watchItems().filter(i =>
+    (!fS || i.source === fS) && (!fT || i.status === fT) &&
+    (!fR || i.relevance === fR) &&
+    (!fV || ((i.compatibility || {}).vintage) === fV));
+  if (!list.length) { box.innerHTML = 'No items match the current filters.'; return; }
+  box.innerHTML = list.slice(0, 60).map(i => {
+    const c = i.compatibility || {};
+    const geo = (c.geography || []).join(', ');
+    return `<div class="border rounded p-2 bg-slate-50">` +
+      `<div><b>${dot[i.status] || '•'} [${i.status}]</b> ${i.title}</div>` +
+      `<div>Source: ${i.source_badge || i.source} · Relevance: ${i.relevance || '—'}</div>` +
+      (c.vintage ? `<div>Vintage: ${c.vintage}${c.vintage_warning ? ' — <b>' + c.vintage_warning + '</b>' : ''}</div>` : '') +
+      (geo ? `<div>Geography: ${geo}</div>` : '') +
+      (i.exposure_candidate ? `<div>⚠ EXPOSURE_CANDIDATE (${i.stock_or_flow}) — human validation required</div>` : '') +
+      `<div>Detected: ${i.detected_at || i.first_seen || '—'}</div>` +
+      `<div class="mt-1 flex gap-2"><a class="text-blue-700 underline" href="${i.url}" target="_blank" rel="noopener">View Source</a>` +
+      (i.kind === 'dataset' ? `<button class="text-indigo-700 underline" data-compat="${i.id}">Review Compatibility</button>` : '') +
+      `</div><div class="compat text-slate-600 hidden mt-1"></div></div>`;
+  }).join('') + (list.length > 60 ? `<div>Showing 60 of ${list.length} — refine filters.</div>` : '');
+  box.querySelectorAll('[data-compat]').forEach(btn => btn.addEventListener('click', () => {
+    const item = watchItems().find(x => x.id === btn.getAttribute('data-compat'));
+    const panel = btn.closest('div.border').querySelector('.compat');
+    panel.classList.toggle('hidden');
+    panel.innerText = 'Compatibility (metadata guess — verify definitions before any use): ' + JSON.stringify(item.compatibility);
+  }));
+}
+
+['wflt-src', 'wflt-status', 'wflt-rel', 'wflt-vin'].forEach(id =>
+  document.getElementById(id).addEventListener('change', drawWatch));
+document.getElementById('btn-watch').addEventListener('click', () => loadWatch(true));
+
 async function loadAvailability() {
   try {
     const res = await fetch('/api/live/status');
@@ -229,5 +302,5 @@ async function loadAvailability() {
 }
 
 document.getElementById('btn-refresh').addEventListener('click', () => { loadLive(true); loadTraffic(true); loadIncidents(true); });
-loadLive(false); loadTraffic(false); loadIncidents(false); loadAvailability();
+loadLive(false); loadTraffic(false); loadIncidents(false); loadAvailability(); loadWatch(false);
 setInterval(() => { loadLive(false); loadTraffic(false); loadIncidents(false); }, REFRESH_MS);

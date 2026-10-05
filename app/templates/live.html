@@ -89,9 +89,23 @@
         <div>Traffic — <span id="sec-traffic">checking…</span></div>
         <div>Reported incidents — <span id="sec-incidents">checking…</span></div>
         <div>Hazards — 🟡 partial (weather-driven only)</div>
-        <div>Government Data Watch — 🟡 Phase 13.4</div>
+        <div>Government Data Watch — 🟢 live below</div>
       </div>
     </div>
+  <div class="bg-white rounded shadow p-3">
+    <div class="flex flex-wrap items-center gap-2 mb-1">
+      <h2 class="font-bold">📡 Government Data Watch</h2>
+      <span id="watch-scan" class="text-[11px] text-slate-500">Last scan: —</span>
+      <button id="btn-watch" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded font-bold">Scan Now</button>
+    </div>
+    <p class="text-[11px] text-slate-500 mb-2">Discovery only — detection never modifies the frozen research benchmark. Human approval required before any use.</p>
+    <div class="flex flex-wrap gap-2 text-xs mb-2 items-center">
+      <label>Source: <select id="wflt-src" class="border rounded px-1"><option value="">All</option></select></label>
+      <label>Status: <select id="wflt-status" class="border rounded px-1"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
+      <label>Relevance: <select id="wflt-rel" class="border rounded px-1"><option value="">All</option><option>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
+      <label>Vintage: <select id="wflt-vin" class="border rounded px-1"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
+    </div>
+    <div id="watch-items" class="grid md:grid-cols-2 gap-2 text-xs">Click “Scan Now” to check official sources.</div>
   </div>
 </div>
 <script src="/static/js/live.js"></script>

@@ -1,8 +1,11 @@
 """Phase 13 Live Monitor routes. Strictly separated from research modules."""
+import os
+
 from flask import Blueprint, jsonify, render_template, request
 
 from app.live import weather as live_weather
 from app.live import traffic as live_traffic
+from app.live import watch as live_watch
 
 live_bp = Blueprint("live", __name__)
 
@@ -27,8 +30,8 @@ def live_status():
              "note": "iRAD/eDAR is access-restricted; not publicly available"},
             {"layer": "Hazards", "state": "PARTIAL",
              "note": "Weather-driven hazards only until Phase 13.3"},
-            {"layer": "Government data watch", "state": "PLANNED",
-             "note": "Phase 13.4"},
+            {"layer": "Government data watch", "state": "AVAILABLE",
+             "note": "OpenCity CKAN + MoRTH/NCRB page checks (Phase 13.4)"},
         ],
     })
 
@@ -55,6 +58,34 @@ def live_weather_summary():
     except Exception:
         return jsonify({"status": "error",
                         "message": "Weather temporarily unavailable"}), 502
+
+
+@live_bp.route("/api/live/watch/scan", methods=["GET"])
+def live_watch_scan():
+    force = (request.args.get("refresh") == "1")
+    try:
+        return jsonify(live_watch.scan(force=force))
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Data Watch temporarily unavailable"}), 502
+
+
+@live_bp.route("/api/live/watch/download", methods=["POST"])
+def live_watch_download():
+    body = request.get_json(silent=True) or {}
+    url = (body.get("url") or "").strip()
+    if not url:
+        return jsonify({"status": "error", "message": "No URL provided."}), 400
+    try:
+        dest = live_watch.queue_download(url)
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Download failed or source unavailable."}), 502
+    return jsonify({"status": "success",
+                    "message": "Saved to review queue (NOT verified research data).",
+                    "path": os.path.basename(dest)})
 
 
 @live_bp.route("/api/live/traffic/flow", methods=["GET"])

@@ -1,0 +1,11 @@
+check,result,evidence,status
+OpenCity live query,55 datasets NEW on first scan,scan counts total=57,PASS
+MoRTH page hash,NEW with sha256 recorded,page status NEW,PASS
+NCRB page fetch,blocked -> SOURCE_UNAVAILABLE card (not silent),page status SOURCE_UNAVAILABLE,PASS
+data.gov.in without key,awaiting_key no requests sent,datagovin status awaiting_key,PASS
+PIB feed,manual-check card only no fabricated feed,pib status manual_check,PASS
+Classification,NEW/UPDATED/KNOWN + RELEVANT + vintage + exposure flags,tests + live sample,PASS
+Review downloads,review_queue only 32MB cap scheme check,tests,PASS
+Protected paths,no research paths in watch code or routes,static tests,PASS
+Full suite,118/118 pytest,PASS
+Git secrets,no keys committed grep audit,PASS
