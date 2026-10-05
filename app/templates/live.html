@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   #live-map { height: 520px; }
+  @media (max-width: 768px) { #live-map { height: 360px; } }
   .wx-marker { display:flex; align-items:center; justify-content:center;
     font-size:18px; background:#fff; border:2px solid #111827; width:34px; height:34px; }
   .wx-circle { border-radius:50%; }
@@ -48,7 +49,7 @@
   <div class="grid md:grid-cols-3 gap-4">
     <div class="md:col-span-2 bg-white rounded shadow p-3">
       <div class="flex flex-wrap items-center gap-3 mb-2">
-        <h2 class="font-bold">🇮🇳 Live India Map</h2>
+        <h2 class="font-bold">1 · 🗺️ India Live Map (primary)</h2>
         <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
         <label class="text-xs"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
         <label class="text-xs"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
@@ -57,6 +58,7 @@
       </div>
       <div id="live-map" class="rounded border"></div>
       <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker for details.</p>
+      <p class="text-[11px] text-slate-500" id="layer-ages">Freshness: weather — · traffic — · incidents —</p>
       <div class="grid md:grid-cols-2 gap-2 mt-2 text-[11px]">
         <div class="border rounded p-2"><b>Traffic legend</b> (thickness + dash, not colour alone):
           <div>— thin solid: Free flow</div><div>— medium solid: Moderate</div>
@@ -75,12 +77,17 @@
     </div>
     <div class="flex flex-col gap-3">
       <div class="bg-white rounded shadow p-3">
-        <h2 class="font-bold mb-1">Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
+        <h2 class="font-bold mb-1">2 · 🌧️ Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
         <div id="weather-detail" class="text-sm">Click a city marker on the map.</div>
         <div class="text-[11px] text-slate-500 mt-2">Source: Open-Meteo (not official IMD measurements).</div>
       </div>
       <div class="bg-white rounded shadow p-3">
-        <h2 class="font-bold mb-1 text-sm">LIVE DATA AVAILABILITY</h2>
+        <h2 class="font-bold mb-1 text-sm">3–5 · 🚦 Traffic · 🔴 Incidents · ⚠️ Hazards</h2>
+        <div id="hazards" class="text-xs flex flex-col gap-1">Hazards will appear once weather/traffic load.</div>
+        <p class="text-[11px] text-slate-500 mt-1">Hazards are derived only from loaded live feeds (reported road closures + severe observed weather). Not official hazard records.</p>
+      </div>
+      <div class="bg-white rounded shadow p-3">
+        <h2 class="font-bold mb-1 text-sm">7 · 📡 LIVE DATA AVAILABILITY</h2>
         <div id="availability" class="text-xs flex flex-col gap-1">Loading…</div>
       </div>
       <div class="bg-white rounded shadow p-3 text-xs">
@@ -94,16 +101,18 @@
     </div>
   <div class="bg-white rounded shadow p-3">
     <div class="flex flex-wrap items-center gap-2 mb-1">
-      <h2 class="font-bold">📡 Government Data Watch</h2>
+      <h2 class="font-bold">6 · 📡 Government Data Watch</h2>
       <span id="watch-scan" class="text-[11px] text-slate-500">Last scan: —</span>
       <button id="btn-watch" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded font-bold">Scan Now</button>
     </div>
-    <p class="text-[11px] text-slate-500 mb-2">Discovery only — detection never modifies the frozen research benchmark. Human approval required before any use.</p>
+    <p class="text-[11px] text-slate-500 mb-2">Discovery only — detection never modifies the frozen research benchmark. Human approval required before any use. History may reset after redeployment on ephemeral infrastructure.</p>
     <div class="flex flex-wrap gap-2 text-xs mb-2 items-center">
       <label>Source: <select id="wflt-src" class="border rounded px-1"><option value="">All</option></select></label>
       <label>Status: <select id="wflt-status" class="border rounded px-1"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
       <label>Relevance: <select id="wflt-rel" class="border rounded px-1"><option value="">All</option><option>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
       <label>Vintage: <select id="wflt-vin" class="border rounded px-1"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
+      <label>Geography: <select id="wflt-geo" class="border rounded px-1"><option value="">All</option></select></label>
+      <label><input type="checkbox" id="wflt-exp"> Exposure candidates only</label>
     </div>
     <div id="watch-items" class="grid md:grid-cols-2 gap-2 text-xs">Click “Scan Now” to check official sources.</div>
   </div>

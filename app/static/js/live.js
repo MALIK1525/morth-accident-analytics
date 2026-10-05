@@ -4,6 +4,38 @@ let map, weatherLayer, trafficLayer, incidentLayer;
 let weatherPoints = [], trafficPoints = [], incidentPoints = [];
 
 const TRAFFIC_DASH = { 'solid': '', 'dash': '6 4', 'dot': '2 3', 'dashdot': '8 3 2 3' };
+const layerEpoch = { weather: null, traffic: null, incidents: null };
+
+function ageStr(epoch) {
+  if (!epoch) return '—';
+  const s = Math.max(0, Math.round((Date.now() - epoch) / 1000));
+  if (s < 60) return s + 's ago';
+  return Math.floor(s / 60) + ' min ago';
+}
+function tickAges() {
+  const el = document.getElementById('layer-ages');
+  if (el) el.innerText = `Freshness: weather ${ageStr(layerEpoch.weather)} · traffic ${ageStr(layerEpoch.traffic)} · incidents ${ageStr(layerEpoch.incidents)}`;
+}
+setInterval(tickAges, 30000);
+
+function drawHazards() {
+  const box = document.getElementById('hazards');
+  if (!box) return;
+  const out = [];
+  trafficPoints.forEach(p => {
+    if (p.road_closure) out.push(`⛔ Reported road closure near ${p.name} (TomTom flow feed)`);
+    else if (p.condition === 'Very heavy' || p.condition === 'Heavy') out.push(`🚦 ${p.condition} congestion near ${p.name} (TomTom flow feed)`);
+  });
+  weatherPoints.forEach(p => {
+    if (p.condition === 'Thunderstorm') out.push(`⛈ Thunderstorm observed at ${p.name} (Open-Meteo)`);
+    else if (p.condition === 'Fog') out.push(`🌫 Fog observed at ${p.name} (Open-Meteo)`);
+    else if (typeof p.precipitation_mm === 'number' && p.precipitation_mm >= 5) out.push(`🌧 Heavy rain observed at ${p.name}: ${p.precipitation_mm} mm (Open-Meteo)`);
+  });
+  incidentPoints.slice(0, 300).forEach(p => {
+    if (p.category === 'Road closed' || p.category === 'Flooding') out.push(`⚠ ${p.category}: ${p.road || 'location undisclosed'} (TomTom incidents)`);
+  });
+  box.innerHTML = out.length ? out.slice(0, 20).map(h => `<div>• ${h}</div>`).join('') : 'No hazards currently derived from loaded live feeds.';
+}
 
 function fmt(v, suffix, digits) {
   if (v === null || v === undefined) return 'Not available';
@@ -43,6 +75,8 @@ async function loadLive(force) {
     } else { weatherLayer.clearLayers(); }
     weatherPoints = data.points;
     drawWeather();
+    drawHazards();
+    layerEpoch.weather = Date.now(); tickAges();
     fillCityFilter();
     const s = data.summary;
     document.getElementById('kpi-locs').innerText = s.locations_monitored;
@@ -136,6 +170,8 @@ async function loadTraffic(force) {
     if (data.status !== 'success' || !data.points) throw new Error('empty');
     trafficPoints = data.points;
     drawTraffic();
+    drawHazards();
+    layerEpoch.traffic = Date.now(); tickAges();
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
     badge.innerText = '🟢 LIVE Source: TomTom Updated: ' + data.fetched_at + (data.cached ? ' (cached)' : '');
     sec.innerText = '🟢 live (TomTom)';
@@ -182,6 +218,8 @@ async function loadIncidents(force) {
     if (data.status !== 'success') throw new Error('empty');
     incidentPoints = (data.points || []).filter(p => p.lat !== null && p.lon !== null);
     drawIncidents();
+    drawHazards();
+    layerEpoch.incidents = Date.now(); tickAges();
     fillIncidentFilter();
     if (secI) secI.innerText = `🟢 live — ${incidentPoints.length} reported incident(s) (TomTom, NOT official records)`;
   } catch (e) {
@@ -251,6 +289,11 @@ function fillWatchSourceFilter() {
   const srcs = [...new Set(watchItems().map(i => i.source))].sort();
   sel.innerHTML = '<option value="">All</option>' + srcs.map(s => `<option>${s}</option>`).join('');
   sel.value = cur;
+  const gsel = document.getElementById('wflt-geo');
+  const gcur = gsel.value;
+  const geos = [...new Set(watchItems().flatMap(i => (i.compatibility || {}).geography || []))].sort();
+  gsel.innerHTML = '<option value="">All</option>' + geos.map(g => `<option>${g}</option>`).join('');
+  gsel.value = gcur;
 }
 
 function drawWatch() {
@@ -259,11 +302,15 @@ function drawWatch() {
   const fT = document.getElementById('wflt-status').value;
   const fR = document.getElementById('wflt-rel').value;
   const fV = document.getElementById('wflt-vin').value;
+  const fG = document.getElementById('wflt-geo').value;
+  const fE = document.getElementById('wflt-exp').checked;
   const dot = { NEW: '🆕', UPDATED: '🔄', KNOWN: '✓', SOURCE_UNAVAILABLE: '🔴' };
   const list = watchItems().filter(i =>
     (!fS || i.source === fS) && (!fT || i.status === fT) &&
     (!fR || i.relevance === fR) &&
-    (!fV || ((i.compatibility || {}).vintage) === fV));
+    (!fV || ((i.compatibility || {}).vintage) === fV) &&
+    (!fG || ((i.compatibility || {}).geography || []).includes(fG)) &&
+    (!fE || i.exposure_candidate));
   if (!list.length) { box.innerHTML = 'No items match the current filters.'; return; }
   box.innerHTML = list.slice(0, 60).map(i => {
     const c = i.compatibility || {};
@@ -287,8 +334,9 @@ function drawWatch() {
   }));
 }
 
-['wflt-src', 'wflt-status', 'wflt-rel', 'wflt-vin'].forEach(id =>
+['wflt-src', 'wflt-status', 'wflt-rel', 'wflt-vin', 'wflt-geo'].forEach(id =>
   document.getElementById(id).addEventListener('change', drawWatch));
+document.getElementById('wflt-exp').addEventListener('change', drawWatch);
 document.getElementById('btn-watch').addEventListener('click', () => loadWatch(true));
 
 async function loadAvailability() {

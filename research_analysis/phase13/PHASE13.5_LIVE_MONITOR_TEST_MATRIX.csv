@@ -1,0 +1,16 @@
+area,check,method,result
+UX,numbered sections + toggles + legends,HTML presence tests,PASS
+UX,empty-filter fallback (research graphs),code review Phase 12 work,PASS
+UX,hazards panel derives from feeds only,JS + HTML tests,PASS
+Map,India-centered toggleable layers,code + live check,PASS
+Weather,proxy/cache/refresh/missing-field/failure,tests + live 10of10,PASS
+Traffic,missing-key graceful + real-data path,mocked tests + live awaiting_key,PASS
+Incidents,cap+shapes+disclaimer+no-KPI,tests,PASS
+Watch,discovery/classify/filters/ephemeral note,tests + live 56 NEW,PASS
+B-W,thickness/dash/shape/icon + textual legends,HTML + trace tests,PASS
+Responsive,grids + map media query,structural (no headed browser),PARTIAL*
+Performance,TTLs + caps + single interval,constant + code tests,PASS
+Security,server-side keys + secret regex + confined downloads,tests + grep,PASS
+Separation,static + functional freeze tests,tests + git status,PASS
+Freshness,absolute timestamps + relative ages + stale states,HTML + JS tests,PASS
+*PARTIAL = no headed-browser screenshots available; documented honestly.
