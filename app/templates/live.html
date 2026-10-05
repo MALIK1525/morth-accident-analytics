@@ -19,38 +19,52 @@
   .wx-diamond span { transform:rotate(-45deg); }
   .wx-star { border-radius:50%; border-style:dotted; border-width:4px; }
   .wx-hexagon { border-radius:8px; border-style:groove; border-width:4px; }
+  .live-header { background:linear-gradient(135deg,#0B1528 0%,#1E3A5F 60%,#0B1528 100%); }
+  .eyebrow { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748B; }
+  .card { background:#fff; border-radius:12px; box-shadow:0 1px 3px rgba(15,23,42,.08); border:1px solid #E2E8F0; }
+  @media print {
+    header .no-print, #btn-refresh, #btn-watch, #btn-wclear, #btn-wmore { display:none !important; }
+    body { background:#fff; }
+    .card { box-shadow:none; }
+  }
 </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
-<header class="bg-[#0B1528] text-white px-6 py-4 flex flex-wrap items-center gap-3">
+<header class="live-header text-white px-6 py-5 shadow-md no-print border-b border-slate-800">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-3">
   <a href="/" class="text-sm text-slate-300 hover:text-white">← Research Dashboard</a>
-  <h1 class="text-lg font-bold">🔴 LIVE ROAD SAFETY MONITOR</h1>
+  <div>
+    <h1 class="text-xl font-bold tracking-tight">🔴 LIVE ROAD SAFETY MONITOR</h1>
+    <p class="text-xs text-slate-300">Current external conditions across India — weather, traffic, reported incidents, hazards & data watch</p>
+  </div>
   <span class="text-[11px] bg-sky-600 text-white font-bold px-2 py-0.5 rounded">LIVE EXTERNAL DATA — not research benchmark</span>
   <span id="live-clock" class="ml-auto text-xs text-slate-300">Last updated: —</span>
   <button id="btn-refresh" class="text-xs bg-blue-600 hover:bg-blue-500 px-3 py-1.5 rounded font-bold">Refresh Now</button>
+  </div>
 </header>
 
 <div class="max-w-7xl mx-auto p-4 flex flex-col gap-4">
-  <div class="bg-amber-50 border border-amber-300 rounded p-3 text-xs">
-    <b>Research / Live separation:</b> this page shows <b>current external data only</b>
+  <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 text-xs">
+    <span class="eyebrow">Research / Live separation</span>
+    <p class="mt-0.5">This page shows <b>current external data only</b>
     (Open-Meteo weather). It never modifies the frozen MoRTH 2018–2024 research benchmark.
     <b>Live traffic incidents are not official accident records.</b> Official accident-level
     iRAD/eDAR data is access-restricted — this monitor must not be interpreted as a live
-    national accident database.
+    national accident database.</p>
   </div>
 
-  <div class="grid md:grid-cols-4 gap-3" id="live-kpis">
-    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Locations monitored</div><div class="text-2xl font-bold" id="kpi-locs">—</div></div>
-    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Rain-affected locations</div><div class="text-2xl font-bold" id="kpi-rain">—</div></div>
-    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Avg temp (monitored locations)</div><div class="text-2xl font-bold" id="kpi-avg">—</div></div>
-    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Max / Min temp</div><div class="text-2xl font-bold" id="kpi-range">—</div></div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="live-kpis">
+    <div class="card p-3"><div class="eyebrow">Locations monitored</div><div class="text-2xl font-bold" id="kpi-locs">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Rain-affected locations</div><div class="text-2xl font-bold" id="kpi-rain">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Avg temp (monitored locations)</div><div class="text-2xl font-bold" id="kpi-avg">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Max / Min temp</div><div class="text-2xl font-bold" id="kpi-range">—</div></div>
   </div>
   <p class="text-[11px] text-slate-500 -mt-2">Monitored-location summary only — not an "India temperature".</p>
 
-  <div class="grid md:grid-cols-3 gap-4">
-    <div class="md:col-span-2 bg-white rounded shadow p-3">
+  <div class="grid lg:grid-cols-3 gap-4">
+    <div class="lg:col-span-2 card p-4">
       <div class="flex flex-wrap items-center gap-3 mb-2">
-        <h2 class="font-bold">1 · 🗺️ India Live Map (primary)</h2>
+        <h2 class="font-bold text-base">1 · 🗺️ India Live Map <span class="eyebrow ml-1">primary</span></h2>
         <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
         <label class="text-xs"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
         <label class="text-xs"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
@@ -76,22 +90,22 @@
         <label>Traffic: <select id="flt-traf" class="border rounded px-1"><option value="">All</option><option>Free flow</option><option>Moderate</option><option>Slow</option><option>Heavy</option><option>Very heavy</option></select></label>
       </div>
     </div>
-    <div class="flex flex-col gap-3">
-      <div class="bg-white rounded shadow p-3">
+    <div class="flex flex-col gap-4">
+      <div class="card p-4">
         <h2 class="font-bold mb-1">2 · 🌧️ Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
         <div id="weather-detail" class="text-sm">Click a city marker on the map.</div>
         <div class="text-[11px] text-slate-500 mt-2">Source: Open-Meteo (not official IMD measurements).</div>
       </div>
-      <div class="bg-white rounded shadow p-3">
+      <div class="card p-4">
         <h2 class="font-bold mb-1 text-sm">3–5 · 🚦 Traffic · 🔴 Incidents · ⚠️ Hazards</h2>
         <div id="hazards" class="text-xs flex flex-col gap-1">Hazards will appear once weather/traffic load.</div>
         <p class="text-[11px] text-slate-500 mt-1">Hazards are derived only from loaded live feeds (reported road closures + severe observed weather). Not official hazard records.</p>
       </div>
-      <div class="bg-white rounded shadow p-3">
+      <div class="card p-4">
         <h2 class="font-bold mb-1 text-sm">7 · 📡 LIVE DATA AVAILABILITY</h2>
         <div id="availability" class="text-xs flex flex-col gap-1">Loading…</div>
       </div>
-      <div class="bg-white rounded shadow p-3 text-xs">
+      <div class="card p-4 text-xs">
         <h2 class="font-bold mb-1 text-sm">Sections</h2>
         <div>Weather — 🟢 live below</div>
         <div>Traffic — <span id="sec-traffic">checking…</span></div>
@@ -102,7 +116,7 @@
     </div>
   </div><!-- /grid: map + sidebar -->
 
-  <div class="bg-white rounded shadow p-4" id="watch-section">
+  <div class="card p-4" id="watch-section">
     <div class="flex flex-wrap items-center gap-2 mb-1">
       <h2 class="font-bold text-base">6 · 📡 Government Data Watch</h2>
       <span id="watch-scan" class="text-[11px] text-slate-500">Last scan: —</span>
@@ -128,6 +142,12 @@
     <div class="text-center mt-3"><button id="btn-wmore" class="hidden text-xs bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded font-bold">Show More</button></div>
   </div>
 </div>
+<footer class="border-t border-slate-800 bg-[#0B1528] text-slate-300 px-6 py-4 mt-2 no-print">
+  <div class="max-w-7xl mx-auto text-xs flex flex-col md:flex-row gap-2 md:items-center justify-between">
+    <div><b class="text-white">🔴 LIVE Monitor</b> — current external data; never modifies the frozen MoRTH 2018–2024 benchmark. Sources: Open-Meteo · TomTom (key required) · OpenCity CKAN · MoRTH/NCRB pages.</div>
+    <div><a class="underline" href="/">← Research Dashboard</a></div>
+  </div>
+</footer>
 <script src="/static/js/live.js"></script>
 </body>
 </html>
