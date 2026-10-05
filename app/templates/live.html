@@ -47,12 +47,31 @@
 
   <div class="grid md:grid-cols-3 gap-4">
     <div class="md:col-span-2 bg-white rounded shadow p-3">
-      <div class="flex items-center gap-2 mb-2">
+      <div class="flex flex-wrap items-center gap-3 mb-2">
         <h2 class="font-bold">🇮🇳 Live India Map</h2>
+        <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
+        <label class="text-xs"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
+        <label class="text-xs"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
         <span id="badge-weather" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Weather: loading…</span>
+        <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
       </div>
       <div id="live-map" class="rounded border"></div>
       <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker for details.</p>
+      <div class="grid md:grid-cols-2 gap-2 mt-2 text-[11px]">
+        <div class="border rounded p-2"><b>Traffic legend</b> (thickness + dash, not colour alone):
+          <div>— thin solid: Free flow</div><div>— medium solid: Moderate</div>
+          <div>— thick solid: Slow</div><div>- - thick dashed: Heavy</div>
+          <div>—·— thick dash-dot: Very heavy</div></div>
+        <div class="border rounded p-2"><b>Incident markers</b> (shape + symbol):
+          <div>▲ ! Accident report · ⬠ X Road closed · ⬠ W Road works</div>
+          <div>■ J Jam · ■ L Lane closed · ◆ hazard · ● Other</div>
+          <div class="mt-1">Reported traffic incidents — <b>NOT official accident records</b>.</div></div>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-2 text-xs items-center">
+        <label>City: <select id="flt-city" class="border rounded px-1"><option value="">All</option></select></label>
+        <label>Incident type: <select id="flt-inc" class="border rounded px-1"><option value="">All</option></select></label>
+        <label>Traffic: <select id="flt-traf" class="border rounded px-1"><option value="">All</option><option>Free flow</option><option>Moderate</option><option>Slow</option><option>Heavy</option><option>Very heavy</option></select></label>
+      </div>
     </div>
     <div class="flex flex-col gap-3">
       <div class="bg-white rounded shadow p-3">
@@ -67,8 +86,8 @@
       <div class="bg-white rounded shadow p-3 text-xs">
         <h2 class="font-bold mb-1 text-sm">Sections</h2>
         <div>Weather — 🟢 live below</div>
-        <div>Traffic — 🟡 awaiting API key (Phase 13.3)</div>
-        <div>Reported incidents — 🟡 awaiting API (Phase 13.3)</div>
+        <div>Traffic — <span id="sec-traffic">checking…</span></div>
+        <div>Reported incidents — <span id="sec-incidents">checking…</span></div>
         <div>Hazards — 🟡 partial (weather-driven only)</div>
         <div>Government Data Watch — 🟡 Phase 13.4</div>
       </div>

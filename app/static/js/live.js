@@ -1,6 +1,9 @@
-/* Phase 13.2 Live Monitor frontend. Backend is the only caller of Open-Meteo. */
+/* Phase 13.2–13.3 Live Monitor frontend. Backend proxies all provider APIs. */
 const REFRESH_MS = 5 * 60 * 1000;
-let map, markersLayer;
+let map, weatherLayer, trafficLayer, incidentLayer;
+let weatherPoints = [], trafficPoints = [], incidentPoints = [];
+
+const TRAFFIC_DASH = { 'solid': '', 'dash': '6 4', 'dot': '2 3', 'dashdot': '8 3 2 3' };
 
 function fmt(v, suffix, digits) {
   if (v === null || v === undefined) return 'Not available';
@@ -33,19 +36,14 @@ async function loadLive(force) {
       map = L.map('live-map').setView([22.5, 79.5], 5);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(map);
-      markersLayer = L.layerGroup().addTo(map);
-    } else { markersLayer.clearLayers(); }
-    data.points.forEach(p => {
-      const icon = L.divIcon({
-        className: '',
-        html: `<div class="wx-marker wx-${p.shape}"><span>${p.icon}</span></div>`,
-        iconSize: [34, 34]
-      });
-      const m = L.marker([p.lat, p.lon], { icon });
-      m.bindTooltip(`<b>${p.name}</b><br>${p.condition}<br>${fmt(p.temperature_c, '°C', 1)}`);
-      m.on('click', () => showDetail(p));
-      markersLayer.addLayer(m);
-    });
+      weatherLayer = L.layerGroup().addTo(map);
+      trafficLayer = L.layerGroup().addTo(map);
+      incidentLayer = L.layerGroup().addTo(map);
+      wireToggles();
+    } else { weatherLayer.clearLayers(); }
+    weatherPoints = data.points;
+    drawWeather();
+    fillCityFilter();
     const s = data.summary;
     document.getElementById('kpi-locs').innerText = s.locations_monitored;
     document.getElementById('kpi-rain').innerText = s.rain_affected;
@@ -67,6 +65,159 @@ async function loadLive(force) {
   }
 }
 
+function wireToggles() {
+  const apply = () => {
+    if (!map) return;
+    const w = document.getElementById('lyr-weather').checked;
+    const t = document.getElementById('lyr-traffic').checked;
+    const ii = document.getElementById('lyr-incidents').checked;
+    [ [weatherLayer, w], [trafficLayer, t], [incidentLayer, ii] ].forEach(([lyr, on]) => {
+      if (on && !map.hasLayer(lyr)) lyr.addTo(map);
+      if (!on && map.hasLayer(lyr)) map.removeLayer(lyr);
+    });
+  };
+  ['lyr-weather', 'lyr-traffic', 'lyr-incidents'].forEach(id =>
+    document.getElementById(id).addEventListener('change', apply));
+  ['flt-city', 'flt-inc', 'flt-traf'].forEach(id =>
+    document.getElementById(id).addEventListener('change', () => { drawWeather(); drawTraffic(); drawIncidents(); }));
+}
+
+function passFilters(p, kind) {
+  const city = document.getElementById('flt-city').value;
+  if (city && p.name !== city) return false;
+  if (kind === 'traffic') {
+    const t = document.getElementById('flt-traf').value;
+    if (t && p.condition !== t) return false;
+  }
+  if (kind === 'incident') {
+    const t = document.getElementById('flt-inc').value;
+    if (t && p.category !== t) return false;
+  }
+  return true;
+}
+
+function drawWeather() {
+  if (!weatherLayer) return;
+  weatherLayer.clearLayers();
+  weatherPoints.filter(p => passFilters(p)).forEach(p => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="wx-marker wx-${p.shape}"><span>${p.icon}</span></div>`,
+      iconSize: [34, 34]
+    });
+    const m = L.marker([p.lat, p.lon], { icon });
+    m.bindTooltip(`<b>${p.name}</b><br>${p.condition}<br>${fmt(p.temperature_c, '°C', 1)}`);
+    m.on('click', () => showDetail(p));
+    weatherLayer.addLayer(m);
+  });
+}
+
+function fillCityFilter() {
+  const sel = document.getElementById('flt-city');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">All</option>' + weatherPoints.map(p => `<option>${p.name}</option>`).join('');
+  sel.value = cur;
+}
+
+async function loadTraffic(force) {
+  const badge = document.getElementById('badge-traffic');
+  const sec = document.getElementById('sec-traffic');
+  const secI = document.getElementById('sec-incidents');
+  try {
+    const res = await fetch('/api/live/traffic/flow' + (force ? '?refresh=1' : ''));
+    const data = await res.json();
+    if (data.status === 'awaiting_key') {
+      badge.className = 'text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800';
+      badge.innerText = '🟡 Traffic: Awaiting API key';
+      sec.innerText = '🟡 awaiting traffic API key (server configuration pending)';
+      secI.innerText = '🟡 awaiting traffic API key (server configuration pending)';
+      return;
+    }
+    if (data.status !== 'success' || !data.points) throw new Error('empty');
+    trafficPoints = data.points;
+    drawTraffic();
+    badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
+    badge.innerText = '🟢 LIVE Source: TomTom Updated: ' + data.fetched_at + (data.cached ? ' (cached)' : '');
+    sec.innerText = '🟢 live (TomTom)';
+  } catch (e) {
+    console.error('Live traffic failed:', e);
+    badge.className = 'text-[11px] px-2 py-0.5 rounded bg-rose-100 text-rose-800';
+    badge.innerText = '🔴 Traffic temporarily unavailable';
+    if (sec) sec.innerText = '🔴 temporarily unavailable (weather unaffected)';
+  }
+}
+
+function drawTraffic() {
+  if (!trafficLayer) return;
+  trafficLayer.clearLayers();
+  trafficPoints.filter(p => passFilters(p, 'traffic')).forEach(p => {
+    const html = `<div class="wx-marker wx-circle" title="${p.condition}"><span style="font-weight:bold">${(p.condition || '?')[0]}</span></div>`;
+    const m = L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', html, iconSize: [30, 30] }) });
+    m.bindTooltip(`<b>${p.name} — ${p.condition}</b><br>Current: ${fmt(p.current_speed_kmh, ' km/h', 0)}<br>Free-flow: ${fmt(p.free_flow_speed_kmh, ' km/h', 0)}<br>Delay: ${fmt(p.delay_s, ' s', 0)}`);
+    m.on('click', () => {
+      document.getElementById('detail-sub').innerText = '— ' + p.name + ' traffic';
+      document.getElementById('weather-detail').innerHTML =
+        `<div class="text-lg font-bold">${p.name} traffic — ${p.condition}</div>` +
+        `<div>Current speed: <b>${fmt(p.current_speed_kmh, ' km/h', 0)}</b></div>` +
+        `<div>Free-flow speed: <b>${fmt(p.free_flow_speed_kmh, ' km/h', 0)}</b></div>` +
+        `<div>Travel time: <b>${fmt(p.travel_time_s, ' s', 0)}</b></div>` +
+        `<div>Delay: <b>${fmt(p.delay_s, ' s', 0)}</b></div>` +
+        `<div>Road closure reported: <b>${p.road_closure ? 'YES' : 'no'}</b></div>` +
+        `<div>Source: <b>TomTom Traffic API</b></div>`;
+    });
+    trafficLayer.addLayer(m);
+    if (p.current_speed_kmh !== null && p.current_speed_kmh !== undefined) {
+      L.circle([p.lat, p.lon], { radius: 22000, color: '#111827', weight: p.line_weight || 2,
+        dashArray: TRAFFIC_DASH[p.line_dash] || '', fill: false }).addTo(trafficLayer);
+    }
+  });
+}
+
+async function loadIncidents(force) {
+  const secI = document.getElementById('sec-incidents');
+  try {
+    const res = await fetch('/api/live/traffic/incidents' + (force ? '?refresh=1' : ''));
+    const data = await res.json();
+    if (data.status === 'awaiting_key') { if (secI) secI.innerText = '🟡 awaiting traffic API key (server configuration pending)'; return; }
+    if (data.status !== 'success') throw new Error('empty');
+    incidentPoints = (data.points || []).filter(p => p.lat !== null && p.lon !== null);
+    drawIncidents();
+    fillIncidentFilter();
+    if (secI) secI.innerText = `🟢 live — ${incidentPoints.length} reported incident(s) (TomTom, NOT official records)`;
+  } catch (e) {
+    console.error('Live incidents failed:', e);
+    if (secI) secI.innerText = '🔴 temporarily unavailable (weather unaffected)';
+  }
+}
+
+function drawIncidents() {
+  if (!incidentLayer) return;
+  incidentLayer.clearLayers();
+  incidentPoints.filter(p => passFilters(p, 'incident')).slice(0, 300).forEach(p => {
+    const m = L.marker([p.lat, p.lon], { icon: L.divIcon({
+      className: '', html: `<div class="wx-marker wx-${p.shape}"><span>${p.symbol}</span></div>`, iconSize: [30, 30] }) });
+    m.bindTooltip(`<b>${p.category}</b><br>${p.road || ''}`);
+    m.on('click', () => {
+      document.getElementById('detail-sub').innerText = '— reported incident';
+      document.getElementById('weather-detail').innerHTML =
+        `<div class="text-lg font-bold">${p.symbol} ${p.category} (reported traffic incident)</div>` +
+        `<div>Description: <b>${p.description || 'Not available'}</b></div>` +
+        `<div>Road: <b>${p.road || 'Not available'}</b></div>` +
+        `<div>Start: <b>${p.start_time || 'Not available'}</b></div>` +
+        `<div>Expected end: <b>${p.end_time || 'Not available'}</b></div>` +
+        `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`;
+    });
+    incidentLayer.addLayer(m);
+  });
+}
+
+function fillIncidentFilter() {
+  const sel = document.getElementById('flt-inc');
+  const cur = sel.value;
+  const cats = [...new Set(incidentPoints.map(p => p.category))].sort();
+  sel.innerHTML = '<option value="">All</option>' + cats.map(c => `<option>${c}</option>`).join('');
+  sel.value = cur;
+}
 async function loadAvailability() {
   try {
     const res = await fetch('/api/live/status');
@@ -77,6 +228,6 @@ async function loadAvailability() {
   } catch (e) { document.getElementById('availability').innerText = 'Availability unknown.'; }
 }
 
-document.getElementById('btn-refresh').addEventListener('click', () => loadLive(true));
-loadLive(false); loadAvailability();
-setInterval(() => loadLive(false), REFRESH_MS);
+document.getElementById('btn-refresh').addEventListener('click', () => { loadLive(true); loadTraffic(true); loadIncidents(true); });
+loadLive(false); loadTraffic(false); loadIncidents(false); loadAvailability();
+setInterval(() => { loadLive(false); loadTraffic(false); loadIncidents(false); }, REFRESH_MS);

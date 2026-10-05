@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, render_template, request
 
 from app.live import weather as live_weather
+from app.live import traffic as live_traffic
 
 live_bp = Blueprint("live", __name__)
 
@@ -18,10 +19,10 @@ def live_status():
         "layers": [
             {"layer": "Weather", "state": "AVAILABLE",
              "note": "Open-Meteo live feed"},
-            {"layer": "Traffic", "state": "AWAITING_API_KEY",
-             "note": "Awaiting Phase 13.3 traffic integration"},
-            {"layer": "Reported incidents", "state": "AWAITING_API",
-             "note": "Awaiting traffic incident API — Phase 13.3"},
+            {"layer": "Traffic", "state": ("AVAILABLE" if live_traffic.has_key() else "AWAITING_API_KEY"),
+             "note": ("TomTom live feed" if live_traffic.has_key() else "Awaiting API key — Phase 13.3 (set TOMTOM_API_KEY)")},
+            {"layer": "Reported incidents", "state": ("AVAILABLE" if live_traffic.has_key() else "AWAITING_API"),
+             "note": ("TomTom incident feed — NOT official accident records" if live_traffic.has_key() else "Awaiting traffic incident API — Phase 13.3")},
             {"layer": "Official accident records", "state": "NOT_AVAILABLE",
              "note": "iRAD/eDAR is access-restricted; not publicly available"},
             {"layer": "Hazards", "state": "PARTIAL",
@@ -54,3 +55,23 @@ def live_weather_summary():
     except Exception:
         return jsonify({"status": "error",
                         "message": "Weather temporarily unavailable"}), 502
+
+
+@live_bp.route("/api/live/traffic/flow", methods=["GET"])
+def live_traffic_flow():
+    force = (request.args.get("refresh") == "1")
+    try:
+        return jsonify(live_traffic.get_flow(force=force))
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Traffic temporarily unavailable"}), 502
+
+
+@live_bp.route("/api/live/traffic/incidents", methods=["GET"])
+def live_traffic_incidents():
+    force = (request.args.get("refresh") == "1")
+    try:
+        return jsonify(live_traffic.get_incidents(force=force))
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Incident feed temporarily unavailable"}), 502
