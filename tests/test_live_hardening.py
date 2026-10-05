@@ -15,7 +15,7 @@ def _html():
 def test_sections_and_toggles_present():
     html = _html()
     for token in ("India Live Map", "lyr-weather", "lyr-traffic", "lyr-incidents",
-                  "Current Weather", "Traffic legend", "Incident markers",
+                  "Current Weather", "map-legend", "Reported incidents",
                   "Government Data Watch", "LIVE DATA AVAILABILITY",
                   "wflt-geo", "wflt-exp", "hazards", "layer-ages"):
         assert token in html, token
@@ -110,6 +110,14 @@ def test_watch_status_icon_system():
     for token in ("WSTATUS", "SOURCE_UNAVAILABLE", "EXPOSURE CANDIDATE",
                   "requires validation before any risk-rate"):
         assert token in js, token
+
+
+def test_map_legend_and_chips():
+    html = _html()
+    for token in ("map-legend", "city-chips", "wx-selected", "focus-visible"):
+        assert token in html, token
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    assert "highlightMarker" in js and "city-chip" in js
 
 
 def test_status_layers_complete():

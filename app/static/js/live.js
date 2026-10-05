@@ -2,6 +2,13 @@
 const REFRESH_MS = 5 * 60 * 1000;
 let map, weatherLayer, trafficLayer, incidentLayer;
 let weatherPoints = [], trafficPoints = [], incidentPoints = [];
+let weatherMarkers = {};
+
+function highlightMarker(marker) {
+  document.querySelectorAll('#live-map .wx-selected').forEach(el => el.classList.remove('wx-selected'));
+  const el = marker && marker.getElement ? marker.getElement().querySelector('.wx-marker') : null;
+  if (el) el.classList.add('wx-selected');
+}
 
 const TRAFFIC_DASH = { 'solid': '', 'dash': '6 4', 'dot': '2 3', 'dashdot': '8 3 2 3' };
 const layerEpoch = { weather: null, traffic: null, incidents: null };
@@ -133,6 +140,7 @@ function passFilters(p, kind) {
 function drawWeather() {
   if (!weatherLayer) return;
   weatherLayer.clearLayers();
+  weatherMarkers = {};
   weatherPoints.filter(p => passFilters(p)).forEach(p => {
     const icon = L.divIcon({
       className: '',
@@ -141,7 +149,8 @@ function drawWeather() {
     });
     const m = L.marker([p.lat, p.lon], { icon });
     m.bindTooltip(`<b>${p.name}</b><br>${p.condition}<br>${fmt(p.temperature_c, '°C', 1)}`);
-    m.on('click', () => showDetail(p));
+    m.on('click', () => { highlightMarker(m); showDetail(p); });
+    weatherMarkers[p.name] = m;
     weatherLayer.addLayer(m);
   });
 }
@@ -151,6 +160,22 @@ function fillCityFilter() {
   const cur = sel.value;
   sel.innerHTML = '<option value="">All</option>' + weatherPoints.map(p => `<option>${p.name}</option>`).join('');
   sel.value = cur;
+  const chips = document.getElementById('city-chips');
+  if (chips) {
+    chips.innerHTML = '';
+    weatherPoints.forEach(p => {
+      const b = document.createElement('button');
+      b.className = 'city-chip';
+      b.innerText = `${p.icon} ${p.name} ${fmt(p.temperature_c, '°C', 0)}`;
+      b.setAttribute('aria-label', `Show weather for ${p.name}`);
+      b.addEventListener('click', () => {
+        showDetail(p);
+        const m = weatherMarkers[p.name];
+        if (m) { map.panTo(m.getLatLng()); highlightMarker(m); }
+      });
+      chips.appendChild(b);
+    });
+  }
 }
 
 async function loadTraffic(force) {
@@ -191,6 +216,7 @@ function drawTraffic() {
     const m = L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', html, iconSize: [30, 30] }) });
     m.bindTooltip(`<b>${p.name} — ${p.condition}</b><br>Current: ${fmt(p.current_speed_kmh, ' km/h', 0)}<br>Free-flow: ${fmt(p.free_flow_speed_kmh, ' km/h', 0)}<br>Delay: ${fmt(p.delay_s, ' s', 0)}`);
     m.on('click', () => {
+      highlightMarker(m);
       document.getElementById('detail-sub').innerText = '— ' + p.name + ' traffic';
       document.getElementById('weather-detail').innerHTML =
         `<div class="text-lg font-bold">${p.name} traffic — ${p.condition}</div>` +
@@ -236,6 +262,7 @@ function drawIncidents() {
       className: '', html: `<div class="wx-marker wx-${p.shape}"><span>${p.symbol}</span></div>`, iconSize: [30, 30] }) });
     m.bindTooltip(`<b>${p.category}</b><br>${p.road || ''}`);
     m.on('click', () => {
+      highlightMarker(m);
       document.getElementById('detail-sub').innerText = '— reported incident';
       document.getElementById('weather-detail').innerHTML =
         `<div class="text-lg font-bold">${p.symbol} ${p.category} (reported traffic incident)</div>` +

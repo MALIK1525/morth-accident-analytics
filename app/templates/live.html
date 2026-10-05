@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  #live-map { height: 520px; }
+  #live-map { height: 600px; }
+  @media (max-width: 1024px) { #live-map { height: 480px; } }
   @media (max-width: 768px) { #live-map { height: 360px; } }
   .wx-marker { display:flex; align-items:center; justify-content:center;
     font-size:18px; background:#fff; border:2px solid #111827; width:34px; height:34px; }
@@ -19,6 +20,11 @@
   .wx-diamond span { transform:rotate(-45deg); }
   .wx-star { border-radius:50%; border-style:dotted; border-width:4px; }
   .wx-hexagon { border-radius:8px; border-style:groove; border-width:4px; }
+  .wx-selected { outline:3px solid #DC2626; outline-offset:2px; }
+  .leaflet-popup-content { font-size:13px; line-height:1.4; }
+  button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible { outline:2px solid #2563EB; outline-offset:1px; }
+  .city-chip { border:1px solid #CBD5E1; border-radius:9999px; padding:2px 10px; font-size:12px; background:#fff; white-space:nowrap; }
+  .city-chip:hover { background:#EFF6FF; }
   .live-header { background:linear-gradient(135deg,#0B1528 0%,#1E3A5F 60%,#0B1528 100%); }
   .eyebrow { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748B; }
   .card { background:#fff; border-radius:12px; box-shadow:0 1px 3px rgba(15,23,42,.08); border:1px solid #E2E8F0; }
@@ -71,18 +77,23 @@
         <span id="badge-weather" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Weather: loading…</span>
         <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
       </div>
-      <div id="live-map" class="rounded border"></div>
-      <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker for details.</p>
+      <div id="live-map" class="rounded-lg border border-slate-300"></div>
+      <div id="city-chips" class="flex gap-2 mt-2 overflow-x-auto pb-1 text-xs" aria-label="Monitored locations"></div>
+      <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker or city chip for details.</p>
       <p class="text-[11px] text-slate-500" id="layer-ages">Freshness: weather — · traffic — · incidents —</p>
-      <div class="grid md:grid-cols-2 gap-2 mt-2 text-[11px]">
-        <div class="border rounded p-2"><b>Traffic legend</b> (thickness + dash, not colour alone):
-          <div>— thin solid: Free flow</div><div>— medium solid: Moderate</div>
-          <div>— thick solid: Slow</div><div>- - thick dashed: Heavy</div>
-          <div>—·— thick dash-dot: Very heavy</div></div>
-        <div class="border rounded p-2"><b>Incident markers</b> (shape + symbol):
-          <div>▲ ! Accident report · ⬠ X Road closed · ⬠ W Road works</div>
-          <div>■ J Jam · ■ L Lane closed · ◆ hazard · ● Other</div>
-          <div class="mt-1">Reported traffic incidents — <b>NOT official accident records</b>.</div></div>
+      <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-2 mt-2 text-[11px]" id="map-legend">
+        <div class="border rounded-lg p-2 bg-slate-50"><b>Weather</b>
+          <div>☀ ○ Clear · ☁ ○ Partly cloudy · ☁ □ Overcast</div>
+          <div>△ Rain · ★ Thunderstorm · ◇ Fog · ⬡ Snow</div></div>
+        <div class="border rounded-lg p-2 bg-slate-50"><b>Traffic</b> (width + dash)
+          <div>thin solid: Free flow · medium solid: Moderate</div>
+          <div>thick solid: Slow · thick dashed: Heavy · thick dash-dot: Very heavy</div></div>
+        <div class="border rounded-lg p-2 bg-slate-50"><b>Reported incidents</b> (shape + symbol)
+          <div>▲ ! Accident report · ⬠ X Closed · ⬠ W Works</div>
+          <div>■ Jam/lane · ◆ Hazard · ● Other — NOT official records</div></div>
+        <div class="border rounded-lg p-2 bg-slate-50"><b>Hazards</b>
+          <div>⛔ Closure · 🚦 Heavy congestion · ⛈ Storm · 🌫 Fog · 🌧 Heavy rain</div>
+          <div>Feed-derived only, with source per item.</div></div>
       </div>
       <div class="flex flex-wrap gap-2 mt-2 text-xs items-center">
         <label>City: <select id="flt-city" class="border rounded px-1"><option value="">All</option></select></label>
