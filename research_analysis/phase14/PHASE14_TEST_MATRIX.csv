@@ -1,0 +1,11 @@
+area,check,method,result
+navigation,research/live separation labels,HTML tests,PASS
+research-dashboard,loads + zero-mismatch preserved,endpoint tests,PASS
+live-monitor,/live + all live APIs,endpoint tests,PASS
+isolation,live calls leave audit identical,functional test,PASS
+charts,BW helpers defined once + bindings,static tests,PASS
+charts,no undefined-style crash strings,static test,PASS
+labels,about + footer + causation wording,HTML tests,PASS
+security,no embedded key literals,regex test,PASS
+demo,click-by-click flow doc,file test,PASS
+full-suite,142/142 pytest,run,PASS
