@@ -270,6 +270,7 @@ async function loadWatch(force) {
     scanEl.innerText = 'Last scan: ' + data.scanned_at + (data.cached ? ' (cached)' : '') +
       ` — ${data.counts.new} new, ${data.counts.updated} updated, ${data.counts.total} tracked`;
     fillWatchSourceFilter();
+    watchShown = WATCH_PAGE;
     drawWatch();
   } catch (e) {
     console.error('Data Watch failed:', e);
@@ -296,36 +297,65 @@ function fillWatchSourceFilter() {
   gsel.value = gcur;
 }
 
+let watchShown = 12;
+const WATCH_PAGE = 12;
+const WSTATUS = {
+  NEW: { icon: '✦', cls: 'bg-blue-100 text-blue-900 border-blue-300' },
+  UPDATED: { icon: '↻', cls: 'bg-amber-100 text-amber-900 border-amber-300' },
+  KNOWN: { icon: '✓', cls: 'bg-slate-100 text-slate-700 border-slate-300' },
+  SOURCE_UNAVAILABLE: { icon: '⚠', cls: 'bg-rose-100 text-rose-900 border-rose-300 border-dashed' }
+};
+
 function drawWatch() {
   const box = document.getElementById('watch-items');
+  const moreBtn = document.getElementById('btn-wmore');
   const fS = document.getElementById('wflt-src').value;
   const fT = document.getElementById('wflt-status').value;
   const fR = document.getElementById('wflt-rel').value;
   const fV = document.getElementById('wflt-vin').value;
   const fG = document.getElementById('wflt-geo').value;
   const fE = document.getElementById('wflt-exp').checked;
-  const dot = { NEW: '🆕', UPDATED: '🔄', KNOWN: '✓', SOURCE_UNAVAILABLE: '🔴' };
   const list = watchItems().filter(i =>
     (!fS || i.source === fS) && (!fT || i.status === fT) &&
     (!fR || i.relevance === fR) &&
     (!fV || ((i.compatibility || {}).vintage) === fV) &&
     (!fG || ((i.compatibility || {}).geography || []).includes(fG)) &&
     (!fE || i.exposure_candidate));
-  if (!list.length) { box.innerHTML = 'No items match the current filters.'; return; }
-  box.innerHTML = list.slice(0, 60).map(i => {
+  const counts = watchData.counts || { new: 0, updated: 0, total: list.length };
+  document.getElementById('wsum-new').innerText = counts.new;
+  document.getElementById('wsum-upd').innerText = counts.updated;
+  document.getElementById('wsum-tot').innerText = counts.total;
+  const srcs = [...new Set(watchItems().map(i => i.source))];
+  document.getElementById('wsum-src').innerText = srcs.length + ' sources';
+  if (!list.length) {
+    box.innerHTML = '<div class="col-span-full border border-dashed rounded-lg p-6 text-center text-slate-500">No datasets match the current filters.</div>';
+    moreBtn.classList.add('hidden');
+    return;
+  }
+  const shown = list.slice(0, watchShown);
+  box.innerHTML = shown.map(i => {
     const c = i.compatibility || {};
     const geo = (c.geography || []).join(', ');
-    return `<div class="border rounded p-2 bg-slate-50">` +
-      `<div><b>${dot[i.status] || '•'} [${i.status}]</b> ${i.title}</div>` +
-      `<div>Source: ${i.source_badge || i.source} · Relevance: ${i.relevance || '—'}</div>` +
-      (c.vintage ? `<div>Vintage: ${c.vintage}${c.vintage_warning ? ' — <b>' + c.vintage_warning + '</b>' : ''}</div>` : '') +
+    const st = WSTATUS[i.status] || { icon: '•', cls: 'bg-slate-100 text-slate-700 border-slate-300' };
+    const official = /OFFICIAL/.test(i.source_badge || '');
+    return `<div class="border ${st.cls} rounded-lg p-3 bg-white shadow-sm flex flex-col gap-1">` +
+      `<div><span class="inline-block border rounded px-1.5 py-0.5 text-[11px] font-bold ${st.cls}">${st.icon} ${i.status}</span></div>` +
+      `<div class="font-bold text-[13px] leading-snug">${i.title}</div>` +
+      `<div>Source: <b>${i.source_badge || i.source}</b>${official ? '' : ''}</div>` +
+      `<div>Relevance: <b>${i.relevance || '—'}</b></div>` +
+      (c.vintage ? `<div>Vintage: <b>${c.vintage}</b>${c.vintage_warning ? ' — <b>' + c.vintage_warning + '</b>' : ''}</div>` : '') +
       (geo ? `<div>Geography: ${geo}</div>` : '') +
-      (i.exposure_candidate ? `<div>⚠ EXPOSURE_CANDIDATE (${i.stock_or_flow}) — human validation required</div>` : '') +
-      `<div>Detected: ${i.detected_at || i.first_seen || '—'}</div>` +
-      `<div class="mt-1 flex gap-2"><a class="text-blue-700 underline" href="${i.url}" target="_blank" rel="noopener">View Source</a>` +
-      (i.kind === 'dataset' ? `<button class="text-indigo-700 underline" data-compat="${i.id}">Review Compatibility</button>` : '') +
+      (i.exposure_candidate ? `<div class="border border-amber-400 rounded p-1 bg-amber-50">⚠ <b>EXPOSURE CANDIDATE</b> (${i.stock_or_flow}) — vehicle-stock/exposure candidate, requires validation before any risk-rate calculation.</div>` : '') +
+      (i.status === 'SOURCE_UNAVAILABLE' ? `<div>Automated access unavailable. Manual verification required.</div>` : '') +
+      `<div class="text-slate-500">Detected: ${i.detected_at || i.first_seen || '—'}</div>` +
+      `<div class="mt-auto pt-1 flex gap-3"><a class="text-blue-700 underline font-semibold" href="${i.url}" target="_blank" rel="noopener">View Source</a>` +
+      (i.kind === 'dataset' ? `<button class="text-indigo-700 underline font-semibold" data-compat="${i.id}">Review Compatibility</button>` : '') +
       `</div><div class="compat text-slate-600 hidden mt-1"></div></div>`;
-  }).join('') + (list.length > 60 ? `<div>Showing 60 of ${list.length} — refine filters.</div>` : '');
+  }).join('');
+  if (list.length > watchShown) {
+    moreBtn.classList.remove('hidden');
+    moreBtn.innerText = `Show More (showing ${shown.length} of ${list.length})`;
+  } else { moreBtn.classList.add('hidden'); }
   box.querySelectorAll('[data-compat]').forEach(btn => btn.addEventListener('click', () => {
     const item = watchItems().find(x => x.id === btn.getAttribute('data-compat'));
     const panel = btn.closest('div.border').querySelector('.compat');
@@ -334,9 +364,18 @@ function drawWatch() {
   }));
 }
 
+function clearWatchFilters() {
+  ['wflt-src', 'wflt-status', 'wflt-rel', 'wflt-vin', 'wflt-geo'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('wflt-exp').checked = false;
+  watchShown = WATCH_PAGE;
+  drawWatch();
+}
+document.getElementById('btn-wclear').addEventListener('click', clearWatchFilters);
+document.getElementById('btn-wmore').addEventListener('click', () => { watchShown += WATCH_PAGE; drawWatch(); });
+
 ['wflt-src', 'wflt-status', 'wflt-rel', 'wflt-vin', 'wflt-geo'].forEach(id =>
-  document.getElementById(id).addEventListener('change', drawWatch));
-document.getElementById('wflt-exp').addEventListener('change', drawWatch);
+  document.getElementById(id).addEventListener('change', () => { watchShown = WATCH_PAGE; drawWatch(); }));
+document.getElementById('wflt-exp').addEventListener('change', () => { watchShown = WATCH_PAGE; drawWatch(); });
 document.getElementById('btn-watch').addEventListener('click', () => loadWatch(true));
 
 async function loadAvailability() {

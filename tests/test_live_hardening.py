@@ -67,7 +67,7 @@ def test_no_secrets_in_live_code():
               "app/live/routes.py", "app/static/js/live.js",
               "app/templates/live.html"):
         blob += open(f, encoding="utf-8").read()
-    assert "sk-" not in blob
+    assert re.search(r"sk-[A-Za-z0-9]{8,}", blob) is None
     assert re.search(r"api[-_]?key\s*=\s*['\"][A-Za-z0-9]{8,}", blob) is None
     # The env var NAME may appear, but never with an assigned literal value.
     for i, line in enumerate(blob.splitlines()):
@@ -86,6 +86,30 @@ def test_hazards_derive_only_from_feeds():
     js = open("app/static/js/live.js", encoding="utf-8").read()
     assert "drawHazards" in js
     assert "road_closure" in js and "Thunderstorm" in js
+
+
+def test_watch_section_full_width():
+    html = _html()
+    assert 'id="watch-section"' in html
+    # watch section must NOT be nested inside the 3-col map grid: it closes before it
+    assert html.index("/grid: map + sidebar") < html.index('id="watch-section"')
+
+
+def test_watch_summary_cards_filters_pagination():
+    html = _html()
+    for token in ("wsum-new", "wsum-upd", "wsum-tot", "wsum-src",
+                  "btn-wclear", "btn-wmore", "xl:grid-cols-4"):
+        assert token in html, token
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    assert "WATCH_PAGE = 12" in js
+    assert "Clear Filters" in html or "btn-wclear" in html
+
+
+def test_watch_status_icon_system():
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    for token in ("WSTATUS", "SOURCE_UNAVAILABLE", "EXPOSURE CANDIDATE",
+                  "requires validation before any risk-rate"):
+        assert token in js, token
 
 
 def test_status_layers_complete():

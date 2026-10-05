@@ -100,22 +100,32 @@
         <div>Government Data Watch — 🟢 live below</div>
       </div>
     </div>
-  <div class="bg-white rounded shadow p-3">
+  </div><!-- /grid: map + sidebar -->
+
+  <div class="bg-white rounded shadow p-4" id="watch-section">
     <div class="flex flex-wrap items-center gap-2 mb-1">
-      <h2 class="font-bold">6 · 📡 Government Data Watch</h2>
+      <h2 class="font-bold text-base">6 · 📡 Government Data Watch</h2>
       <span id="watch-scan" class="text-[11px] text-slate-500">Last scan: —</span>
-      <button id="btn-watch" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-2 py-1 rounded font-bold">Scan Now</button>
+      <button id="btn-watch" class="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded font-bold">Scan Now</button>
     </div>
-    <p class="text-[11px] text-slate-500 mb-2">Discovery only — detection never modifies the frozen research benchmark. Human approval required before any use. History may reset after redeployment on ephemeral infrastructure.</p>
-    <div class="flex flex-wrap gap-2 text-xs mb-2 items-center">
-      <label>Source: <select id="wflt-src" class="border rounded px-1"><option value="">All</option></select></label>
-      <label>Status: <select id="wflt-status" class="border rounded px-1"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
-      <label>Relevance: <select id="wflt-rel" class="border rounded px-1"><option value="">All</option><option>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
-      <label>Vintage: <select id="wflt-vin" class="border rounded px-1"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
-      <label>Geography: <select id="wflt-geo" class="border rounded px-1"><option value="">All</option></select></label>
+    <p class="text-[11px] text-slate-500 mb-3">Discovery only — detection never modifies the frozen research benchmark. Human approval is required before any research use. History may reset after redeployment on ephemeral infrastructure.</p>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-3" id="watch-summary">
+      <div class="border rounded-lg p-2 bg-slate-50"><div class="text-[11px] font-semibold">✦ NEW</div><div class="text-xl font-bold" id="wsum-new">—</div></div>
+      <div class="border rounded-lg p-2 bg-slate-50"><div class="text-[11px] font-semibold">↻ UPDATED</div><div class="text-xl font-bold" id="wsum-upd">—</div></div>
+      <div class="border rounded-lg p-2 bg-slate-50"><div class="text-[11px] font-semibold">✓ TRACKED</div><div class="text-xl font-bold" id="wsum-tot">—</div></div>
+      <div class="border rounded-lg p-2 bg-slate-50"><div class="text-[11px] font-semibold">SOURCES</div><div class="text-xs font-bold" id="wsum-src">—</div></div>
+    </div>
+    <div class="flex flex-wrap gap-x-3 gap-y-2 text-xs mb-3 items-center border-y border-slate-100 py-2">
+      <label>Source: <select id="wflt-src" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
+      <label>Status: <select id="wflt-status" class="border rounded px-1 py-0.5"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
+      <label>Relevance: <select id="wflt-rel" class="border rounded px-1 py-0.5"><option value="">All</option><option>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
+      <label>Vintage: <select id="wflt-vin" class="border rounded px-1 py-0.5"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
+      <label>Geography: <select id="wflt-geo" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
       <label><input type="checkbox" id="wflt-exp"> Exposure candidates only</label>
+      <button id="btn-wclear" class="text-xs bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-semibold">Clear Filters</button>
     </div>
-    <div id="watch-items" class="grid md:grid-cols-2 gap-2 text-xs">Click “Scan Now” to check official sources.</div>
+    <div id="watch-items" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 text-xs">Click “Scan Now” to check official sources.</div>
+    <div class="text-center mt-3"><button id="btn-wmore" class="hidden text-xs bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded font-bold">Show More</button></div>
   </div>
 </div>
 <script src="/static/js/live.js"></script>
