@@ -20,8 +20,10 @@ from app.agents.upload_workspace import UploadWorkspace, ALLOWED_EXTENSIONS
 from app.analytics.statistics import compute_linear_trend, compute_state_slopes_g10, compute_correlation_matrix, compute_time_to_threshold
 from app.analytics.ml_models import SafetyMLPipeline
 from app.reports.pdf_generator import generate_academic_pdf
+from app.live.routes import live_bp
 
 app = Flask(__name__)
+app.register_blueprint(live_bp)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '..', 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

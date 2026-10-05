@@ -1,0 +1,15 @@
+source,layer_or_use,api_url,auth,cost,update_freq,geo,verdict
+TomTom Traffic Flow,Traffic flow overlay,https://api.tomtom.com/traffic,API key,Freemium,real-time (~min),India lat/lon + tiles,RECOMMENDED T3 (needs key)
+TomTom Incident Details,Reported incidents (NOT official accidents),https://api.tomtom.com/traffic,API key,Freemium,real-time,India bbox + lat/lon,RECOMMENDED T3 labeled-only
+HERE Traffic,Alternative flow/incidents,https://developer.here.com,API key,Freemium,real-time,India,ALTERNATIVE T3
+OpenStreetMap,Base map tiles,https://tile.openstreetmap.org,None,Free,static,Global,RECOMMENDED T2 (policy-compliant use)
+Leaflet,Map renderer,https://leafletjs.com,None (BSD),Free,n/a,n/a,RECOMMENDED T2
+Open-Meteo,Current weather + alerts,https://api.open-meteo.com/v1/forecast,None (CC-BY),Free 10k/day,model cycles (1-6h),coord-based global,RECOMMENDED T2
+OpenWeatherMap,Weather fallback,https://api.openweathermap.org,API key,Free 1000/day (OneCall 3.0),~10 min,Global,FALLBACK T3 (needs key)
+IMD mausam,Official alerts reference,https://mausam.imd.gov.in,No open API,n/a,manual,India,LINK-ONLY T1
+iRAD/eDAR,Live accidents,https://irad.parivahan.gov.in,Official login only,n/a,real-time (restricted),India,BLOCKED — ACCESS-RESTRICTED
+data.gov.in OGD,Gov data watch,https://www.data.gov.in/apis,API key,Free,weekly poll,National catalogs,RECOMMENDED T1 (needs key)
+OpenCity CKAN,Gov-mirror watch + MoRTH CSVs,https://data.opencity.in/api/3/action,None (open),Free,weekly poll,India/state/city,RECOMMENDED T2
+MoRTH reports,Annual report watch,https://morth.nic.in,No API,n/a,annual,PDF,MANUAL-CHECK T1
+NCRB ADSI,Annual report watch,https://ncrb.gov.in,No API,n/a,annual,PDF,MANUAL-CHECK T1
+PIB releases,Keyword watch,https://pib.gov.in,Partial RSS,n/a,daily,Releases,PARTIAL T1

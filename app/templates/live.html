@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Road Safety Monitor — MoRTH Analytics</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  #live-map { height: 520px; }
+  .wx-marker { display:flex; align-items:center; justify-content:center;
+    font-size:18px; background:#fff; border:2px solid #111827; width:34px; height:34px; }
+  .wx-circle { border-radius:50%; }
+  .wx-square { border-radius:6px; border-style:double; border-width:4px; }
+  .wx-triangle { border-radius:6px; border-style:dashed; }
+  .wx-diamond { transform:rotate(45deg); border-radius:6px; }
+  .wx-diamond span { transform:rotate(-45deg); }
+  .wx-star { border-radius:50%; border-style:dotted; border-width:4px; }
+  .wx-hexagon { border-radius:8px; border-style:groove; border-width:4px; }
+</style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+<header class="bg-[#0B1528] text-white px-6 py-4 flex flex-wrap items-center gap-3">
+  <a href="/" class="text-sm text-slate-300 hover:text-white">← Research Dashboard</a>
+  <h1 class="text-lg font-bold">🔴 LIVE ROAD SAFETY MONITOR</h1>
+  <span id="live-clock" class="ml-auto text-xs text-slate-300">Last updated: —</span>
+  <button id="btn-refresh" class="text-xs bg-blue-600 hover:bg-blue-500 px-3 py-1.5 rounded font-bold">Refresh Now</button>
+</header>
+
+<div class="max-w-7xl mx-auto p-4 flex flex-col gap-4">
+  <div class="bg-amber-50 border border-amber-300 rounded p-3 text-xs">
+    <b>Research / Live separation:</b> this page shows <b>current external data only</b>
+    (Open-Meteo weather). It never modifies the frozen MoRTH 2018–2024 research benchmark.
+    <b>Live traffic incidents are not official accident records.</b> Official accident-level
+    iRAD/eDAR data is access-restricted — this monitor must not be interpreted as a live
+    national accident database.
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-3" id="live-kpis">
+    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Locations monitored</div><div class="text-2xl font-bold" id="kpi-locs">—</div></div>
+    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Rain-affected locations</div><div class="text-2xl font-bold" id="kpi-rain">—</div></div>
+    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Avg temp (monitored locations)</div><div class="text-2xl font-bold" id="kpi-avg">—</div></div>
+    <div class="bg-white rounded shadow p-3"><div class="text-xs font-semibold">Max / Min temp</div><div class="text-2xl font-bold" id="kpi-range">—</div></div>
+  </div>
+  <p class="text-[11px] text-slate-500 -mt-2">Monitored-location summary only — not an "India temperature".</p>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="md:col-span-2 bg-white rounded shadow p-3">
+      <div class="flex items-center gap-2 mb-2">
+        <h2 class="font-bold">🇮🇳 Live India Map</h2>
+        <span id="badge-weather" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Weather: loading…</span>
+      </div>
+      <div id="live-map" class="rounded border"></div>
+      <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker for details.</p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <div class="bg-white rounded shadow p-3">
+        <h2 class="font-bold mb-1">Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
+        <div id="weather-detail" class="text-sm">Click a city marker on the map.</div>
+        <div class="text-[11px] text-slate-500 mt-2">Source: Open-Meteo (not official IMD measurements).</div>
+      </div>
+      <div class="bg-white rounded shadow p-3">
+        <h2 class="font-bold mb-1 text-sm">LIVE DATA AVAILABILITY</h2>
+        <div id="availability" class="text-xs flex flex-col gap-1">Loading…</div>
+      </div>
+      <div class="bg-white rounded shadow p-3 text-xs">
+        <h2 class="font-bold mb-1 text-sm">Sections</h2>
+        <div>Weather — 🟢 live below</div>
+        <div>Traffic — 🟡 awaiting API key (Phase 13.3)</div>
+        <div>Reported incidents — 🟡 awaiting API (Phase 13.3)</div>
+        <div>Hazards — 🟡 partial (weather-driven only)</div>
+        <div>Government Data Watch — 🟡 Phase 13.4</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/js/live.js"></script>
+</body>
+</html>
