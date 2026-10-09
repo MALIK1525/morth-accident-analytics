@@ -34,7 +34,9 @@ After deploying the single-call batch fix, production still returns HTTP 429
 is over Open-Meteo's per-IP quota regardless of our volume — no further
 code-side reduction is possible. Standing recommendation: Option A (honest
 STALE/UNAVAILABLE states) unless the user approves Option B (key-based provider).
-## Tests: 163/163. Deployment: verify below.
+## Benchmark checksum: d8064caa… MATCH (re-verified this phase). MoRTH/NCRB separate. No zero-fills.
+## Tests: 163/163 PASS.
+## Deployment: 16264c4 on deploy-slim + main; /live, state-intel, status, audit verified HTTP 200 with correct shapes; weather endpoint honestly reports provider 429.
 ## Unresolved: production weather recovery unconfirmed until post-deploy scan;
 browser QA manual; TomTom/data.gov.in keys absent (by design, awaiting user).
 ## Recommendation: demo with research map + Data Watch as centrepiece; weather
