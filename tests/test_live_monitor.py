@@ -116,6 +116,22 @@ def test_fetch_retries_then_raises(monkeypatch):
     assert len(calls) == 2
 
 
+def test_last_error_classified(monkeypatch):
+    from app.live import weather as w
+    import socket
+
+    def boom(req, timeout=None):
+        raise socket.timeout("timed out")
+    monkeypatch.setattr("urllib.request.urlopen", boom)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    try:
+        w.fetch_point(28.61, 77.21)
+    except Exception:
+        pass
+    assert w._last_error["kind"] in ("timeout", "TimeoutError")
+    w._last_error.update(at=None, kind=None, detail=None)
+
+
 def test_summary_math_and_cache(monkeypatch):
     live_weather.clear_cache()
     _patch(monkeypatch)

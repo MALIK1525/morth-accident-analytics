@@ -12,6 +12,10 @@ import urllib.request
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
 TIMEOUT_S = 10
 
+# Last provider failure classification (exception class + short message only;
+# the request URL carries no credentials, so nothing secret can leak here).
+_last_error = {"at": None, "kind": None, "detail": None}
+
 # Monitored locations (city proxy points; NOT state measurements).
 MONITORED_CITIES = [
     {"name": "Delhi", "lat": 28.61, "lon": 77.21},
@@ -59,6 +63,8 @@ def _fetch(url, attempts=2):
                 return json.loads(resp.read().decode("utf-8"))
         except Exception as e:
             last = e
+            _last_error.update(at=time.strftime("%H:%M:%S IST", time.localtime()),
+                              kind=type(e).__name__, detail=str(e)[:200])
             time.sleep(1.5 * (i + 1))
     raise last
 
