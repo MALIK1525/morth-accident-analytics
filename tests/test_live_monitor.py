@@ -82,6 +82,40 @@ def test_timeout_propagates(monkeypatch):
         live_weather.fetch_point(28.61, 77.21)
 
 
+def test_stale_fallback_serves_last_good(monkeypatch):
+    from app.live import weather as w
+    w.clear_cache()
+    good = {"status": "success", "source": "Open-Meteo", "fetched_at": "t",
+            "points": [{"name": "Delhi", "temperature_c": 30.0}],
+            "failed": [], "summary": {}}
+    w._cache.update(at=0.0, data=good)
+
+    def boom(req, timeout=None):
+        raise OSError("net down")
+    monkeypatch.setattr("urllib.request.urlopen", boom)
+    out = w.get_summary(force=True)
+    assert out.get("stale") is True
+    assert len(out["points"]) == 1
+    w.clear_cache()
+
+
+def test_fetch_retries_then_raises(monkeypatch):
+    from app.live import weather as w
+    calls = []
+
+    def boom(req, timeout=None):
+        calls.append(1)
+        raise OSError("net down")
+    monkeypatch.setattr("urllib.request.urlopen", boom)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    try:
+        w._fetch("http://example.com")
+        assert False, "should raise"
+    except OSError:
+        pass
+    assert len(calls) == 2
+
+
 def test_summary_math_and_cache(monkeypatch):
     live_weather.clear_cache()
     _patch(monkeypatch)

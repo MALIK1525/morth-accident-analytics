@@ -97,6 +97,10 @@ async function loadLive(force) {
     document.getElementById('live-clock').innerText = 'Last updated: ' + data.fetched_at + (data.cached ? ' (cached)' : '');
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
     badge.innerText = '🟢 LIVE Source: Open-Meteo Updated: ' + data.fetched_at;
+    if (data.stale) {
+      badge.className = 'text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800';
+      badge.innerText = '🟡 STALE — ' + (data.stale_note || ('last successful update ' + data.fetched_at));
+    }
     if (data.failed && data.failed.length) {
       badge.innerText += ` (${data.failed.length} location(s) unavailable)`;
     }

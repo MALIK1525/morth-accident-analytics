@@ -1,0 +1,25 @@
+entity,metric,year,displayed,source_value,source_table,result,notes
+Uttar Pradesh,accidents,2023,44534,44534,CLEAN sheet MoRTH benchmark,PASS,
+Uttar Pradesh,accidents,2024,46052,46052,CLEAN sheet MoRTH benchmark,PASS,
+Uttar Pradesh,fatalities,2024,24118,24118,CLEAN sheet MoRTH benchmark,PASS,
+Uttar Pradesh,injured,2024,null(unpublished),NV code,CLEAN sheet MoRTH benchmark,PASS,never zero-filled
+Tamil Nadu,accidents,2024,67526,67526,CLEAN sheet MoRTH benchmark,PASS,
+Tamil Nadu,fatalities,2024,18449,18449,CLEAN sheet MoRTH benchmark,PASS,
+Punjab,accidents,2024,6063,6063,CLEAN sheet MoRTH benchmark,PASS,
+Punjab,fatalities,2024,4759,4759,CLEAN sheet MoRTH benchmark,PASS,
+Kerala,accidents,2024,48834,48834,CLEAN sheet MoRTH benchmark,PASS,
+Kerala,fatalities,2024,3880,3880,CLEAN sheet MoRTH benchmark,PASS,live-verified
+Maharashtra,accidents,2024,36118,36118,CLEAN sheet MoRTH benchmark,PASS,
+Maharashtra,fatalities,2024,15715,15715,CLEAN sheet MoRTH benchmark,PASS,
+Mizoram,accidents,2024,118,118,CLEAN sheet MoRTH benchmark,PASS,northeast entity
+Mizoram,fatalities,2024,110,110,CLEAN sheet MoRTH benchmark,PASS,
+Dadra & Nagar Haveli and Daman & Diu,accidents,2024,152,152,CLEAN sheet MoRTH benchmark,PASS,merged UT
+Dadra & Nagar Haveli and Daman & Diu,fatalities,2024,95,95,CLEAN sheet MoRTH benchmark,PASS,
+Ladakh,accidents,2024,264,264,CLEAN sheet MoRTH benchmark,PASS,own polygon
+Ladakh,fatalities,2024,61,61,CLEAN sheet MoRTH benchmark,PASS,
+Telangana,accidents,2024,25986,25986,CLEAN sheet MoRTH benchmark,PASS,own polygon
+Telangana,fatalities,2024,7949,7949,CLEAN sheet MoRTH benchmark,PASS,
+Jammu & Kashmir,accidents,2024,5808,5808,CLEAN sheet MoRTH benchmark,PASS,
+Jammu & Kashmir,fatalities,2024,831,831,CLEAN sheet MoRTH benchmark,PASS,
+ALL-10-ENTITIES,severity,2023-2024,fatalities/accidents*100 exact,CLEAN Fatalities_per_100_Accidents,PASS,formula verified
+ALL-10-ENTITIES,national-confusion check,no state equals 487707 total,endpoint scan,PASS,

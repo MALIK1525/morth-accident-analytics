@@ -49,10 +49,18 @@ def describe_code(code):
     return ("Unknown", "?", "circle")
 
 
-def _fetch(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "MoRTH-Live-Monitor/1.0"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+def _fetch(url, attempts=2):
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "MoRTH-Live-Monitor/1.0"})
+            with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except Exception as e:
+            last = e
+            time.sleep(1.5 * (i + 1))
+    raise last
 
 
 def fetch_point(lat, lon):
@@ -131,6 +139,14 @@ def get_summary(force=False):
             "min_temp_c": min(temps) if temps else None,
         },
     }
+    prev = _cache.get("data")
+    prev_points = (prev or {}).get("points") or []
+    if not points and prev_points:
+        out = dict(prev)
+        out.update(cached=True, stale=True,
+                   stale_note="Provider unreachable; showing last successful update "
+                              f"from {prev.get('fetched_at', 'unknown time')}.")
+        return out
     _cache.update(at=now, data=data, error=None if points else "all failed")
     return data
 
