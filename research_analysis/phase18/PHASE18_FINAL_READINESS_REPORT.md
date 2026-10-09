@@ -28,7 +28,12 @@ coverage passes; human pre-demo run of PHASE17_BROWSER_QA_CHECKLIST.md required.
 - C. Move hosting: unjustified — limitation is provider rate policy, not
   Render-specific breakage; migration cost exceeds benefit. NOT recommended.
 
-## Benchmark checksum: d8064caa… MATCH. MoRTH/NCRB separate. No zero-fills.
+## Post-deploy outcome (recorded, not predicted)
+After deploying the single-call batch fix, production still returns HTTP 429
+(classified live at 20:48 IST). Conclusion: the shared Render egress IP itself
+is over Open-Meteo's per-IP quota regardless of our volume — no further
+code-side reduction is possible. Standing recommendation: Option A (honest
+STALE/UNAVAILABLE states) unless the user approves Option B (key-based provider).
 ## Tests: 163/163. Deployment: verify below.
 ## Unresolved: production weather recovery unconfirmed until post-deploy scan;
 browser QA manual; TomTom/data.gov.in keys absent (by design, awaiting user).
