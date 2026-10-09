@@ -187,7 +187,7 @@ def test_key_never_in_frontend():
 
 def test_weather_works_without_key(client, no_key, monkeypatch):
     def fake(req, timeout=None):
-        return FakeResp({"current": {"temperature_2m": 25.0}, "hourly": {}})
+        return FakeResp([{"current": {"temperature_2m": 25.0}, "hourly": {}}] * 10)
     monkeypatch.setattr("urllib.request.urlopen", fake)
     from app.live import weather as w
     w.clear_cache()

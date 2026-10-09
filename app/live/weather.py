@@ -69,21 +69,7 @@ def _fetch(url, attempts=2):
     raise last
 
 
-def fetch_point(lat, lon):
-    """Fetch current weather for one coordinate. Raises on failure."""
-    lat = float(lat)
-    lon = float(lon)
-    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
-        raise ValueError("Coordinates out of range.")
-    params = urllib.parse.urlencode({
-        "latitude": lat,
-        "longitude": lon,
-        "current": "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m",
-        "hourly": "visibility",
-        "timezone": "Asia/Kolkata",
-        "forecast_days": 1,
-    })
-    raw = _fetch(f"{BASE_URL}?{params}")
+def _parse_point(raw):
     cur = raw.get("current") or {}
     vis = None
     hourly = raw.get("hourly") or {}
@@ -108,6 +94,47 @@ def fetch_point(lat, lon):
     }
 
 
+def fetch_batch(cities):
+    """One provider request for all cities (rate-limit friendly)."""
+    params = urllib.parse.urlencode({
+        "latitude": ",".join(str(c["lat"]) for c in cities),
+        "longitude": ",".join(str(c["lon"]) for c in cities),
+        "current": "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m",
+        "hourly": "visibility",
+        "timezone": "Asia/Kolkata",
+        "forecast_days": 1,
+    })
+    raw = _fetch(f"{BASE_URL}?{params}")
+    items = raw if isinstance(raw, list) else [raw]
+    out = []
+    for city, item in zip(cities, items):
+        if not isinstance(item, dict) or item.get("error"):
+            raise RuntimeError(f"provider error for {city['name']}")
+        out.append({"name": city["name"], "lat": city["lat"],
+                    "lon": city["lon"], **_parse_point(item)})
+    if len(out) != len(cities):
+        raise RuntimeError("incomplete batch response")
+    return out
+
+
+def fetch_point(lat, lon):
+    """Fetch current weather for one coordinate. Raises on failure."""
+    lat = float(lat)
+    lon = float(lon)
+    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        raise ValueError("Coordinates out of range.")
+    params = urllib.parse.urlencode({
+        "latitude": lat,
+        "longitude": lon,
+        "current": "temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m",
+        "hourly": "visibility",
+        "timezone": "Asia/Kolkata",
+        "forecast_days": 1,
+    })
+    raw = _fetch(f"{BASE_URL}?{params}")
+    return _parse_point(raw)
+
+
 _cache = {"at": 0.0, "data": None, "error": None}
 CACHE_TTL_S = 300
 
@@ -120,13 +147,12 @@ def get_summary(force=False):
         out["cached"] = True
         return out
     points, failed = [], []
-    for city in MONITORED_CITIES:
-        try:
-            obs = fetch_point(city["lat"], city["lon"])
-            points.append({"name": city["name"], "lat": city["lat"],
-                           "lon": city["lon"], **obs})
-        except Exception:
-            failed.append(city["name"])
+    try:
+        # Single batched request (1 call/scan) to respect shared-IP rate limits.
+        # No per-city fallback: retrying city-by-city after a 429 would worsen it.
+        points = fetch_batch(MONITORED_CITIES)
+    except Exception:
+        failed = [c["name"] for c in MONITORED_CITIES]
     temps = [p["temperature_c"] for p in points
              if isinstance(p["temperature_c"], (int, float))]
     data = {

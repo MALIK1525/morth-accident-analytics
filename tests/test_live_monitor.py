@@ -132,9 +132,47 @@ def test_last_error_classified(monkeypatch):
     w._last_error.update(at=None, kind=None, detail=None)
 
 
+def test_batch_single_request_and_parse(monkeypatch):
+    from app.live import weather as w
+    calls = []
+    item = {"current": {"time": "t", "temperature_2m": 25.0,
+                        "relative_humidity_2m": 50, "precipitation": 0.0,
+                        "weather_code": 0, "wind_speed_10m": 5.0,
+                        "wind_direction_10m": 90},
+            "hourly": {"visibility": [8000]}}
+
+    def fake(req, timeout=None):
+        calls.append(1)
+        return FakeResp([item, item])
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    pts = w.fetch_batch([{"name": "A", "lat": 1, "lon": 1},
+                         {"name": "B", "lat": 2, "lon": 2}])
+    assert calls == [1]  # exactly one provider request
+    assert [p["name"] for p in pts] == ["A", "B"]
+    assert pts[0]["temperature_c"] == 25.0
+    assert pts[0]["visibility_m"] == 8000
+
+
+def test_batch_error_propagates(monkeypatch):
+    from app.live import weather as w
+
+    def fake(req, timeout=None):
+        return FakeResp([{"error": True}])
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    try:
+        w.fetch_batch([{"name": "A", "lat": 1, "lon": 1}])
+        assert False, "should raise"
+    except RuntimeError:
+        pass
+
+
 def test_summary_math_and_cache(monkeypatch):
+    from app.live import weather as w
     live_weather.clear_cache()
-    _patch(monkeypatch)
+
+    def fake_batch(req, timeout=None):
+        return FakeResp([SAMPLE_RAW] * 10)
+    monkeypatch.setattr("urllib.request.urlopen", fake_batch)
     s1 = live_weather.get_summary()
     assert s1["summary"]["locations_monitored"] == 10
     assert s1["summary"]["rain_affected"] == 0
