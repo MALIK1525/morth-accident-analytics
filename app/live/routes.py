@@ -17,8 +17,22 @@ def live_page():
 
 @live_bp.route("/api/live/status", methods=["GET"])
 def live_status():
+    import time as _t
+    now = _t.time()
+
+    def _age(cache, ttl):
+        at = (cache or {}).get("at", 0) or 0
+        age = int(now - at) if at else None
+        return {"age_s": age, "stale": bool(at and (now - at) > ttl)}
     return jsonify({
         "status": "success",
+        "diagnostics": {
+            "tomtom_key_configured": live_traffic.has_key(),
+            "datagovin_key_configured": bool(os.environ.get("DATA_GOV_IN_API_KEY")),
+            "weather_cache": _age(getattr(live_weather, "_cache", {}), live_weather.CACHE_TTL_S),
+            "traffic_cache": _age(getattr(live_traffic, "_flow_cache", {}), live_traffic.FLOW_TTL_S),
+            "note": "Key presence only — values never exposed. Ages are server-cache ages.",
+        },
         "layers": [
             {"layer": "Weather", "state": "AVAILABLE",
              "note": "Open-Meteo live feed"},

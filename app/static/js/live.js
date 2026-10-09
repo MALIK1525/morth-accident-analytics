@@ -79,6 +79,9 @@ async function loadLive(force) {
       trafficLayer = L.layerGroup().addTo(map);
       incidentLayer = L.layerGroup().addTo(map);
       wireToggles();
+      if (typeof initIndiaMap === 'function') initIndiaMap().catch(e => console.error('State boundaries unavailable:', e));
+      if (typeof wireStateSearch === 'function') wireStateSearch();
+      if (typeof wireNearMe === 'function') wireNearMe();
     } else { weatherLayer.clearLayers(); }
     weatherPoints = data.points;
     drawWeather();
@@ -188,7 +191,7 @@ async function loadTraffic(force) {
     if (data.status === 'awaiting_key') {
       badge.className = 'text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800';
       badge.innerText = '🟡 Traffic: Awaiting API key';
-      sec.innerText = '🟡 awaiting traffic API key (server configuration pending)';
+      sec.innerText = '🟡 awaiting traffic API key — set TOMTOM_API_KEY in server environment (Render → Environment) to enable; weather and map unaffected';
       secI.innerText = '🟡 awaiting traffic API key (server configuration pending)';
       return;
     }

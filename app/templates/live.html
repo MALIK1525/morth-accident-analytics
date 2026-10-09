@@ -71,6 +71,8 @@
     <div class="lg:col-span-2 card p-4">
       <div class="flex flex-wrap items-center gap-3 mb-2">
         <h2 class="font-bold text-base">1 · 🗺️ India Live Map <span class="eyebrow ml-1">primary</span></h2>
+        <label class="text-xs">State/UT: <select id="state-search" class="border rounded px-1 py-0.5"><option value="">Select state / UT…</option></select></label>
+        <button id="btn-india-reset" class="text-xs bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-semibold">Reset to India</button>
         <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
         <label class="text-xs"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
         <label class="text-xs"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
@@ -78,6 +80,7 @@
         <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
       </div>
       <div id="live-map" class="rounded-lg border border-slate-300"></div>
+      <div id="state-panel" class="text-xs mt-2 border rounded-lg p-2 bg-slate-50">Select a state on the map or from the search to see verified statistics. Historical accident statistics are not live incident counts.</div>
       <div id="city-chips" class="flex gap-2 mt-2 overflow-x-auto pb-1 text-xs" aria-label="Monitored locations"></div>
       <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker or city chip for details.</p>
       <p class="text-[11px] text-slate-500" id="layer-ages">Freshness: weather — · traffic — · incidents —</p>
@@ -106,6 +109,11 @@
         <h2 class="font-bold mb-1">2 · 🌧️ Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
         <div id="weather-detail" class="text-sm">Click a city marker on the map.</div>
         <div class="text-[11px] text-slate-500 mt-2">Source: Open-Meteo (not official IMD measurements).</div>
+      </div>
+      <div class="card p-4">
+        <h2 class="font-bold mb-1 text-sm">📍 Weather Near Me <span class="text-xs font-normal text-slate-500">(optional)</span></h2>
+        <button id="btn-near-me" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-2 py-1.5 rounded font-bold">Use My Current Location</button>
+        <div id="near-me" class="text-xs mt-1">Browser location is requested only after you click. Nothing is stored or tracked.</div>
       </div>
       <div class="card p-4">
         <h2 class="font-bold mb-1 text-sm">3–5 · 🚦 Traffic · 🔴 Incidents · ⚠️ Hazards</h2>
@@ -143,7 +151,7 @@
     <div class="flex flex-wrap gap-x-3 gap-y-2 text-xs mb-3 items-center border-y border-slate-100 py-2">
       <label>Source: <select id="wflt-src" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
       <label>Status: <select id="wflt-status" class="border rounded px-1 py-0.5"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
-      <label>Relevance: <select id="wflt-rel" class="border rounded px-1 py-0.5"><option value="">All</option><option>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
+      <label>Relevance: <select id="wflt-rel" class="border rounded px-1 py-0.5"><option value="">All</option><option selected>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
       <label>Vintage: <select id="wflt-vin" class="border rounded px-1 py-0.5"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
       <label>Geography: <select id="wflt-geo" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
       <label><input type="checkbox" id="wflt-exp"> Exposure candidates only</label>
@@ -160,5 +168,6 @@
   </div>
 </footer>
 <script src="/static/js/live.js"></script>
+<script src="/static/js/india_map.js"></script>
 </body>
 </html>

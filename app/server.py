@@ -594,6 +594,49 @@ def dataset_export():
     return send_file(io.BytesIO(csv_str.encode("utf-8")), mimetype="text/csv",
                      as_attachment=True, download_name=f"{base}_cleaned.csv")
 
+@app.route('/api/live/state-intel', methods=['GET'])
+def live_state_intel():
+    """Read-only per-state verified stats from the frozen benchmark.
+
+    Historical accident statistics with reporting years — never labeled live.
+    Injured is null where unpublished (frontend shows 'Not available for
+    this year'); nothing is zero-filled or reconstructed.
+    """
+    df = loader.get_clean_df()
+    out = {}
+    for state, sub in df.groupby('State_UT'):
+        sub = sub.sort_values('Year')
+        years = {}
+        for _, r in sub.iterrows():
+            inj = r.get('Injured')
+            try:
+                inj = None if pd.isna(inj) else int(inj)
+            except (TypeError, ValueError):
+                inj = None
+            years[int(r['Year'])] = {
+                'accidents': int(r['Accidents']),
+                'fatalities': int(r['Fatalities']),
+                'injured': inj,
+            }
+        latest_year = max(years)
+        latest = years[latest_year]
+        acc, fat = latest['accidents'], latest['fatalities']
+        out[str(state)] = {
+            'years': years,
+            'latest_year': latest_year,
+            'latest': latest,
+            'severity_per_100': round(fat / acc * 100, 2) if acc else None,
+            'source': 'MoRTH benchmark (frozen research dataset)',
+            'vintage': 'MoRTH',
+        }
+    return jsonify(_json_safe({
+        'status': 'success',
+        'states': out,
+        'note': ('Historical verified statistics with reporting years. '
+                 'Not live incident counts.'),
+    }))
+
+
 @app.route('/api/load_benchmark', methods=['POST'])
 def load_benchmark():
     loader.reset_to_benchmark()

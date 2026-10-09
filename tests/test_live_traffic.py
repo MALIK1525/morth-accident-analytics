@@ -176,10 +176,13 @@ def test_research_separation():
 
 
 def test_key_never_in_frontend():
+    import re
     js = open("app/static/js/live.js", encoding="utf-8").read()
     html = open("app/templates/live.html", encoding="utf-8").read()
-    assert "TOMTOM_API_KEY" not in js
-    assert "TOMTOM_API_KEY" not in html
+    blob = js + html
+    # Env var NAMES may appear in setup help text; no assigned literal values.
+    assert re.search(r"(TOMTOM_API_KEY|DATA_GOV_IN_API_KEY)\s*=\s*['\"][A-Za-z0-9]", blob) is None
+    assert re.search(r"api-key=\w{4,}|key=\w{16,}", blob) is None
 
 
 def test_weather_works_without_key(client, no_key, monkeypatch):
