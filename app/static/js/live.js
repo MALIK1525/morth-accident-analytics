@@ -131,15 +131,8 @@ async function loadLive(force) {
   }
 }
 
-// Map boots immediately on page load — never gated on weather or any provider.
-ensureMap();
-if (typeof initIndiaMap === 'function') initIndiaMap().catch(e => {
-  console.error('State boundaries unavailable:', e);
-  const p = document.getElementById('state-panel');
-  if (p) p.innerHTML = 'State boundary data failed to load. State statistics remain available via search once loaded.';
-});
-if (typeof wireStateSearch === 'function') wireStateSearch();
-if (typeof wireNearMe === 'function') wireNearMe();
+// NOTE: cross-file boot lives at the end of india_map.js (which loads last),
+// because live.js executes before india_map.js is parsed.
 
 function wireToggles() {
   const apply = () => {

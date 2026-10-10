@@ -131,8 +131,9 @@ def test_map_boots_independent_of_weather():
 
 
 def test_boundary_failure_message():
-    js = open("app/static/js/live.js", encoding="utf-8").read()
-    assert "State boundary data failed to load" in js
+    blob = open("app/static/js/live.js", encoding="utf-8").read() + \
+        open("app/static/js/india_map.js", encoding="utf-8").read()
+    assert "State boundary data failed to load" in blob
 
 
 def test_status_layers_complete():

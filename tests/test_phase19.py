@@ -57,6 +57,17 @@ def test_choropleth_is_counts_not_risk():
         assert banned not in low, banned
 
 
+def test_boot_order_init_runs_last():
+    # Regression: initIndiaMap() must be invoked from india_map.js (which
+    # loads LAST), never from live.js (which executes before it is parsed).
+    live = open("app/static/js/live.js", encoding="utf-8").read()
+    india = open("app/static/js/india_map.js", encoding="utf-8").read()
+    assert "initIndiaMap()" in india
+    assert "wireStateSearch();" in india and "wireNearMe();" in india
+    assert "initIndiaMap()" not in live.replace(
+        "typeof initIndiaMap", "")
+
+
 def test_tooltip_bound_once_with_status():
     js = _js()
     assert "setBoundaryStatus" in js

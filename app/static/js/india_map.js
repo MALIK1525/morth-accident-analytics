@@ -258,7 +258,7 @@ function wireNearMe() {
         clearTimeout(timer);
         const w = await res.json();
         if (w.status !== 'success') throw new Error('empty');
-        box.innerHTML = `<b>${w.temperature_c}°C, ${w.condition}</b> · observed ${w.observed_at || 'n/a'} · Source: Open-Meteo` +
+        box.innerHTML = `<b>${w.temperature_c}°C, ${w.condition}</b> · observed ${w.observed_at || 'n/a'} · Source: ${w.source || 'live weather feed'}` +
           `<br><span class="text-slate-500">Your coordinates stay in this browser session only (nearest monitored-city average shown above is separate).</span>`;
         if (nearMeMarker) map.removeLayer(nearMeMarker);
         nearMeMarker = L.marker([lat, lon]).addTo(map).bindTooltip('<b>You (this session only)</b>').openTooltip();
@@ -271,3 +271,14 @@ function wireNearMe() {
     });
   });
 }
+
+// ---- Boot (this file loads AFTER live.js, so all cross-file functions exist).
+// Map boots immediately on page load — never gated on weather or any provider.
+if (typeof ensureMap === 'function') ensureMap();
+initIndiaMap().catch(e => {
+  console.error('State boundaries unavailable:', e);
+  const p = document.getElementById('state-panel');
+  if (p) p.innerHTML = 'State boundary data failed to load. State statistics remain available via search once loaded.';
+});
+wireStateSearch();
+wireNearMe();
