@@ -80,6 +80,7 @@
         <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
       </div>
       <div id="live-map" class="rounded-lg border border-slate-300"></div>
+      <div id="tile-notice" class="hidden text-[11px] text-amber-700 mt-1">Basemap tiles unavailable — state boundaries and statistics below remain functional.</div>
       <div id="state-panel" class="text-xs mt-2 border rounded-lg p-2 bg-slate-50">Select a state on the map or from the search to see verified statistics. Historical accident statistics are not live incident counts.</div>
       <div id="city-chips" class="flex gap-2 mt-2 overflow-x-auto pb-1 text-xs" aria-label="Monitored locations"></div>
       <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker or city chip for details.</p>
@@ -151,7 +152,7 @@
     <div class="flex flex-wrap gap-x-3 gap-y-2 text-xs mb-3 items-center border-y border-slate-100 py-2">
       <label>Source: <select id="wflt-src" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
       <label>Status: <select id="wflt-status" class="border rounded px-1 py-0.5"><option value="">All</option><option>NEW</option><option>UPDATED</option><option>KNOWN</option><option>SOURCE_UNAVAILABLE</option></select></label>
-      <label>Relevance: <select id="wflt-rel" class="border rounded px-1 py-0.5"><option value="">All</option><option selected>RELEVANT</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
+      <label>Relevance: <select id="wflt-rel" class="border rounded px-1 py-0.5"><option value="">All</option><option selected>RELEVANT</option><option>REVIEW</option><option>NOT_RELEVANT</option><option>MANUAL_REVIEW</option></select></label>
       <label>Vintage: <select id="wflt-vin" class="border rounded px-1 py-0.5"><option value="">All</option><option>MoRTH</option><option>NCRB</option><option>IMD</option><option>OTHER</option></select></label>
       <label>Geography: <select id="wflt-geo" class="border rounded px-1 py-0.5"><option value="">All</option></select></label>
       <label><input type="checkbox" id="wflt-exp"> Exposure candidates only</label>

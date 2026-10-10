@@ -65,24 +65,40 @@ function showDetail(p) {
     `<div>Source: <b>${p.source || 'Open-Meteo'}</b></div>`;
 }
 
+function ensureMap() {
+  if (map || typeof L === 'undefined') return map;
+  const el = document.getElementById('live-map');
+  if (!el) return null;
+  try {
+    map = L.map('live-map').setView([22.5, 79.5], 5);
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { maxZoom: 12, attribution: '© OpenStreetMap contributors' });
+    tiles.on('tileerror', () => {
+      const n = document.getElementById('tile-notice');
+      if (n) n.classList.remove('hidden');
+    });
+    tiles.addTo(map);
+    weatherLayer = L.layerGroup().addTo(map);
+    trafficLayer = L.layerGroup().addTo(map);
+    incidentLayer = L.layerGroup().addTo(map);
+    wireToggles();
+    setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 300);
+  } catch (e) {
+    console.error('Map init failed:', e);
+    el.innerHTML = '<div class="p-6 text-center text-sm">Map failed to initialize. State statistics remain available via search below.</div>';
+    map = null;
+  }
+  return map;
+}
+
 async function loadLive(force) {
   const badge = document.getElementById('badge-weather');
   try {
     const res = await fetch('/api/live/weather/summary' + (force ? '?refresh=1' : ''));
     const data = await res.json();
     if (data.status !== 'success' || !data.points || !data.points.length) throw new Error('empty');
-    if (!map) {
-      map = L.map('live-map').setView([22.5, 79.5], 5);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(map);
-      weatherLayer = L.layerGroup().addTo(map);
-      trafficLayer = L.layerGroup().addTo(map);
-      incidentLayer = L.layerGroup().addTo(map);
-      wireToggles();
-      if (typeof initIndiaMap === 'function') initIndiaMap().catch(e => console.error('State boundaries unavailable:', e));
-      if (typeof wireStateSearch === 'function') wireStateSearch();
-      if (typeof wireNearMe === 'function') wireNearMe();
-    } else { weatherLayer.clearLayers(); }
+    ensureMap();
+    if (weatherLayer) weatherLayer.clearLayers();
     weatherPoints = data.points;
     drawWeather();
     drawHazards();
@@ -106,12 +122,24 @@ async function loadLive(force) {
     }
   } catch (e) {
     console.error('Live weather failed:', e);
+    // Map and state statistics are independent of weather — keep them working.
+    ensureMap();
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-rose-100 text-rose-800';
     badge.innerText = '🔴 Weather temporarily unavailable';
     const prev = document.getElementById('live-clock').innerText;
     if (prev === 'Last updated: —') document.getElementById('live-clock').innerText = 'Weather temporarily unavailable';
   }
 }
+
+// Map boots immediately on page load — never gated on weather or any provider.
+ensureMap();
+if (typeof initIndiaMap === 'function') initIndiaMap().catch(e => {
+  console.error('State boundaries unavailable:', e);
+  const p = document.getElementById('state-panel');
+  if (p) p.innerHTML = 'State boundary data failed to load. State statistics remain available via search once loaded.';
+});
+if (typeof wireStateSearch === 'function') wireStateSearch();
+if (typeof wireNearMe === 'function') wireNearMe();
 
 function wireToggles() {
   const apply = () => {

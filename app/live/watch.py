@@ -97,11 +97,26 @@ def detect_measures(text):
 def classify_relevance(title, description):
     t = f"{title} {description}".lower()
     hits = [k for k in KEYWORDS_RELEVANT if k in t]
+    # Mixed crime/suicide + accident content (e.g. NCRB ADSI) is NOT shown as
+    # a relevant accident dataset: its road component needs human review.
+    # Original record is preserved; only the relevance verdict is refined.
+    suicide_crime = any(k in t for k in
+                        ["suicide", "crime records", "crime in india",
+                         "cognizable", "ipc", "sll "])
+    road_specific = any(k in t for k in
+                        ["road accident", "traffic accident", "morth",
+                         "road crash", "collision", "road death"])
+    if suicide_crime and not road_specific:
+        relevance = "NOT_RELEVANT"
+    elif suicide_crime and road_specific:
+        relevance = "REVIEW"
+    else:
+        relevance = "RELEVANT" if hits else "NOT_RELEVANT"
     exposure = any(k in t for k in KEYWORDS_EXPOSURE)
     flow_like = any(k in t for k in KEYWORDS_FLOW)
     return {
-        "relevant": bool(hits),
-        "relevance": "RELEVANT" if hits else "NOT_RELEVANT",
+        "relevant": relevance == "RELEVANT",
+        "relevance": relevance,
         "exposure_candidate": exposure,
         "stock_or_flow": ("FLOW — must NOT substitute for stock"
                           if flow_like and exposure else

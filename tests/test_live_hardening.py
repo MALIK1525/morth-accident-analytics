@@ -120,6 +120,21 @@ def test_map_legend_and_chips():
     assert "highlightMarker" in js and "city-chip" in js
 
 
+def test_map_boots_independent_of_weather():
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    assert "function ensureMap()" in js
+    # init calls at script scope (not nested inside the weather try-block)
+    assert "ensureMap();" in js
+    assert "tile-notice" in js
+    html = _html()
+    assert 'id="tile-notice"' in html
+
+
+def test_boundary_failure_message():
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    assert "State boundary data failed to load" in js
+
+
 def test_status_layers_complete():
     flask_app.config["TESTING"] = True
     layers = flask_app.test_client().get("/api/live/status").get_json()["layers"]

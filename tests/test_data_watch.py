@@ -90,7 +90,38 @@ def test_source_classification():
     assert live_watch.detect_vintage("MoRTH year book") == "MoRTH"
 
 
+def test_adsi_suicide_dataset_not_relevant_regression():
+    # Exact production case: ADSI 2024 card appeared under RELEVANT filter.
+    r = live_watch.classify_relevance(
+        "Accidental Deaths and Suicides in India 2024",
+        "Accidental Deaths and Suicides in India (ADSI) 2024 is an annual "
+        "report published by the National Crime Records Bureau (NCRB) of the "
+        "Ministry of Home Affairs. It details statistics on accidental deaths "
+        "(road, railway, etc.) and deaths by suicide across India.")
+    assert r["relevance"] in ("NOT_RELEVANT", "REVIEW")
+
+
 def test_relevance_classification():
+    r = live_watch.classify_relevance("Road Accidents 2024", "fatalities by state")
+    assert r["relevance"] == "RELEVANT"
+    r2 = live_watch.classify_relevance("Municipal Budget", "city spending")
+    assert r2["relevance"] == "NOT_RELEVANT"
+
+
+def test_mixed_crime_road_goes_to_review():
+    r = live_watch.classify_relevance(
+        "State Crime and Road Accident Bulletin",
+        "IPC crime records with a road accident annex verified by police.")
+    assert r["relevance"] == "REVIEW"
+    assert r["relevant"] is False
+
+
+def test_pure_road_accident_stays_relevant():
+    r = live_watch.classify_relevance(
+        "Road Accidents in India 2024",
+        "MoRTH report: state-wise road accident statistics.")
+    assert r["relevance"] == "RELEVANT"
+    assert r["relevant"] is True
     r = live_watch.classify_relevance("Road Accidents 2024", "fatalities by state")
     assert r["relevance"] == "RELEVANT"
     r2 = live_watch.classify_relevance("Municipal Budget", "city spending")
