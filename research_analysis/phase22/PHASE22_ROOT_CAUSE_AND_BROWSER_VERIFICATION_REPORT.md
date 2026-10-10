@@ -27,7 +27,22 @@ Also fixed: Near-Me result hardcoded "Source: Open-Meteo" → dynamic `w.source`
 Post-deploy probe MUST show: boundary-status "36 polygons loaded", SVG paths
 in the hundreds, dropdown 39 options, hover tooltip on Punjab, click panel,
 search select, reset, near-me with mocked geolocation, console clean.
-(Results recorded below after deploy.)
+
+### RESULTS (all against the DEPLOYED site, screenshots saved)
+- Boundary status: "State boundaries loaded: 36 polygons…" ✓
+- Dropdown: 39 options (38 entities + placeholder) ✓
+- Search Punjab → panel with 6,063 / 4,759 / Not-available ✓, persists ✓, reset ✓
+- Hover Punjab: tooltip "Punjab (2024, MoRTH benchmark), Accidents 6,063,
+  Fatalities 4,759, Injured: Not available for this year" ✓
+  (screenshot: BROWSER_PUNJAB_HOVER_EVIDENCE.png — choropleth, tooltip,
+  markers, badges all visible)
+- Click Punjab → persistent detail panel (severity 78.49) ✓
+- Near-Me (granted mock): 23.5°C Clear sky via MET Norway fallback ✓
+- Near-Me (denied): fallback message ✓
+- Console: zero page errors ✓
+- Near-Me denial on mobile viewport ✓
+- Note: tooltip temperature line showed the honest unavailable-fallback for
+  Punjab (no monitored city in that state) — correct behavior, not a defect.
 
 ## Tests: 182/182.
 ## Benchmark checksum: d8064caa… (verify at commit).
