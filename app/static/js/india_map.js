@@ -67,28 +67,53 @@ function computeChoro() {
   if (vals.length) choroBounds = [Math.min(...vals), Math.max(...vals)];
 }
 
+function setBoundaryStatus(text, isError) {
+  const el = document.getElementById('boundary-status');
+  if (el) {
+    el.innerText = text;
+    el.className = 'text-[11px] mt-1 ' + (isError ? 'text-rose-700' : 'text-slate-500');
+  }
+}
+
 async function initIndiaMap() {
-  await loadStateIntel();
+  if (!map) { setBoundaryStatus('Map not ready — boundaries pending.', true); return; }
+  setBoundaryStatus('Loading state boundaries…', false);
+  try {
+    await loadStateIntel();
+  } catch (e) {
+    setBoundaryStatus('Accident statistics unavailable — boundary map not loaded.', true);
+    throw e;
+  }
   computeChoro();
-  const res = await fetch('/static/geo/india_states.geojson');
-  const geo = await res.json();
+  let geo;
+  try {
+    const res = await fetch('/static/geo/india_states.geojson');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    geo = await res.json();
+    if (!geo.features || !geo.features.length) throw new Error('empty GeoJSON');
+  } catch (e) {
+    setBoundaryStatus('State boundary data failed to load (' + e.message + '). Statistics remain available via search.', true);
+    throw e;
+  }
   geoLayer = L.geoJSON(geo, {
     style: f => ({ color: '#1E3A5F', weight: 1, fillColor: '#1D4ED8',
-                   fillOpacity: choroOpacity((f.properties || {}).name || '') }),
+                   fillOpacity: choroOpacity((f.properties || {}).name || ''),
+                   interactive: true }),
     onEachFeature: (feature, layer) => {
       const name = (feature.properties || {}).name || 'Unknown';
+      // Bind once: Leaflet opens sticky tooltips on hover automatically.
+      layer.bindTooltip(() => stateTooltip(name), { sticky: true, direction: 'top' });
       layer.on('mouseover', () => {
         if (name !== selectedState) layer.setStyle({ weight: 2.5, fillOpacity: 0.45 });
-        layer.bindTooltip(stateTooltip(name), { sticky: true }).openTooltip();
       });
       layer.on('mouseout', () => {
-        geoLayer.resetStyle(layer);
-        if (name === selectedState) layer.setStyle(stateStyle(true));
+        if (name !== selectedState && geoLayer) geoLayer.resetStyle(layer);
       });
       layer.on('click', () => selectState(name, layer));
     }
   }).addTo(map);
   try { map.fitBounds(geoLayer.getBounds().pad(-0.05)); } catch (e) { map.setView([22.5, 79.5], 5); }
+  setBoundaryStatus(`State boundaries loaded: ${geo.features.length} polygons. Hover for statistics, click to select.`, false);
 }
 
 function stateTooltip(name) {

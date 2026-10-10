@@ -57,6 +57,15 @@ def test_choropleth_is_counts_not_risk():
         assert banned not in low, banned
 
 
+def test_tooltip_bound_once_with_status():
+    js = _js()
+    assert "setBoundaryStatus" in js
+    assert "bindTooltip(() => stateTooltip(name)" in js  # bound once, sticky auto-open
+    assert "interactive: true" in js
+    html = open("app/templates/live.html", encoding="utf-8").read()
+    assert 'id="boundary-status"' in html
+
+
 def test_geolocation_gated_and_private():
     js = _js()
     assert js.index("btn-near-me") < js.index("getCurrentPosition")

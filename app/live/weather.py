@@ -167,7 +167,9 @@ def fetch_metno_point(lat, lon):
 
 
 def fetch_point(lat, lon):
-    """Fetch current weather for one coordinate. Raises on failure."""
+    """Fetch current weather for one coordinate. Falls back to MET Norway
+    when Open-Meteo fails (single-point callers have no batch path).
+    Raises only if both providers fail."""
     lat = float(lat)
     lon = float(lon)
     if not (-90 <= lat <= 90 and -180 <= lon <= 180):
@@ -180,8 +182,10 @@ def fetch_point(lat, lon):
         "timezone": "Asia/Kolkata",
         "forecast_days": 1,
     })
-    raw = _fetch(f"{BASE_URL}?{params}")
-    return _parse_point(raw)
+    try:
+        return _parse_point(_fetch(f"{BASE_URL}?{params}"))
+    except Exception:
+        return fetch_metno_point(lat, lon)
 
 
 _cache = {"at": 0.0, "data": None, "error": None}

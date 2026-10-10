@@ -166,6 +166,72 @@ def test_batch_error_propagates(monkeypatch):
         pass
 
 
+def test_metno_parse():
+    from app.live import weather as w
+    raw = {"properties": {"timeseries": [{
+        "time": "2026-10-10T18:00:00Z",
+        "data": {"instant": {"details": {
+            "air_temperature": 26.0, "relative_humidity": 77.4,
+            "wind_speed": 3.1, "wind_from_direction": 108.7}},
+            "next_1_hours": {"summary": {"symbol_code": "clearsky_night"},
+                             "details": {"precipitation_amount": 0.0}}}}]}}
+    obs = w._parse_metno(raw)
+    assert obs["temperature_c"] == 26.0
+    assert obs["condition"] == "Clear sky"
+    assert obs["wind_speed_kmh"] == round(3.1 * 3.6, 10)
+    assert obs["visibility_m"] is None
+    assert obs["source"] == "MET Norway (fallback)"
+
+
+def test_fallback_chain_labels_source(monkeypatch):
+    from app.live import weather as w
+    w.clear_cache()
+    good = {"status": "success", "source": "x", "fetched_at": "t",
+            "points": [], "failed": [], "summary": {}}
+    monkeypatch.setattr(w, "fetch_batch",
+                        lambda cities: (_ for _ in ()).throw(OSError("429")))
+    made = []
+    monkeypatch.setattr(
+        w, "fetch_metno_point",
+        lambda lat, lon: made.append((lat, lon)) or dict(
+            w._parse_metno({"properties": {"timeseries": [{
+                "time": "t",
+                "data": {"instant": {"details": {
+                    "air_temperature": 20.0, "relative_humidity": 50,
+                    "wind_speed": 1.0, "wind_from_direction": 0}},
+                    "next_1_hours": {"summary": {"symbol_code": "cloudy"},
+                                     "details": {"precipitation_amount": 0.0}}}}]}})))
+    out = w.get_summary(force=True)
+    assert out["status"] == "success"
+    assert out["source"] == "MET Norway (fallback)"
+    assert len(out["points"]) == 10
+    assert len(made) == 10
+    w.clear_cache()
+
+
+def test_point_falls_back_to_metno(monkeypatch):
+    from app.live import weather as w
+    met_raw = {"properties": {"timeseries": [{
+        "time": "t",
+        "data": {"instant": {"details": {
+            "air_temperature": 21.0, "relative_humidity": 60,
+            "wind_speed": 2.0, "wind_from_direction": 10}},
+            "next_1_hours": {"summary": {"symbol_code": "cloudy"},
+                             "details": {"precipitation_amount": 0.0}}}}]}}
+
+    def fake(req, timeout=None):
+        url = req.full_url if hasattr(req, "full_url") else req.get_full_url()
+        if "open-meteo" in url:
+            import urllib.error as E
+            raise E.HTTPError(url, 429, "Too Many", {}, None)
+        return FakeResp(met_raw)
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    obs = w.fetch_point(28.61, 77.21)
+    assert obs["temperature_c"] == 21.0
+    assert obs["source"] == "MET Norway (fallback)"
+
+
 def test_summary_math_and_cache(monkeypatch):
     from app.live import weather as w
     live_weather.clear_cache()
