@@ -66,6 +66,21 @@ def test_tooltip_bound_once_with_status():
     assert 'id="boundary-status"' in html
 
 
+def test_boundary_init_fully_guarded():
+    js = _js()
+    assert "btn-geo-retry" in js
+    assert "Loading accident statistics" in js
+    html = open("app/templates/live.html", encoding="utf-8").read()
+    assert "live.js?v=" in html and "india_map.js?v=" in html
+
+
+def test_near_me_timeout_and_steps():
+    js = _js()
+    assert "AbortController" in js
+    assert "Location received" in js
+    assert "timed out" in js
+
+
 def test_geolocation_gated_and_private():
     js = _js()
     assert js.index("btn-near-me") < js.index("getCurrentPosition")

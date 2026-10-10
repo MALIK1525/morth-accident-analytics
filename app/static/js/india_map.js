@@ -77,43 +77,43 @@ function setBoundaryStatus(text, isError) {
 
 async function initIndiaMap() {
   if (!map) { setBoundaryStatus('Map not ready — boundaries pending.', true); return; }
-  setBoundaryStatus('Loading state boundaries…', false);
   try {
+    setBoundaryStatus('Loading accident statistics…', false);
     await loadStateIntel();
-  } catch (e) {
-    setBoundaryStatus('Accident statistics unavailable — boundary map not loaded.', true);
-    throw e;
-  }
-  computeChoro();
-  let geo;
-  try {
-    const res = await fetch('/static/geo/india_states.geojson');
+    computeChoro();
+    setBoundaryStatus('Loading state boundaries…', false);
+    const res = await fetch('/static/geo/india_states.geojson?v=ph21');
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    geo = await res.json();
+    const geo = await res.json();
     if (!geo.features || !geo.features.length) throw new Error('empty GeoJSON');
+    geoLayer = L.geoJSON(geo, {
+      style: f => ({ color: '#1E3A5F', weight: 1, fillColor: '#1D4ED8',
+                     fillOpacity: choroOpacity((f.properties || {}).name || ''),
+                     interactive: true }),
+      onEachFeature: (feature, layer) => {
+        const name = (feature.properties || {}).name || 'Unknown';
+        // Bind once: Leaflet opens sticky tooltips on hover automatically.
+        layer.bindTooltip(() => stateTooltip(name), { sticky: true, direction: 'top' });
+        layer.on('mouseover', () => {
+          if (name !== selectedState) layer.setStyle({ weight: 2.5, fillOpacity: 0.45 });
+        });
+        layer.on('mouseout', () => {
+          if (name !== selectedState && geoLayer) geoLayer.resetStyle(layer);
+        });
+        layer.on('click', () => selectState(name, layer));
+      }
+    }).addTo(map);
+    try { map.fitBounds(geoLayer.getBounds().pad(-0.05)); } catch (e) { map.setView([22.5, 79.5], 5); }
+    setBoundaryStatus(`State boundaries loaded: ${geo.features.length} polygons. Hover for statistics, click to select.`, false);
   } catch (e) {
-    setBoundaryStatus('State boundary data failed to load (' + e.message + '). Statistics remain available via search.', true);
+    console.error('Boundary init failed:', e);
+    setBoundaryStatus('State boundaries failed to load (' + (e.message || e) + '). Statistics remain available via search. [Retry]', true);
+    const el = document.getElementById('boundary-status');
+    if (el) el.innerHTML += ' <button id="btn-geo-retry" class="underline font-bold">Retry</button>';
+    const rb = document.getElementById('btn-geo-retry');
+    if (rb) rb.addEventListener('click', () => initIndiaMap().catch(() => {}));
     throw e;
   }
-  geoLayer = L.geoJSON(geo, {
-    style: f => ({ color: '#1E3A5F', weight: 1, fillColor: '#1D4ED8',
-                   fillOpacity: choroOpacity((f.properties || {}).name || ''),
-                   interactive: true }),
-    onEachFeature: (feature, layer) => {
-      const name = (feature.properties || {}).name || 'Unknown';
-      // Bind once: Leaflet opens sticky tooltips on hover automatically.
-      layer.bindTooltip(() => stateTooltip(name), { sticky: true, direction: 'top' });
-      layer.on('mouseover', () => {
-        if (name !== selectedState) layer.setStyle({ weight: 2.5, fillOpacity: 0.45 });
-      });
-      layer.on('mouseout', () => {
-        if (name !== selectedState && geoLayer) geoLayer.resetStyle(layer);
-      });
-      layer.on('click', () => selectState(name, layer));
-    }
-  }).addTo(map);
-  try { map.fitBounds(geoLayer.getBounds().pad(-0.05)); } catch (e) { map.setView([22.5, 79.5], 5); }
-  setBoundaryStatus(`State boundaries loaded: ${geo.features.length} polygons. Hover for statistics, click to select.`, false);
 }
 
 function stateTooltip(name) {
@@ -249,8 +249,13 @@ function wireNearMe() {
     box.innerHTML = 'Requesting location permission…';
     navigator.geolocation.getCurrentPosition(async pos => {
       const lat = pos.coords.latitude.toFixed(3), lon = pos.coords.longitude.toFixed(3);
+      box.innerHTML = 'Location received — fetching current weather…';
+      let timer = null;
       try {
-        const res = await fetch(`/api/live/weather?lat=${lat}&lon=${lon}`);
+        const ctrl = new AbortController();
+        timer = setTimeout(() => ctrl.abort(), 25000);
+        const res = await fetch(`/api/live/weather?lat=${lat}&lon=${lon}`, { signal: ctrl.signal });
+        clearTimeout(timer);
         const w = await res.json();
         if (w.status !== 'success') throw new Error('empty');
         box.innerHTML = `<b>${w.temperature_c}°C, ${w.condition}</b> · observed ${w.observed_at || 'n/a'} · Source: Open-Meteo` +
@@ -258,7 +263,8 @@ function wireNearMe() {
         if (nearMeMarker) map.removeLayer(nearMeMarker);
         nearMeMarker = L.marker([lat, lon]).addTo(map).bindTooltip('<b>You (this session only)</b>').openTooltip();
       } catch (e) {
-        box.innerHTML = 'Weather temporarily unavailable for this location. Please use the city search instead.';
+        if (timer) clearTimeout(timer);
+        box.innerHTML = 'Weather request failed or timed out. Provider may be rate-limited — please use the city search instead.';
       }
     }, () => {
       box.innerHTML = 'Location permission denied or unavailable. Nothing breaks — please use the city search instead.';
