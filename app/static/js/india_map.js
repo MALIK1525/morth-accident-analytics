@@ -9,8 +9,18 @@ let nearMeMarker = null;
 
 const GEO_ALIAS = {
   'dadra and nagar haveli and daman and diu':
-    ['Dadra & Nagar Haveli and Daman & Diu', 'Dadra & Nagar Haveli', 'Daman & Diu']
+    ['Dadra & Nagar Haveli and Daman & Diu', 'Dadra & Nagar Haveli', 'Daman & Diu'],
+  'andaman and nicobar':
+    ['Andaman & Nicobar Islands']
 };
+// Monitored weather city -> benchmark state (for tooltip temperature only).
+const CITY_STATE = {
+  'Delhi': 'Delhi', 'Mumbai': 'Maharashtra', 'Chennai': 'Tamil Nadu',
+  'Kolkata': 'West Bengal', 'Bengaluru': 'Karnataka', 'Hyderabad': 'Telangana',
+  'Ahmedabad': 'Gujarat', 'Pune': 'Maharashtra', 'Jaipur': 'Rajasthan',
+  'Lucknow': 'Uttar Pradesh'
+};
+let choroBounds = null;
 function normName(s) {
   return (s || '').toLowerCase().replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
 }
@@ -33,16 +43,38 @@ async function loadStateIntel() {
 }
 
 function stateStyle(selected) {
-  return { color: '#1E3A5F', weight: selected ? 3 : 1, fillColor: '#93C5FD',
+  return { color: '#1E3A5F', weight: selected ? 3 : 1, fillColor: '#1D4ED8',
            fillOpacity: selected ? 0.55 : 0.25, dashArray: '' };
+}
+
+// Choropleth fill by latest recorded accidents (counts only — NOT risk).
+// Grayscale-safe: opacity encodes magnitude; legend states this explicitly.
+function choroOpacity(name) {
+  if (!choroBounds) return 0.25;
+  const ents = entitiesFor(name);
+  const vals = ents.map(e => stateIntel[e]).filter(Boolean)
+    .map(e => e.latest.accidents).filter(v => typeof v === 'number');
+  if (!vals.length) return 0.15;
+  const v = Math.max(...vals);
+  const t = (Math.log10(v + 1) - choroBounds[0]) / (choroBounds[1] - choroBounds[0] || 1);
+  return 0.12 + 0.63 * Math.min(1, Math.max(0, t));
+}
+function computeChoro() {
+  const vals = [];
+  Object.values(stateIntel || {}).forEach(e => {
+    if (typeof e.latest.accidents === 'number') vals.push(Math.log10(e.latest.accidents + 1));
+  });
+  if (vals.length) choroBounds = [Math.min(...vals), Math.max(...vals)];
 }
 
 async function initIndiaMap() {
   await loadStateIntel();
+  computeChoro();
   const res = await fetch('/static/geo/india_states.geojson');
   const geo = await res.json();
   geoLayer = L.geoJSON(geo, {
-    style: () => stateStyle(false),
+    style: f => ({ color: '#1E3A5F', weight: 1, fillColor: '#1D4ED8',
+                   fillOpacity: choroOpacity((f.properties || {}).name || '') }),
     onEachFeature: (feature, layer) => {
       const name = (feature.properties || {}).name || 'Unknown';
       layer.on('mouseover', () => {
@@ -65,10 +97,18 @@ function stateTooltip(name) {
   const e = stateIntel[ents[0]];
   const inj = e.latest.injured === null || e.latest.injured === undefined
     ? 'Not available for this year' : e.latest.injured.toLocaleString('en-IN');
+  let tempLine = 'Current temperature: unavailable (weather feed down or not loaded)';
+  try {
+    const pts = (typeof weatherPoints !== 'undefined' && weatherPoints) || [];
+    const cities = Object.keys(CITY_STATE).filter(c => CITY_STATE[c] === ents[0] || ents.includes(CITY_STATE[c]));
+    const hit = pts.find(p => cities.includes(p.name) && typeof p.temperature_c === 'number');
+    if (hit) tempLine = `Current temperature: ${hit.temperature_c}°C at ${hit.name} (Open-Meteo, city proxy)`;
+  } catch (err) {}
   return `<b>${ents[0]}</b> (${e.latest_year}, MoRTH benchmark)<br>` +
     `Accidents: ${e.latest.accidents.toLocaleString('en-IN')}<br>` +
     `Fatalities: ${e.latest.fatalities.toLocaleString('en-IN')}<br>` +
-    `Injured: ${inj}`;
+    `Injured: ${inj}<br>${tempLine}<br>` +
+    `<span style="color:#64748B">Historical statistics — not live counts. Source: MoRTH.</span>`;
 }
 
 async function selectState(name, layer) {

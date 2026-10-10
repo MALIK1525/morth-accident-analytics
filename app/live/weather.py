@@ -117,6 +117,55 @@ def fetch_batch(cities):
     return out
 
 
+def _parse_metno(raw):
+    """Map MET Norway compact format to our observation schema."""
+    try:
+        ts = (raw.get("properties") or {}).get("timeseries") or []
+        first = ts[0] if ts else {}
+        det = ((first.get("data") or {}).get("instant") or {}).get("details") or {}
+        nxt = ((first.get("data") or {}).get("next_1_hours") or {})
+        code = (nxt.get("summary") or {}).get("symbol_code", "")
+        base = str(code).split("_")[0]
+        wmo_like = {"clearsky": 0, "fair": 1, "partlycloudy": 2, "cloudy": 3,
+                    "fog": 45, "lightrain": 61, "rain": 63, "heavyrain": 65,
+                    "lightsnow": 71, "snow": 73, "sleet": 67,
+                    "thunderstorm": 95}.get(base)
+        label, icon, shape = describe_code(wmo_like)
+        precip = ((nxt.get("details") or {}).get("precipitation_amount"))
+        return {
+            "temperature_c": det.get("air_temperature"),
+            "humidity_pct": det.get("relative_humidity"),
+            "precipitation_mm": precip,
+            "weather_code": None,
+            "condition": label,
+            "icon": icon,
+            "shape": shape,
+            "wind_speed_kmh": (det.get("wind_speed") * 3.6
+                               if isinstance(det.get("wind_speed"), (int, float)) else None),
+            "wind_direction_deg": det.get("wind_from_direction"),
+            "visibility_m": None,  # not provided by this feed
+            "observed_at": first.get("time"),
+            "source": "MET Norway (fallback)",
+        }
+    except (AttributeError, IndexError, KeyError, TypeError):
+        raise RuntimeError("unparseable MET Norway response")
+
+
+def fetch_metno_point(lat, lon):
+    lat = float(lat)
+    lon = float(lon)
+    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        raise ValueError("Coordinates out of range.")
+    params = urllib.parse.urlencode({"lat": lat, "lon": lon})
+    # Distinct UA per MET Norway fair-use policy (identifying contact agent).
+    req = urllib.request.Request(
+        f"https://api.met.no/weatherapi/locationforecast/2.0/compact?{params}",
+        headers={"User-Agent": "MoRTH-Live-Monitor/1.0 (research dashboard; non-commercial)"})
+    with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
+        raw = json.loads(resp.read().decode("utf-8"))
+    return _parse_metno(raw)
+
+
 def fetch_point(lat, lon):
     """Fetch current weather for one coordinate. Raises on failure."""
     lat = float(lat)
@@ -147,17 +196,30 @@ def get_summary(force=False):
         out["cached"] = True
         return out
     points, failed = [], []
+    provider = "Open-Meteo"
     try:
         # Single batched request (1 call/scan) to respect shared-IP rate limits.
         # No per-city fallback: retrying city-by-city after a 429 would worsen it.
         points = fetch_batch(MONITORED_CITIES)
     except Exception:
-        failed = [c["name"] for c in MONITORED_CITIES]
+        # Fallback provider (keyless, fair-use): per-city MET Norway requests.
+        # Only reached when the primary fails; failures here stay honest errors.
+        provider = "MET Norway (fallback)"
+        for city in MONITORED_CITIES:
+            try:
+                obs = fetch_metno_point(city["lat"], city["lon"])
+                points.append({"name": city["name"], "lat": city["lat"],
+                               "lon": city["lon"], **obs})
+            except Exception:
+                failed.append(city["name"])
+        if not points:
+            failed = [c["name"] for c in MONITORED_CITIES]
     temps = [p["temperature_c"] for p in points
              if isinstance(p["temperature_c"], (int, float))]
     data = {
         "status": "success" if points else "error",
-        "source": "Open-Meteo",
+        "source": provider if points else "Open-Meteo",
+        "provider": provider if points else None,
         "fetched_at": time.strftime("%H:%M:%S IST", time.localtime(now)),
         "points": points,
         "failed": failed,
