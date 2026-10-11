@@ -20,8 +20,11 @@ City-scoped incident markers with shapes/symbols, category filter, detail
 panel (+nearest-city scope note), layer toggles, freshness badges; traffic
 legend unchanged. No accident/fatality KPIs (test-enforced).
 
-## Tests: 183/183 (full suite; new: bbox-size guard, dedupe/cap/coverage,
-sanitized error capture, boot-order, binding pattern).
+## UI split (Phase 23 second commit)
+Weather & Research map (state polygons, weather markers, search, Near-Me)
+vs separate Traffic map (flow + incidents only), tabbed with lazy init,
+invalidateSize on switch, per-map state preserved. Browser-verified:
+traffic tab 310 markers, weather tab 10 markers, toggling clean, no errors.
 ## Browser verification (headless Chromium, real rendering + screenshot)
 - Traffic badge LIVE (TomTom) · incident section "309 reported incidents (NOT
   official records)" · 320 map markers · 36 polygons · zero console errors.
