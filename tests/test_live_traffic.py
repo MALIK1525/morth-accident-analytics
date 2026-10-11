@@ -215,3 +215,46 @@ def test_status_reflects_key_state(client, no_key):
     layers = {l["layer"]: l["state"]
               for l in client.get("/api/live/status").get_json()["layers"]}
     assert layers["Traffic"] == "AWAITING_API_KEY"
+
+
+def test_unknown_category_preserved_not_guessed(with_key, monkeypatch):
+    _patch(monkeypatch, {"incidents": [{
+        "type": 1, "geometry": {"type": "Point", "coordinates": [77.0, 28.0]},
+        "properties": {"id": "u1", "iconCategory": 99,
+                       "events": [{"description": "Mystery"}]}}]})
+    items = live_traffic.fetch_incidents("77.0,28.0,78.0,29.0")
+    assert items[0]["category"] == "Unknown"
+    assert items[0]["symbol"] == "?"
+
+
+def test_delay_labels_only_when_defined(with_key, monkeypatch):
+    def one(mag):
+        _patch(monkeypatch, {"incidents": [{
+            "type": 1, "geometry": {"type": "Point", "coordinates": [77.0, 28.0]},
+            "properties": {"id": "d", "iconCategory": 6, "magnitudeOfDelay": mag,
+                           "events": []}}]})
+        return live_traffic.fetch_incidents("a")[0]["delay_label"]
+    assert one(1) == "Minor delay"
+    assert one(2) == "Moderate delay"
+    assert one(3) == "Major delay"
+    assert one(0) is None
+    assert one(4) is None
+    assert one(None) is None
+
+
+def test_linestring_geometry_resolved(with_key, monkeypatch):
+    _patch(monkeypatch, {"incidents": [{
+        "type": 1, "geometry": {"type": "LineString",
+                                "coordinates": [[[77.1, 28.5], [77.2, 28.6]]]},
+        "properties": {"id": "l1", "iconCategory": 9, "events": []}}]})
+    items = live_traffic.fetch_incidents("a")
+    assert (items[0]["lat"], items[0]["lon"]) == (28.5, 77.1)
+    assert items[0]["category"] == "Road works"
+
+
+def test_missing_geometry_kept_with_nulls(with_key, monkeypatch):
+    _patch(monkeypatch, {"incidents": [{
+        "type": 1, "geometry": {},
+        "properties": {"id": "g1", "iconCategory": 6, "events": []}}]})
+    items = live_traffic.fetch_incidents("a")
+    assert items[0]["lat"] is None  # frontend filters nulls from map

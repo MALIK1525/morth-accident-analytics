@@ -111,7 +111,16 @@ def fetch_flow(lat, lon):
     }
 
 
-# TomTom iconCategory -> (label, marker symbol, shape class).
+# TomTom magnitudeOfDelay: 0 unknown, 1 minor, 2 moderate, 3 major,
+# 4 undefined. Only 1-3 are displayed; the rest stay unlabeled (unknown).
+DELAY_LABELS = {1: "Minor delay", 2: "Moderate delay", 3: "Major delay"}
+
+
+def _delay_label(mag):
+    try:
+        return DELAY_LABELS.get(int(mag))
+    except (TypeError, ValueError):
+        return None
 INCIDENT_STYLES = {
     0: ("Unknown", "?", "circle"),
     1: ("Accident report", "!", "triangle"),
@@ -180,6 +189,7 @@ def fetch_incidents(bbox):
             "start_time": props.get("startTime"),
             "end_time": props.get("endTime"),
             "delay_magnitude": props.get("magnitudeOfDelay"),
+            "delay_label": _delay_label(props.get("magnitudeOfDelay")),
             "source": "TomTom Traffic API",
         })
     return out

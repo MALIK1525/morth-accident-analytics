@@ -367,6 +367,7 @@ function drawIncidents() {
       document.getElementById('weather-detail').innerHTML =
         `<div class="text-lg font-bold">${p.symbol} ${p.category} (reported traffic incident)</div>` +
         `<div>Description: <b>${p.description || 'Not available'}</b></div>` +
+        (p.delay_label ? `<div>Severity: <b>${p.delay_label}</b> (provider-reported)</div>` : '') +
         `<div>Road: <b>${p.road || 'Not available'}</b></div>` +
         (p.near ? `<div>Nearest monitored city: <b>${p.near}</b> (query area, not exact scope)</div>` : '') +
         `<div>Start: <b>${p.start_time || 'Not available'}</b></div>` +
@@ -377,6 +378,19 @@ function drawIncidents() {
     incidentLayerT.addLayer(m);
   });
   drawIncidentList(list);
+  updateIncidentLegend(list);
+}
+
+// Live counts per normalized category (only categories actually present).
+function updateIncidentLegend(list) {
+  const el = document.getElementById('legend-inc-counts');
+  if (!el) return;
+  const counts = {};
+  list.forEach(p => { counts[p.category || 'Unknown'] = (counts[p.category || 'Unknown'] || 0) + 1; });
+  const keys = Object.keys(counts).sort();
+  el.innerHTML = keys.length
+    ? keys.map(k => `${k}: <b>${counts[k]}</b>`).join(' · ')
+    : 'No incidents in current filter.';
 }
 
 function drawIncidentList(list) {
