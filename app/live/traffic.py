@@ -138,7 +138,7 @@ def fetch_incidents(bbox):
         raise RuntimeError("missing key")
     params = urllib.parse.urlencode({
         "bbox": bbox,
-        "fields": "{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code},startTime,endTime,roadName,from,to}}}",
+        "fields": "{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code},startTime,endTime,from,to}}}",
         "language": "en-US",
         "timeValidityFilter": "present",
         "key": key,
@@ -172,7 +172,7 @@ def fetch_incidents(bbox):
             "symbol": symbol,
             "shape": shape,
             "description": (events[0].get("description") if events and isinstance(events[0], dict) else None),
-            "road": props.get("roadName") or props.get("from") or "Not available",
+            "road": props.get("from") or props.get("to") or "Not available",
             "from": props.get("from"),
             "to": props.get("to"),
             "lat": lat,

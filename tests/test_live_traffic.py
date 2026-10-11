@@ -22,7 +22,7 @@ FLOW_RAW = {"flowSegmentData": {"frc": "FRC2", "currentSpeed": 30,
 INC_RAW = {"incidents": [{"type": 1, "geometry": {"type": "Point",
                                                   "coordinates": [77.2, 28.6]},
                           "properties": {"id": "1", "iconCategory": 8,
-                                         "roadName": "NH-48",
+                                         "from": "NH-48",
                                          "startTime": "2026-10-05T10:00:00",
                                          "endTime": "2026-10-05T12:00:00",
                                          "events": [{"description": "Closed"}]}}]}
