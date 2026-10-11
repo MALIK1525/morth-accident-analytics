@@ -20,8 +20,14 @@ City-scoped incident markers with shapes/symbols, category filter, detail
 panel (+nearest-city scope note), layer toggles, freshness badges; traffic
 legend unchanged. No accident/fatality KPIs (test-enforced).
 
-## Tests: FULL SUITE (below) — new: bbox-size guard, dedupe/cap/coverage,
-sanitized error capture (key redaction).
+## Tests: 183/183 (full suite; new: bbox-size guard, dedupe/cap/coverage,
+sanitized error capture, boot-order, binding pattern).
+## Browser verification (headless Chromium, real rendering + screenshot)
+- Traffic badge LIVE (TomTom) · incident section "309 reported incidents (NOT
+  official records)" · 320 map markers · 36 polygons · zero console errors.
+- Incident filter categories: Jam, Road closed, Road works.
+- Evidence: BROWSER_TRAFFIC_INCIDENTS_EVIDENCE.png (choropleth, X incident
+  markers, hazards panel with real Delhi closures, both LIVE badges).
 ## Benchmark: d8064caa… before == after.
 ## Research: untouched; live never merged; NCRB untouched.
 ## Deployment: (verify) commit + push + live flow/incident/status checks +
