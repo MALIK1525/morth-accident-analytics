@@ -9,8 +9,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   #live-map { height: 600px; }
-  @media (max-width: 1024px) { #live-map { height: 480px; } }
-  @media (max-width: 768px) { #live-map { height: 360px; } }
+  #map-traffic { height: 600px; }
+  @media (max-width: 1024px) { #live-map, #map-traffic { height: 480px; } }
+  @media (max-width: 768px) { #live-map, #map-traffic { height: 360px; } }
   .wx-marker { display:flex; align-items:center; justify-content:center;
     font-size:18px; background:#fff; border:2px solid #111827; width:34px; height:34px; }
   .wx-circle { border-radius:50%; }
@@ -71,6 +72,10 @@
     <div class="lg:col-span-2 card p-4">
       <div class="flex flex-wrap items-center gap-3 mb-2">
         <h2 class="font-bold text-base">1 · 🗺️ India Live Map <span class="eyebrow ml-1">primary</span></h2>
+        <div role="tablist" aria-label="Map view" class="flex gap-1 text-xs font-bold">
+          <button id="tab-weather" role="tab" aria-selected="true" class="px-3 py-1.5 rounded bg-blue-600 text-white">Weather &amp; Research</button>
+          <button id="tab-traffic" role="tab" aria-selected="false" class="px-3 py-1.5 rounded bg-slate-200 text-slate-700">Traffic</button>
+        </div>
         <label class="text-xs">State/UT: <select id="state-search" class="border rounded px-1 py-0.5"><option value="">Select state / UT…</option></select></label>
         <button id="btn-india-reset" class="text-xs bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-semibold">Reset to India</button>
         <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
@@ -79,7 +84,13 @@
         <span id="badge-weather" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Weather: loading…</span>
         <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
       </div>
+      <div id="map-weather-wrap">
       <div id="live-map" class="rounded-lg border border-slate-300"></div>
+      </div>
+      <div id="map-traffic-wrap" class="hidden">
+        <div id="map-traffic" class="rounded-lg border border-slate-300" style="height:600px"></div>
+        <p class="text-[11px] text-slate-500 mt-1" id="traffic-status">TomTom traffic flow + reported incidents (NOT official accident records). Coverage: monitored-city areas.</p>
+      </div>
       <div id="boundary-status" class="text-[11px] mt-1 text-slate-500">Loading state boundaries…</div>
       <div id="tile-notice" class="hidden text-[11px] text-amber-700 mt-1">Basemap tiles unavailable — state boundaries and statistics below remain functional.</div>
       <div id="state-panel" class="text-xs mt-2 border rounded-lg p-2 bg-slate-50">Select a state on the map or from the search to see verified statistics. Historical accident statistics are not live incident counts.</div>

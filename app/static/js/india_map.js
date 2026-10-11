@@ -275,6 +275,7 @@ function wireNearMe() {
 // ---- Boot (this file loads AFTER live.js, so all cross-file functions exist).
 // Map boots immediately on page load — never gated on weather or any provider.
 if (typeof ensureMap === 'function') ensureMap();
+if (typeof wireTabs === 'function') wireTabs();
 initIndiaMap().catch(e => {
   console.error('State boundaries unavailable:', e);
   const p = document.getElementById('state-panel');

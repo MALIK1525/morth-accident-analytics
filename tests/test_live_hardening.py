@@ -112,6 +112,23 @@ def test_watch_status_icon_system():
         assert token in js, token
 
 
+def test_two_map_split():
+    html = open("app/templates/live.html", encoding="utf-8").read()
+    for token in ("tab-weather", "tab-traffic", "map-traffic",
+                  "map-weather-wrap", "map-traffic-wrap"):
+        assert token in html, token
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    for token in ("function ensureTrafficMap()", "function showTab(",
+                  "trafficLayerT", "incidentLayerT", "invalidateSize"):
+        assert token in js, token
+    # traffic renders only to the traffic map layers, never the weather map
+    assert "trafficLayer.addLayer" not in js
+    assert "incidentLayer.addLayer" not in js
+    # weather map created exactly once
+    assert js.count("L.map('live-map')") == 1
+    assert js.count("L.map('map-traffic')") == 1
+
+
 def test_map_legend_and_chips():
     html = _html()
     for token in ("map-legend", "city-chips", "wx-selected", "focus-visible"):

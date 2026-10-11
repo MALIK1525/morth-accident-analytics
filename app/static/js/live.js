@@ -1,6 +1,8 @@
 /* Phase 13.2–13.3 Live Monitor frontend. Backend proxies all provider APIs. */
 const REFRESH_MS = 5 * 60 * 1000;
-let map, weatherLayer, trafficLayer, incidentLayer;
+let map, weatherLayer;
+let mapTraffic = null, trafficLayerT = L.layerGroup(), incidentLayerT = L.layerGroup();
+let activeTab = 'weather';
 let weatherPoints = [], trafficPoints = [], incidentPoints = [];
 let weatherMarkers = {};
 
@@ -79,8 +81,6 @@ function ensureMap() {
     });
     tiles.addTo(map);
     weatherLayer = L.layerGroup().addTo(map);
-    trafficLayer = L.layerGroup().addTo(map);
-    incidentLayer = L.layerGroup().addTo(map);
     wireToggles();
     setTimeout(() => { try { map.invalidateSize(); } catch (e) {} }, 300);
   } catch (e) {
@@ -134,17 +134,73 @@ async function loadLive(force) {
 // NOTE: cross-file boot lives at the end of india_map.js (which loads last),
 // because live.js executes before india_map.js is parsed.
 
+function ensureTrafficMap() {
+  if (mapTraffic) return mapTraffic;
+  const el = document.getElementById('map-traffic');
+  if (!el || typeof L === 'undefined' || !el.offsetParent) return null;
+  try {
+    mapTraffic = L.map('map-traffic').setView([22.5, 79.5], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(mapTraffic);
+    trafficLayerT.addTo(mapTraffic);
+    incidentLayerT.addTo(mapTraffic);
+    applyToggles();
+    setTimeout(() => { try { mapTraffic.invalidateSize(); } catch (e) {} }, 100);
+  } catch (e) {
+    console.error('Traffic map init failed:', e);
+    mapTraffic = null;
+  }
+  return mapTraffic;
+}
+
+function showTab(which) {
+  activeTab = which;
+  const w = document.getElementById('map-weather-wrap');
+  const t = document.getElementById('map-traffic-wrap');
+  const bw = document.getElementById('tab-weather');
+  const bt = document.getElementById('tab-traffic');
+  const on = 'px-3 py-1.5 rounded bg-blue-600 text-white';
+  const off = 'px-3 py-1.5 rounded bg-slate-200 text-slate-700';
+  if (which === 'traffic') {
+    w.classList.add('hidden'); t.classList.remove('hidden');
+    bw.className = off; bt.className = on;
+    bw.setAttribute('aria-selected', 'false'); bt.setAttribute('aria-selected', 'true');
+    ensureTrafficMap();
+    setTimeout(() => { try { mapTraffic && mapTraffic.invalidateSize(); } catch (e) {} }, 60);
+    drawTraffic(); drawIncidents();
+  } else {
+    t.classList.add('hidden'); w.classList.remove('hidden');
+    bt.className = off; bw.className = on;
+    bt.setAttribute('aria-selected', 'false'); bw.setAttribute('aria-selected', 'true');
+    setTimeout(() => { try { map && map.invalidateSize(); } catch (e) {} }, 60);
+  }
+}
+
+function wireTabs() {
+  const bw = document.getElementById('tab-weather');
+  const bt = document.getElementById('tab-traffic');
+  if (bw) bw.addEventListener('click', () => showTab('weather'));
+  if (bt) bt.addEventListener('click', () => showTab('traffic'));
+}
+
+function applyToggles() {
+  const w = document.getElementById('lyr-weather').checked;
+  const t = document.getElementById('lyr-traffic').checked;
+  const ii = document.getElementById('lyr-incidents').checked;
+  if (map && weatherLayer) {
+    if (w && !map.hasLayer(weatherLayer)) weatherLayer.addTo(map);
+    if (!w && map.hasLayer(weatherLayer)) map.removeLayer(weatherLayer);
+  }
+  if (mapTraffic) {
+    if (t && !mapTraffic.hasLayer(trafficLayerT)) trafficLayerT.addTo(mapTraffic);
+    if (!t && mapTraffic.hasLayer(trafficLayerT)) mapTraffic.removeLayer(trafficLayerT);
+    if (ii && !mapTraffic.hasLayer(incidentLayerT)) incidentLayerT.addTo(mapTraffic);
+    if (!ii && mapTraffic.hasLayer(incidentLayerT)) mapTraffic.removeLayer(incidentLayerT);
+  }
+}
+
 function wireToggles() {
-  const apply = () => {
-    if (!map) return;
-    const w = document.getElementById('lyr-weather').checked;
-    const t = document.getElementById('lyr-traffic').checked;
-    const ii = document.getElementById('lyr-incidents').checked;
-    [ [weatherLayer, w], [trafficLayer, t], [incidentLayer, ii] ].forEach(([lyr, on]) => {
-      if (on && !map.hasLayer(lyr)) lyr.addTo(map);
-      if (!on && map.hasLayer(lyr)) map.removeLayer(lyr);
-    });
-  };
+  const apply = () => { applyToggles(); };
   ['lyr-weather', 'lyr-traffic', 'lyr-incidents'].forEach(id =>
     document.getElementById(id).addEventListener('change', apply));
   ['flt-city', 'flt-inc', 'flt-traf'].forEach(id =>
@@ -237,8 +293,7 @@ async function loadTraffic(force) {
 }
 
 function drawTraffic() {
-  if (!trafficLayer) return;
-  trafficLayer.clearLayers();
+  trafficLayerT.clearLayers();
   trafficPoints.filter(p => passFilters(p, 'traffic')).forEach(p => {
     const html = `<div class="wx-marker wx-circle" title="${p.condition}"><span style="font-weight:bold">${(p.condition || '?')[0]}</span></div>`;
     const m = L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', html, iconSize: [30, 30] }) });
@@ -255,10 +310,10 @@ function drawTraffic() {
         `<div>Road closure reported: <b>${p.road_closure ? 'YES' : 'no'}</b></div>` +
         `<div>Source: <b>TomTom Traffic API</b></div>`;
     });
-    trafficLayer.addLayer(m);
+    trafficLayerT.addLayer(m);
     if (p.current_speed_kmh !== null && p.current_speed_kmh !== undefined) {
       L.circle([p.lat, p.lon], { radius: 22000, color: '#111827', weight: p.line_weight || 2,
-        dashArray: TRAFFIC_DASH[p.line_dash] || '', fill: false }).addTo(trafficLayer);
+        dashArray: TRAFFIC_DASH[p.line_dash] || '', fill: false }).addTo(trafficLayerT);
     }
   });
 }
@@ -283,8 +338,7 @@ async function loadIncidents(force) {
 }
 
 function drawIncidents() {
-  if (!incidentLayer) return;
-  incidentLayer.clearLayers();
+  incidentLayerT.clearLayers();
   incidentPoints.filter(p => passFilters(p, 'incident')).slice(0, 300).forEach(p => {
     const m = L.marker([p.lat, p.lon], { icon: L.divIcon({
       className: '', html: `<div class="wx-marker wx-${p.shape}"><span>${p.symbol}</span></div>`, iconSize: [30, 30] }) });
@@ -301,7 +355,7 @@ function drawIncidents() {
         `<div>Expected end: <b>${p.end_time || 'Not available'}</b></div>` +
         `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`;
     });
-    incidentLayer.addLayer(m);
+    incidentLayerT.addLayer(m);
   });
 }
 
