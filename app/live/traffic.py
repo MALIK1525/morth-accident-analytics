@@ -10,6 +10,7 @@ Only provider-returned fields are used; nothing is invented.
 """
 import json
 import os
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -26,6 +27,24 @@ INDIA_BBOX = "68.0,6.0,97.5,37.5"
 
 def has_key():
     return bool(os.environ.get("TOMTOM_API_KEY"))
+
+
+# Last provider failure (HTTP status + short message only; the request URL
+# carries the key, so it is NEVER stored or exposed).
+_last_error = {"at": None, "kind": None, "detail": None}
+
+
+def _record_error(e):
+    code = getattr(e, "code", None)
+    try:
+        body = e.read().decode("utf-8", errors="replace")[:160] if hasattr(e, "read") else ""
+    except Exception:
+        body = ""
+    # Strip anything resembling a credential before storing.
+    body = re.sub(r"key=[^&\s]*", "key=***", body)
+    _last_error.update(at=time.strftime("%H:%M:%S IST", time.localtime()),
+                       kind=type(e).__name__,
+                       detail=f"HTTP {code}: {body}"[:200] if code else str(e)[:200])
 
 
 def _get(url):
@@ -203,7 +222,8 @@ def get_incidents(force=False):
                 "message": "Reported incidents: Awaiting API key (set TOMTOM_API_KEY)."}
     try:
         items = fetch_incidents()
-    except Exception:
+    except Exception as e:
+        _record_error(e)
         stale = _inc_cache["data"]
         if stale and stale.get("points"):
             out = dict(stale)

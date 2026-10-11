@@ -32,6 +32,7 @@ def live_status():
             "weather_cache": _age(getattr(live_weather, "_cache", {}), live_weather.CACHE_TTL_S),
             "weather_last_error": getattr(live_weather, "_last_error", {}),
             "traffic_cache": _age(getattr(live_traffic, "_flow_cache", {}), live_traffic.FLOW_TTL_S),
+            "traffic_last_error": getattr(live_traffic, "_last_error", {}),
             "note": "Key presence only — values never exposed. Ages are server-cache ages.",
         },
         "layers": [
