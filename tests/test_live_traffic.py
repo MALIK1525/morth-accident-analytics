@@ -112,7 +112,7 @@ def test_rate_limit_handled(with_key, monkeypatch):
 
 def test_incident_normalization(with_key, monkeypatch):
     _patch(monkeypatch, INC_RAW)
-    items = live_traffic.fetch_incidents()
+    items = live_traffic.fetch_incidents("77.0,28.0,78.0,29.0")
     assert len(items) == 1
     assert items[0]["category"] == "Road closed"
     assert items[0]["road"] == "NH-48"
@@ -120,7 +120,22 @@ def test_incident_normalization(with_key, monkeypatch):
     assert "official" not in items[0]["category"].lower()
 
 
-def test_incident_category_styles_unique():
+def test_city_bboxes_within_provider_limit():
+    import re
+    for c in [{"lat": 28.61, "lon": 77.21}, {"lat": 8.0, "lon": 77.0}]:
+        parts = [float(x) for x in live_traffic.city_bbox(c["lat"], c["lon"]).split(",")]
+        # rough km2 at India latitudes; must stay far below the 10,000 km2 cap
+        area = (parts[2] - parts[0]) * 111 * (parts[3] - parts[1]) * 111
+        assert area < 10000, area
+
+
+def test_incidents_dedupe_and_cap(with_key, monkeypatch):
+    _patch(monkeypatch, INC_RAW)
+    out = live_traffic.get_incidents(force=True)
+    assert out["status"] == "success"
+    assert out["count"] == 1  # same id across 10 city bboxes deduped
+    assert out["points"][0]["near"] == "Delhi"
+    assert "not nationwide" in out["coverage"]
     styles = {(s, h) for s, h in
               [(v[1], v[2]) for v in live_traffic.INCIDENT_STYLES.values()]}
     assert len(styles) >= 10  # symbol+shape combos distinguish categories
@@ -149,7 +164,7 @@ def test_stale_incidents_served(with_key, monkeypatch):
 
 def test_empty_incidents_ok(with_key, monkeypatch):
     _patch(monkeypatch, {"incidents": []})
-    assert live_traffic.fetch_incidents() == []
+    assert live_traffic.fetch_incidents("77.0,28.0,78.0,29.0") == []
 
 
 def test_no_accident_kpis(with_key, monkeypatch):

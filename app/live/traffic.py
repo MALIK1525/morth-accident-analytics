@@ -18,11 +18,17 @@ import urllib.request
 from app.live.weather import MONITORED_CITIES
 
 TIMEOUT_S = 10
-FLOW_TTL_S = 120
-INCIDENT_TTL_S = 180
+FLOW_TTL_S = 300
+INCIDENT_TTL_S = 900
 
-# Bounding box covering India: minLon,minLat,maxLon,maxLat
-INDIA_BBOX = "68.0,6.0,97.5,37.5"
+# Per-city incident bbox half-width in degrees (~55 km). One whole-India bbox
+# is rejected by the provider ("bbox area larger than 10,000 km2"), so the
+# monitor queries one small bbox per monitored city instead.
+CITY_BBOX_HALF_DEG = 0.25
+
+
+def city_bbox(lat, lon, half=CITY_BBOX_HALF_DEG):
+    return f"{lon - half},{lat - half},{lon + half},{lat + half}"
 
 
 def has_key():
@@ -125,12 +131,13 @@ INCIDENT_STYLES = {
 }
 
 
-def fetch_incidents():
+def fetch_incidents(bbox):
+    """Incidents inside one small bbox (provider caps bbox area at 10,000 km2)."""
     key = os.environ.get("TOMTOM_API_KEY", "")
     if not key:
         raise RuntimeError("missing key")
     params = urllib.parse.urlencode({
-        "bbox": INDIA_BBOX,
+        "bbox": bbox,
         "fields": "{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code},startTime,endTime,roadName,from,to}}}",
         "language": "en-US",
         "timeValidityFilter": "present",
@@ -160,6 +167,7 @@ def fetch_incidents():
             lon = lat = None
         events = props.get("events") or []
         out.append({
+            "id": props.get("id"),
             "category": label,
             "symbol": symbol,
             "shape": shape,
@@ -221,7 +229,25 @@ def get_incidents(force=False):
         return {"status": "awaiting_key",
                 "message": "Reported incidents: Awaiting API key (set TOMTOM_API_KEY)."}
     try:
-        items = fetch_incidents()
+        items, seen = [], set()
+        errors = 0
+        for city in MONITORED_CITIES:
+            try:
+                for inc in fetch_incidents(city_bbox(city["lat"], city["lon"])):
+                    ident = inc.get("id") or (inc.get("category"), inc.get("lat"), inc.get("lon"))
+                    if ident in seen:
+                        continue
+                    seen.add(ident)
+                    inc["near"] = city["name"]
+                    items.append(inc)
+                    if len(items) >= 300:
+                        break
+            except Exception as e:
+                errors += 1
+                _record_error(e)
+                continue
+        if not items:
+            raise RuntimeError(f"all city incident queries failed ({errors} errors)")
     except Exception as e:
         _record_error(e)
         stale = _inc_cache["data"]
@@ -233,6 +259,8 @@ def get_incidents(force=False):
                 "points": [], "fetched_at": None}
     data = {"status": "success",
             "source": "TomTom Traffic API",
+            "coverage": ("10 monitored-city areas (small bboxes); not nationwide. "
+                         "Provider caps one bbox at 10,000 km2."),
             "fetched_at": time.strftime("%H:%M:%S IST", time.localtime(now)),
             "points": items,
             "count": len(items)}

@@ -296,6 +296,7 @@ function drawIncidents() {
         `<div class="text-lg font-bold">${p.symbol} ${p.category} (reported traffic incident)</div>` +
         `<div>Description: <b>${p.description || 'Not available'}</b></div>` +
         `<div>Road: <b>${p.road || 'Not available'}</b></div>` +
+        (p.near ? `<div>Nearest monitored city: <b>${p.near}</b> (query area, not exact scope)</div>` : '') +
         `<div>Start: <b>${p.start_time || 'Not available'}</b></div>` +
         `<div>Expected end: <b>${p.end_time || 'Not available'}</b></div>` +
         `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`;

@@ -34,9 +34,9 @@ def test_no_accident_kpi_language():
 
 def test_ttl_values_sane():
     assert live_weather.CACHE_TTL_S == 300
-    assert live_traffic.FLOW_TTL_S == 120
-    assert live_traffic.INCIDENT_TTL_S == 180
-    assert live_traffic.FLOW_TTL_S < live_weather.CACHE_TTL_S
+    assert live_traffic.FLOW_TTL_S == 300
+    assert live_traffic.INCIDENT_TTL_S == 900
+    assert live_traffic.FLOW_TTL_S <= live_weather.CACHE_TTL_S
 
 
 def test_incident_cap_present():
