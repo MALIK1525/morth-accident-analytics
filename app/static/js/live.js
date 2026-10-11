@@ -1,7 +1,19 @@
 /* Phase 13.2–13.3 Live Monitor frontend. Backend proxies all provider APIs. */
 const REFRESH_MS = 5 * 60 * 1000;
 let map, weatherLayer;
-let mapTraffic = null, trafficLayerT = L.layerGroup(), incidentLayerT = L.layerGroup();
+let mapTraffic = null, trafficLayerT = L.layerGroup(), incidentLayerT = null;
+const CITY_DEG = 0.25; // must match backend CITY_BBOX_HALF_DEG
+
+function makeIncidentLayer() {
+  // Real clustering when the CDN plugin loads; plain group otherwise.
+  // Cluster counts always equal distinct markers added (backend dedupes by id).
+  if (typeof L.markerClusterGroup === 'function') {
+    return L.markerClusterGroup({ showCoverageOnHover: true, spiderfyOnMaxZoom: true,
+      maxClusterRadius: 60, chunkedLoading: true });
+  }
+  return L.layerGroup();
+}
+incidentLayerT = makeIncidentLayer();
 let activeTab = 'weather';
 let weatherPoints = [], trafficPoints = [], incidentPoints = [];
 let weatherMarkers = {};
@@ -217,6 +229,9 @@ function passFilters(p, kind) {
   if (kind === 'incident') {
     const t = document.getElementById('flt-inc').value;
     if (t && p.category !== t) return false;
+    const qEl = document.getElementById('incident-search');
+    const q = qEl ? qEl.value.toLowerCase().trim() : '';
+    if (q && !((p.road || '') + ' ' + (p.description || '') + ' ' + (p.category || '')).toLowerCase().includes(q)) return false;
   }
   return true;
 }
@@ -279,6 +294,7 @@ async function loadTraffic(force) {
     if (data.status !== 'success' || !data.points) throw new Error('empty');
     trafficPoints = data.points;
     drawTraffic();
+    fillTrafficCities();
     drawHazards();
     layerEpoch.traffic = Date.now(); tickAges();
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
@@ -339,7 +355,9 @@ async function loadIncidents(force) {
 
 function drawIncidents() {
   incidentLayerT.clearLayers();
-  incidentPoints.filter(p => passFilters(p, 'incident')).slice(0, 300).forEach(p => {
+  const list = incidentPoints.filter(p => passFilters(p, 'incident')).slice(0, 300);
+  window._incidentMarkers = {};
+  list.forEach((p, idx) => {
     const m = L.marker([p.lat, p.lon], { icon: L.divIcon({
       className: '', html: `<div class="wx-marker wx-${p.shape}"><span>${p.symbol}</span></div>`, iconSize: [30, 30] }) });
     m.bindTooltip(`<b>${p.category}</b><br>${p.road || ''}`);
@@ -355,8 +373,89 @@ function drawIncidents() {
         `<div>Expected end: <b>${p.end_time || 'Not available'}</b></div>` +
         `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`;
     });
+    window._incidentMarkers[p.id || ('n' + idx)] = m;
     incidentLayerT.addLayer(m);
   });
+  drawIncidentList(list);
+}
+
+function drawIncidentList(list) {
+  const box = document.getElementById('incident-list');
+  if (!box) return;
+  if (!list.length) {
+    box.innerHTML = incidentPoints.length
+      ? 'No incidents match the current filters. <button id="btn-inc-clear" class="underline font-bold">Clear incident filters</button>'
+      : 'No reported incidents in monitored areas right now.';
+    const c = document.getElementById('btn-inc-clear');
+    if (c) c.addEventListener('click', () => {
+      document.getElementById('flt-inc').value = '';
+      const q = document.getElementById('incident-search');
+      if (q) q.value = '';
+      drawIncidents();
+    });
+    return;
+  }
+  const shown = list.slice(0, 50);
+  box.innerHTML = shown.map((p, idx) => {
+    const key = p.id || ('n' + idx);
+    return `<div><button class="underline text-left" data-inc="${key}"><b>${p.category}</b> — ${p.road || 'road undisclosed'} <span class="text-slate-500">${p.start_time || ''}</span></button></div>`;
+  }).join('') + (list.length > 50 ? `<div class="text-slate-500">Showing 50 of ${list.length} — refine search.</div>` : '');
+  box.querySelectorAll('[data-inc]').forEach(btn => btn.addEventListener('click', () => {
+    const m = window._incidentMarkers[btn.getAttribute('data-inc')];
+    if (m && mapTraffic) {
+      if (activeTab !== 'traffic') showTab('traffic');
+      setTimeout(() => {
+        if (incidentLayerT.zoomToShowLayer) {
+          incidentLayerT.zoomToShowLayer(m, () => { highlightMarker(m); m.fire('click'); });
+        } else {
+          mapTraffic.setView(m.getLatLng(), 13);
+          highlightMarker(m);
+          m.fire('click');
+        }
+      }, 150);
+    }
+  }));
+}
+
+function fillTrafficCities() {
+  const sel = document.getElementById('traffic-city');
+  if (!sel) return;
+  const names = [...new Set(trafficPoints.map(p => p.name))].sort();
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">India overview</option>' + names.map(n => `<option>${n}</option>`).join('');
+  sel.value = cur;
+}
+
+function wireTrafficNav() {
+  const sel = document.getElementById('traffic-city');
+  const reset = document.getElementById('btn-traffic-india');
+  const search = document.getElementById('incident-search');
+  const cov = document.getElementById('traffic-coverage');
+  if (sel && !sel.dataset.wired) {
+    sel.dataset.wired = '1';
+    sel.addEventListener('change', () => {
+      const p = trafficPoints.find(x => x.name === sel.value);
+      if (p && mapTraffic) {
+        mapTraffic.fitBounds([[p.lat - CITY_DEG, p.lon - CITY_DEG], [p.lat + CITY_DEG, p.lon + CITY_DEG]]);
+        if (cov) cov.innerText = `Coverage: ±0.25° around ${p.name} (monitored-city area, not nationwide).`;
+      } else if (mapTraffic) {
+        mapTraffic.setView([22.5, 79.5], 5);
+        if (cov) cov.innerText = 'Coverage: monitored-city areas (not nationwide).';
+      }
+    });
+  }
+  if (reset && !reset.dataset.wired) {
+    reset.dataset.wired = '1';
+    reset.addEventListener('click', () => {
+      if (sel) sel.value = '';
+      if (mapTraffic) mapTraffic.setView([22.5, 79.5], 5);
+      if (cov) cov.innerText = 'Coverage: monitored-city areas (not nationwide).';
+    });
+  }
+  if (search && !search.dataset.wired) {
+    search.dataset.wired = '1';
+    search.addEventListener('input', () => drawIncidents());
+  }
 }
 
 function fillIncidentFilter() {

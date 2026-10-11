@@ -276,6 +276,7 @@ function wireNearMe() {
 // Map boots immediately on page load — never gated on weather or any provider.
 if (typeof ensureMap === 'function') ensureMap();
 if (typeof wireTabs === 'function') wireTabs();
+if (typeof wireTrafficNav === 'function') wireTrafficNav();
 initIndiaMap().catch(e => {
   console.error('State boundaries unavailable:', e);
   const p = document.getElementById('state-panel');

@@ -112,6 +112,17 @@ def test_watch_status_icon_system():
         assert token in js, token
 
 
+def test_traffic_cluster_search_city():
+    html = open("app/templates/live.html", encoding="utf-8").read()
+    for token in ("markercluster", "traffic-city", "btn-traffic-india",
+                  "incident-search", "incident-list", "traffic-coverage"):
+        assert token in html, token
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    for token in ("markerClusterGroup", "zoomToShowLayer", "drawIncidentList",
+                  "fillTrafficCities", "wireTrafficNav", "CITY_DEG"):
+        assert token in js, token
+
+
 def test_two_map_split():
     html = open("app/templates/live.html", encoding="utf-8").read()
     for token in ("tab-weather", "tab-traffic", "map-traffic",
