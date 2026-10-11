@@ -244,12 +244,12 @@ def get_incidents(force=False):
                         break
             except Exception as e:
                 errors += 1
-                _record_error(e)
+                if errors == 1:
+                    _record_error(e)  # keep the first root cause, not the aggregate
                 continue
         if not items:
             raise RuntimeError(f"all city incident queries failed ({errors} errors)")
-    except Exception as e:
-        _record_error(e)
+    except Exception:
         stale = _inc_cache["data"]
         if stale and stale.get("points"):
             out = dict(stale)
