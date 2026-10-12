@@ -1,0 +1,4 @@
+Dataset_A,Dataset_B,Join_Key,Year_Compat,Geography,Unit_Compat,Definition_Compat,Missingness,Boundary_Issue,Safe_Integration,Reason
+MoRTH benchmark,TN district 2021-23,State(TN only)+Year,2021-23 overlap,district sums == state totals exactly,counts,none,MAYILADUTHURAI 2021 NaN,none,CONDITIONAL,TN-only district drill-down; national join unsafe
+MoRTH benchmark,NCRB month-wise 2024,State+Year(2024),2024 only,state names; NCRB DAMAN&DIU label,counts,high (definition drift),NCRB total 467967 vs MoRTH 487707,none,NO (as merge),Keep as parallel NCRB-vintage seasonality source only
+MoRTH benchmark,NCRB cities month-wise,City+Year,2024,50 vs NCRB city lists differ,counts,medium,-,city-definition mismatch,NO,Separate analysis only

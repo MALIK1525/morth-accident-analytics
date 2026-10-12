@@ -238,6 +238,9 @@ function applyModePanels(which) {
     ['sections-wx', traffic], ['sections-traf', !traffic],
     ['lbl-lyr-weather', traffic], ['lbl-lyr-traffic', !traffic],
     ['lbl-lyr-incidents', !traffic], ['badge-weather', traffic], ['badge-traffic', !traffic],
+    ['traffic-filters', !traffic], ['state-panel', traffic], ['city-chips', traffic],
+    ['watch-section', traffic], ['state-search', traffic], ['btn-india-reset', traffic],
+    ['layer-ages', false],
   ];
   pairs.forEach(([id, hide]) => {
     const el = document.getElementById(id);

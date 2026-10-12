@@ -1,0 +1,17 @@
+Figure_ID,Filename,Source,Caption,Status
+F01,F01.png,research_analysis verified CSVs,"F01. Annual road accidents in India, 2018-2024 (verified MoRTH benchmark). Recorded totals",EXISTS
+F02,F02.png,research_analysis verified CSVs,"F02. Annual road fatalities in India, 2018-2024 (MoRTH benchmark). Fatalities rose 12.4%, faster",EXISTS
+F03,F03.png,research_analysis verified CSVs,"F03. Fatality ratio, deaths per 100 accidents, 2018-2024 (derived). Rose 33.50 to 36.33; a",EXISTS
+F04,F04.png,research_analysis verified CSVs,F04. Zone accident trends by six zones (benchmark + mapping). Descriptive differences only; no ranking.,EXISTS
+F05,F05.png,research_analysis verified CSVs,"F05. State-year accident heatmap, 38 entities x 2018-2024. Missing (NV) shown as missing, never zero.",EXISTS
+F06,F06.png,research_analysis verified CSVs,"F06. State accident/fatality slopes with 95% CI (OLS, N=7). Wide intervals; most non-detectable.",EXISTS
+F07,F07.png,research_analysis verified CSVs,"F07. State-year rainfall vs accidents (IMD join, N=236). Pooled r=-0.234; scale confounding likely; not causal.",EXISTS
+F08,F08.png,research_analysis verified CSVs,F08. State-year mean Tmax vs fatalities (N=236). Pooled r=+0.498; associational only.,EXISTS
+F09,F09.png,research_analysis verified CSVs,"F09. 2024 fatalities by reported violation category (MoRTH AR2024 mirror, India-level). Over-speeding",EXISTS
+F10,F10.png,research_analysis verified CSVs,F10. 2024 accidents by collision type (AR2024 mirror). Descriptive configuration mix.,EXISTS
+F11,F11.png,research_analysis verified CSVs,F11. 2024 fatalities by road-user mode (AR2024 mirror). Counts without exposure; largest count is not highest risk.,EXISTS
+F12,F12.png,research_analysis verified CSVs,F12. 2024 licence-status accidents and safety-device non-use toll (AR2024 mirror). Reported categories only.,EXISTS
+F13,F13.png,research_analysis verified CSVs,"F13. 2024 monthly road accidents, NCRB ADSI Table 1A.5 Road-States (NCRB vintage, NOT MoRTH). May peak, July trough.",EXISTS
+F14,F14.png,research_analysis verified CSVs,F14. Tamil Nadu district accidents 2021-2023 (district CSV; sums == benchmark TN). TN-only evidence.,EXISTS
+F15,F15.png,research_analysis verified CSVs,F15. Actual vs predicted accidents with test-RMSE comparison (2023-2024 holdout). Naive persistence,EXISTS
+F16,F16.png,research_analysis verified CSVs,"F16. K-means K-selection and PCA cluster scatter (K=2, silhouette 0.356). Exploratory typology; descriptive labels.",EXISTS

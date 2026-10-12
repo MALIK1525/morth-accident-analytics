@@ -1,0 +1,229 @@
+State_UT,Metric,Threshold,First_Year,Value,Prev_Value,N
+Andaman & Nicobar Islands,Accidents,10000,NOT_REACHED,,,7
+Andaman & Nicobar Islands,Accidents,25000,NOT_REACHED,,,7
+Andaman & Nicobar Islands,Accidents,50000,NOT_REACHED,,,7
+Andaman & Nicobar Islands,Fatalities,1000,NOT_REACHED,,,7
+Andaman & Nicobar Islands,Fatalities,5000,NOT_REACHED,,,7
+Andaman & Nicobar Islands,Fatalities,10000,NOT_REACHED,,,7
+Andhra Pradesh,Accidents,10000,2018,24475.0,,7
+Andhra Pradesh,Accidents,25000,NOT_REACHED,,,7
+Andhra Pradesh,Accidents,50000,NOT_REACHED,,,7
+Andhra Pradesh,Fatalities,1000,2018,7556.0,,7
+Andhra Pradesh,Fatalities,5000,2018,7556.0,,7
+Andhra Pradesh,Fatalities,10000,NOT_REACHED,,,7
+Arunachal Pradesh,Accidents,10000,NOT_REACHED,,,7
+Arunachal Pradesh,Accidents,25000,NOT_REACHED,,,7
+Arunachal Pradesh,Accidents,50000,NOT_REACHED,,,7
+Arunachal Pradesh,Fatalities,1000,NOT_REACHED,,,7
+Arunachal Pradesh,Fatalities,5000,NOT_REACHED,,,7
+Arunachal Pradesh,Fatalities,10000,NOT_REACHED,,,7
+Assam,Accidents,10000,NOT_REACHED,,,7
+Assam,Accidents,25000,NOT_REACHED,,,7
+Assam,Accidents,50000,NOT_REACHED,,,7
+Assam,Fatalities,1000,2018,2966.0,,7
+Assam,Fatalities,5000,NOT_REACHED,,,7
+Assam,Fatalities,10000,NOT_REACHED,,,7
+Bihar,Accidents,10000,2019,10007.0,9600.0,7
+Bihar,Accidents,25000,NOT_REACHED,,,7
+Bihar,Accidents,50000,NOT_REACHED,,,7
+Bihar,Fatalities,1000,2018,6729.0,,7
+Bihar,Fatalities,5000,2018,6729.0,,7
+Bihar,Fatalities,10000,NOT_REACHED,,,7
+Chandigarh,Accidents,10000,NOT_REACHED,,,7
+Chandigarh,Accidents,25000,NOT_REACHED,,,7
+Chandigarh,Accidents,50000,NOT_REACHED,,,7
+Chandigarh,Fatalities,1000,NOT_REACHED,,,7
+Chandigarh,Fatalities,5000,NOT_REACHED,,,7
+Chandigarh,Fatalities,10000,NOT_REACHED,,,7
+Chhattisgarh,Accidents,10000,2018,13864.0,,7
+Chhattisgarh,Accidents,25000,NOT_REACHED,,,7
+Chhattisgarh,Accidents,50000,NOT_REACHED,,,7
+Chhattisgarh,Fatalities,1000,2018,4592.0,,7
+Chhattisgarh,Fatalities,5000,2019,5003.0,4592.0,7
+Chhattisgarh,Fatalities,10000,NOT_REACHED,,,7
+Dadra & Nagar Haveli,Accidents,10000,NOT_REACHED,,,2
+Dadra & Nagar Haveli,Accidents,25000,NOT_REACHED,,,2
+Dadra & Nagar Haveli,Accidents,50000,NOT_REACHED,,,2
+Dadra & Nagar Haveli,Fatalities,1000,NOT_REACHED,,,2
+Dadra & Nagar Haveli,Fatalities,5000,NOT_REACHED,,,2
+Dadra & Nagar Haveli,Fatalities,10000,NOT_REACHED,,,2
+Dadra & Nagar Haveli and Daman & Diu,Accidents,10000,NOT_REACHED,,,5
+Dadra & Nagar Haveli and Daman & Diu,Accidents,25000,NOT_REACHED,,,5
+Dadra & Nagar Haveli and Daman & Diu,Accidents,50000,NOT_REACHED,,,5
+Dadra & Nagar Haveli and Daman & Diu,Fatalities,1000,NOT_REACHED,,,5
+Dadra & Nagar Haveli and Daman & Diu,Fatalities,5000,NOT_REACHED,,,5
+Dadra & Nagar Haveli and Daman & Diu,Fatalities,10000,NOT_REACHED,,,5
+Daman & Diu,Accidents,10000,NOT_REACHED,,,2
+Daman & Diu,Accidents,25000,NOT_REACHED,,,2
+Daman & Diu,Accidents,50000,NOT_REACHED,,,2
+Daman & Diu,Fatalities,1000,NOT_REACHED,,,2
+Daman & Diu,Fatalities,5000,NOT_REACHED,,,2
+Daman & Diu,Fatalities,10000,NOT_REACHED,,,2
+Delhi,Accidents,10000,NOT_REACHED,,,7
+Delhi,Accidents,25000,NOT_REACHED,,,7
+Delhi,Accidents,50000,NOT_REACHED,,,7
+Delhi,Fatalities,1000,2018,1690.0,,7
+Delhi,Fatalities,5000,NOT_REACHED,,,7
+Delhi,Fatalities,10000,NOT_REACHED,,,7
+Goa,Accidents,10000,NOT_REACHED,,,7
+Goa,Accidents,25000,NOT_REACHED,,,7
+Goa,Accidents,50000,NOT_REACHED,,,7
+Goa,Fatalities,1000,NOT_REACHED,,,7
+Goa,Fatalities,5000,NOT_REACHED,,,7
+Goa,Fatalities,10000,NOT_REACHED,,,7
+Gujarat,Accidents,10000,2018,18769.0,,7
+Gujarat,Accidents,25000,NOT_REACHED,,,7
+Gujarat,Accidents,50000,NOT_REACHED,,,7
+Gujarat,Fatalities,1000,2018,7996.0,,7
+Gujarat,Fatalities,5000,2018,7996.0,,7
+Gujarat,Fatalities,10000,NOT_REACHED,,,7
+Haryana,Accidents,10000,2018,11238.0,,7
+Haryana,Accidents,25000,NOT_REACHED,,,7
+Haryana,Accidents,50000,NOT_REACHED,,,7
+Haryana,Fatalities,1000,2018,5118.0,,7
+Haryana,Fatalities,5000,2018,5118.0,,7
+Haryana,Fatalities,10000,NOT_REACHED,,,7
+Himachal Pradesh,Accidents,10000,NOT_REACHED,,,7
+Himachal Pradesh,Accidents,25000,NOT_REACHED,,,7
+Himachal Pradesh,Accidents,50000,NOT_REACHED,,,7
+Himachal Pradesh,Fatalities,1000,2018,1208.0,,7
+Himachal Pradesh,Fatalities,5000,NOT_REACHED,,,7
+Himachal Pradesh,Fatalities,10000,NOT_REACHED,,,7
+Jammu & Kashmir,Accidents,10000,NOT_REACHED,,,7
+Jammu & Kashmir,Accidents,25000,NOT_REACHED,,,7
+Jammu & Kashmir,Accidents,50000,NOT_REACHED,,,7
+Jammu & Kashmir,Fatalities,1000,NOT_REACHED,,,7
+Jammu & Kashmir,Fatalities,5000,NOT_REACHED,,,7
+Jammu & Kashmir,Fatalities,10000,NOT_REACHED,,,7
+Jharkhand,Accidents,10000,NOT_REACHED,,,7
+Jharkhand,Accidents,25000,NOT_REACHED,,,7
+Jharkhand,Accidents,50000,NOT_REACHED,,,7
+Jharkhand,Fatalities,1000,2018,3542.0,,7
+Jharkhand,Fatalities,5000,NOT_REACHED,,,7
+Jharkhand,Fatalities,10000,NOT_REACHED,,,7
+Karnataka,Accidents,10000,2018,41707.0,,7
+Karnataka,Accidents,25000,2018,41707.0,,7
+Karnataka,Accidents,50000,NOT_REACHED,,,7
+Karnataka,Fatalities,1000,2018,10990.0,,7
+Karnataka,Fatalities,5000,2018,10990.0,,7
+Karnataka,Fatalities,10000,2018,10990.0,,7
+Kerala,Accidents,10000,2018,40181.0,,7
+Kerala,Accidents,25000,2018,40181.0,,7
+Kerala,Accidents,50000,NOT_REACHED,,,7
+Kerala,Fatalities,1000,2018,4303.0,,7
+Kerala,Fatalities,5000,NOT_REACHED,,,7
+Kerala,Fatalities,10000,NOT_REACHED,,,7
+Ladakh,Accidents,10000,NOT_REACHED,,,7
+Ladakh,Accidents,25000,NOT_REACHED,,,7
+Ladakh,Accidents,50000,NOT_REACHED,,,7
+Ladakh,Fatalities,1000,NOT_REACHED,,,7
+Ladakh,Fatalities,5000,NOT_REACHED,,,7
+Ladakh,Fatalities,10000,NOT_REACHED,,,7
+Lakshadweep,Accidents,10000,NOT_REACHED,,,7
+Lakshadweep,Accidents,25000,NOT_REACHED,,,7
+Lakshadweep,Accidents,50000,NOT_REACHED,,,7
+Lakshadweep,Fatalities,1000,NOT_REACHED,,,7
+Lakshadweep,Fatalities,5000,NOT_REACHED,,,7
+Lakshadweep,Fatalities,10000,NOT_REACHED,,,7
+Madhya Pradesh,Accidents,10000,2018,51397.0,,7
+Madhya Pradesh,Accidents,25000,2018,51397.0,,7
+Madhya Pradesh,Accidents,50000,2018,51397.0,,7
+Madhya Pradesh,Fatalities,1000,2018,10706.0,,7
+Madhya Pradesh,Fatalities,5000,2018,10706.0,,7
+Madhya Pradesh,Fatalities,10000,2018,10706.0,,7
+Maharashtra,Accidents,10000,2018,35717.0,,7
+Maharashtra,Accidents,25000,2018,35717.0,,7
+Maharashtra,Accidents,50000,NOT_REACHED,,,7
+Maharashtra,Fatalities,1000,2018,13261.0,,7
+Maharashtra,Fatalities,5000,2018,13261.0,,7
+Maharashtra,Fatalities,10000,2018,13261.0,,7
+Manipur,Accidents,10000,NOT_REACHED,,,7
+Manipur,Accidents,25000,NOT_REACHED,,,7
+Manipur,Accidents,50000,NOT_REACHED,,,7
+Manipur,Fatalities,1000,NOT_REACHED,,,7
+Manipur,Fatalities,5000,NOT_REACHED,,,7
+Manipur,Fatalities,10000,NOT_REACHED,,,7
+Meghalaya,Accidents,10000,NOT_REACHED,,,7
+Meghalaya,Accidents,25000,NOT_REACHED,,,7
+Meghalaya,Accidents,50000,NOT_REACHED,,,7
+Meghalaya,Fatalities,1000,NOT_REACHED,,,7
+Meghalaya,Fatalities,5000,NOT_REACHED,,,7
+Meghalaya,Fatalities,10000,NOT_REACHED,,,7
+Mizoram,Accidents,10000,NOT_REACHED,,,7
+Mizoram,Accidents,25000,NOT_REACHED,,,7
+Mizoram,Accidents,50000,NOT_REACHED,,,7
+Mizoram,Fatalities,1000,NOT_REACHED,,,7
+Mizoram,Fatalities,5000,NOT_REACHED,,,7
+Mizoram,Fatalities,10000,NOT_REACHED,,,7
+Nagaland,Accidents,10000,NOT_REACHED,,,7
+Nagaland,Accidents,25000,NOT_REACHED,,,7
+Nagaland,Accidents,50000,NOT_REACHED,,,7
+Nagaland,Fatalities,1000,NOT_REACHED,,,7
+Nagaland,Fatalities,5000,NOT_REACHED,,,7
+Nagaland,Fatalities,10000,NOT_REACHED,,,7
+Odisha,Accidents,10000,2018,11262.0,,7
+Odisha,Accidents,25000,NOT_REACHED,,,7
+Odisha,Accidents,50000,NOT_REACHED,,,7
+Odisha,Fatalities,1000,2018,5315.0,,7
+Odisha,Fatalities,5000,2018,5315.0,,7
+Odisha,Fatalities,10000,NOT_REACHED,,,7
+Puducherry,Accidents,10000,NOT_REACHED,,,7
+Puducherry,Accidents,25000,NOT_REACHED,,,7
+Puducherry,Accidents,50000,NOT_REACHED,,,7
+Puducherry,Fatalities,1000,NOT_REACHED,,,7
+Puducherry,Fatalities,5000,NOT_REACHED,,,7
+Puducherry,Fatalities,10000,NOT_REACHED,,,7
+Punjab,Accidents,10000,NOT_REACHED,,,7
+Punjab,Accidents,25000,NOT_REACHED,,,7
+Punjab,Accidents,50000,NOT_REACHED,,,7
+Punjab,Fatalities,1000,2018,4740.0,,7
+Punjab,Fatalities,5000,NOT_REACHED,,,7
+Punjab,Fatalities,10000,NOT_REACHED,,,7
+Rajasthan,Accidents,10000,2018,21743.0,,7
+Rajasthan,Accidents,25000,NOT_REACHED,,,7
+Rajasthan,Accidents,50000,NOT_REACHED,,,7
+Rajasthan,Fatalities,1000,2018,10320.0,,7
+Rajasthan,Fatalities,5000,2018,10320.0,,7
+Rajasthan,Fatalities,10000,2018,10320.0,,7
+Sikkim,Accidents,10000,NOT_REACHED,,,7
+Sikkim,Accidents,25000,NOT_REACHED,,,7
+Sikkim,Accidents,50000,NOT_REACHED,,,7
+Sikkim,Fatalities,1000,NOT_REACHED,,,7
+Sikkim,Fatalities,5000,NOT_REACHED,,,7
+Sikkim,Fatalities,10000,NOT_REACHED,,,7
+Tamil Nadu,Accidents,10000,2018,67279.0,,7
+Tamil Nadu,Accidents,25000,2018,67279.0,,7
+Tamil Nadu,Accidents,50000,2018,67279.0,,7
+Tamil Nadu,Fatalities,1000,2018,18392.0,,7
+Tamil Nadu,Fatalities,5000,2018,18392.0,,7
+Tamil Nadu,Fatalities,10000,2018,18392.0,,7
+Telangana,Accidents,10000,2018,22230.0,,7
+Telangana,Accidents,25000,2024,25986.0,22903.0,7
+Telangana,Accidents,50000,NOT_REACHED,,,7
+Telangana,Fatalities,1000,2018,6603.0,,7
+Telangana,Fatalities,5000,2018,6603.0,,7
+Telangana,Fatalities,10000,NOT_REACHED,,,7
+Tripura,Accidents,10000,NOT_REACHED,,,7
+Tripura,Accidents,25000,NOT_REACHED,,,7
+Tripura,Accidents,50000,NOT_REACHED,,,7
+Tripura,Fatalities,1000,NOT_REACHED,,,7
+Tripura,Fatalities,5000,NOT_REACHED,,,7
+Tripura,Fatalities,10000,NOT_REACHED,,,7
+Uttar Pradesh,Accidents,10000,2018,42568.0,,7
+Uttar Pradesh,Accidents,25000,2018,42568.0,,7
+Uttar Pradesh,Accidents,50000,NOT_REACHED,,,7
+Uttar Pradesh,Fatalities,1000,2018,22256.0,,7
+Uttar Pradesh,Fatalities,5000,2018,22256.0,,7
+Uttar Pradesh,Fatalities,10000,2018,22256.0,,7
+Uttarakhand,Accidents,10000,NOT_REACHED,,,7
+Uttarakhand,Accidents,25000,NOT_REACHED,,,7
+Uttarakhand,Accidents,50000,NOT_REACHED,,,7
+Uttarakhand,Fatalities,1000,2018,1047.0,,7
+Uttarakhand,Fatalities,5000,NOT_REACHED,,,7
+Uttarakhand,Fatalities,10000,NOT_REACHED,,,7
+West Bengal,Accidents,10000,2018,12705.0,,7
+West Bengal,Accidents,25000,NOT_REACHED,,,7
+West Bengal,Accidents,50000,NOT_REACHED,,,7
+West Bengal,Fatalities,1000,2018,5711.0,,7
+West Bengal,Fatalities,5000,2018,5711.0,,7
+West Bengal,Fatalities,10000,NOT_REACHED,,,7

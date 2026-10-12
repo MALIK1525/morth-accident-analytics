@@ -1,0 +1,19 @@
+Source,Year,Category,Killed,Share_of_total,Note
+VH-01,2023,Pedestrian,35221,20.37,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Pedestrian,36526,20.62,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Bicycles,4560,2.64,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Bicycles,4161,2.35,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Two-wheelers,77539,44.85,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Two-wheelers,81780,46.16,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Auto-Rickshaws,6308,3.65,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Auto-Rickshaws,5659,3.19,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,"Cars, Taxis, Vans & LMVs",21496,12.43,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,"Cars, Taxis, Vans & LMVs",21988,12.41,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Trucks/Lorries,10066,5.82,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Trucks/Lorries,9687,5.47,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Buses,3956,2.29,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Buses,3855,2.18,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,Other Non- Motor Vehicles (including e-rickshaw),2006,1.16,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,Other Non- Motor Vehicles (including e-rickshaw),1629,0.92,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2023,"Others (other motor vehicles, animals drawn vehicle, cycle rickshaws, hand carts, & other persons)",11738,6.79,counts only; no exposure denominator; largest count is NOT most dangerous
+VH-01,2024,"Others (other motor vehicles, animals drawn vehicle, cycle rickshaws, hand carts, & other persons)",11890,6.71,counts only; no exposure denominator; largest count is NOT most dangerous

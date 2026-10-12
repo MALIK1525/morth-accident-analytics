@@ -1,0 +1,77 @@
+State_UT,Metric,N,Slope,R2,P,CI_lo,CI_hi,Class,Note
+Andaman & Nicobar Islands,Accidents,7,-18.9643,0.5862,0.04482,-37.2829,-0.6457,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Andaman & Nicobar Islands,Fatalities,7,1.5357,0.5024,0.074554,-0.2211,3.2926,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Andhra Pradesh,Accidents,7,-610.7143,0.5613,0.052563,-1231.3503,9.9217,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Andhra Pradesh,Fatalities,7,140.3571,0.4087,0.122142,-53.7348,334.4491,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Arunachal Pradesh,Accidents,7,6.8929,0.0741,0.554863,-21.1217,34.9074,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Arunachal Pradesh,Fatalities,7,3.2143,0.0412,0.662454,-14.6106,21.0391,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Assam,Accidents,7,-93.9286,0.1012,0.486887,-415.7569,227.8998,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Assam,Fatalities,7,60.5714,0.2843,0.217763,-49.9009,171.0438,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Bihar,Accidents,7,364.5,0.5943,0.042472,18.2569,710.7431,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Bihar,Fatalities,7,478.1786,0.8665,0.002327,262.3726,693.9846,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Chandigarh,Accidents,7,-21.75,0.5416,0.059327,-44.7513,1.2513,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Chandigarh,Fatalities,7,-4.0357,0.2223,0.285493,-12.7133,4.6419,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Chhattisgarh,Accidents,7,133.5714,0.0748,0.552772,-406.3351,673.4779,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Chhattisgarh,Fatalities,7,379.0357,0.8879,0.001489,224.2297,533.8418,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Dadra & Nagar Haveli,Accidents,2,,,,,,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Dadra & Nagar Haveli,Fatalities,2,,,,,,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Dadra & Nagar Haveli and Daman & Diu,Accidents,5,14.6,0.3763,0.271127,-19.9331,49.1331,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Dadra & Nagar Haveli and Daman & Diu,Fatalities,5,6.0,0.5689,0.140724,-3.5967,15.5967,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Daman & Diu,Accidents,2,,,,,,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Daman & Diu,Fatalities,2,,,,,,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Delhi,Accidents,7,-23.2857,0.0043,0.889089,-431.2719,384.7005,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Delhi,Fatalities,7,-5.8571,0.0055,0.874904,-96.736,85.0217,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Goa,Accidents,7,-129.75,0.3821,0.138992,-319.4189,59.9189,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Goa,Fatalities,7,3.7857,0.074,0.554979,-11.6052,19.1766,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Gujarat,Accidents,7,-306.5714,0.159,0.375508,-1116.999,503.8562,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Gujarat,Fatalities,7,54.9643,0.0384,0.673656,-261.2086,371.1371,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Haryana,Accidents,7,-152.1429,0.2625,0.239685,-445.2814,140.9957,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Haryana,Fatalities,7,-37.75,0.1343,0.418787,-147.9326,72.4326,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Himachal Pradesh,Accidents,7,-133.7143,0.6461,0.02937,-247.4783,-19.9503,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Himachal Pradesh,Fatalities,7,-49.7143,0.6401,0.030721,-92.5663,-6.8623,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Jammu & Kashmir,Accidents,7,61.6429,0.0785,0.542819,-181.1644,304.4501,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Jammu & Kashmir,Fatalities,7,-21.0,0.194,0.32257,-70.2009,28.2009,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Jharkhand,Accidents,7,13.2857,0.0064,0.864618,-177.0122,203.5836,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Jharkhand,Fatalities,7,118.3571,0.4218,0.114408,-40.947,277.6613,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Karnataka,Accidents,7,543.3214,0.0958,0.499243,-1375.0633,2461.7062,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Karnataka,Fatalities,7,316.7143,0.4359,0.106507,-97.4568,730.8854,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Kerala,Accidents,7,1998.2857,0.3191,0.18641,-1357.607,5354.1784,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Kerala,Fatalities,7,-23.25,0.0088,0.841831,-307.6205,261.1205,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Ladakh,Accidents,4,-0.1,0.0,0.997833,-140.4925,140.2925,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Ladakh,Fatalities,4,1.2,0.3429,0.41446,-3.8545,6.2545,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Lakshadweep,Accidents,7,-0.25,0.1361,0.41542,-0.9741,0.4741,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Lakshadweep,Fatalities,7,-0.0357,0.0096,0.834331,-0.4524,0.381,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Madhya Pradesh,Accidents,7,1224.9286,0.4388,0.104969,-367.709,2817.5661,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Madhya Pradesh,Fatalities,7,701.3929,0.9432,0.000266,503.5755,899.2102,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Maharashtra,Accidents,7,508.9643,0.0742,0.554485,-1557.5588,2575.4873,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Maharashtra,Fatalities,7,577.6071,0.6483,0.028891,88.5076,1066.7067,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Manipur,Accidents,7,-49.2143,0.6394,0.03089,-91.7032,-6.7254,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Manipur,Fatalities,7,-12.5714,0.7421,0.012716,-21.0908,-4.0521,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Meghalaya,Accidents,7,-31.2857,0.4344,0.107311,-72.3211,9.7497,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Meghalaya,Fatalities,7,1.4643,0.0322,0.700434,-7.7705,10.699,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Mizoram,Accidents,7,12.9643,0.7059,0.017962,3.344,22.5845,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Mizoram,Fatalities,7,12.9286,0.7602,0.010523,4.5799,21.2772,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Nagaland,Accidents,7,-36.5714,0.1704,0.357301,-129.3237,56.1809,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Nagaland,Fatalities,7,7.4643,0.6437,0.029902,1.0806,13.848,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Odisha,Accidents,7,251.4643,0.4295,0.110068,-81.7331,584.6617,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Odisha,Fatalities,7,143.6429,0.4729,0.087726,-30.6929,317.9786,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Puducherry,Accidents,7,-16.2143,0.0248,0.735747,-133.004,100.5754,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Puducherry,Fatalities,7,0.5714,0.0011,0.942711,-18.8728,20.0157,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Punjab,Accidents,7,-11.3571,0.0035,0.899983,-232.1956,209.4813,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Punjab,Fatalities,7,54.3929,0.1339,0.419526,-104.6367,213.4224,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Rajasthan,Accidents,7,579.0357,0.3504,0.161478,-327.3631,1485.4345,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Rajasthan,Fatalities,7,309.3571,0.5177,0.068326,-33.8878,652.6021,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Sikkim,Accidents,7,0.7143,0.0039,0.894071,-12.3942,13.8228,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Sikkim,Fatalities,7,-1.4643,0.0376,0.676982,-9.9811,7.0526,Negative slope,descriptive classification; slope sign is not causation; no ranking
+Tamil Nadu,Accidents,7,859.2143,0.0743,0.554207,-2626.8714,4345.3,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Tamil Nadu,Fatalities,7,141.5714,0.0351,0.687586,-712.0051,995.148,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Telangana,Accidents,7,585.0357,0.3764,0.142877,-280.7041,1450.7756,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Telangana,Fatalities,7,218.1071,0.9145,0.00075,141.4201,294.7942,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Tripura,Accidents,7,1.1071,0.0014,0.937289,-33.3009,35.5152,Near-zero slope,descriptive classification; slope sign is not causation; no ranking
+Tripura,Fatalities,7,4.7143,0.1583,0.376748,-7.7833,17.2118,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Uttar Pradesh,Accidents,7,781.3929,0.1727,0.353833,-1184.7875,2747.5732,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Uttar Pradesh,Fatalities,7,393.7857,0.2648,0.237366,-360.6073,1148.1788,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Uttarakhand,Accidents,7,76.7143,0.4474,0.100366,-21.289,174.7175,Positive slope,descriptive classification; slope sign is not causation; no ranking
+Uttarakhand,Fatalities,7,31.1071,0.1833,0.3379,-44.3746,106.5889,Positive slope,descriptive classification; slope sign is not causation; no ranking
+West Bengal,Accidents,7,288.8571,0.3288,0.178342,-185.5855,763.2998,Positive slope,descriptive classification; slope sign is not causation; no ranking
+West Bengal,Fatalities,7,153.1786,0.5121,0.070587,-18.7153,325.0725,Positive slope,descriptive classification; slope sign is not causation; no ranking

@@ -1,0 +1,6 @@
+Graph,Dataset,X,Y,Type,Priority
+Actual vs predicted,PREDICTIONS,Actual,Predicted,Scatter,1
+Residual distribution,PREDICTIONS,Residual,Count,Histogram,1
+RMSE comparison,MODEL_RESULTS,Model,Test_RMSE,Bar,1
+Feature importance,IMPORTANCE,Feature,Importance,Bar,2
+Error by year,ERROR,Year,MAE,Bar,2

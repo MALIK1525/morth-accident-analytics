@@ -1,0 +1,6 @@
+Method,Assumption,Check,Result,Action
+Pearson pooled weather,Linearity; interval scale,scatter inspected via Phase 8; Spearman reported alongside,OK,none
+OLS state trends N=7,Linearity; independent years,N=7 limits power; CI wide,CONDITIONAL,wide CI reported
+Friedman zones,Ranked blocks; repeated years,years as blocks,OK,none
+Chi-square monthly,Expected freq >=5; independence,expected ~39k; months assumed independent,OK,single year only
+Spearman,Monotonicity,rank-based; robust,OK,none

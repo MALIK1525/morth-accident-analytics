@@ -1,0 +1,13 @@
+Source,Year,Category,Accidents,Killed,Fatality_Ratio,Definition,Notes
+CS-01,2023,Over-speeding,328727,117682,0.358,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Over-speeding,345024,124522,0.3609,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2023,Drunken driving/consumption of alcohol & drug,9143,3674,0.4018,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Drunken driving/consumption of alcohol & drug,8270,3204,0.3874,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2023,Driving on wrong side/Lane indiscipline,25242,9432,0.3737,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Driving on wrong side/Lane indiscipline,22530,8327,0.3696,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2023,Jumping red light,2440,818,0.3352,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Jumping red light,1559,528,0.3387,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2023,Use of mobile phone,7122,2884,0.4049,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Use of mobile phone,4935,2002,0.4057,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2023,Others,107909,38400,0.3559,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"
+CS-01,2024,Others,105389,38592,0.3662,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism"

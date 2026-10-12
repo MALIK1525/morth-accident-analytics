@@ -1,0 +1,272 @@
+[
+ [
+  "Delhi-N",
+  "7",
+  "91",
+  "53",
+  "200",
+  "image/png",
+  "(256, 256) opaque=6989/65536"
+ ],
+ [
+  "Delhi-N",
+  "11",
+  "1463",
+  "854",
+  "200",
+  "image/png",
+  "(256, 256) opaque=4228/65536"
+ ],
+ [
+  "Delhi-N",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 28, 36)"
+ ],
+ [
+  "Chandigarh-N",
+  "7",
+  "91",
+  "52",
+  "200",
+  "image/png",
+  "(256, 256) opaque=4823/65536"
+ ],
+ [
+  "Chandigarh-N",
+  "11",
+  "1460",
+  "840",
+  "200",
+  "image/png",
+  "(256, 256) opaque=619/65536"
+ ],
+ [
+  "Chandigarh-N",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 32, 40)"
+ ],
+ [
+  "Chennai-S",
+  "7",
+  "92",
+  "59",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2821/65536"
+ ],
+ [
+  "Chennai-S",
+  "11",
+  "1480",
+  "948",
+  "200",
+  "image/png",
+  "(256, 256) opaque=1744/65536"
+ ],
+ [
+  "Chennai-S",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 20, 27)"
+ ],
+ [
+  "Bengaluru-S",
+  "7",
+  "91",
+  "59",
+  "200",
+  "image/png",
+  "(256, 256) opaque=3728/65536"
+ ],
+ [
+  "Bengaluru-S",
+  "11",
+  "1465",
+  "949",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2859/65536"
+ ],
+ [
+  "Bengaluru-S",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 22, 28)"
+ ],
+ [
+  "Kolkata-E",
+  "7",
+  "95",
+  "55",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2491/65536"
+ ],
+ [
+  "Kolkata-E",
+  "11",
+  "1526",
+  "892",
+  "200",
+  "image/png",
+  "(256, 256) opaque=1808/65536"
+ ],
+ [
+  "Kolkata-E",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 11, 23)"
+ ],
+ [
+  "Bhubaneswar-E",
+  "7",
+  "94",
+  "56",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2248/65536"
+ ],
+ [
+  "Bhubaneswar-E",
+  "11",
+  "1512",
+  "906",
+  "200",
+  "image/png",
+  "(256, 256) opaque=883/65536"
+ ],
+ [
+  "Bhubaneswar-E",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 22, 31)"
+ ],
+ [
+  "Mumbai-W",
+  "7",
+  "89",
+  "57",
+  "200",
+  "image/png",
+  "(256, 256) opaque=511/65536"
+ ],
+ [
+  "Mumbai-W",
+  "11",
+  "1438",
+  "913",
+  "200",
+  "image/png",
+  "(256, 256) opaque=4769/65536"
+ ],
+ [
+  "Mumbai-W",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 13, 17)"
+ ],
+ [
+  "Ahmedabad-W",
+  "7",
+  "89",
+  "55",
+  "200",
+  "image/png",
+  "(256, 256) opaque=3000/65536"
+ ],
+ [
+  "Ahmedabad-W",
+  "11",
+  "1436",
+  "889",
+  "200",
+  "image/png",
+  "(256, 256) opaque=6000/65536"
+ ],
+ [
+  "Ahmedabad-W",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 48, 48)"
+ ],
+ [
+  "Bhopal-C",
+  "7",
+  "91",
+  "55",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2754/65536"
+ ],
+ [
+  "Bhopal-C",
+  "11",
+  "1464",
+  "887",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2366/65536"
+ ],
+ [
+  "Bhopal-C",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 14, 21)"
+ ],
+ [
+  "Nagpur-C",
+  "7",
+  "92",
+  "56",
+  "200",
+  "image/png",
+  "(256, 256) opaque=2478/65536"
+ ],
+ [
+  "Nagpur-C",
+  "11",
+  "1473",
+  "900",
+  "200",
+  "image/png",
+  "(256, 256) opaque=4317/65536"
+ ],
+ [
+  "Nagpur-C",
+  "seg",
+  "-",
+  "-",
+  "200",
+  "application/json",
+  "('success', 18, 29)"
+ ]
+]

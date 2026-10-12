@@ -1,0 +1,397 @@
+State_UT_Harmonized,Year,Accidents,Fatalities,Injured,Source_Vintage,Harmonization_Flag,Note
+Andhra Pradesh,2014,24440,7908,29931,AR2017 vintage,DIRECT,Stable entity
+Arunachal Pradesh,2014,205,119,308,AR2017 vintage,DIRECT,Stable entity
+Assam,2014,7144,2522,6499,AR2017 vintage,DIRECT,Stable entity
+Bihar,2014,9556,4913,6640,AR2017 vintage,DIRECT,Stable entity
+Chhattisgarh,2014,13821,4022,13157,AR2017 vintage,DIRECT,Stable entity
+Goa,2014,4229,290,1879,AR2017 vintage,DIRECT,Stable entity
+Gujarat,2014,23712,7955,22493,AR2017 vintage,DIRECT,Stable entity
+Haryana,2014,10676,4483,8944,AR2017 vintage,DIRECT,Stable entity
+Himachal Pradesh,2014,3058,1199,5576,AR2017 vintage,DIRECT,Stable entity
+"Jammu & Kashmir (pre-reorg, incl. Ladakh region)",2014,5861,992,8043,AR2017 vintage,JK_UNDIVIDED,Direct pre-2019 administrative definition
+Jharkhand,2014,5201,2628,4356,AR2017 vintage,DIRECT,Stable entity
+Karnataka,2014,43713,10452,56831,AR2017 vintage,DIRECT,Stable entity
+Kerala,2014,36282,4049,41096,AR2017 vintage,DIRECT,Stable entity
+Madhya Pradesh,2014,53472,8569,55335,AR2017 vintage,DIRECT,Stable entity
+Maharashtra,2014,61627,12803,40455,AR2017 vintage,DIRECT,Stable entity
+Manipur,2014,743,168,1295,AR2017 vintage,DIRECT,Stable entity
+Meghalaya,2014,542,141,311,AR2017 vintage,DIRECT,Stable entity
+Mizoram,2014,132,103,234,AR2017 vintage,DIRECT,Stable entity
+Nagaland,2014,305,81,230,AR2017 vintage,DIRECT,Stable entity
+Odisha,2014,9648,3931,11087,AR2017 vintage,DIRECT,Stable entity
+Punjab,2014,6391,4621,4127,AR2017 vintage,DIRECT,Stable entity
+Rajasthan,2014,24628,10289,27453,AR2017 vintage,DIRECT,Stable entity
+Sikkim,2014,203,59,352,AR2017 vintage,DIRECT,Stable entity
+Tamil Nadu,2014,67250,15190,77725,AR2017 vintage,DIRECT,Stable entity
+Telangana,2014,20078,6906,21636,AR2017 vintage,DIRECT,Stable entity
+Tripura,2014,716,188,1225,AR2017 vintage,DIRECT,Stable entity
+Uttarakhand,2014,1410,878,1531,AR2017 vintage,DIRECT,Stable entity
+Uttar Pradesh,2014,31034,16287,22337,AR2017 vintage,DIRECT,Stable entity
+West Bengal,2014,12875,5875,12018,AR2017 vintage,DIRECT,Stable entity
+Andaman & Nicobar Islands,2014,218,23,283,AR2017 vintage,DIRECT,Stable entity
+Chandigarh,2014,369,131,335,AR2017 vintage,DIRECT,Stable entity
+Delhi,2014,8623,1671,8283,AR2017 vintage,DIRECT,Stable entity
+Lakshadweep,2014,1,0,1,AR2017 vintage,DIRECT,Stable entity
+Puducherry,2014,1111,151,1323,AR2017 vintage,DIRECT,Stable entity
+Andhra Pradesh,2015,24258,8297,29439,AR2017 vintage,DIRECT,Stable entity
+Arunachal Pradesh,2015,284,127,359,AR2017 vintage,DIRECT,Stable entity
+Assam,2015,6959,2397,7068,AR2017 vintage,DIRECT,Stable entity
+Bihar,2015,9555,5421,6835,AR2017 vintage,DIRECT,Stable entity
+Chhattisgarh,2015,14446,4082,13426,AR2017 vintage,DIRECT,Stable entity
+Goa,2015,4338,311,2055,AR2017 vintage,DIRECT,Stable entity
+Gujarat,2015,23183,8119,21448,AR2017 vintage,DIRECT,Stable entity
+Haryana,2015,11174,4879,10794,AR2017 vintage,DIRECT,Stable entity
+Himachal Pradesh,2015,3010,1096,5108,AR2017 vintage,DIRECT,Stable entity
+"Jammu & Kashmir (pre-reorg, incl. Ladakh region)",2015,5836,917,8142,AR2017 vintage,JK_UNDIVIDED,Direct pre-2019 administrative definition
+Jharkhand,2015,5162,2893,4038,AR2017 vintage,DIRECT,Stable entity
+Karnataka,2015,44011,10856,56971,AR2017 vintage,DIRECT,Stable entity
+Kerala,2015,39014,4196,43735,AR2017 vintage,DIRECT,Stable entity
+Madhya Pradesh,2015,54947,9314,55815,AR2017 vintage,DIRECT,Stable entity
+Maharashtra,2015,63805,13212,39606,AR2017 vintage,DIRECT,Stable entity
+Manipur,2015,671,139,1201,AR2017 vintage,DIRECT,Stable entity
+Meghalaya,2015,606,183,319,AR2017 vintage,DIRECT,Stable entity
+Mizoram,2015,70,72,103,AR2017 vintage,DIRECT,Stable entity
+Nagaland,2015,54,30,74,AR2017 vintage,DIRECT,Stable entity
+Odisha,2015,10542,4303,11825,AR2017 vintage,DIRECT,Stable entity
+Punjab,2015,6702,4893,4414,AR2017 vintage,DIRECT,Stable entity
+Rajasthan,2015,24072,10510,26153,AR2017 vintage,DIRECT,Stable entity
+Sikkim,2015,219,70,337,AR2017 vintage,DIRECT,Stable entity
+Tamil Nadu,2015,69059,15642,79746,AR2017 vintage,DIRECT,Stable entity
+Telangana,2015,21252,7110,22948,AR2017 vintage,DIRECT,Stable entity
+Tripura,2015,647,158,1028,AR2017 vintage,DIRECT,Stable entity
+Uttarakhand,2015,1523,913,1657,AR2017 vintage,DIRECT,Stable entity
+Uttar Pradesh,2015,32385,17666,23205,AR2017 vintage,DIRECT,Stable entity
+West Bengal,2015,13208,6234,11794,AR2017 vintage,DIRECT,Stable entity
+Andaman & Nicobar Islands,2015,258,23,331,AR2017 vintage,DIRECT,Stable entity
+Chandigarh,2015,416,129,331,AR2017 vintage,DIRECT,Stable entity
+Delhi,2015,8085,1622,8258,AR2017 vintage,DIRECT,Stable entity
+Lakshadweep,2015,3,0,3,AR2017 vintage,DIRECT,Stable entity
+Puducherry,2015,1530,235,1552,AR2017 vintage,DIRECT,Stable entity
+Andhra Pradesh,2016,24888,8541,30051,AR2017 vintage,DIRECT,Stable entity
+Arunachal Pradesh,2016,249,149,391,AR2017 vintage,DIRECT,Stable entity
+Assam,2016,7435,2572,6127,AR2017 vintage,DIRECT,Stable entity
+Bihar,2016,8222,4901,5651,AR2017 vintage,DIRECT,Stable entity
+Chhattisgarh,2016,13580,3908,12955,AR2017 vintage,DIRECT,Stable entity
+Goa,2016,4304,336,2026,AR2017 vintage,DIRECT,Stable entity
+Gujarat,2016,21859,8136,19949,AR2017 vintage,DIRECT,Stable entity
+Haryana,2016,11234,5024,10531,AR2017 vintage,DIRECT,Stable entity
+Himachal Pradesh,2016,3168,1271,5764,AR2017 vintage,DIRECT,Stable entity
+"Jammu & Kashmir (pre-reorg, incl. Ladakh region)",2016,5501,958,7692,AR2017 vintage,JK_UNDIVIDED,Direct pre-2019 administrative definition
+Jharkhand,2016,4932,3027,3793,AR2017 vintage,DIRECT,Stable entity
+Karnataka,2016,44403,11133,54556,AR2017 vintage,DIRECT,Stable entity
+Kerala,2016,39420,4287,44108,AR2017 vintage,DIRECT,Stable entity
+Madhya Pradesh,2016,53972,9646,57873,AR2017 vintage,DIRECT,Stable entity
+Maharashtra,2016,39878,12935,35884,AR2017 vintage,DIRECT,Stable entity
+Manipur,2016,538,81,955,AR2017 vintage,DIRECT,Stable entity
+Meghalaya,2016,620,150,354,AR2017 vintage,DIRECT,Stable entity
+Mizoram,2016,83,70,68,AR2017 vintage,DIRECT,Stable entity
+Nagaland,2016,75,46,120,AR2017 vintage,DIRECT,Stable entity
+Odisha,2016,10532,4463,11312,AR2017 vintage,DIRECT,Stable entity
+Punjab,2016,6952,5077,4351,AR2017 vintage,DIRECT,Stable entity
+Rajasthan,2016,23066,10465,24103,AR2017 vintage,DIRECT,Stable entity
+Sikkim,2016,210,85,263,AR2017 vintage,DIRECT,Stable entity
+Tamil Nadu,2016,71431,17218,82163,AR2017 vintage,DIRECT,Stable entity
+Telangana,2016,22811,7219,24217,AR2017 vintage,DIRECT,Stable entity
+Tripura,2016,557,173,853,AR2017 vintage,DIRECT,Stable entity
+Uttarakhand,2016,1591,962,1735,AR2017 vintage,DIRECT,Stable entity
+Uttar Pradesh,2016,35612,19320,25096,AR2017 vintage,DIRECT,Stable entity
+West Bengal,2016,13580,6544,11859,AR2017 vintage,DIRECT,Stable entity
+Andaman & Nicobar Islands,2016,238,17,323,AR2017 vintage,DIRECT,Stable entity
+Chandigarh,2016,428,151,329,AR2017 vintage,DIRECT,Stable entity
+Delhi,2016,7375,1591,7154,AR2017 vintage,DIRECT,Stable entity
+Lakshadweep,2016,1,1,0,AR2017 vintage,DIRECT,Stable entity
+Puducherry,2016,1766,244,1786,AR2017 vintage,DIRECT,Stable entity
+Andhra Pradesh,2017,25727,8060,27475,AR2017 vintage,DIRECT,Stable entity
+Arunachal Pradesh,2017,241,110,316,AR2017 vintage,DIRECT,Stable entity
+Assam,2017,7170,2783,6163,AR2017 vintage,DIRECT,Stable entity
+Bihar,2017,8855,5554,6014,AR2017 vintage,DIRECT,Stable entity
+Chhattisgarh,2017,13563,4136,12550,AR2017 vintage,DIRECT,Stable entity
+Goa,2017,3917,328,1922,AR2017 vintage,DIRECT,Stable entity
+Gujarat,2017,19081,7289,16802,AR2017 vintage,DIRECT,Stable entity
+Haryana,2017,11258,5120,10339,AR2017 vintage,DIRECT,Stable entity
+Himachal Pradesh,2017,3114,1203,5452,AR2017 vintage,DIRECT,Stable entity
+"Jammu & Kashmir (pre-reorg, incl. Ladakh region)",2017,5624,926,7419,AR2017 vintage,JK_UNDIVIDED,Direct pre-2019 administrative definition
+Jharkhand,2017,5198,3256,3918,AR2017 vintage,DIRECT,Stable entity
+Karnataka,2017,42542,10609,52961,AR2017 vintage,DIRECT,Stable entity
+Kerala,2017,38470,4131,42671,AR2017 vintage,DIRECT,Stable entity
+Madhya Pradesh,2017,53399,10177,57532,AR2017 vintage,DIRECT,Stable entity
+Maharashtra,2017,35853,12264,32128,AR2017 vintage,DIRECT,Stable entity
+Manipur,2017,578,136,1027,AR2017 vintage,DIRECT,Stable entity
+Meghalaya,2017,675,182,354,AR2017 vintage,DIRECT,Stable entity
+Mizoram,2017,68,60,55,AR2017 vintage,DIRECT,Stable entity
+Nagaland,2017,531,41,375,AR2017 vintage,DIRECT,Stable entity
+Odisha,2017,10855,4790,11198,AR2017 vintage,DIRECT,Stable entity
+Punjab,2017,6273,4463,4218,AR2017 vintage,DIRECT,Stable entity
+Rajasthan,2017,22112,10444,22071,AR2017 vintage,DIRECT,Stable entity
+Sikkim,2017,196,78,479,AR2017 vintage,DIRECT,Stable entity
+Tamil Nadu,2017,65562,16157,74571,AR2017 vintage,DIRECT,Stable entity
+Telangana,2017,22484,6596,23990,AR2017 vintage,DIRECT,Stable entity
+Tripura,2017,503,161,718,AR2017 vintage,DIRECT,Stable entity
+Uttarakhand,2017,1603,942,1631,AR2017 vintage,DIRECT,Stable entity
+Uttar Pradesh,2017,38783,20124,27494,AR2017 vintage,DIRECT,Stable entity
+West Bengal,2017,11631,5769,10091,AR2017 vintage,DIRECT,Stable entity
+Andaman & Nicobar Islands,2017,189,21,263,AR2017 vintage,DIRECT,Stable entity
+Chandigarh,2017,342,107,302,AR2017 vintage,DIRECT,Stable entity
+Delhi,2017,6673,1584,6604,AR2017 vintage,DIRECT,Stable entity
+Lakshadweep,2017,1,0,1,AR2017 vintage,DIRECT,Stable entity
+Puducherry,2017,1693,233,1741,AR2017 vintage,DIRECT,Stable entity
+Dadra & Nagar Haveli and Daman & Diu,2014,126,74,145,AR2017 vintage,SUM_HISTORICAL,"Arithmetic sum of separate UTs (MEDIUM, mirrors Phase 2C)"
+Dadra & Nagar Haveli and Daman & Diu,2015,139,84,161,AR2017 vintage,SUM_HISTORICAL,"Arithmetic sum of separate UTs (MEDIUM, mirrors Phase 2C)"
+Dadra & Nagar Haveli and Daman & Diu,2016,141,84,232,AR2017 vintage,SUM_HISTORICAL,"Arithmetic sum of separate UTs (MEDIUM, mirrors Phase 2C)"
+Dadra & Nagar Haveli and Daman & Diu,2017,146,79,130,AR2017 vintage,SUM_HISTORICAL,"Arithmetic sum of separate UTs (MEDIUM, mirrors Phase 2C)"
+Dadra & Nagar Haveli and Daman & Diu,2018,156,89,160,benchmark (revised vintage),SUM_HISTORICAL,Arithmetic sum of legacy split rows (MEDIUM)
+Dadra & Nagar Haveli and Daman & Diu,2019,137,77,179,benchmark (revised vintage),SUM_HISTORICAL,Arithmetic sum of legacy split rows (MEDIUM)
+Andhra Pradesh,2018,24475,7556,23456,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2018,277,175,323,benchmark (revised vintage),DIRECT,
+Assam,2018,8248,2966,7375,benchmark (revised vintage),DIRECT,
+Bihar,2018,9600,6729,6679,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2018,13864,4592,12715,benchmark (revised vintage),DIRECT,
+Goa,2018,3709,262,1549,benchmark (revised vintage),DIRECT,
+Gujarat,2018,18769,7996,17467,benchmark (revised vintage),DIRECT,
+Haryana,2018,11238,5118,10020,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2018,3110,1208,5551,benchmark (revised vintage),DIRECT,
+Jharkhand,2018,5394,3542,3975,benchmark (revised vintage),DIRECT,
+Karnataka,2018,41707,10990,51562,benchmark (revised vintage),DIRECT,
+Kerala,2018,40181,4303,45458,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2018,51397,10706,54662,benchmark (revised vintage),DIRECT,
+Maharashtra,2018,35717,13261,31365,benchmark (revised vintage),DIRECT,
+Manipur,2018,601,134,1042,benchmark (revised vintage),DIRECT,
+Meghalaya,2018,399,182,205,benchmark (revised vintage),DIRECT,
+Mizoram,2018,53,45,80,benchmark (revised vintage),DIRECT,
+Nagaland,2018,430,39,335,benchmark (revised vintage),DIRECT,
+Odisha,2018,11262,5315,11794,benchmark (revised vintage),DIRECT,
+Punjab,2018,6428,4740,3384,benchmark (revised vintage),DIRECT,
+Rajasthan,2018,21743,10320,21547,benchmark (revised vintage),DIRECT,
+Sikkim,2018,180,85,370,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2018,67279,18392,69834,benchmark (revised vintage),DIRECT,
+Telangana,2018,22230,6603,23613,benchmark (revised vintage),DIRECT,
+Tripura,2018,552,213,741,benchmark (revised vintage),DIRECT,
+Uttarakhand,2018,1468,1047,1571,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2018,42568,22256,29664,benchmark (revised vintage),DIRECT,
+West Bengal,2018,12705,5711,11997,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2018,254,19,260,benchmark (revised vintage),DIRECT,
+Chandigarh,2018,316,98,300,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli,2018,80,54,66,benchmark (revised vintage),LEGACY_SPLIT,
+Daman & Diu,2018,76,35,94,benchmark (revised vintage),LEGACY_SPLIT,
+Delhi,2018,6515,1690,6086,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2018,5978,984,7845,benchmark (revised vintage),JK_UNDIVIDED,
+Ladakh,2018,,,,benchmark (revised vintage),NV_SOURCE,Not verified in benchmark (Ladakh 2018-2020)
+Lakshadweep,2018,3,1,3,benchmark (revised vintage),DIRECT,
+Puducherry,2018,1597,226,1727,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2019,21992,7984,24619,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2019,237,127,309,benchmark (revised vintage),DIRECT,
+Assam,2019,8350,3208,7473,benchmark (revised vintage),DIRECT,
+Bihar,2019,10007,7205,7206,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2019,13899,5003,13090,benchmark (revised vintage),DIRECT,
+Goa,2019,3440,297,1448,benchmark (revised vintage),DIRECT,
+Gujarat,2019,17046,7390,16258,benchmark (revised vintage),DIRECT,
+Haryana,2019,10944,5057,9362,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2019,2873,1146,4904,benchmark (revised vintage),DIRECT,
+Jharkhand,2019,5217,3801,3818,benchmark (revised vintage),DIRECT,
+Karnataka,2019,40658,10958,50447,benchmark (revised vintage),DIRECT,
+Kerala,2019,41111,4440,46055,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2019,50669,11249,52816,benchmark (revised vintage),DIRECT,
+Maharashtra,2019,32925,12788,28628,benchmark (revised vintage),DIRECT,
+Manipur,2019,672,156,1055,benchmark (revised vintage),DIRECT,
+Meghalaya,2019,482,179,222,benchmark (revised vintage),DIRECT,
+Mizoram,2019,62,48,56,benchmark (revised vintage),DIRECT,
+Nagaland,2019,358,26,246,benchmark (revised vintage),DIRECT,
+Odisha,2019,11064,5333,11177,benchmark (revised vintage),DIRECT,
+Punjab,2019,6348,4525,3812,benchmark (revised vintage),DIRECT,
+Rajasthan,2019,23480,10563,22979,benchmark (revised vintage),DIRECT,
+Sikkim,2019,162,73,318,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2019,62685,18129,63132,benchmark (revised vintage),DIRECT,
+Telangana,2019,21570,6964,21999,benchmark (revised vintage),DIRECT,
+Tripura,2019,655,239,816,benchmark (revised vintage),DIRECT,
+Uttarakhand,2019,1352,867,1457,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2019,42572,22655,28932,benchmark (revised vintage),DIRECT,
+West Bengal,2019,12658,5767,11761,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2019,230,20,207,benchmark (revised vintage),DIRECT,
+Chandigarh,2019,305,104,275,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli,2019,68,49,105,benchmark (revised vintage),LEGACY_SPLIT,
+Daman & Diu,2019,69,28,74,benchmark (revised vintage),LEGACY_SPLIT,
+Delhi,2019,5610,1463,5152,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2019,5796,996,7532,benchmark (revised vintage),JK_UNDIVIDED,
+Ladakh,2019,,,,benchmark (revised vintage),NV_SOURCE,Not verified in benchmark (Ladakh 2018-2020)
+Lakshadweep,2019,1,0,1,benchmark (revised vintage),DIRECT,
+Puducherry,2019,1392,147,1619,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2020,19509,7039,19675,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2020,134,73,185,benchmark (revised vintage),DIRECT,
+Assam,2020,6595,2629,5269,benchmark (revised vintage),DIRECT,
+Bihar,2020,8639,6699,7016,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2020,11656,4606,10505,benchmark (revised vintage),DIRECT,
+Goa,2020,2375,223,880,benchmark (revised vintage),DIRECT,
+Gujarat,2020,13398,6170,12002,benchmark (revised vintage),DIRECT,
+Haryana,2020,9431,4507,7659,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2020,2239,893,3223,benchmark (revised vintage),DIRECT,
+Jharkhand,2020,4405,3044,3295,benchmark (revised vintage),DIRECT,
+Karnataka,2020,34178,9760,39492,benchmark (revised vintage),DIRECT,
+Kerala,2020,27877,2979,30510,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2020,45266,11141,46456,benchmark (revised vintage),DIRECT,
+Maharashtra,2020,24971,11569,19914,benchmark (revised vintage),DIRECT,
+Manipur,2020,432,127,663,benchmark (revised vintage),DIRECT,
+Meghalaya,2020,214,144,220,benchmark (revised vintage),DIRECT,
+Mizoram,2020,53,42,68,benchmark (revised vintage),DIRECT,
+Nagaland,2020,500,53,286,benchmark (revised vintage),DIRECT,
+Odisha,2020,9817,4738,8822,benchmark (revised vintage),DIRECT,
+Punjab,2020,5203,3898,2904,benchmark (revised vintage),DIRECT,
+Rajasthan,2020,19114,9250,16769,benchmark (revised vintage),DIRECT,
+Sikkim,2020,138,47,218,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2020,49844,14527,47618,benchmark (revised vintage),DIRECT,
+Telangana,2020,19172,6882,18661,benchmark (revised vintage),DIRECT,
+Tripura,2020,466,192,470,benchmark (revised vintage),DIRECT,
+Uttarakhand,2020,1041,674,854,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2020,34243,19149,22410,benchmark (revised vintage),DIRECT,
+West Bengal,2020,10863,5128,9715,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2020,141,14,145,benchmark (revised vintage),DIRECT,
+Chandigarh,2020,159,53,148,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli and Daman & Diu,2020,100,64,119,benchmark (revised vintage),DIRECT_MERGED,
+Delhi,2020,4178,1196,3662,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2020,4860,728,5894,benchmark (revised vintage),JK_UT_BREAK,
+Ladakh,2020,,,,benchmark (revised vintage),NV_SOURCE,Not verified in benchmark (Ladakh 2018-2020)
+Lakshadweep,2020,1,0,1,benchmark (revised vintage),DIRECT,
+Puducherry,2020,969,145,1019,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2021,21556,8186,21040,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2021,283,157,347,benchmark (revised vintage),DIRECT,
+Assam,2021,7411,3036,5763,benchmark (revised vintage),DIRECT,
+Bihar,2021,9553,7660,7946,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2021,12375,5371,10683,benchmark (revised vintage),DIRECT,
+Goa,2021,2849,226,843,benchmark (revised vintage),DIRECT,
+Gujarat,2021,15186,7452,13690,benchmark (revised vintage),DIRECT,
+Haryana,2021,9933,4706,8121,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2021,2404,1052,3454,benchmark (revised vintage),DIRECT,
+Jharkhand,2021,4728,3513,3227,benchmark (revised vintage),DIRECT,
+Karnataka,2021,34647,10038,40754,benchmark (revised vintage),DIRECT,
+Kerala,2021,33296,3429,36775,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2021,48877,12057,48956,benchmark (revised vintage),DIRECT,
+Maharashtra,2021,29477,13528,23071,benchmark (revised vintage),DIRECT,
+Manipur,2021,366,110,504,benchmark (revised vintage),DIRECT,
+Meghalaya,2021,245,187,263,benchmark (revised vintage),DIRECT,
+Mizoram,2021,69,56,65,benchmark (revised vintage),DIRECT,
+Nagaland,2021,746,55,380,benchmark (revised vintage),DIRECT,
+Odisha,2021,10983,5081,9782,benchmark (revised vintage),DIRECT,
+Punjab,2021,5871,4589,3072,benchmark (revised vintage),DIRECT,
+Rajasthan,2021,20951,10043,19344,benchmark (revised vintage),DIRECT,
+Sikkim,2021,155,56,244,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2021,55682,15384,55996,benchmark (revised vintage),DIRECT,
+Telangana,2021,21315,7557,20107,benchmark (revised vintage),DIRECT,
+Tripura,2021,479,194,547,benchmark (revised vintage),DIRECT,
+Uttarakhand,2021,1405,820,1091,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2021,37729,21227,24897,benchmark (revised vintage),DIRECT,
+West Bengal,2021,11937,5800,10454,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2021,115,20,97,benchmark (revised vintage),DIRECT,
+Chandigarh,2021,208,96,172,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli and Daman & Diu,2021,140,76,171,benchmark (revised vintage),DIRECT_MERGED,
+Delhi,2021,4720,1239,4273,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2021,5452,774,6972,benchmark (revised vintage),JK_UT_BREAK,
+Ladakh,2021,236,56,242,benchmark (revised vintage),LADAKH_START_2021,
+Lakshadweep,2021,4,1,6,benchmark (revised vintage),DIRECT,
+Puducherry,2021,1049,140,1099,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2022,21249,8293,21340,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2022,227,148,186,benchmark (revised vintage),DIRECT,
+Assam,2022,7023,2994,5637,benchmark (revised vintage),DIRECT,
+Bihar,2022,10801,8898,7068,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2022,13279,5834,11695,benchmark (revised vintage),DIRECT,
+Goa,2022,3011,271,1091,benchmark (revised vintage),DIRECT,
+Gujarat,2022,15751,7618,15089,benchmark (revised vintage),DIRECT,
+Haryana,2022,10429,4915,8519,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2022,2597,1032,4063,benchmark (revised vintage),DIRECT,
+Jharkhand,2022,5175,3898,3747,benchmark (revised vintage),DIRECT,
+Karnataka,2022,39762,11702,48154,benchmark (revised vintage),DIRECT,
+Kerala,2022,43910,4317,49307,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2022,54432,13427,55168,benchmark (revised vintage),DIRECT,
+Maharashtra,2022,33383,15224,27239,benchmark (revised vintage),DIRECT,
+Manipur,2022,508,127,817,benchmark (revised vintage),DIRECT,
+Meghalaya,2022,246,162,310,benchmark (revised vintage),DIRECT,
+Mizoram,2022,133,113,107,benchmark (revised vintage),DIRECT,
+Nagaland,2022,489,73,291,benchmark (revised vintage),DIRECT,
+Odisha,2022,11663,5467,10302,benchmark (revised vintage),DIRECT,
+Punjab,2022,6138,4756,3324,benchmark (revised vintage),DIRECT,
+Rajasthan,2022,23614,11104,22293,benchmark (revised vintage),DIRECT,
+Sikkim,2022,211,92,354,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2022,64105,17884,67703,benchmark (revised vintage),DIRECT,
+Telangana,2022,21619,7559,20209,benchmark (revised vintage),DIRECT,
+Tripura,2022,575,241,541,benchmark (revised vintage),DIRECT,
+Uttarakhand,2022,1674,1042,1613,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2022,41746,22595,28541,benchmark (revised vintage),DIRECT,
+West Bengal,2022,13686,6002,12843,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2022,141,19,136,benchmark (revised vintage),DIRECT,
+Chandigarh,2022,237,83,203,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli and Daman & Diu,2022,196,90,273,benchmark (revised vintage),DIRECT_MERGED,
+Delhi,2022,5652,1461,5201,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2022,6092,805,8372,benchmark (revised vintage),JK_UT_BREAK,
+Ladakh,2022,374,62,346,benchmark (revised vintage),LADAKH_START_2021,
+Lakshadweep,2022,3,2,2,benchmark (revised vintage),DIRECT,
+Puducherry,2022,1181,181,1282,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2023,19949,8137,,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2023,287,145,,benchmark (revised vintage),DIRECT,
+Assam,2023,7421,3296,,benchmark (revised vintage),DIRECT,
+Bihar,2023,11014,8873,,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2023,13468,6166,,benchmark (revised vintage),DIRECT,
+Goa,2023,2846,290,,benchmark (revised vintage),DIRECT,
+Gujarat,2023,16349,7854,,benchmark (revised vintage),DIRECT,
+Haryana,2023,10463,4968,,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2023,2253,889,,benchmark (revised vintage),DIRECT,
+Jharkhand,2023,5315,4173,,benchmark (revised vintage),DIRECT,
+Karnataka,2023,43440,12321,,benchmark (revised vintage),DIRECT,
+Kerala,2023,48091,4080,,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2023,55327,13798,,benchmark (revised vintage),DIRECT,
+Maharashtra,2023,35243,15366,,benchmark (revised vintage),DIRECT,
+Manipur,2023,398,73,,benchmark (revised vintage),DIRECT,
+Meghalaya,2023,223,168,,benchmark (revised vintage),DIRECT,
+Mizoram,2023,106,96,,benchmark (revised vintage),DIRECT,
+Nagaland,2023,303,86,,benchmark (revised vintage),DIRECT,
+Odisha,2023,11992,5739,,benchmark (revised vintage),DIRECT,
+Punjab,2023,6269,4829,,benchmark (revised vintage),DIRECT,
+Rajasthan,2023,24694,11762,,benchmark (revised vintage),DIRECT,
+Sikkim,2023,182,57,,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2023,67213,18347,,benchmark (revised vintage),DIRECT,
+Telangana,2023,22903,7660,,benchmark (revised vintage),DIRECT,
+Tripura,2023,577,261,,benchmark (revised vintage),DIRECT,
+Uttarakhand,2023,1691,1054,,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2023,44534,23652,,benchmark (revised vintage),DIRECT,
+West Bengal,2023,13795,6027,,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2023,143,24,,benchmark (revised vintage),DIRECT,
+Chandigarh,2023,182,67,,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli and Daman & Diu,2023,182,74,,benchmark (revised vintage),DIRECT_MERGED,
+Delhi,2023,5834,1457,,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2023,6298,893,,benchmark (revised vintage),JK_UT_BREAK,
+Ladakh,2023,289,59,,benchmark (revised vintage),LADAKH_START_2021,
+Lakshadweep,2023,1,0,,benchmark (revised vintage),DIRECT,
+Puducherry,2023,1308,149,,benchmark (revised vintage),DIRECT,
+Andhra Pradesh,2024,19557,8346,,benchmark (revised vintage),DIRECT,
+Arunachal Pradesh,2024,277,168,,benchmark (revised vintage),DIRECT,
+Assam,2024,7848,3351,,benchmark (revised vintage),DIRECT,
+Bihar,2024,11610,9347,,benchmark (revised vintage),DIRECT,
+Chhattisgarh,2024,14857,6945,,benchmark (revised vintage),DIRECT,
+Goa,2024,2682,286,,benchmark (revised vintage),DIRECT,
+Gujarat,2024,15588,7717,,benchmark (revised vintage),DIRECT,
+Haryana,2024,9806,4689,,benchmark (revised vintage),DIRECT,
+Himachal Pradesh,2024,2156,869,,benchmark (revised vintage),DIRECT,
+Jharkhand,2024,5196,4114,,benchmark (revised vintage),DIRECT,
+Karnataka,2024,43062,12390,,benchmark (revised vintage),DIRECT,
+Kerala,2024,48834,3880,,benchmark (revised vintage),DIRECT,
+Madhya Pradesh,2024,56669,14791,,benchmark (revised vintage),DIRECT,
+Maharashtra,2024,36118,15715,,benchmark (revised vintage),DIRECT,
+Manipur,2024,299,72,,benchmark (revised vintage),DIRECT,
+Meghalaya,2024,269,197,,benchmark (revised vintage),DIRECT,
+Mizoram,2024,118,110,,benchmark (revised vintage),DIRECT,
+Nagaland,2024,129,62,,benchmark (revised vintage),DIRECT,
+Odisha,2024,12375,6142,,benchmark (revised vintage),DIRECT,
+Punjab,2024,6063,4759,,benchmark (revised vintage),DIRECT,
+Rajasthan,2024,24838,11790,,benchmark (revised vintage),DIRECT,
+Sikkim,2024,149,67,,benchmark (revised vintage),DIRECT,
+Tamil Nadu,2024,67526,18449,,benchmark (revised vintage),DIRECT,
+Telangana,2024,25986,7949,,benchmark (revised vintage),DIRECT,
+Tripura,2024,578,226,,benchmark (revised vintage),DIRECT,
+Uttarakhand,2024,1747,1090,,benchmark (revised vintage),DIRECT,
+Uttar Pradesh,2024,46052,24118,,benchmark (revised vintage),DIRECT,
+West Bengal,2024,13702,6676,,benchmark (revised vintage),DIRECT,
+Andaman & Nicobar Islands,2024,135,29,,benchmark (revised vintage),DIRECT,
+Chandigarh,2024,169,75,,benchmark (revised vintage),DIRECT,
+Dadra & Nagar Haveli and Daman & Diu,2024,152,95,,benchmark (revised vintage),DIRECT_MERGED,
+Delhi,2024,5657,1551,,benchmark (revised vintage),DIRECT,
+Jammu & Kashmir,2024,5808,831,,benchmark (revised vintage),JK_UT_BREAK,
+Ladakh,2024,264,61,,benchmark (revised vintage),LADAKH_START_2021,
+Lakshadweep,2024,0,0,,benchmark (revised vintage),DIRECT,
+Puducherry,2024,1431,218,,benchmark (revised vintage),DIRECT,

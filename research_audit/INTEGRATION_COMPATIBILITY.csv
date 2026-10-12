@@ -1,0 +1,9 @@
+Dataset_A,Dataset_B,Join_Key,Time_Compat,Geo_Compat,Unit_Compat,Definition_Compat,Risk,Safe_To_Join,Reason
+Accidents,Population projected,State+Year,ok,ok,ok,counts vs 000,sum-vs-published rounding only,none,YES,Phase 2D join; 5 SUM/MEDIUM rows flagged
+Accidents,Road length,State+Year,2021-22 only,ok,Total km,-,4 UNRESOLVED JK/Ladakh cells,YES (2021-22 only),Outside 2021-22 is unsafe
+Accidents,Weather,State+Year,2018-24,34 entities,annual means,-,18 excluded rows,YES (matched only),Excluded islands/legacy splits stay out
+Accidents,Registered vehicles,Year,India only,unit mismatch state,000 stock,state split absent,-,NO (state level),India-level comparison descriptive only
+Accidents,City data,City+Year,city names,city,counts,state-city nesting,-,NO (as join),Separate city analysis only
+Accidents,NCRB variables,-,different definitions/totals,-,-,-,YES as separate source only,Never merge silently; label source
+State injuries 2023-24,India injuries,-,no allocation key,-,-,missingness,NO,UNSAFE: would fabricate state values
+Monthly accidents,Annual totals,-,no month split key,-,-,-,NO,UNSAFE: would invent monthly values

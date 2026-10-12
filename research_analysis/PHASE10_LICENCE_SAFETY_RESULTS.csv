@@ -1,0 +1,23 @@
+Source,Year,Category,Accidents,Share_of_reported,Note,Family,NoHelmet_Killed,NoHelmet_Injured,NoSeatbelt_Killed,NoSeatbelt_Injured
+DL-01,2020,Valid driving licence,264991.0,71.2,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2021,Valid driving licence,290261.0,70.38,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2022,Valid driving licence,320235.0,69.42,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2023,Valid driving licence,340960.0,70.95,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2024,Valid driving licence,332462.0,68.17,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2020,Learner's licence,19117.0,5.14,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2021,Learner's licence,19184.0,4.65,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2022,Learner's licence,18298.0,3.97,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2023,Learner's licence,16074.0,3.34,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2024,Learner's licence,16494.0,3.38,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2020,Without valid licence,34716.0,9.33,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2021,Without valid licence,37182.0,9.02,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2022,Without valid licence,35925.0,7.79,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2023,Without valid licence,33827.0,7.04,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2024,Without valid licence,35347.0,7.25,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2020,Not known,53357.0,14.34,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2021,Not known,65805.0,15.96,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2022,Not known,86854.0,18.83,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2023,Not known,89722.0,18.67,"share of reported accidents, NOT share of all drivers",licence,,,,
+DL-01,2024,Not known,103404.0,21.2,"share of reported accidents, NOT share of all drivers",licence,,,,
+SD-01,2024,Drivers,,,reported deaths/injuries associated with recorded non-use category; non-use did not necessarily cause death,safety,39470.0,64520.0,7489.0,15695.0
+SD-01,2024,Passenger,,,reported deaths/injuries associated with recorded non-use category; non-use did not necessarily cause death,safety,14652.0,39012.0,6977.0,21458.0

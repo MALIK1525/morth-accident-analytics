@@ -1,0 +1,2 @@
+Test,Variables,N,Assumptions,Statistic,p_value,Effect_size,Effect,Interpretation
+Friedman,Zone accidents across years (years as blocks),6 zones x 7 years,ordinal ranks; repeated years,25.286,0.000302,0.7224,Kendall W,tests zone differences accounting for repeated years; not a ranking

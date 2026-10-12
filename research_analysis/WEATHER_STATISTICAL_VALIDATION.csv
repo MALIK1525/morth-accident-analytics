@@ -1,0 +1,43 @@
+Stratum,X,Y,N,Pearson_r,Pearson_p,Spearman_rho,Spearman_p,Pearson_95CI,Status,Note
+pooled,Annual_Rainfall_mm,Accidents,236,-0.2337,0.000293,-0.3432,0.0,"[-0.358,-0.109]",OK,pooled state-years; state scale may drive association
+Central,Annual_Rainfall_mm,Accidents,14,-0.5719,0.03262,-0.4989,0.069364,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Rainfall_mm,Accidents,28,0.4639,0.012888,0.4778,0.010121,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Rainfall_mm,Accidents,70,-0.1762,0.144512,-0.2172,0.070866,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Rainfall_mm,Accidents,56,-0.1542,0.256542,-0.3293,0.013194,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Rainfall_mm,Accidents,42,0.0357,0.822368,-0.0968,0.541836,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Rainfall_mm,Accidents,26,-0.7134,4.3e-05,-0.6212,0.000707,,OK,zone subgroup; interpret only if N>=20
+pooled,Annual_Rainfall_mm,Fatalities,236,-0.3758,0.0,-0.3934,0.0,"[-0.495,-0.257]",OK,pooled state-years; state scale may drive association
+Central,Annual_Rainfall_mm,Fatalities,14,-0.5046,0.065751,-0.433,0.12201,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Rainfall_mm,Fatalities,28,-0.1183,0.548755,-0.0219,0.911948,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Rainfall_mm,Fatalities,70,-0.173,0.152011,-0.2034,0.091247,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Rainfall_mm,Fatalities,56,-0.1172,0.38982,0.1689,0.213223,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Rainfall_mm,Fatalities,42,-0.4615,0.002095,-0.5305,0.000302,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Rainfall_mm,Fatalities,26,-0.7671,5e-06,-0.5966,0.001296,,OK,zone subgroup; interpret only if N>=20
+pooled,Annual_Mean_Tmax_C,Accidents,236,0.4521,0.0,0.6081,0.0,"[0.338,0.566]",OK,pooled state-years; state scale may drive association
+Central,Annual_Mean_Tmax_C,Accidents,14,0.1144,0.696852,0.2396,0.40943,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Mean_Tmax_C,Accidents,28,-0.0517,0.793787,0.0131,0.947104,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Mean_Tmax_C,Accidents,70,0.5545,1e-06,0.7065,0.0,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Mean_Tmax_C,Accidents,56,0.0801,0.557134,0.279,0.037335,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Mean_Tmax_C,Accidents,42,-0.4744,0.001504,-0.6077,2e-05,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Mean_Tmax_C,Accidents,26,0.5249,0.0059,0.4951,0.010119,,OK,zone subgroup; interpret only if N>=20
+pooled,Annual_Mean_Tmax_C,Fatalities,236,0.4981,0.0,0.622,0.0,"[0.387,0.609]",OK,pooled state-years; state scale may drive association
+Central,Annual_Mean_Tmax_C,Fatalities,14,0.081,0.78299,-0.0242,0.934619,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Mean_Tmax_C,Fatalities,28,-0.2064,0.292028,-0.2693,0.165821,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Mean_Tmax_C,Fatalities,70,0.5552,1e-06,0.803,0.0,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Mean_Tmax_C,Fatalities,56,0.0716,0.599866,0.1082,0.427162,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Mean_Tmax_C,Fatalities,42,-0.0496,0.755215,-0.2354,0.133393,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Mean_Tmax_C,Fatalities,26,0.5728,0.002226,0.4907,0.010924,,OK,zone subgroup; interpret only if N>=20
+pooled,Annual_Mean_Tmin_C,Accidents,236,0.3665,0.0,0.5009,0.0,"[0.247,0.486]",OK,pooled state-years; state scale may drive association
+Central,Annual_Mean_Tmin_C,Accidents,14,-0.8562,9.3e-05,-0.6645,0.009537,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Mean_Tmin_C,Accidents,28,0.6714,9.2e-05,0.7479,5e-06,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Mean_Tmin_C,Accidents,70,0.5582,1e-06,0.7275,0.0,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Mean_Tmin_C,Accidents,56,0.0366,0.788808,0.1072,0.431513,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Mean_Tmin_C,Accidents,42,-0.4444,0.003196,-0.4094,0.007089,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Mean_Tmin_C,Accidents,26,-0.9177,0.0,-0.8246,0.0,,OK,zone subgroup; interpret only if N>=20
+pooled,Annual_Mean_Tmin_C,Fatalities,236,0.3397,0.0,0.4671,0.0,"[0.219,0.460]",OK,pooled state-years; state scale may drive association
+Central,Annual_Mean_Tmin_C,Fatalities,14,-0.7533,0.001866,-0.6425,0.013222,,SMALL_N,zone subgroup; interpret only if N>=20
+East,Annual_Mean_Tmin_C,Fatalities,28,0.0834,0.672976,0.1131,0.566772,,OK,zone subgroup; interpret only if N>=20
+North,Annual_Mean_Tmin_C,Fatalities,70,0.5655,0.0,0.8284,0.0,,OK,zone subgroup; interpret only if N>=20
+Northeast,Annual_Mean_Tmin_C,Fatalities,56,0.0544,0.690344,0.2764,0.039211,,OK,zone subgroup; interpret only if N>=20
+South,Annual_Mean_Tmin_C,Fatalities,42,-0.2873,0.065101,-0.2375,0.1299,,OK,zone subgroup; interpret only if N>=20
+West,Annual_Mean_Tmin_C,Fatalities,26,-0.9114,0.0,-0.7938,1e-06,,OK,zone subgroup; interpret only if N>=20

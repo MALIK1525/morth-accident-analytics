@@ -1,0 +1,15 @@
+document,question_id,topic,claim,answer_value,source_value,status,notes
+viva_qa,A12,state-years,254,254,254,PASS,
+viva_qa,A13,entities,38,38,PASS,
+viva_qa,B2024,totals,"487707/177175/471441",487707/177175/471441,PASS,
+viva_qa,C30,Friedman,"25.29/3.0e-4/0.72",25.29/3.0e-4/0.72,PASS,
+viva_qa,D37,weather N,236/18,236/18,PASS,
+viva_qa,D39,weather r,locked set,locked set,PASS,
+viva_qa,E46,overspeeding,70.7/70.3,70.7/70.3,PASS,reported-category language
+viva_qa,E50,road users,46.2/20.6,46.2/20.6,PASS,shares not risk
+viva_qa,E53,safety counts,"54122/14466",54122/14466,PASS,toll not effectiveness
+viva_qa,F67,baseline RMSE,"1038.6/286.3",1038.6/286.3,PASS,
+viva_qa,F-train,split,N=141/72,N=141/72,PASS,
+viva_qa,G79,kmeans,K=2/sil .356/17+6,K=2/sil .356/17+6,PASS,descriptive only
+cheat_sheet,all,top-10 numbers,locked values,locked values,PASS,
+rapid_answers,all,timings,30/60/120s,30/60/120s,PASS,natural standalone texts

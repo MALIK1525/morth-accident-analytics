@@ -1,0 +1,11 @@
+Feature,Source,Unit,Geography,Years,Missingness,Target_Leakage,Status,Reason
+Accidents_lag1,benchmark,count,State-Year,2018-23 as feature,none,past only,Ready,cutoff T-1
+Accidents_lag2,benchmark,count,State-Year,2018-23 as feature,median-imputed where missing,past only,Ready,
+Fatalities_lag1/2,benchmark,count,State-Year,as above,median-imputed lag2,past only,Ready,
+Acc_growth_lag1,derived,rate,State-Year,,median-imputed,past only,Ready,
+Rain/Tmax/Tmin_lag1,IMD join,mm/degC,State-Year,18 excluded rows dropped,median-imputed,lagged only,Ready,contemporaneous excluded (timing risk)
+Year,calendar,year,-,none,none,not leakage (calendar),Ready,trend carrier
+Zone dummies,project mapping,0/1,State,none,one-hot,time-invariant,Ready,no ordinal encoding
+Population projection,RGI join,000,State-Year,5 SUM rows,not used in primary spec,projection vintage,Conditional,sensitivity only
+Contemporaneous weather,IMD join,mm/degC,State-Year,-,EXCLUDED,same-year timing,Unavailable,would need nowcasting design
+Target-year acc/fat/ratio,benchmark,count,-,-,EXCLUDED,TARGET LEAKAGE,Unavailable,prohibited

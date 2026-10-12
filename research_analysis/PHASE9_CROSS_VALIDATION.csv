@@ -1,0 +1,3 @@
+Model,Validation_Method,Folds,Leakage_Check,Status
+Naive_lag1,none (rule),none,uses T-1 actual only,PASS
+All trained,rolling-origin: train<=2020/val 2021; train<=2021/val 2022,2 folds,no future in any fold,PASS

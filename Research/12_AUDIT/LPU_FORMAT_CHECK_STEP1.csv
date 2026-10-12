@@ -1,0 +1,10 @@
+Requirement,Source,Applied_Format,Status,Notes
+paper size,no official template in repo,A4,DOCUMENTED-ASSUMPTION,confirm with dept
+margins,none found,1 inch,DOCUMENTED-ASSUMPTION,
+font,none found,Times New Roman 12,DOCUMENTED-ASSUMPTION,
+line spacing,none found,1.5,DOCUMENTED-ASSUMPTION,
+headings,none found,16/14/12 bold,DOCUMENTED-ASSUMPTION,
+page numbering,none found,roman front + arabic restart,DOCUMENTED-ASSUMPTION,
+figure/table numbering,none found,F01-F16 / Tables 1-15,DOCUMENTED-ASSUMPTION,
+references,none found,consistent author-style list,DOCUMENTED-ASSUMPTION,
+declaration/certificate,none found,placeholders,DOCUMENTED-ASSUMPTION,candidate must supply

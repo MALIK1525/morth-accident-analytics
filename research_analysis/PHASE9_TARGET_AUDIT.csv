@@ -1,0 +1,5 @@
+Target,Definition,Unit,Source,Years,Geography,Missingness,Suitable,Reason
+Accidents,recorded state accident count,count,benchmark,2018-24,State-Year,Ladakh NV 2018-20 excluded,YES,primary count target
+Fatalities,recorded state deaths,count,benchmark,2018-24,State-Year,Ladakh NV 2018-20 excluded,YES,primary count target
+Injuries,recorded state injuries,count,benchmark,2018-22 only,State-Year,2023-24 state N/A,NO,deferred: test years lack state injuries
+Fatality_Ratio,Fatalities/Accidents,ratio,derived,2018-24,State-Year,bounded target; leakage-prone features,NO,deferred: bounded + small-N concerns

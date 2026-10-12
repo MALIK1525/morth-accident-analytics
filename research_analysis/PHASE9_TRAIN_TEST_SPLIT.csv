@@ -1,0 +1,2 @@
+Dataset,Train_Years,Test_Years,Train_N,Test_N,Target,Feature_Set,Reason
+State-Year panel,"2019-2022 (effective; 2018 dropped: lag-1 unavailable, 2017 not benchmark-compatible)",2023-2024,141,72,Accidents; Fatalities,"lag-only, cutoff T-1",chronological; no test leakage; 2018 rows dropped honestly

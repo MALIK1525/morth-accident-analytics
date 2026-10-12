@@ -1,0 +1,10 @@
+Claim,Source,Evidence,Supported?,Claim_Type,Causal?,Exposure_Required?,Allowed_in_Paper?,Notes
+Accidents +3.7% 2018-2024,INDIA_YEAR_ANALYSIS.csv,470403->487707,YES,Descriptive,NO,NO,YES,
+Fatalities +12.4%,INDIA_YEAR_ANALYSIS.csv,157593->177175,YES,Descriptive,NO,NO,YES,
+Severity 33.50->36.33,INDIA_YEAR_ANALYSIS.csv,computed ratio,YES,Descriptive,NO,NO,YES,"case-fatality-style, labeled"
+Rain r=-0.234 acc,WEATHER_ASSOCIATIONS.csv,"N=236, p=2.9e-4, FDR-held",YES,Association,NO,NO,YES,scale confounding disclosed
+Naive beats all trained,PHASE9_BASELINE_COMPARISON.csv,RMSE 1038.6 vs 2148.6+,YES,Predictive,NO,NO,YES,honest null
+K=2 descriptive profiles,PHASE9_CLUSTER_*,"silhouette 0.356, ARI",YES,Exploratory,NO,NO,YES,labels never risk
+May peak / July trough,NCRB_MONTHLY_2024.csv,"8.84%/7.46%, chi2",YES,Descriptive,NO,NO,YES,NCRB vintage labeled
+Two-wheelers 46.2% of deaths,VH-01 module file,81780/177175,YES,Descriptive,NO,YES*,YES,*exposure required for risk; counts only
+Over-speeding 70.3% of deaths,CS-01 module file,124522/177175,YES,Descriptive,NO,NO,YES,reported category only

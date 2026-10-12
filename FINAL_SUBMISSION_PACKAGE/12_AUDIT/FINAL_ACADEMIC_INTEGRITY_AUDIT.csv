@@ -1,0 +1,6 @@
+Check,Result,Evidence
+no causal/ranking language in report,PASS,0 hits
+no fake DOI,PASS,checked
+external plagiarism % claimed nowhere,PASS,no percentage stated anywhere by construction
+mirrors labeled,PASS,yes
+all figures exist,PASS,16/16

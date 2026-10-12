@@ -1,0 +1,39 @@
+Sl No,District,Total Accidents 2021,Total Deaths 2021,Total Accidents 2022,Total Deaths 2022,Total Accidents 2023,Total Deaths 2023,Note
+1.0,ARIYALUR,545.0,174.0,562,184,584,190,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+2.0,CHENGALPATTU,1614.0,472.0,3044,937,3402,936,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+3.0,CHENNAI CITY,5035.0,999.0,3453,507,3654,504,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+4.0,COIMBATORE,2792.0,841.0,3544,1057,3657,1044,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+5.0,CUDDALORE,2927.0,550.0,3426,478,3121,585,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+6.0,DHARMAPURI,1240.0,317.0,1357,389,1420,343,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+7.0,DINDIGUL,1747.0,539.0,2002,680,2296,755,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+8.0,ERODE,1852.0,525.0,2155,661,2396,687,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+9.0,KALLAKURICHI,1070.0,275.0,1147,284,1166,327,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+10.0,KANCHEEPURAM,910.0,240.0,1011,303,1039,297,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+11.0,KANNIYAKUMARI,1225.0,321.0,1381,306,1471,350,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+12.0,KARUR,1111.0,413.0,1101,382,1132,362,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+13.0,KRISHNAGIRI,1734.0,589.0,2029,646,2142,656,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+14.0,MADURAI,2283.0,711.0,2489,810,2660,890,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+15.0,MYILADUTHURAI,,,660,153,771,146,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+16.0,NAGAPATTINAM,1024.0,225.0,592,134,529,134,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+17.0,NAMAKKAL,1734.0,422.0,2021,529,2089,584,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+18.0,PERAMBALUR,511.0,173.0,550,228,529,188,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+19.0,PUDUKKOTTAI,1369.0,380.0,1731,497,1681,447,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+20.0,RAMANATHAPURAM,1107.0,335.0,1211,374,1310,426,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+21.0,RANIPET,833.0,242.0,858,271,911,283,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+22.0,SALEM,2606.0,721.0,3360,868,3199,797,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+23.0,SIVAGANGAI,961.0,337.0,1143,395,1244,392,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+24.0,TENKASI,979.0,237.0,1103,283,1117,252,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+25.0,THANJAVUR,1849.0,431.0,2224,551,2327,609,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+26.0,THE NILGIRIS,210.0,33.0,236,44,213,75,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+27.0,THENI,960.0,239.0,1121,338,1177,327,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+28.0,THIRUVALLUR,1274.0,331.0,2595,727,2624,730,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+29.0,THIRUVARUR,621.0,168.0,727,216,893,227,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+30.0,THOOTHUKUDI,1253.0,394.0,1246,457,1440,486,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+31.0,TIRUCHIRAPALLI,1953.0,643.0,2222,714,2426,720,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+32.0,TIRUNELVELI,1280.0,359.0,1294,408,1531,415,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+33.0,TIRUPATHUR,709.0,226.0,766,217,622,217,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+34.0,TIRUPPUR,2703.0,798.0,3145,899,3294,875,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+35.0,TIRUVANNAMALAI,1435.0,522.0,1762,565,1913,697,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+36.0,VELLORE,819.0,246.0,976,294,992,328,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+37.0,VILLUPURAM,2131.0,520.0,2403,583,2591,564,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN
+38.0,VIRUDHUNAGAR,1276.0,436.0,1458,515,1650,502,TN only; MAYILADUTHURAI 2021 missing (new district); sums == benchmark TN

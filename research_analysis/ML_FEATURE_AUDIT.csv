@@ -1,0 +1,7 @@
+Feature,Source,Unit,Years,Geography,Missingness,Target,Potential_leakage,Ready_Conditional_Unavailable
+Lag-1 accidents,benchmark,count,2018-24,State-Year,none,next-year accidents,none (past only),Ready
+Lag-1 fatalities,benchmark,count,2018-24,State-Year,none,next-year accidents,none,Ready
+Population projection,RGI join,000 persons,2018-24,State-Year,5 SUM rows,next-year accidents,projection vintage,Conditional
+Weather annual,IMD join,mm/degC,2018-24,State-Year,18 excluded rows,next-year accidents,same-year timing must lag,Conditional
+Violation/cause shares,CS-01,share,2023-24,India,India-level only,state accidents,geography mismatch,Unavailable
+Target-year accidents,benchmark,count,-,-,-,next-year accidents,TARGET LEAKAGE if used,Unavailable (leakage)

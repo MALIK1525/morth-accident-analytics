@@ -1,0 +1,5 @@
+Analysis,Result,Note
+Benchmark-only India trend 2018-24,"acc slope +6,725/yr p=0.44 (ns)",core result
+Historical candidate 2014-24 India trend,computed separately; vintage flagged CONDITIONAL,NOT merged; sensitivity context only
+Pooled vs within-state weather,pooled r reported; within-state N=7 LOW_POWER descriptive only,scale-confounding acknowledged
+Weather complete vs temp-NaN-excluded,per-pair N (236 rain / 233 severity-temp),missingness explicit

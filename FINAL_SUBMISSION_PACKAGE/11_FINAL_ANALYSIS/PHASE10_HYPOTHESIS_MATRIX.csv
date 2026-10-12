@@ -1,0 +1,14 @@
+H0_H1,Hypothesis,Dataset,Method,Result,Decision,Limitation
+H-W1,Annual_Rainfall_mm x Accidents,weather join,Pearson pooled,r=-0.2337 p=0.000293 adj=0.00339,Supported (association),"association only, not causal"
+H-W2,Annual_Rainfall_mm x Fatalities,weather join,Pearson pooled,r=-0.3758 p=0.0 adj=0.0,Not supported,"association only, not causal"
+H-W3,Annual_Mean_Tmax_C x Accidents,weather join,Pearson pooled,r=0.4521 p=0.0 adj=0.0,Not supported,"association only, not causal"
+H-W4,Annual_Mean_Tmax_C x Fatalities,weather join,Pearson pooled,r=0.4981 p=0.0 adj=0.0,Not supported,"association only, not causal"
+H-W5,Annual_Mean_Tmin_C x Accidents,weather join,Pearson pooled,r=0.3665 p=0.0 adj=0.0,Not supported,"association only, not causal"
+H-W6,Annual_Mean_Tmin_C x Fatalities,weather join,Pearson pooled,r=0.3397 p=0.0 adj=0.0,Not supported,"association only, not causal"
+H-W7,Annual_Rainfall_mm x Severity,weather join,Pearson pooled,r=-0.0582 p=0.376314 adj=0.586857,Not supported,"association only, not causal"
+H-W8,Annual_Mean_Tmax_C x Severity,weather join,Pearson pooled,r=0.002 p=0.975576 adj=0.987771,Not supported,"association only, not causal"
+H-W9,Annual_Mean_Tmin_C x Severity,weather join,Pearson pooled,r=-0.0692 p=0.29272 adj=0.526896,Not supported,"association only, not causal"
+H-Z1,Systematic zone differences across years,ZONE_YEAR,Friedman (years as blocks),chi2=25.286 p=0.000302,Supported,"descriptive, not a ranking"
+H-P1,Trained model improves over naive baseline (accidents),phase9 panel,held-out 2023-24 RMSE,naive 1038.6 < all trained,Not supported (null preserved),persistence dominates
+H-P2,Trained model improves over naive baseline (fatalities),phase9 panel,held-out 2023-24 RMSE,naive 286.3 < all trained,Not supported (null preserved),persistence dominates
+H-C1,K-means typology,state profiles,exploratory (no H0/H1),"K=2, silhouette 0.356",Exploratory,descriptive only

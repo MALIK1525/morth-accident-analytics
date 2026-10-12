@@ -1,0 +1,5 @@
+Dataset,Rows,Cols,Dup_keys,Missing_cells,Missing_pct,Sample_keys
+INDIA_YEAR,7,10,0,7,10.0,"[2018, 2019, 2020]"
+STATE_YEAR,254,6,0,81,5.31,"['Andaman & Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh']"
+ZONE_YEAR,42,7,0,6,2.04,"['Central', 'East', 'North']"
+WEATHER_MATCHED,250,22,0,46,0.84,"['Andaman & Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh']"

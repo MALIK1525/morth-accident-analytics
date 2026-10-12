@@ -1,0 +1,4 @@
+Series,N,Slope,Intercept,R2,P,CI_lo,CI_hi,Status,Note
+Accidents,7,6724.6786,-13141778.68,0.1217,0.443195,-14046.2281,27495.5852,OK,"descriptive linear trend; slope is fitted, not causal"
+Fatalities,7,4166.6429,-8259715.5,0.4694,0.089413,-926.4261,9259.7119,OK,"descriptive linear trend; slope is fitted, not causal"
+Injuries,5,-10761.0,22154947.2,0.1157,0.575474,-65432.2357,43910.2357,OK,"descriptive linear trend; slope is fitted, not causal"

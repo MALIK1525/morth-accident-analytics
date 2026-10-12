@@ -1,0 +1,255 @@
+State_UT,Year,Accidents,Fatalities,Injured,Zone
+Andhra Pradesh,2018,24475.0,7556.0,23456.0,South
+Arunachal Pradesh,2018,277.0,175.0,323.0,Northeast
+Assam,2018,8248.0,2966.0,7375.0,Northeast
+Bihar,2018,9600.0,6729.0,6679.0,East
+Chhattisgarh,2018,13864.0,4592.0,12715.0,Central
+Goa,2018,3709.0,262.0,1549.0,West
+Gujarat,2018,18769.0,7996.0,17467.0,West
+Haryana,2018,11238.0,5118.0,10020.0,North
+Himachal Pradesh,2018,3110.0,1208.0,5551.0,North
+Jharkhand,2018,5394.0,3542.0,3975.0,East
+Karnataka,2018,41707.0,10990.0,51562.0,South
+Kerala,2018,40181.0,4303.0,45458.0,South
+Madhya Pradesh,2018,51397.0,10706.0,54662.0,Central
+Maharashtra,2018,35717.0,13261.0,31365.0,West
+Manipur,2018,601.0,134.0,1042.0,Northeast
+Meghalaya,2018,399.0,182.0,205.0,Northeast
+Mizoram,2018,53.0,45.0,80.0,Northeast
+Nagaland,2018,430.0,39.0,335.0,Northeast
+Odisha,2018,11262.0,5315.0,11794.0,East
+Punjab,2018,6428.0,4740.0,3384.0,North
+Rajasthan,2018,21743.0,10320.0,21547.0,North
+Sikkim,2018,180.0,85.0,370.0,Northeast
+Tamil Nadu,2018,67279.0,18392.0,69834.0,South
+Telangana,2018,22230.0,6603.0,23613.0,South
+Tripura,2018,552.0,213.0,741.0,Northeast
+Uttarakhand,2018,1468.0,1047.0,1571.0,North
+Uttar Pradesh,2018,42568.0,22256.0,29664.0,North
+West Bengal,2018,12705.0,5711.0,11997.0,East
+Andaman & Nicobar Islands,2018,254.0,19.0,260.0,South
+Chandigarh,2018,316.0,98.0,300.0,North
+Dadra & Nagar Haveli,2018,80.0,54.0,66.0,West
+Daman & Diu,2018,76.0,35.0,94.0,West
+Delhi,2018,6515.0,1690.0,6086.0,North
+Jammu & Kashmir,2018,5978.0,984.0,7845.0,North
+Ladakh,2018,,,,North
+Lakshadweep,2018,3.0,1.0,3.0,South
+Puducherry,2018,1597.0,226.0,1727.0,South
+Andhra Pradesh,2019,21992.0,7984.0,24619.0,South
+Arunachal Pradesh,2019,237.0,127.0,309.0,Northeast
+Assam,2019,8350.0,3208.0,7473.0,Northeast
+Bihar,2019,10007.0,7205.0,7206.0,East
+Chhattisgarh,2019,13899.0,5003.0,13090.0,Central
+Goa,2019,3440.0,297.0,1448.0,West
+Gujarat,2019,17046.0,7390.0,16258.0,West
+Haryana,2019,10944.0,5057.0,9362.0,North
+Himachal Pradesh,2019,2873.0,1146.0,4904.0,North
+Jharkhand,2019,5217.0,3801.0,3818.0,East
+Karnataka,2019,40658.0,10958.0,50447.0,South
+Kerala,2019,41111.0,4440.0,46055.0,South
+Madhya Pradesh,2019,50669.0,11249.0,52816.0,Central
+Maharashtra,2019,32925.0,12788.0,28628.0,West
+Manipur,2019,672.0,156.0,1055.0,Northeast
+Meghalaya,2019,482.0,179.0,222.0,Northeast
+Mizoram,2019,62.0,48.0,56.0,Northeast
+Nagaland,2019,358.0,26.0,246.0,Northeast
+Odisha,2019,11064.0,5333.0,11177.0,East
+Punjab,2019,6348.0,4525.0,3812.0,North
+Rajasthan,2019,23480.0,10563.0,22979.0,North
+Sikkim,2019,162.0,73.0,318.0,Northeast
+Tamil Nadu,2019,62685.0,18129.0,63132.0,South
+Telangana,2019,21570.0,6964.0,21999.0,South
+Tripura,2019,655.0,239.0,816.0,Northeast
+Uttarakhand,2019,1352.0,867.0,1457.0,North
+Uttar Pradesh,2019,42572.0,22655.0,28932.0,North
+West Bengal,2019,12658.0,5767.0,11761.0,East
+Andaman & Nicobar Islands,2019,230.0,20.0,207.0,South
+Chandigarh,2019,305.0,104.0,275.0,North
+Dadra & Nagar Haveli,2019,68.0,49.0,105.0,West
+Daman & Diu,2019,69.0,28.0,74.0,West
+Delhi,2019,5610.0,1463.0,5152.0,North
+Jammu & Kashmir,2019,5796.0,996.0,7532.0,North
+Ladakh,2019,,,,North
+Lakshadweep,2019,1.0,0.0,1.0,South
+Puducherry,2019,1392.0,147.0,1619.0,South
+Andhra Pradesh,2020,19509.0,7039.0,19675.0,South
+Arunachal Pradesh,2020,134.0,73.0,185.0,Northeast
+Assam,2020,6595.0,2629.0,5269.0,Northeast
+Bihar,2020,8639.0,6699.0,7016.0,East
+Chhattisgarh,2020,11656.0,4606.0,10505.0,Central
+Goa,2020,2375.0,223.0,880.0,West
+Gujarat,2020,13398.0,6170.0,12002.0,West
+Haryana,2020,9431.0,4507.0,7659.0,North
+Himachal Pradesh,2020,2239.0,893.0,3223.0,North
+Jharkhand,2020,4405.0,3044.0,3295.0,East
+Karnataka,2020,34178.0,9760.0,39492.0,South
+Kerala,2020,27877.0,2979.0,30510.0,South
+Madhya Pradesh,2020,45266.0,11141.0,46456.0,Central
+Maharashtra,2020,24971.0,11569.0,19914.0,West
+Manipur,2020,432.0,127.0,663.0,Northeast
+Meghalaya,2020,214.0,144.0,220.0,Northeast
+Mizoram,2020,53.0,42.0,68.0,Northeast
+Nagaland,2020,500.0,53.0,286.0,Northeast
+Odisha,2020,9817.0,4738.0,8822.0,East
+Punjab,2020,5203.0,3898.0,2904.0,North
+Rajasthan,2020,19114.0,9250.0,16769.0,North
+Sikkim,2020,138.0,47.0,218.0,Northeast
+Tamil Nadu,2020,49844.0,14527.0,47618.0,South
+Telangana,2020,19172.0,6882.0,18661.0,South
+Tripura,2020,466.0,192.0,470.0,Northeast
+Uttarakhand,2020,1041.0,674.0,854.0,North
+Uttar Pradesh,2020,34243.0,19149.0,22410.0,North
+West Bengal,2020,10863.0,5128.0,9715.0,East
+Andaman & Nicobar Islands,2020,141.0,14.0,145.0,South
+Chandigarh,2020,159.0,53.0,148.0,North
+Dadra & Nagar Haveli and Daman & Diu,2020,100.0,64.0,119.0,West
+Delhi,2020,4178.0,1196.0,3662.0,North
+Jammu & Kashmir,2020,4860.0,728.0,5894.0,North
+Ladakh,2020,,,,North
+Lakshadweep,2020,1.0,0.0,1.0,South
+Puducherry,2020,969.0,145.0,1019.0,South
+Andhra Pradesh,2021,21556.0,8186.0,21040.0,South
+Arunachal Pradesh,2021,283.0,157.0,347.0,Northeast
+Assam,2021,7411.0,3036.0,5763.0,Northeast
+Bihar,2021,9553.0,7660.0,7946.0,East
+Chhattisgarh,2021,12375.0,5371.0,10683.0,Central
+Goa,2021,2849.0,226.0,843.0,West
+Gujarat,2021,15186.0,7452.0,13690.0,West
+Haryana,2021,9933.0,4706.0,8121.0,North
+Himachal Pradesh,2021,2404.0,1052.0,3454.0,North
+Jharkhand,2021,4728.0,3513.0,3227.0,East
+Karnataka,2021,34647.0,10038.0,40754.0,South
+Kerala,2021,33296.0,3429.0,36775.0,South
+Madhya Pradesh,2021,48877.0,12057.0,48956.0,Central
+Maharashtra,2021,29477.0,13528.0,23071.0,West
+Manipur,2021,366.0,110.0,504.0,Northeast
+Meghalaya,2021,245.0,187.0,263.0,Northeast
+Mizoram,2021,69.0,56.0,65.0,Northeast
+Nagaland,2021,746.0,55.0,380.0,Northeast
+Odisha,2021,10983.0,5081.0,9782.0,East
+Punjab,2021,5871.0,4589.0,3072.0,North
+Rajasthan,2021,20951.0,10043.0,19344.0,North
+Sikkim,2021,155.0,56.0,244.0,Northeast
+Tamil Nadu,2021,55682.0,15384.0,55996.0,South
+Telangana,2021,21315.0,7557.0,20107.0,South
+Tripura,2021,479.0,194.0,547.0,Northeast
+Uttarakhand,2021,1405.0,820.0,1091.0,North
+Uttar Pradesh,2021,37729.0,21227.0,24897.0,North
+West Bengal,2021,11937.0,5800.0,10454.0,East
+Andaman & Nicobar Islands,2021,115.0,20.0,97.0,South
+Chandigarh,2021,208.0,96.0,172.0,North
+Dadra & Nagar Haveli and Daman & Diu,2021,140.0,76.0,171.0,West
+Delhi,2021,4720.0,1239.0,4273.0,North
+Jammu & Kashmir,2021,5452.0,774.0,6972.0,North
+Ladakh,2021,236.0,56.0,242.0,North
+Lakshadweep,2021,4.0,1.0,6.0,South
+Puducherry,2021,1049.0,140.0,1099.0,South
+Andhra Pradesh,2022,21249.0,8293.0,21340.0,South
+Arunachal Pradesh,2022,227.0,148.0,186.0,Northeast
+Assam,2022,7023.0,2994.0,5637.0,Northeast
+Bihar,2022,10801.0,8898.0,7068.0,East
+Chhattisgarh,2022,13279.0,5834.0,11695.0,Central
+Goa,2022,3011.0,271.0,1091.0,West
+Gujarat,2022,15751.0,7618.0,15089.0,West
+Haryana,2022,10429.0,4915.0,8519.0,North
+Himachal Pradesh,2022,2597.0,1032.0,4063.0,North
+Jharkhand,2022,5175.0,3898.0,3747.0,East
+Karnataka,2022,39762.0,11702.0,48154.0,South
+Kerala,2022,43910.0,4317.0,49307.0,South
+Madhya Pradesh,2022,54432.0,13427.0,55168.0,Central
+Maharashtra,2022,33383.0,15224.0,27239.0,West
+Manipur,2022,508.0,127.0,817.0,Northeast
+Meghalaya,2022,246.0,162.0,310.0,Northeast
+Mizoram,2022,133.0,113.0,107.0,Northeast
+Nagaland,2022,489.0,73.0,291.0,Northeast
+Odisha,2022,11663.0,5467.0,10302.0,East
+Punjab,2022,6138.0,4756.0,3324.0,North
+Rajasthan,2022,23614.0,11104.0,22293.0,North
+Sikkim,2022,211.0,92.0,354.0,Northeast
+Tamil Nadu,2022,64105.0,17884.0,67703.0,South
+Telangana,2022,21619.0,7559.0,20209.0,South
+Tripura,2022,575.0,241.0,541.0,Northeast
+Uttarakhand,2022,1674.0,1042.0,1613.0,North
+Uttar Pradesh,2022,41746.0,22595.0,28541.0,North
+West Bengal,2022,13686.0,6002.0,12843.0,East
+Andaman & Nicobar Islands,2022,141.0,19.0,136.0,South
+Chandigarh,2022,237.0,83.0,203.0,North
+Dadra & Nagar Haveli and Daman & Diu,2022,196.0,90.0,273.0,West
+Delhi,2022,5652.0,1461.0,5201.0,North
+Jammu & Kashmir,2022,6092.0,805.0,8372.0,North
+Ladakh,2022,374.0,62.0,346.0,North
+Lakshadweep,2022,3.0,2.0,2.0,South
+Puducherry,2022,1181.0,181.0,1282.0,South
+Andhra Pradesh,2023,19949.0,8137.0,,South
+Arunachal Pradesh,2023,287.0,145.0,,Northeast
+Assam,2023,7421.0,3296.0,,Northeast
+Bihar,2023,11014.0,8873.0,,East
+Chhattisgarh,2023,13468.0,6166.0,,Central
+Goa,2023,2846.0,290.0,,West
+Gujarat,2023,16349.0,7854.0,,West
+Haryana,2023,10463.0,4968.0,,North
+Himachal Pradesh,2023,2253.0,889.0,,North
+Jharkhand,2023,5315.0,4173.0,,East
+Karnataka,2023,43440.0,12321.0,,South
+Kerala,2023,48091.0,4080.0,,South
+Madhya Pradesh,2023,55327.0,13798.0,,Central
+Maharashtra,2023,35243.0,15366.0,,West
+Manipur,2023,398.0,73.0,,Northeast
+Meghalaya,2023,223.0,168.0,,Northeast
+Mizoram,2023,106.0,96.0,,Northeast
+Nagaland,2023,303.0,86.0,,Northeast
+Odisha,2023,11992.0,5739.0,,East
+Punjab,2023,6269.0,4829.0,,North
+Rajasthan,2023,24694.0,11762.0,,North
+Sikkim,2023,182.0,57.0,,Northeast
+Tamil Nadu,2023,67213.0,18347.0,,South
+Telangana,2023,22903.0,7660.0,,South
+Tripura,2023,577.0,261.0,,Northeast
+Uttarakhand,2023,1691.0,1054.0,,North
+Uttar Pradesh,2023,44534.0,23652.0,,North
+West Bengal,2023,13795.0,6027.0,,East
+Andaman & Nicobar Islands,2023,143.0,24.0,,South
+Chandigarh,2023,182.0,67.0,,North
+Dadra & Nagar Haveli and Daman & Diu,2023,182.0,74.0,,West
+Delhi,2023,5834.0,1457.0,,North
+Jammu & Kashmir,2023,6298.0,893.0,,North
+Ladakh,2023,289.0,59.0,,North
+Lakshadweep,2023,1.0,0.0,,South
+Puducherry,2023,1308.0,149.0,,South
+Andhra Pradesh,2024,19557.0,8346.0,,South
+Arunachal Pradesh,2024,277.0,168.0,,Northeast
+Assam,2024,7848.0,3351.0,,Northeast
+Bihar,2024,11610.0,9347.0,,East
+Chhattisgarh,2024,14857.0,6945.0,,Central
+Goa,2024,2682.0,286.0,,West
+Gujarat,2024,15588.0,7717.0,,West
+Haryana,2024,9806.0,4689.0,,North
+Himachal Pradesh,2024,2156.0,869.0,,North
+Jharkhand,2024,5196.0,4114.0,,East
+Karnataka,2024,43062.0,12390.0,,South
+Kerala,2024,48834.0,3880.0,,South
+Madhya Pradesh,2024,56669.0,14791.0,,Central
+Maharashtra,2024,36118.0,15715.0,,West
+Manipur,2024,299.0,72.0,,Northeast
+Meghalaya,2024,269.0,197.0,,Northeast
+Mizoram,2024,118.0,110.0,,Northeast
+Nagaland,2024,129.0,62.0,,Northeast
+Odisha,2024,12375.0,6142.0,,East
+Punjab,2024,6063.0,4759.0,,North
+Rajasthan,2024,24838.0,11790.0,,North
+Sikkim,2024,149.0,67.0,,Northeast
+Tamil Nadu,2024,67526.0,18449.0,,South
+Telangana,2024,25986.0,7949.0,,South
+Tripura,2024,578.0,226.0,,Northeast
+Uttarakhand,2024,1747.0,1090.0,,North
+Uttar Pradesh,2024,46052.0,24118.0,,North
+West Bengal,2024,13702.0,6676.0,,East
+Andaman & Nicobar Islands,2024,135.0,29.0,,South
+Chandigarh,2024,169.0,75.0,,North
+Dadra & Nagar Haveli and Daman & Diu,2024,152.0,95.0,,West
+Delhi,2024,5657.0,1551.0,,North
+Jammu & Kashmir,2024,5808.0,831.0,,North
+Ladakh,2024,264.0,61.0,,North
+Lakshadweep,2024,0.0,0.0,,South
+Puducherry,2024,1431.0,218.0,,South

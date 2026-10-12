@@ -1,0 +1,4 @@
+Parameter,Phase4_Status,Phase5_Status,Evidence
+2014-2017 state acc/fat/inj,DISCOVERED PDF-only,"VERIFIED CANDIDATE (AR2017 vintage, 12/12 MATCH)",02_VERIFIED_DATA/phase5/historical_2014_2017/HISTORICAL_STATE_PANEL_CANDIDATE.csv
+State registered vehicles,DISCOVERED (OGD),DISCOVERED (OGD + RTYB identified; download blocked),research_acquisition/PHASE5_VEHICLE_FINDING.md
+2019 vintage control,documented,preserved (AR2017 vintage separate; benchmark untouched),provenance file

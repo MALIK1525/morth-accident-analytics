@@ -1,0 +1,8 @@
+Question,Variables,Dataset,Test,Assumptions_Limits,N,Status
+India accident trend 2018-24,Year;Accidents,INDIA_YEAR,Descriptive + OLS slope,N=7 limits power,7,READY
+State accident slopes,Year;Accidents by state,STATE_YEAR,OLS per state (N=7),Low power; wide CI,7,READY
+Weather association,Rain/Tmax/Tmin;Acc/Fat,WEATHER_MATCHED,Pearson+Spearman pooled,Scale confounding; N~236,236,READY
+Weather x severity,Weather;Fatalities/Acc,WEATHER_MATCHED,Pearson+Spearman pooled,As above,236,READY
+NCRB seasonality 2024,Month;Cases,NCRB_MONTHLY,Shares + MoM change,Single year; NCRB vintage,12,READY
+ANOVA across zones,Zone;Accidents,ZONE_YEAR,ANOVA,Repeated measures; small N,42,CONDITIONAL
+Chi-square causation,Cause categories,SUPPORTING,Chi-square,India-level only; no exposure,0,DEFERRED

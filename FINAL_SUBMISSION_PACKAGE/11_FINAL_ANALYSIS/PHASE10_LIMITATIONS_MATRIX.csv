@@ -1,0 +1,11 @@
+Limitation,Affected_Analysis,Why_It_Matters,Current_Status,Possible_Future_Solution
+Vehicle exposure (state stock),per-vehicle rates,no denominator exists,UNAVAILABLE,manual OGD/RTYB acquisition
+Vehicle-km / AADT,exposure modeling,no source,UNAVAILABLE,transport surveys
+Accident-level microdata / coords,"hotspots, severity modeling",eDAR restricted,ACCESS-RESTRICTED,authority data-sharing
+Driver / vehicle detail,driver-risk analysis,no verified file,UNAVAILABLE,MoRTH annexure extraction
+Humidity/visibility/fog/wind,environmental completeness,IMD grids temp/rain only,UNAVAILABLE,station-data request
+MoRTH monthly state data,seasonality in-benchmark,NCRB vintage only,PARTIAL,NCRB extraction stands separate
+Multi-state districts,sub-state analysis,TN only,PARTIAL,state transport portals
+2023-24 state injuries,recent severity,source stops 2022,UNAVAILABLE,future AR releases
+2014-17 compatibility,long panel,J&K break; DNH merge,CONDITIONAL,flagged harmonized candidate
+Small ML panel (N=213),prediction power,persistence dominates,LIMITED,more years / richer features

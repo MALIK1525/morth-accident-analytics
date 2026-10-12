@@ -1,0 +1,17 @@
+Figure,Title,Dataset,Variables,GraphType,Source,RQ,Interpretation,Limitation
+F01,India accidents 2018-2024,benchmark,Year x Accidents,Line,MoRTH CLEAN,RQ1,fluctuating +3.7%,2020 break
+F02,India fatalities 2018-2024,benchmark,Year x Fatalities,Line,MoRTH CLEAN,RQ1,+12.4% outpaces accidents,ns slope
+F03,Severity 33.50 to 36.33,benchmark,Year x Ratio,Line,derived,RQ1,severity rises,not a population rate
+F04,Zone trends,zone-year,Year x Acc by zone,Line,benchmark+map,RQ2,descriptive differences,no ranking
+F05,State-year accident heatmap,matrices,State x Year,Heatmap,benchmark,RQ2,heterogeneity,NV as missing
+F06,State slope distribution,trends,State x Slope,Bar+CI,OLS N=7,RQ2,mostly non-detectable,low power
+F07,Rain vs accidents,weather join,Rain x Acc,Scatter,IMD+MoRTH,RQ4,r=-0.234 pooled,scale confounding
+F08,Tmax vs fatalities,weather join,Tmax x Fat,Scatter,IMD+MoRTH,RQ4,r=+0.498 pooled,not causal
+F09,Cause x fatalities 2024,CS-01,Cause x Killed,Bar,AR2024 mirror,RQ5,over-speeding 70.3%,reported category
+F10,Collision x accidents 2024,CL-01,Type x Acc,Bar,AR2024 mirror,RQ6,Hit from Back leads,India-level
+F11,Road-user fatalities 2024,VH-01,Mode x Killed,Bar,AR2024 mirror,RQ7,two-wheelers 46.2%,counts not risk
+F12,Licence + safety 2024,DL/SD-01,Categories,Bar,AR2024 mirror,RQ8,reported shares,not driver-level
+F13,NCRB monthly 2024,NCRB,Month x Cases,Bar,ADSI T1A.5,RQ3,May peak Jul trough,NCRB vintage
+F14,TN districts 2021-23,TN,District x Year,Line,district CSV,RQ2,TN-only verified,single state
+F15,Actual vs predicted + RMSE bars,phase9,Actual/Pred/RMSE,Scatter+Bar,stored predictions,RQ9,naive wins,null result
+F16,K-means silhouette + PCA scatter,phase9,K/silhouette/PC,Line+Scatter,profiles,RQ10,K=2 descriptive,exploratory

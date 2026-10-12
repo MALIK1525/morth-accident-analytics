@@ -1,0 +1,8 @@
+document,slide_or_section,claim,spoken_value,source_value,status,notes
+script,all_slides,research values preserved,locked values used,locked values,PASS,observational language throughout
+script,S9,2024 totals,"487707/177175",487707/177175,PASS,
+script,S11,Friedman,"25.29/3.0e-4/0.72",25.29/3.0e-4/0.72,PASS,
+script,S15,weather r values,locked set,locked set,PASS,association-only wording
+script,S22,naive RMSE,"1038.6/286.3",1038.6/286.3,PASS,honest null framing
+script,S23,K-means,"K=2/sil 0.356/17+6",K=2/sil 0.356/17+6,PASS,descriptive only
+2min,all,values match scripts,locked values,locked values,PASS,standalone smooth text

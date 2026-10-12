@@ -1,0 +1,18 @@
+Section,Claim,Expected,Actual,Status,Source
+poster,India 2024 acc,487,707,487,707,PASS,Phase11 locked results
+poster,India 2024 fat,177,175,177,175,PASS,Phase11 locked results
+poster,India inj,471,441,471,441,PASS,Phase11 locked results
+poster,state-years,254,254,PASS,Phase11 locked results
+poster,entities,38,38,PASS,Phase11 locked results
+poster,weather,236/18,236/18,PASS,Phase11 locked results
+poster,Friedman,25.29/p=3.0e-4/W=0.72,25.29/p=3.0e-4/W=0.72,PASS,Phase11 locked results
+poster,rain r,-0.234/-0.376,-0.234/-0.376,PASS,Phase11 locked results
+poster,Tmax r,+0.452/+0.498,+0.452/+0.498,PASS,Phase11 locked results
+poster,Tmin r,+0.366/+0.340,+0.366/+0.340,PASS,Phase11 locked results
+poster,NCRB May/Jul,8.84%/7.46%,8.84%/7.46%,PASS,Phase11 locked results
+poster,overspeed,70.7%/70.3%,70.7%/70.3%,PASS,Phase11 locked results
+poster,2W/ped,46.2%/20.6%,46.2%/20.6%,PASS,Phase11 locked results
+poster,licence,68.2%,68.2%,PASS,Phase11 locked results
+poster,helmet/belt,54,122/14,466,54,122/14,466,PASS,Phase11 locked results
+poster,naive RMSE,1038.6/286.3,1038.6/286.3,PASS,Phase11 locked results
+poster,K-means,K=2/sil=0.356/17+6,K=2/sil=0.356/17+6,PASS,Phase11 locked results

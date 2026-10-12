@@ -1,0 +1,8 @@
+Parameter,Phase3_Status,Phase4_Status,Evidence
+D-02 Month,UNAVAILABLE,PARTIAL (NCRB 2024 Road-states extracted; separate vintage),02_VERIFIED_DATA/phase4/ncrb_monthwise_traffic_accidents_2024.csv
+B-04 District,UNAVAILABLE,PARTIAL (TN 2021-23 verified; single state),01_RAW_DATA/phase4/tamilnadu_district/tn_district_2021_23.csv
+A-03 Time bucket,PARTIAL,PARTIAL (NCRB Table 1A.6 discovered PDF-only),-
+F-04 Registered vehicles state split,PARTIAL,"DISCOVERED (OGD 2010-2020, not yet downloaded)",-
+2014-2017 state panel,UNAVAILABLE,DISCOVERED (AR PDFs; extraction pending),-
+A-01 Accident ID / coords,UNAVAILABLE,ACCESS-RESTRICTED (eDAR),-
+J-04 Humidity etc.,UNAVAILABLE,NOT AVAILABLE (IMD grids temp/rain only),-

@@ -1,0 +1,46 @@
+Document,Field,Expected_Value,Actual_Value,Status
+FINAL_BTECH_RESEARCH_REPORT.md,Title core,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,Years,2018-2024,2018-2024,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,State-years,254,254,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,Entities,38,38,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,Weather matched,236,236,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,ML test,2023-2024,2023-2024,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,Baseline RMSE acc,1038.6,1038.6,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,K-means K,K=2,K=2,PASS
+FINAL_BTECH_RESEARCH_REPORT.md,Silhouette,0.356,0.356,PASS
+FINAL_RESEARCH_PAPER.md,Title core,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,PASS
+FINAL_RESEARCH_PAPER.md,Years,2018-2024,2018-2024,PASS
+FINAL_RESEARCH_PAPER.md,State-years,254,254,PASS
+FINAL_RESEARCH_PAPER.md,Entities,38,38,PASS
+FINAL_RESEARCH_PAPER.md,Weather matched,236,236,PASS
+FINAL_RESEARCH_PAPER.md,ML test,2023-2024,2023-2024,PASS
+FINAL_RESEARCH_PAPER.md,Baseline RMSE acc,1038.6,1038.6,PASS
+FINAL_RESEARCH_PAPER.md,K-means K,K=2,K=2,PASS
+FINAL_RESEARCH_PAPER.md,Silhouette,0.356,0.356,PASS
+FINAL_IEEE_PAPER.md,Title core,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,PASS
+FINAL_IEEE_PAPER.md,Years,2018-2024,2018-2024,PASS
+FINAL_IEEE_PAPER.md,State-years,254,254,PASS
+FINAL_IEEE_PAPER.md,Entities,38,38,PASS
+FINAL_IEEE_PAPER.md,Weather matched,236,236,PASS
+FINAL_IEEE_PAPER.md,ML test,2023-2024,2023-2024,PASS
+FINAL_IEEE_PAPER.md,Baseline RMSE acc,1038.6,1038.6,PASS
+FINAL_IEEE_PAPER.md,K-means K,K=2,K=2,PASS
+FINAL_IEEE_PAPER.md,Silhouette,0.356,0.356,PASS
+FINAL_ABSTRACT.md,Title core,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,PASS
+FINAL_ABSTRACT.md,Years,2018-2024,2018-2024,PASS
+FINAL_ABSTRACT.md,State-years,254,254,PASS
+FINAL_ABSTRACT.md,Entities,38,38,PASS
+FINAL_ABSTRACT.md,Weather matched,236,236,PASS
+FINAL_ABSTRACT.md,ML test,2023-2024,2023-2024,PASS
+FINAL_ABSTRACT.md,Baseline RMSE acc,1038.6,1038.6,PASS
+FINAL_ABSTRACT.md,K-means K,K=2,K=2,PASS
+FINAL_ABSTRACT.md,Silhouette,0.356,0.356,PASS
+FINAL_BTECH_PRESENTATION.md,Title core,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,Multi-Level Data-Driven Analysis of Road Traffic Accidents in India,PASS
+FINAL_BTECH_PRESENTATION.md,Years,2018-2024,2018-2024,PASS
+FINAL_BTECH_PRESENTATION.md,State-years,254,254,PASS
+FINAL_BTECH_PRESENTATION.md,Entities,38,38,PASS
+FINAL_BTECH_PRESENTATION.md,Weather matched,236,236,PASS
+FINAL_BTECH_PRESENTATION.md,ML test,2023-2024,2023-2024,PASS
+FINAL_BTECH_PRESENTATION.md,Baseline RMSE acc,1038.6,1038.6,PASS
+FINAL_BTECH_PRESENTATION.md,K-means K,K=2,K=2,PASS
+FINAL_BTECH_PRESENTATION.md,Silhouette,0.356,0.356,PASS

@@ -1,0 +1,4 @@
+X,Y,N,Pearson_r,Pearson_p,Spearman_rho,Spearman_p,Status,Interpretation
+Annual_Rainfall_mm,Fatality_Ratio,233,-0.0582,0.376314,-0.0243,0.712548,OK,No statistically detectable association in this dataset
+Annual_Mean_Tmax_C,Fatality_Ratio,233,0.002,0.975576,-0.0812,0.216773,OK,No statistically detectable association in this dataset
+Annual_Mean_Tmin_C,Fatality_Ratio,233,-0.0692,0.29272,-0.1467,0.025114,OK,No statistically detectable association in this dataset

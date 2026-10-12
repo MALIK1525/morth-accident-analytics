@@ -1,0 +1,7 @@
+Factor_A,Factor_B,Dataset,Years,Geography,Outcome,Method,N,Test,Statistic,p_value,Effect_Size,Status,Interpretation,Limitation
+Annual_Rainfall_mm,Accidents,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,-0.2337,0.000293,r,OK,pooled association; state scale may confound; not causal,no exposure denominator
+Annual_Rainfall_mm,Fatalities,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,-0.3758,0.0,r,OK,pooled association; state scale may confound; not causal,no exposure denominator
+Annual_Mean_Tmax_C,Accidents,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,0.4521,0.0,r,OK,pooled association; state scale may confound; not causal,no exposure denominator
+Annual_Mean_Tmax_C,Fatalities,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,0.4981,0.0,r,OK,pooled association; state scale may confound; not causal,no exposure denominator
+Annual_Mean_Tmin_C,Accidents,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,0.3665,0.0,r,OK,pooled association; state scale may confound; not causal,no exposure denominator
+Annual_Mean_Tmin_C,Fatalities,weather_morth_join,2018-24,34 entities,Acc/Fat,Pearson+Spearman pooled,236,Pearson,0.3397,0.0,r,OK,pooled association; state scale may confound; not causal,no exposure denominator

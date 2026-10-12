@@ -1,0 +1,31 @@
+Check,Got,Expected,Status
+2018 accidents,470403,470403,PASS
+2018 fatalities,157593,157593,PASS
+2019 accidents,456959,456959,PASS
+2019 fatalities,158984,158984,PASS
+2020 accidents,372181,372181,PASS
+2020 fatalities,138383,138383,PASS
+2021 accidents,412432,412432,PASS
+2021 fatalities,153972,153972,PASS
+2022 accidents,461312,461312,PASS
+2022 fatalities,168491,168491,PASS
+2023 accidents,480583,480583,PASS
+2023 fatalities,172890,172890,PASS
+2024 accidents,487707,487707,PASS
+2024 fatalities,177175,177175,PASS
+fatality ratio 2018,33.5,33.5,PASS
+fatality ratio 2024,36.33,36.33,PASS
+rain-acc r,-0.234,-0.234,PASS
+rain-fat r,-0.376,-0.376,PASS
+tmax-acc r,0.452,0.452,PASS
+tmax-fat r,0.498,0.498,PASS
+tmin-acc r,0.366,0.366,PASS
+tmin-fat r,0.34,0.34,PASS
+friedman chi2,25.29,25.29,PASS
+kendall W,0.72,0.72,PASS
+NCRB May share,8.84,8.84,PASS
+NCRB Jul share,7.46,7.46,PASS
+acc baseline RMSE,1038.6,1038.6,PASS
+fat baseline RMSE,286.31,286.31,PASS
+test period,[72],[72],PASS
+K=2 silhouette,0.356,0.356,PASS

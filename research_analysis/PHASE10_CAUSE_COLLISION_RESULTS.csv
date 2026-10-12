@@ -1,0 +1,31 @@
+Source,Year,Category,Accidents,Killed,Fatality_Ratio,Definition,Notes,Family
+CS-01,2023,Over-speeding,328727,117682,0.358,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Over-speeding,345024,124522,0.3609,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2023,Drunken driving/consumption of alcohol & drug,9143,3674,0.4018,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Drunken driving/consumption of alcohol & drug,8270,3204,0.3874,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2023,Driving on wrong side/Lane indiscipline,25242,9432,0.3737,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Driving on wrong side/Lane indiscipline,22530,8327,0.3696,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2023,Jumping red light,2440,818,0.3352,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Jumping red light,1559,528,0.3387,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2023,Use of mobile phone,7122,2884,0.4049,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Use of mobile phone,4935,2002,0.4057,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2023,Others,107909,38400,0.3559,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CS-01,2024,Others,105389,38592,0.3662,Killed/Accidents (case-fatality-style; NOT a population rate),"reported violation/cause category, not proven mechanism",violation/cause
+CL-01,2023,Hit and Run,68783,31209,0.4537,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Hit and Run,68584,34030,0.4962,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,With parked Vehicle,13810,5636,0.4081,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,With parked Vehicle,11198,4486,0.4006,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Hit from Back,110656,36804,0.3326,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Hit from Back,113907,37404,0.3284,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Hit from side,73805,20623,0.2794,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Hit from side,77112,21716,0.2816,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Run off Road,21527,10196,0.4736,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Run off Road,19082,8917,0.4673,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Fixed object,17451,8291,0.4751,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Fixed object,16246,7521,0.4629,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Vehicle overturn,18905,9124,0.4826,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Vehicle overturn,17296,8419,0.4868,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Head on collision,84348,28898,0.3426,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Head on collision,84429,28400,0.3364,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2023,Others,71298,22109,0.3101,Killed/Accidents (case-fatality-style),descriptive only,collision
+CL-01,2024,Others,79853,26282,0.3291,Killed/Accidents (case-fatality-style),descriptive only,collision

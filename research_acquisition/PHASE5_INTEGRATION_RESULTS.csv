@@ -1,0 +1,4 @@
+Dataset_A,Dataset_B,Join_Key,Years,Geography,Unit_Compat,Definition_Compat,Missingness,Safe_Integration,Reason
+MoRTH 2018-24 benchmark,Historical 2014-17 candidate,State+Year,2014-17 vs 2018-24,CONDITIONAL geography,counts,J&K split + DNH merge handling required,none,CONDITIONAL,Join allowed only with documented SPLIT/AGGREGATE transforms; benchmark untouched
+MoRTH accidents,State registered vehicles,State+Year,no verified state file,-,-,-,all years missing,UNSAFE (no data),No verified state-level vehicle denominator acquired
+MoRTH accidents (India),Registered vehicles India (EX-01),Year,2014-22,India,counts vs 000,stock incl dead vehicles,2023-24 NA,CONDITIONAL (descriptive only),India-level comparison only; not a state rate

@@ -1,0 +1,10 @@
+X,Y,N,Pearson_r,Pearson_p,Spearman_rho,Spearman_p,Status
+Annual_Rainfall_mm,Accidents,236,-0.2337,0.000293,-0.3432,0.0,OK
+Annual_Rainfall_mm,Fatalities,236,-0.3758,0.0,-0.3934,0.0,OK
+Annual_Mean_Tmax_C,Accidents,236,0.4521,0.0,0.6081,0.0,OK
+Annual_Mean_Tmax_C,Fatalities,236,0.4981,0.0,0.622,0.0,OK
+Annual_Mean_Tmin_C,Accidents,236,0.3665,0.0,0.5009,0.0,OK
+Annual_Mean_Tmin_C,Fatalities,236,0.3397,0.0,0.4671,0.0,OK
+Annual_Rainfall_mm,Severity,233,-0.0582,0.376314,-0.0243,0.712548,OK
+Annual_Mean_Tmax_C,Severity,233,0.002,0.975576,-0.0812,0.216773,OK
+Annual_Mean_Tmin_C,Severity,233,-0.0692,0.29272,-0.1467,0.025114,OK

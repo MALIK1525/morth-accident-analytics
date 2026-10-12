@@ -1,0 +1,19 @@
+File,Rows,Schema_Check,Status
+research_analysis\PHASE10_CAUSE_COLLISION_RESULTS.csv,30,columns: Source|Year|Category|Accidents|Killed|Fatality_Ratio,PASS
+research_analysis\PHASE10_CITY_RESULTS.csv,51,columns: City|Accidents_2024|Killed_2024|Fatality_Ratio|Note,PASS
+research_analysis\PHASE10_CLUSTER_RESULTS.csv,2,columns: Cluster|N|MAcc|MFat|FRatio|AccSlope,PASS
+research_analysis\PHASE10_EVIDENCE_MATRIX.csv,8,columns: Finding_ID|Research_Question|Dataset|Years|Population|Method,PASS
+research_analysis\PHASE10_FINAL_FINDINGS.csv,8,columns: Finding_ID|Research_Question|Dataset|Years|Population|Method,PASS
+research_analysis\PHASE10_FINAL_GRAPH_PLAN.csv,17,columns: Graph_ID|Research_Question|Dataset|Variables|Y_Var|Graph_Type,PASS
+research_analysis\PHASE10_HYPOTHESIS_MATRIX.csv,13,columns: H0_H1|Hypothesis|Dataset|Method|Result|Decision,PASS
+research_analysis\PHASE10_INDIA_FINAL_RESULTS.csv,7,columns: Year|Accidents|Fatalities|States|Injuries|Injuries_India_Verified,PASS
+research_analysis\PHASE10_LICENCE_SAFETY_RESULTS.csv,22,columns: Source|Year|Category|Accidents|Share_of_reported|Note,PASS
+research_analysis\PHASE10_LIMITATIONS_MATRIX.csv,10,columns: Limitation|Affected_Analysis|Why_It_Matters|Current_Status|Possible_Future_Solution,PASS
+research_analysis\PHASE10_ML_FINAL_RESULTS.csv,12,columns: Target|Model|Train_N|Test_N|Train_MAE|Train_RMSE,PASS
+research_analysis\PHASE10_NCRB_MONTHLY_RESULTS.csv,12,columns: Month|Cases|Share_pct|MoM_change_pct|Source,PASS
+research_analysis\PHASE10_PAPER_TABLE_PLAN.csv,10,columns: Table|Title|Source_File,PASS
+research_analysis\PHASE10_ROAD_USER_RESULTS.csv,18,columns: Source|Year|Category|Killed|Share_of_total|Note,PASS
+research_analysis\PHASE10_STATE_FINAL_RESULTS.csv,76,columns: State_UT|Metric|N|Slope|R2|P,PASS
+research_analysis\PHASE10_TN_DISTRICT_RESULTS.csv,38,columns: Sl No|District|Total Accidents 2021|Total Deaths 2021|Total Accidents 2022|Total Deaths 2022,PASS
+research_analysis\PHASE10_WEATHER_FINAL_RESULTS.csv,9,columns: X|Y|N|Pearson_r|Pearson_p|Spearman_rho,PASS
+research_analysis\PHASE10_ZONE_FINAL_RESULTS.csv,42,columns: Zone|Year|Accidents|Fatalities|India_Acc|Share_pct,PASS

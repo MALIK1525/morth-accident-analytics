@@ -1,0 +1,2 @@
+Test,Variables,N,Assumptions,Statistic,p_value,Effect_size,Interpretation
+Chi-square goodness-of-fit vs uniform,Month;Road-States cases (NCRB vintage),12,expected=total/12 all >5000; independent months assumed,1276.0,0.0,,tests deviation from uniform monthly distribution; NCRB vintage only

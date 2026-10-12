@@ -1,0 +1,16 @@
+Target,Model,Feature,Importance,Note
+Accidents,GradientBoosting,Accidents_lag1,0.9726,predictive contribution only; not causal
+Accidents,GradientBoosting,Accidents_lag2,0.0042,predictive contribution only; not causal
+Accidents,GradientBoosting,Fatalities_lag1,0.0052,predictive contribution only; not causal
+Accidents,GradientBoosting,Fatalities_lag2,0.0016,predictive contribution only; not causal
+Accidents,GradientBoosting,Acc_growth_lag1,0.003,predictive contribution only; not causal
+Accidents,GradientBoosting,Annual_Rainfall_mm_lag1,0.0012,predictive contribution only; not causal
+Accidents,GradientBoosting,Annual_Mean_Tmax_C_lag1,0.0053,predictive contribution only; not causal
+Accidents,GradientBoosting,Annual_Mean_Tmin_C_lag1,0.0042,predictive contribution only; not causal
+Accidents,GradientBoosting,Year,0.0016,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_Central,0.0,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_East,0.0,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_North,0.0,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_Northeast,0.0,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_South,0.0,predictive contribution only; not causal
+Accidents,GradientBoosting,Zone_West,0.0013,predictive contribution only; not causal

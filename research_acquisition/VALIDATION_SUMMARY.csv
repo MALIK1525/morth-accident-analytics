@@ -1,0 +1,8 @@
+Check,Computed,Published,Difference,Result
+TN district 2021 acc sum,55682,55682 (MoRTH TN 2021),0,MATCH
+TN district 2022 fat sum,17884,17884 (MoRTH TN 2022),0,MATCH
+TN district 2023 acc sum,67213,67213 (MoRTH TN 2023),0,MATCH
+NCRB Road states+UTs 2024,467967,467967 (TOTAL ALL INDIA),0,MATCH
+NCRB Road cities 2024,71239,71239 (TOTAL CITIES),0,MATCH
+NCRB RailX/Rail/Grand sections,all match,published totals,0,MATCH
+NCRB road vs MoRTH 2024,467967,487707 (MoRTH),-19740,MISMATCH (definition)

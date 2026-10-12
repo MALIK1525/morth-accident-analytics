@@ -1,0 +1,31 @@
+Target,Model,Feature,Coef,Note
+Fatalities,LinearRegression,Accidents_lag1,194.5782,direction under this specification; not causal
+Fatalities,LinearRegression,Accidents_lag2,-412.0611,direction under this specification; not causal
+Fatalities,LinearRegression,Fatalities_lag1,5050.4483,direction under this specification; not causal
+Fatalities,LinearRegression,Fatalities_lag2,362.8915,direction under this specification; not causal
+Fatalities,LinearRegression,Acc_growth_lag1,-85.6077,direction under this specification; not causal
+Fatalities,LinearRegression,Annual_Rainfall_mm_lag1,62.9912,direction under this specification; not causal
+Fatalities,LinearRegression,Annual_Mean_Tmax_C_lag1,248.0702,direction under this specification; not causal
+Fatalities,LinearRegression,Annual_Mean_Tmin_C_lag1,-322.9081,direction under this specification; not causal
+Fatalities,LinearRegression,Year,293.7157,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_Central,86.0062,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_East,34.0717,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_North,-118.1326,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_Northeast,-22.4823,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_South,70.219,direction under this specification; not causal
+Fatalities,LinearRegression,Zone_West,4.0154,direction under this specification; not causal
+Accidents,LinearRegression,Accidents_lag1,15696.5707,standardized coef; not causal
+Accidents,LinearRegression,Accidents_lag2,-874.5293,standardized coef; not causal
+Accidents,LinearRegression,Fatalities_lag1,-592.6033,standardized coef; not causal
+Accidents,LinearRegression,Fatalities_lag2,980.3584,standardized coef; not causal
+Accidents,LinearRegression,Acc_growth_lag1,-222.6323,standardized coef; not causal
+Accidents,LinearRegression,Annual_Rainfall_mm_lag1,295.3025,standardized coef; not causal
+Accidents,LinearRegression,Annual_Mean_Tmax_C_lag1,497.7088,standardized coef; not causal
+Accidents,LinearRegression,Annual_Mean_Tmin_C_lag1,-642.762,standardized coef; not causal
+Accidents,LinearRegression,Year,1057.2394,standardized coef; not causal
+Accidents,LinearRegression,Zone_Central,154.7922,standardized coef; not causal
+Accidents,LinearRegression,Zone_East,65.796,standardized coef; not causal
+Accidents,LinearRegression,Zone_North,-119.4018,standardized coef; not causal
+Accidents,LinearRegression,Zone_Northeast,-104.8202,standardized coef; not causal
+Accidents,LinearRegression,Zone_South,188.5298,standardized coef; not causal
+Accidents,LinearRegression,Zone_West,-123.626,standardized coef; not causal

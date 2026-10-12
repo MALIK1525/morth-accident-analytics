@@ -1,0 +1,1158 @@
+==================== AR2017
+--- p61 ---
+Sl. No. States/UTs 2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 7277 7524 7851 7564
+2 Arunachal Pradesh 92 117 103 103
+3 Assam 2169 2122 2445 2474
+4 Bihar 4505 4771 4425 5045
+5 Chhattisgarh 3570 3710 3527 3878
+6 Goa 283 302 316 306
+7 Gujarat 7063 7332 7296 6739
+8 Haryana 4214 4430 4636 4700
+9 Himachal Pradesh 831 843 1000 907
+10 Jammu & Kashmir 886 749 734 765
+11 Jharkhand 2259 2619 2681 3034
+12 Karnataka 9485 9888 10215 9739
+13 Kerala 3823 3937 4064 3915
+14 Madhya Pradesh 7554 8412 8774 9258
+15 Maharashtra 11528 12009 11780 11220
+16 Manipur 149 116 78 107
+17 Meghalaya 127 153 146 140
+18 Mizoram 88 50 61 55
+19 Nagaland 68 23 41 35
+20 Odisha 3506 3855 4036 4372
+21 Punjab 4285 4357 4584 4139
+22 Rajasthan 9334 9306 9282 9300
+23 Sikkim 53 61 60 60
+24 Tamil Nadu 14165 14524 16092 15061
+25 Telangana 6316 6569 6617 6110
+26 Tripura 168 154 165 153
+27 Uttarakhand 713 765 801 727
+28 Uttar Pradesh 13842 15218 16164 17706
+29 West Bengal 5489 5779 6081 5199
+30 Andaman & Nicobar Islands 20 22 16 20
+31 Chandigarh 124 124 144 103
+32 Dadra & Nagar Haveli 53 36 40 40
+33 Daman & Diu 15 38 32 36
+34 Delhi 1629 1582 1548 1565
+35 Lakshadweep 0 0 1 0
+36 Puducherry 145 229 235 221
+125828 131726 136071 134796
+Annexure - 5
+Total Number of Fatal Road Accidents in States/UTs: 2014-2017
+Total 
+53
+--- p62 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 32.4 34.2 34.3 31.3
+2 Arunachal Pradesh 58 44.7 59.8 45.6
+3 Assam 35.3 34.4 34.6 38.8
+4 Bihar 51.4 56.7 59.6 62.7
+5 Chhattisgarh 29.1 28.3 28.8 30.5
+6 Goa 6.9 7.2 7.8 8.4
+7 Gujarat 33.5 35.0 37.2 38.2
+8 Haryana 42 43.7 44.7 45.5
+9 Himachal Pradesh 39.2 36.4 40.1 38.6
+10 Jammu & Kashmir 16.9 15.7 17.4 16.5
+11 Jharkhand 50.5 56.0 61.4 62.6
+12 Karnataka 23.9 24.7 25.1 24.9
+13 Kerala 11.2 10.8 10.9 10.7
+14 Madhya Pradesh 16 17.0 17.9 19.1
+15 Maharashtra 20.8 20.7 32.4 34.2
+16 Manipur 22.6 20.7 15.1 23.5
+17 Meghalaya 26 30.2 24.2 27.0
+18 Mizoram 78 102.9 84.3 88.2
+19 Nagaland 26.6 55.6 61.3 7.7
+20 Odisha 40.7 40.8 42.4 44.1
+21 Punjab 72.3 73.0 73.0 71.1
+22 Rajasthan 41.8 43.7 45.4 47.2
+23 Sikkim 29.1 32.0 40.5 39.8
+24 Tamil Nadu 22.6 22.7 24.1 24.6
+25 Telangana 34.4 33.5 31.6 29.3
+26 Tripura 26.3 24.4 31.1 32.0
+27 Uttarakhand 62.3 59.9 60.5 58.8
+28 Uttar Pradesh 52.5 54.5 54.3 51.9
+29 West Bengal 45.6 47.2 48.2 49.6
+30 Andaman & Nicobar Islands 10.6 8.9 7.1 11.1
+31 Chandigarh 35.5 31.0 35.3 31.3
+32 Dadra & Nagar Haveli 67.8 60.9 65.7 64.2
+33 Daman & Diu 38.5 60.0 53.5 45.6
+34 Delhi 19.4 20.1 21.6 23.7
+35 Lakshadweep 0 0.0 100.0 0.0
+36 Puducherry 13.6 15.4 13.8 13.8
+28.5 29.1 31.4 31.8
+Annexure - 6
+S. No. States/UTs
+54
+Severity* of Road Accidents in India (State/UT-wise): 2014 to 2017
+Persons Killed per 100 Accidents
+National Average
+Note:   * Accident Severity:  Road accident deaths per 100 accidents
+--- p63 ---
+1 2 3 4 5 6 7
+1 Andhra Pradesh 7,564 4,607 10,285 3,271 25,727
+2 Arunachal Pradesh 103 86 26 26 241
+3 Assam 2,474 3,451 706 539 7,170
+4 Bihar 5,045 2,431 887 492 8,855
+5 Chhattisgarh 3,878 1,706 6,285 1,694 13,563
+6 Goa 306 237 926 2,448 3,917
+7 Gujarat 6,739 5,653 5,033 1,656 19,081
+8 Haryana 4,700 1,700 4,771 87 11,258
+9 Himachal Pradesh 907 959 1042 206 3,114
+10 Jammu & Kashmir 765 2179 1,945 735 5,624
+11 Jharkhand 3,034 1,734 337 93 5,198
+12 Karnataka 9,739 14,191 14,247 4,365 42,542
+13 Kerala 3,915 27,034 5,994 1,527 38,470
+14 Madhya Pradesh 9,258 4,863 34,493 4,785 53,399
+15 Maharashtra 11,220 12,164 7,253 5,216 35,853
+16 Manipur 107 91 342 38 578
+17 Meghalaya 140 253 101 181 675
+18 Mizoram 55 8 2 3 68
+19 Nagaland 35 72 159 265 531
+20 Orissa 4,372 4,021 2,302 160 10,855
+21 Punjab 4,139 1,490 561 83 6,273
+22 Rajasthan 9,300 4,017 8,110 685 22,112
+23 Sikkim 60 70 58 8 196
+24 Tamil Nadu 15,061 5,005 43,856 1,640 65,562
+25 Telangana 6,110 1,165 12,695 2,514 22,484
+26 Tripura 153 339 2 9 503
+27 Uttarakhand 727 674 167 35 1,603
+28 Uttar Pradesh 17,706 14,363 6,044 670 38,783
+29 West Bengal 5,199 4,811 560 1061 11,631
+30 A & N Islands 20 54 88 27 189
+31 Chandigarh 103 7 198 34 342
+32 D & N Haveli 40 20 4 3 67
+33 Daman & Diu 36 31 4 8 79
+34 Delhi 1,565 907 4,110 91 6,673
+35 Lakshadweep 0 1 0 0 1
+36 Puducherry 221 577 807 88 1,693
+1,34,796 1,20,971 1,74,400 34,743 4,64,910
+55
+Annexure - 7
+Type of Road accidents in States/ UTs in 2017
+S.No States/UTs Fatal 
+Accidents
+Grievous 
+Injury 
+Accidents
+Non-Injury 
+Accidents
+Total 
+Accidents
+Minor 
+Injury 
+Accidents
+Total
+--- p64 ---
+Annexure - 8
+S.No States/UTs
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+1 Andhra Pradesh 1273 649 311 661 3646 1398 907 2079 4014 1187 1308 3294 1772 501 748 1359
+2 Arunachal Pradesh 29 6 11 7 8 4 8 5 16 7 19 6 12 6 17 5
+3 Assam 1515 666 1078 218 1277 538 673 122 1086 460 883 190 630 188 458 127
+4 Bihar 3370 2237 1523 634 1134 769 441 148 846 474 463 171 835 514 425 223
+5 Chhattisgarh 1949 630 287 1265 605 181 102 441 1888 427 222 1252 1332 266 175 1001
+6 Goa 86 17 13 26 164 47 38 51 705 59 48 275 1010 52 104 471
+7 Gujarat 7337 2742 2744 2927 1920 798 867 579 3318 1212 1650 1600 2263 784 1089 1081
+8 Haryana 2817 1256 411 2238 2159 1087 543 1262 616 216 126 471 479 177 79 372
+9 Himachal Pradesh 672 159 259 479 406 101 169 240 136 38 54 138 244 48 119 268
+10 Jammu & Kashmir 221 54 82 161 616 111 201 514 138 17 24 191 106 13 50 123
+11 Jharkhand 927 775 613 101 473 356 322 77 486 388 414 85 329 235 293 83
+12 Karnataka 2911 853 1654 1498 4312 1054 2231 2140 16983 4588 8713 12848 5936 1207 3104 4343
+13 Kerala 333 43 317 303 10207 1332 7760 1990 4933 457 3734 2107 1866 185 1745 838
+14 Madhya Pradesh 11690 2437 1272 12206 3517 671 382 3178 6791 1143 1095 5808 3859 565 410 3580
+15 Maharashtra 6160 2324 3256 2082 5521 1626 2972 1324 5601 1810 3048 1795 3167 837 1682 1120
+16 Manipur 16 9 2 12 44 15 7 51 83 12 23 142 117 21 32 146
+17 Meghalaya 219 54 85 36 97 26 38 12 36 11 11 6 37 14 12 5
+18 Mizoram 11 9 8 9 8 6 1 1 5 4 2 0 3 3 1 0
+19 Nagaland 56 5 20 31 54 8 26 13 21 1 6 9 5 0 0 0
+20 Orissa 2047 838 1181 1079 698 330 296 280 1472 647 888 672 1017 432 604 562
+21 Punjab 1673 1360 777 196 482 297 205 63 967 546 676 160 781 528 391 159
+22 Rajasthan 3528 1671 1372 2204 1547 696 408 842 3855 1656 1044 2731 1856 803 522 1329
+23 Sikkim 9 3 3 14 25 8 9 12 2 2 0 0 7 0 8 9
+24 Tamil Nadu 5009 1698 303 4435 13515 3507 1229 11084 10133 2114 1180 11846 7049 1656 983 7048
+25 Telangana 1577 605 91 1208 3302 969 206 2427 4065 889 322 3870 1900 442 153 1851
+26 Tripura 60 28 69 2 124 41 118 3 81 21 93 1 52 13 82 0
+27 Uttarakhand 150 98 90 9 97 52 78 17 248 122 167 43 297 140 189 49
+28 Uttar Pradesh 6104 3269 3055 1183 2847 1431 1388 717 4370 2060 203
+--- p65 ---
+Annexure - 8       Contd…
+S.No States/UTs
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+1 Andhra Pradesh 778 313 195 752 203 79 47 228 1021 430 354 731 601 175 118 685
+2 Arunachal Pradesh 18 5 14 3 0 0 0 0 16 10 17 10 26 13 18 9
+3 Assam 418 124 333 81 66 26 59 18 182 79 128 65 362 107 221 51
+4 Bihar 463 275 279 56 108 46 57 54 216 97 109 54 160 86 76 30
+5 Chhattisgarh 725 174 130 610 107 36 32 47 577 207 100 441 154 54 46 98
+6 Goa 164 22 15 34 3 2 0 2 307 27 8 84 21 3 0 3
+7 Gujarat 578 188 247 234 420 171 191 216 548 256 338 300 562 244 314 290
+8 Haryana 207 88 104 117 33 15 6 29 352 120 67 274 216 77 39 149
+9 Himachal Pradesh 640 563 303 1294 6 3 1 3 104 44 40 178 71 13 22 74
+10 Jammu & Kashmir 144 46 126 154 11 2 0 3 81 4 24 104 9 1 9 6
+11 Jharkhand 382 231 266 68 480 67 125 72 76 93 91 31 78 93 109 17
+12 Karnataka 1242 252 648 914 204 46 105 121 738 169 406 525 632 108 345 409
+13 Kerala 32 7 31 21 0 0 0 0 268 78 145 134 216 20 279 82
+14 Madhya Pradesh 642 188 96 586 258 68 27 183 943 151 101 885 578 62 56 496
+15 Maharashtra 301 72 180 140 68 13 31 13 937 324 491 426 290 39 213 143
+16 Manipur 4 2 9 0 1 0 2 0 20 0 0 30 3 1 10 11
+17 Meghalaya 26 8 9 4 26 10 8 4 35 12 11 6 26 7 8 4
+18 Mizoram 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+19 Nagaland 88 7 13 65 0 0 0 0 77 0 7 36 37 0 5 20
+20 Orissa 401 161 213 206 149 60 96 78 530 184 325 209 276 104 142 156
+21 Punjab 237 133 109 35 227 154 98 29 155 127 70 40 259 154 150 50
+22 Rajasthan 440 228 77 366 124 62 26 97 243 136 64 158 113 55 36 92
+23 Sikkim 72 52 78 109 0 0 0 0 12 2 3 9 4 0 4 2
+24 Tamil Nadu 2197 592 155 3091 329 106 17 326 2211 651 178 2348 1087 297 151 1112
+25 Telangana 310 125 32 357 74 30 1 77 610 249 19 585 201 91 18 199
+26 Tripura 2 1 1 0 0 0 0 0 21 6 37 0 0 0 0 0
+27 Uttarakhand 3 7 0 0 11 6 7 0 103 64 57 13 32 12 20 3
+28 Uttar Pradesh 2057 1125 918 453 662 335 360 155 1379 692 721 288 896 431 403 221
+29 West Bengal 305 143 270 85 36 23 30 8 123 17 57 39 132 59 98 34
+30 A & N Islands 6 0 1 6 1 0 0 0 9 0 1 7 6 0 0 8
+31 Chandigarh 0 0 0 0 1 0 0 0 4 1 0 4 0 0 0 0
+32 D & N Haveli 0 0 0 0 0 0 0 0 6 6 8 0 0 0 0 0
+33 Daman & Diu 0 0 0 0 1 0 0 0 10 7 7 4 1 0 0 0
+34 Delhi 4
+--- p66 ---
+Annexure - 8        Contd…
+S.No States/UTs
+Total Accdents Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accdents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 35 36 37 38 39 40 41 42 43 44 45 46
+1 Andhra Pradesh 1334 528 422 1553 7807 2129 1889 7114 3278 671 879 1841
+2 Arunachal Pradesh 33 25 28 18 27 15 29 19 56 19 31 42
+3 Assam 699 261 465 112 656 244 446 88 279 90 267 80
+4 Bihar 502 316 249 86 631 397 339 184 590 343 248 165
+5 Chhattisgarh 492 153 102 430 1834 523 350 1797 3900 1485 611 3011
+6 Goa 94 15 4 39 1084 82 164 439 279 2 8 96
+7 Gujarat 1229 538 502 612 531 180 267 402 375 176 241 111
+8 Haryana 616 294 203 382 730 277 210 481 3033 1513 640 2136
+9 Himachal Pradesh 109 54 72 352 566 122 328 771 160 58 57 231
+10 Jammu & Kashmir 164 34 11 249 358 57 77 393 3776 587 3201 1716
+11 Jharkhand 581 235 188 33 401 259 200 54 985 524 576 100
+12 Karnataka 843 146 393 734 8411 2115 4768 6762 330 71 124 176
+13 Kerala 6927 730 5516 1817 13688 1279 10206 5646 0 0 0 0
+14 Madhya Pradesh 2960 631 528 3428 10334 1993 1356 9600 11827 2268 1392 10867
+15 Maharashtra 1342 445 853 528 6419 2701 4604 1866 6047 2073 3135 2226
+16 Manipur 36 4 0 72 130 23 81 230 124 49 95 72
+17 Meghalaya 19 6 6 2 57 14 22 9 97 20 43 13
+18 Mizoram 6 5 1 1 11 8 5 7 24 25 9 10
+19 Nagaland 38 6 12 11 116 7 31 47 39 7 2 21
+20 Orissa 1472 686 754 764 1121 521 608 515 1672 827 804 766
+21 Punjab 511 437 231 106 981 727 502 171 0 0 0 0
+22 Rajasthan 2532 1123 676 1738 4297 2318 1146 3419 3577 1696 1112 2612
+23 Sikkim 20 3 21 18 10 0 15 20 35 8 68 77
+24 Tamil Nadu 3852 1071 370 4358 16080 3539 1304 18481 4100 926 719 3856
+25 Telangana 733 271 98 906 3633 1134 359 4445 6079 1791 424 6342
+26 Tripura 54 17 137 0 103 30 169 2 6 4 4 0
+27 Uttarakhand 172 141 125 31 160 66 149 42 330 234 498 44
+28 Uttar Pradesh 2312 1115 1111 476 4048 2119 2258 732 10197 5523 5062 1954
+29 West Bengal 172 82 202 70 2441 1215 1920 480 1671 687 925 301
+30 A & N Islands 25 3 6 73 35 5 23 23 0 0 0 0
+31 Chandigarh 4 2 0 6 33 7 2 34 4 2 0 6
+32 D & N Haveli 0 0 0 0 12 4 6 0 17 13 3 2
+33 Daman & Diu 2 1 2 1 5 1 4 2 19 7 15 3
+34 Delhi 97 28 2 95 181 48 44 128 975 205 250 734
+35 Lakshadweep 0 0 0 0 0 0 0 0 0 0 0 0
+36 Puducherry 55 7 3 26 137 11 91 77 170 6 50 134
+30037 9413 13293 19127 87068 24170 33972 64480 64051 21910 21493 39745
+58
+Others 
+Total
+                          Accidents classified ac
+--- p67 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 8799 8477 8171 8544
+2 Arunachal Pradesh 88 113 95 88
+3 Assam 3639 3353 3478 3274
+4 Bihar 3708 3227 3138 3883
+5 Chhattisgarh 3330 4058 4042 3701
+6 Goa 1687 1784 1438 1470
+7 Gujarat 5038 4897 4617 4333
+8 Haryana 3290 3509 3818 3785
+9 Himachal Pradesh 1242 1211 1475 1460
+10 Jammu & Kashmir 2040 1953 2122 2139
+11 Jharkhand 1368 2007 1935 1828
+12 Karnataka 13827 12705 14933 14217
+13 Kerala 9006 9442 9209 8993
+14 Madhya Pradesh 12726 11988 10709 11150
+15 Maharashtra 10788 10839 10364 9237
+16 Manipur 431 404 325 372
+17 Meghalaya 270 322 338 338
+18 Mizoram 55 29 46 38
+19 Nagaland 164 34 57 341
+20 Odisha 3880 4480 4214 4487
+21 Punjab 1791 2092 2114 2533
+22 Rajasthan 6991 6821 6567 6851
+23 Sikkim 105 117 90 83
+24 Tamil Nadu 20109 21902 22573 20696
+25 Telangana 4945 5649 6166 6211
+26 Tripura 230 230 203 221
+27 Uttarakhand 669 728 842 908
+28 Uttar Pradesh 11157 13802 13078 14333
+29 West Bengal 4895 4288 4468 4158
+30 Andaman & Nicobar Islands 69 96 90 60
+31 Chandigarh 36 45 47 33
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 6 0 9
+34 Delhi 976 897 723 755
+35 Lakshadweep 0 0 0 0
+36 Puducherry 554 763 874 937
+137903 142268 142359 141466
+* Includes expressways
+Annexure - 9
+Total Number of Road Accidents on National Highways*: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Road Accidents on 
+National Highways during
+59
+Total 
+--- p68 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 2970 3235 3006 2898
+2 Arunachal Pradesh 52 49 58 41
+3 Assam 1392 1427 1295 1464
+4 Bihar 2013 2002 2014 2540
+5 Chhattisgarh 1118 1201 1181 1152
+6 Goa 108 132 113 118
+7 Gujarat 2149 2136 2141 2145
+8 Haryana 1704 1759 1845 1990
+9 Himachal Pradesh 389 369 478 528
+10 Jammu & Kashmir 452 357 403 409
+11 Jharkhand 669 1325 1222 1250
+12 Karnataka 4256 3657 4116 3792
+13 Kerala 1261 1368 1263 1309
+14 Madhya Pradesh 2395 2287 2564 2521
+15 Maharashtra 3577 3789 3887 3637
+16 Manipur 100 94 46 97
+17 Meghalaya 93 89 108 111
+18 Mizoram 40 20 45 29
+19 Nagaland 35 10 35 27
+20 Odisha 1641 1795 1812 2123
+21 Punjab 1482 1538 1495 1891
+22 Rajasthan 3598 3709 3737 4066
+23 Sikkim 33 37 39 30
+24 Tamil Nadu 5344 5752 6255 5892
+25 Telangana 1895 2103 2173 1954
+26 Tripura 74 50 68 70
+27 Uttarakhand 479 464 503 584
+28 Uttar Pradesh 5827 7773 7469 7946
+29 West Bengal 2152 2243 2304 2135
+30 Andaman & Nicobar Islands 7 4 7 7
+31 Chandigarh 21 19 24 16
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 5 0 5
+34 Delhi 253 260 238 267
+35 Lakshadweep 0 0 0 0
+36 Puducherry 70 146 131 137
+47649 51204 52075 53181
+60
+* Includes expressways
+Annexure - 10
+Total Number of Persons Killed in Road Accidents on National Highways*: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Persons Killed in Road Accidents on National 
+Highways during
+Total 
+--- p69 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 10240 9816 9553 8936
+2 Arunachal Pradesh 115 132 135 113
+3 Assam 3592 3446 2759 2813
+4 Bihar 2627 2257 2034 2433
+5 Chhattisgarh 2986 3585 3844 3345
+6 Goa 610 650 472 709
+7 Gujarat 4516 4299 3955 3062
+8 Haryana 3014 3097 3157 3588
+9 Himachal Pradesh 2067 1767 2435 2576
+10 Jammu & Kashmir 2819 3146 2895 2554
+11 Jharkhand 1081 1555 1504 1264
+12 Karnataka 20291 16813 17856 17242
+13 Kerala 10282 10542 10521 9990
+14 Madhya Pradesh 12757 10260 11375 11616
+15 Maharashtra 9742 9577 9515 8351
+16 Manipur 820 770 591 685
+17 Meghalaya 168 165 206 158
+18 Mizoram 73 26 39 11
+19 Nagaland 118 39 85 268
+20 Odisha 4594 4950 4354 4487
+21 Punjab 1203 1339 1287 1717
+22 Rajasthan 7980 7526 7023 7085
+23 Sikkim 188 172 96 173
+24 Tamil Nadu 24834 26355 27844 25268
+25 Telangana 5086 6239 6504 6856
+26 Tripura 420 422 304 338
+27 Uttarakhand 769 713 958 940
+28 Uttar Pradesh 8477 9618 9197 10232
+29 West Bengal 4531 4270 4096 3959
+30 Andaman & Nicobar Islands 112 119 160 123
+31 Chandigarh 38 39 22 29
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 2 0 2
+34 Delhi 907 888 650 760
+35 Lakshadweep 0 0 0 0
+36 Puducherry 639 747 860 939
+147696 145341 146286 142622
+61
+* Includes expressways
+Annexure - 11
+Total Number of Persons Injured in Road Accidents on National Highways*: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Persons Injured in Road 
+Accidents on National Highways during
+Total 
+--- p70 ---
+Annexure - 12
+S.No States/UTs Greviously Injured 
+persons
+Minor Injured 
+persons
+Total Injured 
+persons
+1 2 3 4 5
+1 Andhra Pradesh 2333 6603 8936
+2 Arunachal Pradesh 67 46 113
+3 Assam 2284 529 2813
+4 Bihar 1831 602 2433
+5 Chhattisgarh 642 2703 3345
+6 Goa 148 561 709
+7 Gujarat 1347 1715 3062
+8 Haryana 1129 2459 3588
+9 Himachal Pradesh 721 1855 2576
+10 Jammu & Kashmir 1148 1406 2554
+11 Jharkhand 910 354 1264
+12 Karnataka 6505 10737 17242
+13 Kerala 6647 3343 9990
+14 Madhya Pradesh 1420 10196 11616
+15 Maharashtra 5452 2899 8351
+16 Manipur 200 485 685
+17 Meghalaya 107 51 158
+18 Mizoram 9 2 11
+19 Nagaland 90 178 268
+20 Orissa 2534 1953 4487
+21 Punjab 1340 377 1717
+22 Rajasthan 2255 4830 7085
+23 Sikkim 88 85 173
+24 Tamil Nadu 1830 23438 25268
+25 Telangana 429 6427 6856
+26 Tripura 337 1 338
+27 Uttarakhand 814 126 940
+28 Uttar Pradesh 7268 2964 10232
+29 West Bengal 3170 789 3959
+30 A & N Islands 18 105 123
+31 Chandigarh 1 28 29
+32 D & N Haveli 0 0 0
+33 Daman & Diu 1 1 2
+34 Delhi 115 645 760
+35 Lakshadweep 0 0 0
+36 Puducherry 339 600 939
+Total 53529 89093 142622
+Total number of Grevious and Minor Injured Persons in Road Accidents on National 
+Highways during the calendar year 2017
+62
+--- p71 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 5644 5351 5639 5657
+2 Arunachal Pradesh 0 0 75 70
+3 Assam 1777 1898 1999 1619
+4 Bihar 2535 3255 2434 2258
+5 Chhattisgarh 3758 3898 3164 3379
+6 Goa 434 451 356 527
+7 Gujarat 7437 6739 6309 5424
+8 Haryana 3247 3389 2887 2898
+9 Himachal Pradesh 698 634 820 777
+10 Jammu & Kashmir 767 837 537 702
+11 Jharkhand 1252 1480 1704 1678
+12 Karnataka 13308 10254 11462 11193
+13 Kerala 6140 6888 7135 7044
+14 Madhya Pradesh 14267 13166 14456 14351
+15 Maharashtra 11760 11184 9052 8508
+16 Manipur 167 136 117 144
+17 Meghalaya 91 117 102 201
+18 Mizoram 51 34 27 14
+19 Nagaland 94 11 0 119
+20 Odisha 3507 4074 3328 3445
+21 Punjab 1519 1965 2101 1601
+22 Rajasthan 3774 3638 3695 3368
+23 Sikkim 71 85 70 50
+24 Tamil Nadu 21441 23165 23405 22527
+25 Telangana 3623 3783 4090 3895
+26 Tripura 374 268 217 183
+27 Uttarakhand 391 408 568 332
+28 Uttar Pradesh 11669 9320 11715 11529
+29 West Bengal 3404 3802 3793 2458
+30 Andaman & Nicobar Islands 56 32 19 50
+31 Chandigarh 0 0 0 0
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 0 6 0
+34 Delhi 0 0 0 0
+35 Lakshadweep 0 0 0 0
+36 Puducherry 152 256 373 157
+123408 120518 121655 116158
+Annexure - 13
+Total Number of Road Accidents on State Highways: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Road Accidents on 
+State Highways during
+63
+Note: There were no State Highways in  Chandigarh and Delhi.
+Total 
+--- p72 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 2024 1877 2017 1812
+2 Arunachal Pradesh 0 0 44 34
+3 Assam 594 584 681 557
+4 Bihar 1401 1808 1436 1414
+5 Chhattisgarh 1180 1139 926 964
+6 Goa 46 23 35 45
+7 Gujarat 2662 2675 2788 2376
+8 Haryana 1339 1475 1243 1369
+9 Himachal Pradesh 212 206 360 257
+10 Jammu & Kashmir 166 217 70 102
+11 Jharkhand 710 783 982 1035
+12 Karnataka 3620 2889 3096 3102
+13 Kerala 774 841 885 837
+14 Madhya Pradesh 2495 2868 3040 2973
+15 Maharashtra 4414 4179 3636 3622
+16 Manipur 35 25 16 29
+17 Meghalaya 22 21 22 51
+18 Mizoram 39 47 17 15
+19 Nagaland 31 11 0 7
+20 Odisha 1387 1718 1467 1552
+21 Punjab 1194 1484 1584 1087
+22 Rajasthan 1926 1908 1928 1973
+23 Sikkim 19 28 35 27
+24 Tamil Nadu 5090 5528 5825 5691
+25 Telangana 1391 1474 1438 1357
+26 Tripura 84 64 61 61
+27 Uttarakhand 202 227 305 179
+28 Uttar Pradesh 6024 4984 6210 5962
+29 West Bengal 1571 1741 1882 1294
+30 Andaman & Nicobar Islands 7 5 1 9
+31 Chandigarh 0 0 0 0
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 0 2 0
+34 Delhi 0 0 0 0
+35 Lakshadweep 0 0 0 0
+36 Puducherry 19 34 35 19
+40678 40863 42067 39812
+64
+Annexure - 14
+Total Number of Persons Killed in Road Accidents on State Highways: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Persons Killed in Road Accidents 
+on State Highways during
+Note: There were no State Highways in Chandigarh and Delhi.
+Total 
+--- p73 ---
+2014 2015 2016 2017
+1 2 3 4 5 6
+1 Andhra Pradesh 7049 6950 6791 5746
+2 Arunachal Pradesh 0 0 108 96
+3 Assam 1619 1999 1671 1470
+4 Bihar 1711 2397 1663 1615
+5 Chhattisgarh 3768 3642 3157 3178
+6 Goa 279 250 170 250
+7 Gujarat 7101 6656 6137 4901
+8 Haryana 3065 3859 2399 2757
+9 Himachal Pradesh 1220 1293 1518 1281
+10 Jammu & Kashmir 1479 1498 702 1052
+11 Jharkhand 979 1197 1279 1088
+12 Karnataka 17570 14270 15448 14903
+13 Kerala 7097 7835 8002 7913
+14 Madhya Pradesh 16583 17647 16678 15797
+15 Maharashtra 11878 10275 8207 7774
+16 Manipur 281 233 202 246
+17 Meghalaya 51 85 37 117
+18 Mizoram 94 62 23 18
+19 Nagaland 80 22 0 73
+20 Odisha 4029 4521 3764 3792
+21 Punjab 1013 1475 1325 1109
+22 Rajasthan 4243 3804 3887 3552
+23 Sikkim 125 143 81 154
+24 Tamil Nadu 24324 26573 26329 24951
+25 Telangana 3937 4307 4738 4453
+26 Tripura 561 411 383 262
+27 Uttarakhand 378 441 592 342
+28 Uttar Pradesh 7710 6263 8003 8223
+29 West Bengal 3512 3395 3742 2281
+30 Andaman & Nicobar Islands 74 40 27 45
+31 Chandigarh 0 0 0 0
+32 Dadra & Nagar Haveli 0 0 0 0
+33 Daman & Diu 0 0 16 0
+34 Delhi 0 0 0 0
+35 Lakshadweep 0 0 0 0
+36 Puducherry 149 266 391 143
+131959 131809 127470 119582
+Annexure - 15
+Total Number of Persons Injured in Road Accidents on State Highways: 2014 to 2017
+Sl. 
+No.
+States/UTs State/UT-Wise Total Number of  Persons Injured in Road 
+Accidents on State Highways during
+65
+Note: There were no State Highways in  Chandigarh and Delhi.
+Total 
+--- p74 ---
+Annexure - 16
+S.No States/UTs Greviously Injured 
+persons
+Minor Injured 
+persons
+Total Injured 
+persons
+1 2 3 4 5
+1 Andhra Pradesh 1530 4216 5746
+2 Arunachal Pradesh 59 37 96
+3 Assam 1139 331 1470
+4 Bihar 1077 538 1615
+5 Chhattisgarh 637 2541 3178
+6 Goa 41 209 250
+7 Gujarat 2805 2096 4901
+8 Haryana 540 2217 2757
+9 Himachal Pradesh 338 943 1281
+10 Jammu & Kashmir 729 323 1052
+11 Jharkhand 940 148 1088
+12 Karnataka 6430 8473 14903
+13 Kerala 5253 2660 7913
+14 Madhya Pradesh 2221 13576 15797
+15 Maharashtra 5198 2576 7774
+16 Manipur 40 206 246
+17 Meghalaya 76 41 117
+18 Mizoram 10 8 18
+19 Nagaland 23 50 73
+20 Orissa 1957 1835 3792
+21 Punjab 792 317 1109
+22 Rajasthan 1043 2509 3552
+23 Sikkim 78 76 154
+24 Tamil Nadu 2180 22771 24951
+25 Telangana 361 4092 4453
+26 Tripura 258 4 262
+27 Uttarakhand 286 56 342
+28 Uttar Pradesh 5840 2383 8223
+29 West Bengal 1862 419 2281
+30 A & N Islands 21 24 45
+31 Chandigarh 0 0 0
+32 D & N Haveli 0 0 0
+33 Daman & Diu 0 0 0
+34 Delhi 0 0 0
+35 Lakshadweep 0 0 0
+36 Puducherry 55 88 143
+Total 43819 75763 119582
+Total number of Grevious and Minor Injured Persons in Road Accidents on State 
+Highways during the calendar year 2017
+66
+Note: There were no State Highways in  Chandigarh and Delhi.
+--- p75 ---
+Annexure - 17
+S.No State/UT
+2016 2017 2016 2017 2016 2017
+1 2 3 4 5 6 7 8
+1 Andhra Pradesh 11078 11526 3518 3350 13707 12793
+2 Arunachal Pradesh 79 83 47 35 148 107
+3 Assam 1958 2277 596 762 1697 1880
+4 Bihar 2650 2714 1451 1600 1954 1966
+5 Chhattisgarh 6374 6483 1801 2020 5954 6027
+6 Goa 2510 1920 188 165 1384 963
+7 Gujarat 10933 9324 3207 2768 9857 8839
+8 Haryana 4529 4575 1936 1761 4975 3994
+9 Himachal Pradesh 873 877 433 418 1811 1595
+10 Jammu & Kashmir 2842 2783 485 415 4095 3813
+11 Jharkhand 1293 1692 823 971 1010 1566
+12 Karnataka 18008 17132 3921 3715 21252 20816
+13 Kerala 23076 22433 2139 1985 25585 24768
+14 Madhya Pradesh 28807 27898 4042 4683 29820 30119
+15 Maharashtra 20462 18108 5412 5005 18162 16003
+16 Manipur 96 62 19 10 162 96
+17 Meghalaya 180 136 20 20 111 79
+18 Mizoram 10 16 8 16 6 26
+19 Nagaland 18 71 11 7 35 34
+20 Orissa 2990 2923 1184 1115 3194 2919
+21 Punjab 2737 2139 1998 1485 1739 1392
+22 Rajasthan 12804 11893 4800 4405 13193 11434
+23 Sikkim 50 63 11 21 86 152
+24 Tamil Nadu 25453 22339 5138 4574 27990 24352
+25 Telangana 12555 12378 3608 3285 12975 12681
+26 Tripura 137 99 44 30 166 118
+27 Uttarakhand 181 363 154 179 185 349
+28 Uttar Pradesh 10819 12921 5641 6216 7896 9039
+29 West Bengal 5319 5015 2358 2340 4021 3851
+30 Andaman & Nicobar Islands 129 79 9 5 136 95
+31 Chandigarh 381 309 127 91 307 273
+32 Dadra & Nagar Haveli 70 67 46 43 130 60
+33 Daman & Diu 65 70 36 31 86 68
+34 Delhi 6652 5918 1353 1317 6504 5844
+35 Lakshadweep 1 1 1 0 0 1
+36 Puducherry 519 599 78 77 535 659
+216638 207286 56643 54920 220868 208771
+67
+Total number of Road Accidents, Persons Killed and Injured on Other Roads during 
+the calendar years 2016 & 2017
+Total 
+Accidents Killed Injured
+--- p76 ---
+Annexure - 18
+S.No States/UTs Greviously Injured 
+persons
+Minor Injured 
+persons
+Total Injured 
+persons
+1 2 3 4 5
+1 Andhra Pradesh 7178 20297 27475
+2 Arunachal Pradesh 192 124 316
+3 Assam 5011 1152 6163
+4 Bihar 4209 1805 6014
+5 Chhattisgarh 2157 10393 12550
+6 Goa 402 1520 1922
+7 Gujarat 8450 8352 16802
+8 Haryana 2428 7911 10339
+9 Himachal Pradesh 1424 4028 5452
+10 Jammu & Kashmir 3805 3614 7419
+11 Jharkhand 3197 721 3918
+12 Karnataka 22491 30470 52961
+13 Kerala 29733 12938 42671
+14 Madhya Pradesh 6715 50817 57532
+15 Maharashtra 20465 11663 32128
+16 Manipur 261 766 1027
+17 Meghalaya 253 101 354
+18 Mizoram 27 28 55
+19 Nagaland 122 253 375
+20 Orissa 5911 5287 11198
+21 Punjab 3209 1009 4218
+22 Rajasthan 6483 15588 22071
+23 Sikkim 209 270 479
+24 Tamil Nadu 6587 67984 74571
+25 Telangana 1723 22267 23990
+26 Tripura 710 8 718
+27 Uttarakhand 1380 251 1631
+28 Uttar Pradesh 19149 8345 27494
+29 West Bengal 8186 1905 10091
+30 A & N Islands 65 198 263
+31 Chandigarh 7 295 302
+32 D & N Haveli 55 5 60
+33 Daman & Diu 51 19 70
+34 Delhi 1080 5524 6604
+35 Lakshadweep 1 0 1
+36 Puducherry 612 1129 1741
+Total 173938 297037 470975
+68
+Total number of Grevious and Minor Injured Persons in Road Accidents on all roads 
+during the calendar year 2017
+--- p77 ---
+S.No States/UTs
+Total 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22
+1 Andhra Pradesh 5918 1736 1740 4329 1358 492 490 1034 2404 687 787 1618 13275 4347 2903 11126 2772 798 1258 2190
+2 Arunachal Pradesh 48 14 29 21 38 19 27 24 35 21 36 26 57 26 59 28 63 30 41 25
+3 Assam 1224 439 923 165 584 196 400 123 1324 521 902 213 2456 937 1876 265 1582 690 910 386
+4 Bihar 1933 1264 971 343 665 406 316 170 1448 799 766 359 3536 2323 1584 593 1273 762 572 340
+5 Chhattisgarh 2856 832 598 2116 682 221 133 523 2134 553 239 1373 5798 1968 814 4714 2093 562 373 1667
+6 Goa 1181 94 97 531 120 7 6 31 806 61 75 371 1810 166 224 587 0 0 0 0
+7 Gujarat 4368 1351 1852 1758 1586 493 759 768 2430 684 1064 1190 9933 4453 4437 4107 764 308 338 529
+8 Haryana 1838 803 323 1325 908 363 224 677 1498 632 292 1122 4774 2096 1092 3162 2240 1226 497 1625
+9 Himachal Pradesh 626 233 306 682 141 38 58 171 421 97 174 355 1490 700 663 2387 436 135 223 433
+10 Jammu & Kashmir 753 90 250 718 129 15 72 79 636 85 186 490 2977 569 2575 1605 1129 167 722 722
+11 Jharkhand 1007 608 427 139 504 264 289 57 1178 671 734 172 1504 952 1013 192 1005 761 734 161
+12 Karnataka 3706 648 1914 2211 2123 333 1233 1762 3681 704 2522 2032 32179 8706 16404 23460 853 218 418 1005
+13 Kerala 9565 1151 7146 3848 2535 252 2004 873 1689 198 1372 983 24681 2530 19211 7234 0 0 0 0
+14 Madhya Pradesh 10796 1852 1479 9855 2010 320 238 1787 6166 775 777 5544 21148 5056 2754 21240 13279 2174 1467 12391
+15 Maharashtra 5506 1787 2981 1945 2637 653 1405 819 3908 1226 2216 1088 23802 8598 13863 7811 0 0 0 0
+16 Manipur 205 41 43 323 32 7 8 48 107 13 25 150 214 73 169 224 20 2 16 21
+17 Meghalaya 100 27 36 11 120 31 47 21 193 49 62 36 163 41 70 18 99 34 38 15
+18 Mizoram 27 20 8 12 1 1 7 2 2 2 1 1 18 14 3 3 20 23 8 10
+19 Nagaland 91 4 20 54 50 2 17 22 285 16 71 125 68 13 12 32 37 6 2 20
+20 Orissa 1741 710 940 831 721 280 449 410 2057 795 1110 809 4433 2174 2345 2320 1903 831 1067 917
+21 Punjab 1550 1081 970 198 597 568 251 192 888 517 397 146 3238 2297 1591 473 0 0 0 0
+22 Rajasthan 3880 1561 1140 2650 749 251 286 526 
+--- p78 ---
+Annexure - 20
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+1 Andhra Pradesh 17937 5454 4489 14087 3350 1177 1114 2847 1295 437 362 1044 668 262 255 554
+2 Arunachal Pradesh 18 11 21 14 21 12 22 16 27 14 24 17 22 15 23 15
+3 Assam 3118 1195 2527 301 740 272 516 80 499 186 303 91 261 106 209 52
+4 Bihar 4120 2665 2068 733 1570 956 759 313 569 329 296 113 346 192 176 95
+5 Chhattisgarh 7491 2134 1015 5539 1459 387 251 1126 514 140 114 483 307 119 59 223
+6 Goa 2987 229 239 1330 917 98 162 175 12 1 1 15 1 0 0 0
+7 Gujarat 14036 5241 6323 5652 2192 881 866 1092 783 311 353 376 518 230 215 237
+8 Haryana 4918 1251 989 3566 1064 434 269 763 530 214 161 379 136 458 108 160
+9 Himachal Pradesh 2016 667 926 2237 763 383 367 1277 18 12 5 15 0 0 0 0
+10 Jammu & Kashmir 1189 241 196 1409 487 86 157 528 25 4 9 20 2 0 0 2
+11 Jharkhand 1962 1354 1048 220 998 601 602 159 195 99 163 49 213 138 150 49
+12 Karnataka 33619 8488 17571 23891 6077 1457 3264 4666 1330 358 715 934 16 3 5 60
+13 Kerala 32496 3628 24461 10446 2505 226 2136 995 124 24 104 59 248 23 281 61
+14 Madhya Pradesh 28512 5139 3121 27503 3859 850 472 3751 576 131 51 663 1935 327 291 1832
+15 Maharashtra 26373 9615 14626 8753 3081 976 1823 803 1130 265 798 349 990 254 625 317
+16 Manipur 307 61 80 467 64 11 28 85 27 1 2 36 16 6 2 22
+17 Meghalaya 69 20 28 8 59 19 21 9 46 13 16 8 71 19 23 11
+18 Mizoram 58 49 20 23 9 8 2 1 0 0 0 0 0 0 0 0
+19 Nagaland 295 24 88 141 67 12 4 20 45 1 13 39 35 0 3 7
+20 Orissa 5481 2364 2942 2572 1639 719 851 919 381 197 183 220 426 207 213 215
+21 Punjab 3968 2770 1965 701 507 472 285 84 350 274 124 60 232 316 174 36
+22 Rajasthan 17970 8659 5060 12637 1933 772 610 1510 130 54 45 93 132 56 29 92
+23 Sikkim 132 51 181 175 22 10 15 12 0 0 0 0 0 0 0 0
+24 Tamil Nadu 44132 10996 4299 45905 11824 3099 1337 12648 3544 885 345 3674 2837 373 316 2996
+25 Telangana 13398 4029 1039 13528 1320 445 168 1275 506 178 41 574 250 88 21 315
+26 Tripura 366 117 541 8 125 36 147 0 9 7 18 0 2 1 2 0
+27 Uttarakhand 615 375 421 41 460 272 481 136 91 64 68 8 39 25 13 4
+28 Uttar Pradesh 13971 7516 6965 2707 5692 2795 2772 1157 2331 1230 1254 516 1845 898 910 450
+29 Wes
+--- p79 ---
+Annexure -  20         contd.
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Number of 
+Accidents
+Persons  
+Killed 
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 15 16 17 18 19 20 21 22 23 24 25 26
+1 Andhra Pradesh 288 108 129 187 127 56 50 103 290 92 100 204 1772 474 679 1271
+2 Arunachal Pradesh 12 7 19 12 17 8 17 11 52 20 34 20 72 23 32 19
+3 Assam 196 53 138 48 156 45 142 37 283 92 209 97 1917 834 967 446
+4 Bihar 208 116 85 75 253 160 97 77 366 188 145 117 1423 948 583 282
+5 Chhattisgarh 76 31 17 41 70 31 11 45 586 186 105 369 3060 1108 585 2567
+6 Goa 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+7 Gujarat 552 228 237 308 364 174 219 233 320 115 133 231 316 109 104 223
+8 Haryana 465 522 162 328 168 744 56 175 232 72 74 182 3745 1425 609 2358
+9 Himachal Pradesh 19 10 5 14 95 42 48 168 168 72 60 264 35 17 13 53
+10 Jammu & Kashmir 0 0 0 0 29 12 17 10 0 0 0 0 3892 583 3426 1645
+11 Jharkhand 118 64 76 18 156 67 84 19 234 138 104 38 1322 795 970 169
+12 Karnataka 178 47 135 88 369 70 294 285 663 142 442 339 290 44 65 207
+13 Kerala 522 52 461 318 2379 162 2081 1007 196 16 209 52 0 0 0 0
+14 Madhya Pradesh 1012 141 83 935 817 167 79 737 2672 544 366 2135 14016 2878 2252 13261
+15 Maharashtra 2370 726 1480 733 1415 314 915 513 494 114 198 195 0 0 0 0
+16 Manipur 3 0 0 5 5 2 0 13 20 0 2 42 136 55 147 96
+17 Meghalaya 12 5 4 2 66 17 19 17 71 25 21 13 281 64 121 33
+18 Mizoram 0 0 0 0 0 0 0 0 0 0 0 0 1 3 5 4
+19 Nagaland 61 3 7 20 18 0 5 14 8 1 0 7 2 0 2 5
+20 Orissa 150 73 88 72 190 98 128 151 879 383 527 408 1709 749 979 730
+21 Punjab 334 162 151 34 444 185 162 50 438 284 348 44 0 0 0 0
+22 Rajasthan 93 37 16 65 179 91 98 86 150 113 46 116 1525 662 579 989
+23 Sikkim 0 0 0 0 14 4 3 28 12 5 7 35 16 8 3 20
+24 Tamil Nadu 627 173 28 641 348 67 68 307 752 131 100 659 1499 434 96 1154
+25 Telangana 33 5 1 37 100 26 12 131 313 106 4 352 6564 1719 437 6055
+26 Tripura 0 0 0 0 0 0 0 0 1 0 2 0 0 0 0 0
+27 Uttarakhand 48 27 11 4 22 9 18 5 88 82 75 20 240 88 293 33
+28 Uttar Pradesh 1986 987 967 452 1284 683 597 260 2299 1286 1396 525 9375 4729 4288 2278
+29 West Bengal 17 10 6 7 19 11 24 2 54 27 27 7 0 0 0 0
+30 Andaman & Nicobar Islands 0 0 0 0 8 1 2 11 0 0 0 0 0 0 0 0
+31 Chandigarh 4 2 0 4 1 0 0 1 0 0 0 0 2 0 0 2
+32 Dadra & Nagar Haveli 0 0 0 0 0 0 0 0 0 0 0 0 45 29 
+--- p80 ---
+S.No States/UTs
+Total number of 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total number of 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total number of 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total number of 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+Total number of 
+Accidents
+Persons 
+Killed
+Persons 
+Greviously 
+Injured
+Persons 
+Minor 
+Injured
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22
+1 Andhra Pradesh 3376 1177 1024 2702 2206 687 625 2027 1999 698 485 1747 2631 944 1073 1866 2114 706 813 1621
+2 Arunachal Pradesh 49 22 39 25 40 18 37 21 33 22 36 24 12 5 6 7 13 3 3 6
+3 Assam 1022 301 645 214 736 215 564 142 797 244 475 176 421 139 276 47 524 193 381 72
+4 Bihar 645 394 261 146 397 240 177 82 435 271 163 89 136 85 61 30 154 90 66 29
+5 Chhattisgarh 1622 438 390 1111 851 245 217 497 1221 300 165 688 921 374 163 761 1504 517 278 1017
+6 Goa 185 10 15 65 57 4 6 21 188 6 15 45 0 0 0 0 93 7 2 12
+7 Gujarat 1526 509 608 699 768 283 283 372 1936 575 750 867 1647 481 720 749 969 287 326 508
+8 Haryana 450 221 111 349 324 152 58 210 292 113 78 190 758 315 100 543 184 89 39 108
+9 Himachal Pradesh 56 19 36 51 16 2 4 17 11 3 3 11 0 0 0 0 1 0 0 3
+10 Jammu & Kashmir 568 101 322 551 258 34 155 272 153 30 52 123 49 8 21 26 1901 341 953 1793
+11 Jharkhand 523 315 275 67 481 350 253 87 466 281 298 89 563 354 226 22 435 328 511 95
+12 Karnataka 2830 533 1443 1616 1810 331 1038 1110 1873 299 990 989 943 207 375 547 1215 225 645 701
+13 Kerala 887 86 937 136 649 70 591 126 918 62 691 130 354 23 234 113 271 35 264 51
+14 Madhya Pradesh 7687 1279 964 7114 4436 737 455 3998 4971 602 481 4265 1745 301 141 1574 2137 359 206 2087
+15 Maharashtra 1708 508 753 759 1208 334 606 477 2197 556 1242 807 527 97 364 151 1127 219 788 326
+16 Manipur 115 30 68 151 66 15 18 97 33 10 21 25 0 0 0 0 22 2 5 14
+17 Meghalaya 95 25 35 10 125 33 48 22 186 56 60 35 166 23 71 18 103 45 39 16
+18 Mizoram 12 10 2 4 9 10 2 3 0 0 0 0 0 0 0 0 0 0 0 0
+19 Nagaland 10 3 11 11 18 2 9 18 29 11 6 19 3 1 0 0 48 2 1 17
+20 Orissa 1508 748 862 760 1307 555 673 567 1176 554 687 561 1015 415 540 440 887 350 532 452
+21 Punjab 776 496 339 145 385 264 181 86 481 311 247 96 286 197 157 51 492 277 262 72
+22 Rajasthan 2042 777 633 1448 869 399 255 569 1082 429 338 695 1077 545 452 624 861 358 322 493
+23 Sikkim 0 0 0 0 1 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0
+24 Tamil Nadu 15337 3822 1369 

@@ -1,0 +1,10 @@
+Gap,Priority,Finding,Acquisition_Status,Note
+Monthly/Seasonal (A),P1,"NCRB month-wise 2024 extracted (Road section, States)",ACQUIRED+VERIFIED,Only 2024; NCRB vintage separate from MoRTH; no MoRTH monthly exists
+Monthly/Seasonal (A),P1,NCRB time-wise buckets,DISCOVERED,PDF-only; download on demand
+District (B),P2,TN 38 districts 2021-23,ACQUIRED+VERIFIED,Single state only; post-2019 splits visible
+District (B),P2,Other states district panels,NOT FOUND,No verified multi-state source located
+Accident-level (C),P1,eDAR,ACCESS-RESTRICTED,No public path; no bypass
+Driver/Vehicle (D),P2,Beyond licence table,NOT FOUND,No verified age/gender/age-of-vehicle file located
+Exposure (E),P1,State vehicles 2010-2020 (OGD),DISCOVERED,Needs API key or manual download; RTYB PDF is fallback source
+Environment (F),P2,Humidity/visibility/fog/wind,NOT AVAILABLE,IMD grids cover temp/rain only
+2014-2017 (G),P4,AR PDFs 2014-2017,DISCOVERED (PDF-only),State extraction not performed; geography reconciliation pending

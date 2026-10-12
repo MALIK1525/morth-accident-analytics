@@ -1,0 +1,6 @@
+Historical_State,Canonical_State,Year,Transformation,Reason,Safe_to_harmonize
+Telangana,Telangana,2014-2017,NONE,separate in source all years,YES
+Jammu & Kashmir,"Jammu & Kashmir + Ladakh (2018+ panel split)",2014-2017,SPLIT_REQUIRED,undivided pre-2019 reorganisation,CONDITIONAL
+Dadra & Nagar Haveli,DNH & Daman & Diu (2020+ merged entity),2014-2017,AGGREGATE_REQUIRED (2020+),separate pre-2020 merger,CONDITIONAL
+Daman & Diu,DNH & Daman & Diu (2020+ merged entity),2014-2017,AGGREGATE_REQUIRED (2020+),separate pre-2020 merger,CONDITIONAL
+All other states/UTs,same name,2014-2017,NONE,stable names/definition,YES

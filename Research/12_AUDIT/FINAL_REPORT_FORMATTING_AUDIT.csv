@@ -1,0 +1,37 @@
+Check,Detail,Result
+LANGUAGE,,
+causes accidents,0 hits,PASS
+caused by weather,0 hits,PASS
+proves that,0 hits,PASS
+most dangerous,0 hits,PASS
+riskiest state,0 hits,PASS
+safest state,0 hits,PASS
+high-risk state,0 hits,PASS
+weather causes,0 hits,PASS
+ML accurately predicts,0 hits,PASS
+proven prediction system,1 hits,FAIL
+NUMERICAL,,
+487707,acc2024,PRESENT
+177175,fat2024,PRESENT
+471441,inj2024,CHECK-SOURCE-DOC
+254,state-years,PRESENT
+236,weather matched,PRESENT
+1038.6,naive RMSE acc,PRESENT
+286.3,naive RMSE fat,PRESENT
+0.356,silhouette,PRESENT
+25.29,friedman,PRESENT
+1276,ncrb chi2,PRESENT
+8.84,may share,PRESENT
+46.2,two-wheelers,PRESENT
+70.3,overspeeding,PRESENT
+FORMATTING,,
+A4 page size,set 8.27x11.69in,PASS
+margins 1in,set all sides,PASS
+Times New Roman 12 body,Normal style,PASS
+heading hierarchy H1-H3,16/14/12 bold,PASS
+TOC field present,TOC fieldcode,PASS
+LOF field present,figure-caption TOC field,PASS
+LOT field present,table-caption TOC field,PASS
+figures embedded F01-F16,16 images,PASS
+page-number footer,PAGE field + restart arabic,PASS
+caption style 10pt italic,CaptionX,PASS

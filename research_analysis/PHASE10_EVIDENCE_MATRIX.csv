@@ -1,0 +1,9 @@
+Finding_ID,Research_Question,Dataset,Years,Population,Method,Result,Effect_Size,p_value,Adjusted_p_value,Evidence_Strength,Limitation,Causal_Claim_Allowed,Source
+F01,India accidents 2018-24 fluctuate with 2020 dip,benchmark,2018-24,254 state-years,descriptives,470403->487707; 2020 -18.6%,-,-,-,Descriptive,2020 structural break,NO,research_analysis phase 7-9 outputs
+F02,Fatalities rise faster than accidents,benchmark,2018-24,254,ratio trend,33.5->36.3 per 100 acc,-,-,-,Descriptive,-,NO,research_analysis phase 7-9 outputs
+F03,Rain negatively / temp positively associated with counts (pooled),weather join,2018-24,236,Pearson+Spearman+FDR,r=-0.23..+0.50,r,<0.001 (raw),Statistical association detected,scale confounding,NO,,research_analysis phase 7-9 outputs
+F04,No weather-severity association detected,weather join,2018-24,233,Pearson+Spearman,|r|<0.15,r,>0.2,No statistically detectable association,-,NO,,research_analysis phase 7-9 outputs
+F05,"2024 monthly peak May, trough Jul (NCRB vintage)",NCRB T1A.5,2024,36 states/UTs,shares+chi2,May 8.84% vs Jul 7.46%,-,<0.001,Statistical association detected,single year; NCRB vintage,NO,,research_analysis phase 7-9 outputs
+F06,"Two-wheelers 46.2% of 2024 fatalities (counts, no exposure)",VH-01,2024,India,shares,81780/177175,-,-,Descriptive,no denominator; not risk,NO,,research_analysis phase 7-9 outputs
+F07,Over-speeding 70.3% of 2024 violation fatalities (reported category),CS-01,2024,India,shares,124522/177175,-,-,Descriptive,"reported category, not proven cause",NO,,research_analysis phase 7-9 outputs
+F08,State vehicle stock unavailable; no per-vehicle rates,-,-,-,-,-,-,-,Insufficient data,-,NO,,research_analysis phase 7-9 outputs

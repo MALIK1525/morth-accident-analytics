@@ -1,0 +1,3 @@
+Cluster,N,MAcc,MFat,FRatio,AccSlope,Label
+0,24,4693.084821428572,2027.417261904762,42.16218613231803,-37.01487916666667,higher fatality-ratio profile
+1,10,33612.2,11241.5,38.56521142748066,757.825,higher recorded-accident-count profile

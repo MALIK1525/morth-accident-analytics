@@ -1,0 +1,13 @@
+Target,Model,Test_RMSE,Baseline_RMSE,RMSE_Diff,MAE_Diff,Verdict
+Accidents,Naive_lag1,1038.6,1038.6,0.0,0.0,BASELINE
+Accidents,LinearRegression,2674.49,1038.6,1635.89,1979.31,Model did not outperform the naive baseline under this test design
+Accidents,Ridge_alpha1,2475.55,1038.6,1436.95,1750.71,Model did not outperform the naive baseline under this test design
+Accidents,RandomForest,3060.72,1038.6,2022.12,774.55,Model did not outperform the naive baseline under this test design
+Accidents,GradientBoosting,2148.6,1038.6,1110.0,509.52,Model did not outperform the naive baseline under this test design
+Accidents,KNN_k5,6373.83,1038.6,5335.23,3545.85,Model did not outperform the naive baseline under this test design
+Fatalities,Naive_lag1,286.31,286.31,0.0,0.0,BASELINE
+Fatalities,LinearRegression,766.68,286.31,480.37,552.72,Model did not outperform the naive baseline under this test design
+Fatalities,Ridge_alpha1,793.85,286.31,507.54,582.43,Model did not outperform the naive baseline under this test design
+Fatalities,RandomForest,1104.25,286.31,817.94,259.71,Model did not outperform the naive baseline under this test design
+Fatalities,GradientBoosting,1012.18,286.31,725.87,292.86,Model did not outperform the naive baseline under this test design
+Fatalities,KNN_k5,2014.19,286.31,1727.88,1158.33,Model did not outperform the naive baseline under this test design

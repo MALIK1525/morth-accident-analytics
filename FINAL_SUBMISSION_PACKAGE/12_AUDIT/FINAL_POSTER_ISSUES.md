@@ -1,0 +1,1 @@
+Prior placeholder poster replaced with full research poster in this step. PDF regenerated via reportlab (LibreOffice unavailable; PPTX remains the master visual). No unresolved content issues.

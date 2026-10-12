@@ -1,0 +1,12 @@
+Parameter,India,Zone,State_UT,District,City,Police,Coordinates
+Accidents,✓,✓,✓,N,N,N,N
+Fatalities,✓,✓,✓,N,N,N,N
+Injured (<=2022 state; all-year India),✓,✓,~,N,N,N,N
+Severity per 100 acc,✓,✓,✓,N,N,N,N
+Population projected,✓,✓,✓,N,N,N,N
+Road length,N,N,✓,N,N,N,N
+Vehicles registered,✓,N,N,N,N,N,N
+Violation/Collision/Road-user/Licence/Safety,✓,N,N,N,~,N,N
+Cities,N,N,N,N,✓,N,N
+Weather rain/temp,N,✓,✓,N,N,N,N
+Month/Day/Hour/Coords/District/Driver-detail,N,N,N,N,N,N,N

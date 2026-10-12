@@ -1,0 +1,9 @@
+File,Rows,Cols,First_Cols
+road-accidents-2024-cities-accidents-fatalities.csv,51,14,Sl No|City|2023 Accidents|2024 Accidents|2023 Ranking Accidents|2024 Ranking Accidents|2023 Killed|2024 Killed
+road-accidents-2024-fatality-road-user.csv,19,4,Road-user category|Persons killed 2023|Persons killed 2024|% Change 2024 over 2023
+road-accidents-2024-safety-device.csv,5,5,Category|No Helmet - Killed|No Helmet - Injured|No Seat belt - killed|No seat belt - injured
+road-accidents-2024-type-of-collision.csv,19,10,Type of collision|2023-Accidents|2023-Killed|2023-injured|2024-Accidents|2024-Killed|2024-injured|%Change-Accidents
+road-accidents-2024-type-of-license.csv,9,7,Type of license|2020|2021|2022|2023|2024|%Change 2023 to 2024
+road-accidents-2024-type-of-violation.csv,13,10,Category|2023-Accidents|2023-Killed|2023-injured|2024-Accidents|2024-Killed|2024-injured|%Change-Accidents
+road-accidents-2024-victims-crime-vehicle.csv,20,11,"Victim vehicle(Column below)/Crime vehicle (row to the right)|Bicycles|Two Wheelers|Auto rickshaws|Cars, Taxis, Vans & LMVs|Trucks/Lorries|Buses|Other Non- Motor Vehicles (including erickshaw)"
+road-accidents-registrations-density-2014-24.csv,15,8,"Year|Road accidents ('000)|Road accident deaths ('000)|Road accident injuries ('000)|Registered vehicles ('000)|Road length ('000 km)|Death rate per 10,000 vehicles|Vehicle density (no of vehicles per km of road)"

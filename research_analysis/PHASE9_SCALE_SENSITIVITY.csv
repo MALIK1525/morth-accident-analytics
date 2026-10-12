@@ -1,0 +1,3 @@
+Target,RMSE_raw,RMSE_log1p_backtransformed,Method,Note
+Accidents,3060.72,160647.76,"log1p target, expm1 back-transform; compare on raw scale only",state scale dominates raw counts; see Corr_Volume_Error
+Fatalities,1104.25,57252.54,"log1p target, expm1 back-transform; compare on raw scale only",state scale dominates raw counts; see Corr_Volume_Error

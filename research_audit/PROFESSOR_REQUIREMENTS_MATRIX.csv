@@ -1,0 +1,23 @@
+Requirement,Readiness,Evidence
+India consolidated yearly trend,READY,254 state-years aggregate; 2018-2024
+State-wise yearly trend,READY,Full panel
+Individual state graphs,READY,G9 pattern
+All-state consolidated graph,READY,G8 pattern
+Regression/trend lines,READY,Phase 4 slopes + CI + FDR
+Slope comparison,READY,"34 slopes, 9 FDR-robust; no ranking"
+Growth/change rate,READY,YoY tables
+Time-to-threshold analysis,PARTIALLY READY,Descriptive only; no forecasting license
+Multiple regression algorithms,READY,Phase 5 comparison incl. naive baseline
+Supervised regression,READY,N=175 lag-only; naive wins
+KNN,PARTIALLY READY,Supervised use only; small-N limits
+Unsupervised analysis,DATA REQUIRED,No suitable unlabeled feature set justified
+Weather,READY,236 matched; observational only
+Seasonality,DATA REQUIRED,Needs NCRB month extraction (PDF-only)
+Severity,READY,Phase 9 complete
+Cause/violation,READY,India-level 2023-24 only
+Road-user fatalities,READY,India-level 2023-24 only
+Collision type,READY,India-level 2023-24 only
+Exposure,PARTIALLY READY,Pop full; road 2021-22; vehicles India-only
+Safety devices,READY,India 2024 counts
+Licence status,READY,India 2020-24 accidents
+Million-plus cities,READY,50 cities 2023-24

@@ -1,0 +1,13 @@
+Target,Model,N,MeanResid,MedResid,MAE,MaxAbsErr,WorstState,WorstYear,MAE_2023,MAE_2024,Corr_Volume_Error
+Accidents,GradientBoosting,72,209.32,-81.5,1050.19,8522.0,Uttar Pradesh,2024,962.57,1137.82,
+Accidents,KNN_k5,72,1551.74,-131.5,4086.53,20481.2,Madhya Pradesh,2023,4136.04,4037.03,
+Accidents,LinearRegression,72,-2310.04,-2558.2,2520.0,4318.6,Lakshadweep,2024,2058.32,2981.67,
+Accidents,Naive_lag1,72,366.6,14.5,540.68,4181.0,Kerala,2023,665.31,416.06,0.7
+Accidents,RandomForest,72,926.61,15.5,1315.23,15207.8,Tamil Nadu,2024,1451.85,1178.61,
+Accidents,Ridge_alpha1,72,-2008.68,-2286.65,2291.39,4188.9,Lakshadweep,2024,1959.16,2623.62,
+Fatalities,GradientBoosting,72,-125.22,-23.8,458.86,4117.7,Madhya Pradesh,2023,446.78,470.95,
+Fatalities,KNN_k5,72,355.58,-62.7,1324.33,6828.4,Uttar Pradesh,2023,1286.43,1362.23,
+Fatalities,LinearRegression,72,-712.61,-722.9,718.72,1366.0,Lakshadweep,2024,574.6,862.84,
+Fatalities,Naive_lag1,72,120.61,19.5,166.0,1057.0,Uttar Pradesh,2023,163.47,168.53,
+Fatalities,RandomForest,72,35.0,-10.0,425.72,5935.5,Uttar Pradesh,2024,436.23,415.21,
+Fatalities,Ridge_alpha1,72,-740.01,-762.55,748.44,1300.8,Lakshadweep,2024,593.95,902.92,

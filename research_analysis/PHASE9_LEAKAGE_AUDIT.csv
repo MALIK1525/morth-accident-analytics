@@ -1,0 +1,8 @@
+Feature,Source_Year,Target_Year,Available_Before_Target,Leakage_Check,Decision
+Accidents_lag1,T-1,T,YES (past only),PASS,include
+Fatalities_lag1,T-1,T,YES (past only),PASS,include
+Weather_lag1,T-1,T,YES (past only),PASS,include
+Weather_T,T,T,NO (same-year timing),FAIL,exclude
+Accidents_T as feature,T,T,NO (target itself),FAIL,exclude
+Fatality_Ratio_T as feature,T,T,NO (derived from target),FAIL,exclude
+Full-period state slopes as features,2018-24,T<2024,NO (uses future years),FAIL,exclude

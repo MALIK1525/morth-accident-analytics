@@ -1,0 +1,17 @@
+Graph,Question,Dataset,X,Y,Type,Priority
+XF1,Cause x Fatalities,CAUSE_SEVERITY,Cause,Killed,Bar,1
+XF2,Cause x Accidents,CAUSE_SEVERITY,Cause,Accidents,Bar,1
+XF3,Collision x Fatalities,COLLISION_SEVERITY,Type,Killed,Bar,1
+XF4,Collision x Accidents,COLLISION_SEVERITY,Type,Accidents,Bar,1
+XF5,Road-user x Fatalities,ROAD_USER,Mode,Killed,Bar,1
+XF6,Licence x Accidents,LICENCE,Status,Accidents,Bar,2
+XF7,Safety-device toll,SAFETY_DEVICE,Category,Killed,Bar,2
+XF8,Weather x accidents,WEATHER,Weather,Accidents,Scatter,1
+XF9,Weather x fatalities,WEATHER,Weather,Fatalities,Scatter,1
+XF10,Weather x severity,WEATHER_SEV,Weather,Ratio,Scatter,2
+XF11,Zone x Year,ZONE_YEAR,Year,Accidents,Line by zone,1
+XF12,NCRB month x Accidents,NCRB,Month,Cases,Bar,1
+XF13,NCRB month x Fatalities,NCRB,Month,Deaths,Bar,2
+XF14,City x Fatalities,CITY,City,Killed,Bar,2
+XF15,TN district x Year,TN_DISTRICT,Year,Accidents,Line by district,2
+XF16,State slope distribution,STATE_TRENDS,State,Slope,Bar+CI,1

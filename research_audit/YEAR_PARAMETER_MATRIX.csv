@@ -1,0 +1,14 @@
+Parameter,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024
+Accidents state-level,N,N,N,N,✓,✓,✓,✓,✓,✓,✓
+Fatalities state-level,N,N,N,N,✓,✓,✓,✓,✓,✓,✓
+Injured state-level,N,N,N,N,✓,✓,✓,✓,✓,N,N
+Injured India-level,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+Population projected state,N,N,N,N,✓,✓,✓,✓,✓,✓,✓
+Road length state,N,N,N,N,N,N,N,✓,✓,N,N
+Registered vehicles India,✓,✓,✓,✓,✓,✓,✓,✓,✓,N,N
+Weather state (rain/temp),N,N,N,N,✓,✓,✓,✓,✓,✓,✓
+Violation/Collision/Road-user (India),N,N,N,N,N,N,N,N,N,✓,✓
+Licence (India),N,N,N,N,N,N,✓,✓,✓,✓,✓
+Cities 50 (acc/fat),N,N,N,N,N,N,N,N,N,✓,✓
+Safety devices (India),N,N,N,N,N,N,N,N,N,N,✓
+Month/Day/Hour/Cause-detail/District/Coords,N,N,N,N,N,N,N,N,N,N,N

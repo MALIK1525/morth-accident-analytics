@@ -1,0 +1,18 @@
+Graph_ID,Research_Question,Dataset,Variables,Y_Var,Graph_Type,X,Y,Grouping,OriginPro_Sheet,Priority,Status,Phase
+G1,India accident trend,INDIA_YEAR,Year,Accidents,Line,Year,Accidents,-,INDIA_YEAR,1,READY,7.0
+G2,India fatality trend,INDIA_YEAR,Year,Fatalities,Line,Year,Fatalities,-,INDIA_YEAR,1,READY,7.0
+G3,India injuries,INDIA_YEAR,Year,Injuries,Line,Year,Injuries,-,INDIA_YEAR,1,READY,7.0
+G4,Fatality ratio,INDIA_YEAR,Year,Fatalities_per_100_Accidents,Line,Year,Ratio,-,INDIA_YEAR,1,READY,7.0
+G5,Zone comparison,ZONE_YEAR,Zone,Accidents,Bar,Zone,Accidents,Year,ZONE_YEAR,1,READY,7.0
+G6,Zone-year trend,ZONE_YEAR,Year,Accidents,Line,Year,Accidents,Zone,ZONE_YEAR,1,READY,7.0
+G7,State comparison,STATE_YEAR,State,Accidents,Bar,State,Accidents,Year,STATE_YEAR,1,READY,7.0
+G8,State-year heatmap,MATRICES,State x Year,Accidents,Heatmap,Year,State,-,MATRICES,1,READY,7.0
+G9,State trends,STATE_YEAR,Year,Accidents,Line,Year,Accidents,State,STATE_YEAR,1,READY,7.0
+G10,Slope distribution,STATE_TRENDS,State,Slope,Bar+CI,State,Slope,-,STATE_TRENDS,1,READY,7.0
+W1,Rain vs accidents,WEATHER_MATCHED,Rainfall,Accidents,Scatter,Rainfall,Accidents,-,WEATHER,1,READY,7.0
+S1,NCRB monthly 2024,NCRB_MONTHLY,Month,Cases,Bar,Month,Cases,-,NCRB,2,READY,7.0
+Actual vs predicted,,PREDICTIONS,,,Scatter,Actual,Predicted,,,1,,
+Residual distribution,,PREDICTIONS,,,Histogram,Residual,Count,,,1,,
+RMSE comparison,,MODEL_RESULTS,,,Bar,Model,Test_RMSE,,,1,,
+Feature importance,,IMPORTANCE,,,Bar,Feature,Importance,,,2,,
+Error by year,,ERROR,,,Bar,Year,MAE,,,2,,

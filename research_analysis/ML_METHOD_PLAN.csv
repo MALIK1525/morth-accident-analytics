@@ -1,0 +1,6 @@
+Algorithm,Type,Target,Features,Required_Data,Training_Unit,Potential_Use,Data_Availability,Status
+Linear Regression,Supervised,Next-year state accidents,Lag acc/fat/pop,phase5 N=175,State-year,Baseline interpretable model,YES,READY
+Random Forest Regression,Supervised,Next-year state accidents,Lag acc/fat/pop,phase5 N=175,State-year,Nonlinear baseline,YES,READY
+Gradient Boosting Regression,Supervised,Next-year state accidents,Lag acc/fat/pop,phase5 N=175,State-year,Strong tabular learner,YES,READY
+KNN Regression,Supervised (NOT unsupervised),Next-year state accidents,Lag acc/fat/pop,phase5 N=175,State-year,Local-pattern check,YES,READY
+K-means Clustering,Unsupervised,State profiles,Normalized rates + severity,Needs scaled features,State,Typology exploration,PARTIAL,CONDITIONAL

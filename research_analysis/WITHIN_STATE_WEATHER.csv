@@ -1,0 +1,217 @@
+State_UT,X,Y,N,Pearson_r,Pearson_p,Status
+Andaman & Nicobar Islands,Annual_Rainfall_mm,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andaman & Nicobar Islands,Annual_Rainfall_mm,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andaman & Nicobar Islands,Annual_Mean_Tmax_C,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andaman & Nicobar Islands,Annual_Mean_Tmax_C,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andaman & Nicobar Islands,Annual_Mean_Tmin_C,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andaman & Nicobar Islands,Annual_Mean_Tmin_C,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Andhra Pradesh,Annual_Rainfall_mm,Accidents,7,-0.6873,0.087967,LOW_POWER_DESCRIPTIVE
+Andhra Pradesh,Annual_Rainfall_mm,Fatalities,7,-0.0952,0.839163,LOW_POWER_DESCRIPTIVE
+Andhra Pradesh,Annual_Mean_Tmax_C,Accidents,7,0.2568,0.578344,LOW_POWER_DESCRIPTIVE
+Andhra Pradesh,Annual_Mean_Tmax_C,Fatalities,7,0.0433,0.926614,LOW_POWER_DESCRIPTIVE
+Andhra Pradesh,Annual_Mean_Tmin_C,Accidents,7,-0.5793,0.172849,LOW_POWER_DESCRIPTIVE
+Andhra Pradesh,Annual_Mean_Tmin_C,Fatalities,7,0.2843,0.536602,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Rainfall_mm,Accidents,7,-0.8328,0.020007,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Rainfall_mm,Fatalities,7,-0.656,0.109608,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Mean_Tmax_C,Accidents,7,0.2197,0.63601,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Mean_Tmax_C,Fatalities,7,0.0278,0.952792,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Mean_Tmin_C,Accidents,7,0.0071,0.988022,LOW_POWER_DESCRIPTIVE
+Arunachal Pradesh,Annual_Mean_Tmin_C,Fatalities,7,-0.115,0.805981,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Rainfall_mm,Accidents,7,-0.3941,0.381655,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Rainfall_mm,Fatalities,7,-0.2691,0.559579,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Mean_Tmax_C,Accidents,7,-0.1827,0.694915,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Mean_Tmax_C,Fatalities,7,0.0326,0.944726,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Mean_Tmin_C,Accidents,7,-0.4668,0.291014,LOW_POWER_DESCRIPTIVE
+Assam,Annual_Mean_Tmin_C,Fatalities,7,0.195,0.675226,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Rainfall_mm,Accidents,7,-0.7029,0.078118,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Rainfall_mm,Fatalities,7,-0.4798,0.275881,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Mean_Tmax_C,Accidents,7,0.9089,0.004584,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Mean_Tmax_C,Fatalities,7,0.7441,0.055124,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Mean_Tmin_C,Accidents,7,0.8648,0.011984,LOW_POWER_DESCRIPTIVE
+Bihar,Annual_Mean_Tmin_C,Fatalities,7,0.91,0.004439,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Rainfall_mm,Accidents,7,-0.0386,0.934466,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Rainfall_mm,Fatalities,7,-0.2574,0.577287,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Mean_Tmax_C,Accidents,7,0.3503,0.441119,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Mean_Tmax_C,Fatalities,7,0.2961,0.519067,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Mean_Tmin_C,Accidents,7,0.0119,0.979799,LOW_POWER_DESCRIPTIVE
+Chandigarh,Annual_Mean_Tmin_C,Fatalities,7,0.231,0.618259,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Rainfall_mm,Accidents,7,-0.2443,0.597553,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Rainfall_mm,Fatalities,7,-0.013,0.977944,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Mean_Tmax_C,Accidents,7,0.9136,0.004021,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Mean_Tmax_C,Fatalities,7,0.4656,0.292391,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Mean_Tmin_C,Accidents,7,0.7325,0.061154,LOW_POWER_DESCRIPTIVE
+Chhattisgarh,Annual_Mean_Tmin_C,Fatalities,7,0.8775,0.009433,LOW_POWER_DESCRIPTIVE
+Dadra & Nagar Haveli and Daman & Diu,Annual_Rainfall_mm,Accidents,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Dadra & Nagar Haveli and Daman & Diu,Annual_Rainfall_mm,Fatalities,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Dadra & Nagar Haveli and Daman & Diu,Annual_Mean_Tmax_C,Accidents,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Dadra & Nagar Haveli and Daman & Diu,Annual_Mean_Tmax_C,Fatalities,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Dadra & Nagar Haveli and Daman & Diu,Annual_Mean_Tmin_C,Accidents,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Dadra & Nagar Haveli and Daman & Diu,Annual_Mean_Tmin_C,Fatalities,5,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Delhi,Annual_Rainfall_mm,Accidents,7,-0.3354,0.462117,LOW_POWER_DESCRIPTIVE
+Delhi,Annual_Rainfall_mm,Fatalities,7,-0.4227,0.344711,LOW_POWER_DESCRIPTIVE
+Delhi,Annual_Mean_Tmax_C,Accidents,7,0.4429,0.319632,LOW_POWER_DESCRIPTIVE
+Delhi,Annual_Mean_Tmax_C,Fatalities,7,0.4352,0.329069,LOW_POWER_DESCRIPTIVE
+Delhi,Annual_Mean_Tmin_C,Accidents,7,0.5212,0.23028,LOW_POWER_DESCRIPTIVE
+Delhi,Annual_Mean_Tmin_C,Fatalities,7,0.5321,0.218899,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Rainfall_mm,Accidents,7,-0.4594,0.299738,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Rainfall_mm,Fatalities,7,0.0812,0.862651,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Mean_Tmax_C,Accidents,7,0.2453,0.595954,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Mean_Tmax_C,Fatalities,7,0.7278,0.063731,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Mean_Tmin_C,Accidents,7,-0.6239,0.134336,LOW_POWER_DESCRIPTIVE
+Goa,Annual_Mean_Tmin_C,Fatalities,7,-0.3687,0.415789,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Rainfall_mm,Accidents,7,-0.6741,0.096815,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Rainfall_mm,Fatalities,7,-0.5221,0.229389,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Mean_Tmax_C,Accidents,7,0.5463,0.204565,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Mean_Tmax_C,Fatalities,7,0.4582,0.301165,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Mean_Tmin_C,Accidents,7,0.2523,0.585244,LOW_POWER_DESCRIPTIVE
+Gujarat,Annual_Mean_Tmin_C,Fatalities,7,0.5855,0.167261,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Rainfall_mm,Accidents,7,-0.3689,0.415434,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Rainfall_mm,Fatalities,7,-0.3167,0.488971,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Mean_Tmax_C,Accidents,7,0.3386,0.457581,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Mean_Tmax_C,Fatalities,7,0.2866,0.533234,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Mean_Tmin_C,Accidents,7,0.125,0.78938,LOW_POWER_DESCRIPTIVE
+Haryana,Annual_Mean_Tmin_C,Fatalities,7,0.2134,0.64596,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Rainfall_mm,Accidents,7,0.4614,0.297301,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Rainfall_mm,Fatalities,7,0.3958,0.37939,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Mean_Tmax_C,Accidents,7,0.0106,0.981935,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Mean_Tmax_C,Fatalities,7,0.0093,0.984133,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Mean_Tmin_C,Accidents,7,-0.3105,0.497887,LOW_POWER_DESCRIPTIVE
+Himachal Pradesh,Annual_Mean_Tmin_C,Fatalities,7,-0.2861,0.533895,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Rainfall_mm,Accidents,7,-0.0099,0.983241,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Rainfall_mm,Fatalities,7,0.4964,0.25714,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Mean_Tmax_C,Accidents,7,0.4423,0.32031,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Mean_Tmax_C,Fatalities,7,-0.1631,0.726817,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Mean_Tmin_C,Accidents,7,0.6702,0.099467,LOW_POWER_DESCRIPTIVE
+Jammu & Kashmir,Annual_Mean_Tmin_C,Fatalities,7,-0.0635,0.892381,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Rainfall_mm,Accidents,7,-0.6625,0.104884,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Rainfall_mm,Fatalities,7,-0.2392,0.605496,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Mean_Tmax_C,Accidents,7,0.8352,0.019341,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Mean_Tmax_C,Fatalities,7,0.9536,0.000867,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Mean_Tmin_C,Accidents,7,0.2658,0.564482,LOW_POWER_DESCRIPTIVE
+Jharkhand,Annual_Mean_Tmin_C,Fatalities,7,0.7577,0.048495,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Rainfall_mm,Accidents,7,-0.6163,0.140571,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Rainfall_mm,Fatalities,7,-0.4373,0.326548,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Mean_Tmax_C,Accidents,7,0.7411,0.056662,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Mean_Tmax_C,Fatalities,7,0.5214,0.230051,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Mean_Tmin_C,Accidents,7,-0.1208,0.796435,LOW_POWER_DESCRIPTIVE
+Karnataka,Annual_Mean_Tmin_C,Fatalities,7,-0.0485,0.917833,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Rainfall_mm,Accidents,7,-0.3732,0.409595,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Rainfall_mm,Fatalities,7,0.0004,0.99929,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Mean_Tmax_C,Accidents,7,0.406,0.366143,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Mean_Tmax_C,Fatalities,7,0.0956,0.838497,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Mean_Tmin_C,Accidents,7,0.1718,0.712687,LOW_POWER_DESCRIPTIVE
+Kerala,Annual_Mean_Tmin_C,Fatalities,7,-0.3104,0.498096,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Rainfall_mm,Accidents,7,-0.7074,0.075428,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Rainfall_mm,Fatalities,7,-0.734,0.060347,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Mean_Tmax_C,Accidents,7,0.6038,0.151098,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Mean_Tmax_C,Fatalities,7,0.6191,0.13821,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Mean_Tmin_C,Accidents,7,0.699,0.080518,LOW_POWER_DESCRIPTIVE
+Ladakh,Annual_Mean_Tmin_C,Fatalities,7,0.7399,0.057267,LOW_POWER_DESCRIPTIVE
+Lakshadweep,Annual_Rainfall_mm,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Lakshadweep,Annual_Rainfall_mm,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Lakshadweep,Annual_Mean_Tmax_C,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Lakshadweep,Annual_Mean_Tmax_C,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Lakshadweep,Annual_Mean_Tmin_C,Accidents,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Lakshadweep,Annual_Mean_Tmin_C,Fatalities,0,,,INSUFFICIENT_TEMPORAL_OBSERVATIONS
+Madhya Pradesh,Annual_Rainfall_mm,Accidents,7,0.1931,0.678303,LOW_POWER_DESCRIPTIVE
+Madhya Pradesh,Annual_Rainfall_mm,Fatalities,7,0.2999,0.513501,LOW_POWER_DESCRIPTIVE
+Madhya Pradesh,Annual_Mean_Tmax_C,Accidents,7,0.2638,0.567647,LOW_POWER_DESCRIPTIVE
+Madhya Pradesh,Annual_Mean_Tmax_C,Fatalities,7,-0.1688,0.717453,LOW_POWER_DESCRIPTIVE
+Madhya Pradesh,Annual_Mean_Tmin_C,Accidents,7,0.4113,0.359312,LOW_POWER_DESCRIPTIVE
+Madhya Pradesh,Annual_Mean_Tmin_C,Fatalities,7,0.5244,0.226891,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Rainfall_mm,Accidents,7,-0.3495,0.442184,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Rainfall_mm,Fatalities,7,-0.0728,0.876816,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Mean_Tmax_C,Accidents,7,0.676,0.095508,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Mean_Tmax_C,Fatalities,7,0.0493,0.91643,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Mean_Tmin_C,Accidents,7,-0.082,0.86125,LOW_POWER_DESCRIPTIVE
+Maharashtra,Annual_Mean_Tmin_C,Fatalities,7,-0.0003,0.999443,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Rainfall_mm,Accidents,7,0.0268,0.954545,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Rainfall_mm,Fatalities,7,0.1346,0.773529,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Mean_Tmax_C,Accidents,7,0.0012,0.997913,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Mean_Tmax_C,Fatalities,7,0.0016,0.997297,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Mean_Tmin_C,Accidents,7,-0.4473,0.314246,LOW_POWER_DESCRIPTIVE
+Manipur,Annual_Mean_Tmin_C,Fatalities,7,-0.4956,0.258097,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Rainfall_mm,Accidents,7,-0.396,0.379148,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Rainfall_mm,Fatalities,7,-0.6542,0.110896,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Mean_Tmax_C,Accidents,7,-0.393,0.383165,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Mean_Tmax_C,Fatalities,7,0.0774,0.868991,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Mean_Tmin_C,Accidents,7,-0.6604,0.106376,LOW_POWER_DESCRIPTIVE
+Meghalaya,Annual_Mean_Tmin_C,Fatalities,7,0.034,0.942241,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Rainfall_mm,Accidents,7,-0.2244,0.628606,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Rainfall_mm,Fatalities,7,-0.2072,0.655823,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Mean_Tmax_C,Accidents,7,0.0664,0.887516,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Mean_Tmax_C,Fatalities,7,0.0218,0.962946,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Mean_Tmin_C,Accidents,7,0.812,0.02652,LOW_POWER_DESCRIPTIVE
+Mizoram,Annual_Mean_Tmin_C,Fatalities,7,0.8393,0.018203,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Rainfall_mm,Accidents,7,-0.9058,0.004968,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Rainfall_mm,Fatalities,7,0.2409,0.602742,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Mean_Tmax_C,Accidents,7,0.7169,0.06984,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Mean_Tmax_C,Fatalities,7,0.1867,0.688577,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Mean_Tmin_C,Accidents,7,0.5713,0.180341,LOW_POWER_DESCRIPTIVE
+Nagaland,Annual_Mean_Tmin_C,Fatalities,7,0.4605,0.298396,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Rainfall_mm,Accidents,7,-0.7782,0.039327,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Rainfall_mm,Fatalities,7,-0.7667,0.044321,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Mean_Tmax_C,Accidents,7,0.8483,0.015832,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Mean_Tmax_C,Fatalities,7,0.7812,0.038095,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Mean_Tmin_C,Accidents,7,0.7711,0.042386,LOW_POWER_DESCRIPTIVE
+Odisha,Annual_Mean_Tmin_C,Fatalities,7,0.7696,0.043022,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Rainfall_mm,Accidents,7,-0.5533,0.197647,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Rainfall_mm,Fatalities,7,-0.324,0.4783,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Mean_Tmax_C,Accidents,7,0.4185,0.350139,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Mean_Tmax_C,Fatalities,7,-0.1535,0.74244,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Mean_Tmin_C,Accidents,7,0.2233,0.630224,LOW_POWER_DESCRIPTIVE
+Puducherry,Annual_Mean_Tmin_C,Fatalities,7,0.0784,0.867325,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Rainfall_mm,Accidents,7,0.2975,0.51694,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Rainfall_mm,Fatalities,7,0.0793,0.865781,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Mean_Tmax_C,Accidents,7,0.3087,0.500553,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Mean_Tmax_C,Fatalities,7,0.3245,0.47767,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Mean_Tmin_C,Accidents,7,0.4842,0.270855,LOW_POWER_DESCRIPTIVE
+Punjab,Annual_Mean_Tmin_C,Fatalities,7,0.7413,0.056565,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Rainfall_mm,Accidents,7,0.6933,0.084104,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Rainfall_mm,Fatalities,7,0.6478,0.115677,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Mean_Tmax_C,Accidents,7,-0.2397,0.604716,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Mean_Tmax_C,Fatalities,7,-0.1771,0.703977,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Mean_Tmin_C,Accidents,7,0.7032,0.077963,LOW_POWER_DESCRIPTIVE
+Rajasthan,Annual_Mean_Tmin_C,Fatalities,7,0.6724,0.097969,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Rainfall_mm,Accidents,7,0.2427,0.600037,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Rainfall_mm,Fatalities,7,0.3246,0.477553,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Mean_Tmax_C,Accidents,7,0.4154,0.353975,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Mean_Tmax_C,Fatalities,7,0.0928,0.843128,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Mean_Tmin_C,Accidents,7,0.1149,0.806236,LOW_POWER_DESCRIPTIVE
+Sikkim,Annual_Mean_Tmin_C,Fatalities,7,-0.1277,0.785033,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Rainfall_mm,Accidents,7,-0.3378,0.458657,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Rainfall_mm,Fatalities,7,-0.4352,0.329122,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Mean_Tmax_C,Accidents,7,0.074,0.874639,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Mean_Tmax_C,Fatalities,7,0.2109,0.649795,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Mean_Tmin_C,Accidents,7,-0.2471,0.5932,LOW_POWER_DESCRIPTIVE
+Tamil Nadu,Annual_Mean_Tmin_C,Fatalities,7,-0.1145,0.806938,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Rainfall_mm,Accidents,7,-0.355,0.434525,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Rainfall_mm,Fatalities,7,0.3304,0.469179,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Mean_Tmax_C,Accidents,7,0.4176,0.35126,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Mean_Tmax_C,Fatalities,7,-0.3571,0.431679,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Mean_Tmin_C,Accidents,7,0.6451,0.117674,LOW_POWER_DESCRIPTIVE
+Telangana,Annual_Mean_Tmin_C,Fatalities,7,0.3993,0.37481,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Rainfall_mm,Accidents,7,0.4499,0.311082,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Rainfall_mm,Fatalities,7,0.0206,0.965089,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Mean_Tmax_C,Accidents,7,-0.1909,0.681835,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Mean_Tmax_C,Fatalities,7,0.1929,0.678648,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Mean_Tmin_C,Accidents,7,0.103,0.825998,LOW_POWER_DESCRIPTIVE
+Tripura,Annual_Mean_Tmin_C,Fatalities,7,0.5577,0.1933,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Rainfall_mm,Accidents,7,-0.505,0.247703,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Rainfall_mm,Fatalities,7,-0.4048,0.367699,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Mean_Tmax_C,Accidents,7,0.6697,0.099794,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Mean_Tmax_C,Fatalities,7,0.6274,0.131491,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Mean_Tmin_C,Accidents,7,0.6294,0.129848,LOW_POWER_DESCRIPTIVE
+Uttar Pradesh,Annual_Mean_Tmin_C,Fatalities,7,0.7001,0.079837,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Rainfall_mm,Accidents,7,0.404,0.368753,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Rainfall_mm,Fatalities,7,0.1959,0.673707,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Mean_Tmax_C,Accidents,7,0.6287,0.130423,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Mean_Tmax_C,Fatalities,7,0.6541,0.11099,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Mean_Tmin_C,Accidents,7,0.731,0.061965,LOW_POWER_DESCRIPTIVE
+Uttarakhand,Annual_Mean_Tmin_C,Fatalities,7,0.5923,0.161108,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Rainfall_mm,Accidents,7,-0.6298,0.129553,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Rainfall_mm,Fatalities,7,-0.1788,0.701316,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Mean_Tmax_C,Accidents,7,0.6938,0.083799,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Mean_Tmax_C,Fatalities,7,0.4711,0.285957,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Mean_Tmin_C,Accidents,7,0.6289,0.130322,LOW_POWER_DESCRIPTIVE
+West Bengal,Annual_Mean_Tmin_C,Fatalities,7,0.8267,0.021821,LOW_POWER_DESCRIPTIVE

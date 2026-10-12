@@ -1,0 +1,11 @@
+Table,Title,Source_File
+Table 1,Data sources and coverage,MASTER_PARAMETER_AVAILABILITY + provenance files
+Table 2,India annual trends,PHASE10_INDIA_FINAL_RESULTS.csv
+Table 3,State trend statistics,PHASE10_STATE_FINAL_RESULTS.csv
+Table 4,Zone analysis + Friedman,PHASE10_ZONE_FINAL_RESULTS.csv
+Table 5,Weather associations,PHASE10_WEATHER_FINAL_RESULTS.csv
+Table 6,Cause/violation findings,PHASE10_CAUSE_COLLISION_RESULTS.csv
+Table 7,Collision findings,PHASE10_CAUSE_COLLISION_RESULTS.csv
+Table 8,ML model comparison,PHASE10_ML_FINAL_RESULTS.csv
+Table 9,K-means profiles,PHASE10_CLUSTER_RESULTS.csv
+Table 10,Limitations,PHASE10_LIMITATIONS_MATRIX.csv

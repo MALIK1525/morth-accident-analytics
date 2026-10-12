@@ -1,0 +1,5 @@
+Model,Selected,Tuned_On,Test_Use,Note
+RandomForest,"n_estimators=200,min_samples_leaf=5",rolling-origin 2021/2022 folds,test untouched,fixed (small-N: no wide search)
+GradientBoosting,defaults,rolling-origin 2021/2022 folds,test untouched,fixed defaults + documented
+KNN,"k=5,distance",rolling-origin folds,test untouched,k=5 for N~100 train
+Ridge,alpha=1.0,rolling-origin folds,test untouched,single alpha (no test tuning)

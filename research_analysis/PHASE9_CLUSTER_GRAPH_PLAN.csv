@@ -1,0 +1,5 @@
+Graph,Dataset,X,Y,Type,Priority
+Silhouette vs K,K_SELECTION,K,Silhouette,Line,1
+Inertia vs K,K_SELECTION,K,Inertia,Line,1
+Cluster scatter (PCA),KMEANS+PCA,PC1,PC2,Scatter by cluster,1
+Cluster profiles,PROFILES,Cluster,MAcc/MFat/FRatio,Grouped bar,2

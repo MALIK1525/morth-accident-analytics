@@ -1,0 +1,12 @@
+# Provenance - ncrb_monthwise_traffic_accidents_2024.csv
+- Source_Organization: National Crime Records Bureau (NCRB), Ministry of Home Affairs
+- Report: Accidental Deaths and Suicides in India (ADSI) 2024, Table 1A.5 (Month of Occurrence-wise Number of Traffic Accidents)
+- Original_Publisher: NCRB (ncrb.gov.in)
+- Mirror_URL: https://data.opencity.in/dataset/accidental-deaths-and-suicides-in-india-2024 (OpenCity CKAN; table PDF Table1A5 State/UT & City)
+- Raw_File: 01_RAW_DATA/phase4/ncrb_adsi2024/NCRB_ADSI2024_Table1A5_MonthWise_StateUT_City.pdf (1,249,490 bytes, 8 pages)
+- Coverage: 2024, States + UTs + Cities, Jan-Dec months
+- Variables: monthly traffic-accident counts by Section (Road / RailwayCrossing / Railway / GrandTotal) x Scope (States/UTs/Cities)
+- Transformation: PDF text extraction (pypdf) + section/scope labeling; DAMAN & DIU serial-less UT row recovered from source text; no value changes
+- Validation: states+UTs sums == published TOTAL(ALL INDIA) in all 4 sections (Road 467,967); cities sums == TOTAL(CITIES) in all 4 sections
+- Source_Separation: NCRB vintage is SEPARATE from MoRTH (NCRB road total 467,967 vs MoRTH 487,707 for 2024). Never merge silently.
+- Status: VERIFIED-MIRROR (NCRB source)

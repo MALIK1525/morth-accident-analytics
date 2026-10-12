@@ -1,0 +1,6 @@
+Target,Method,N,MAE,RMSE,R2,MedAE,MAPE
+Accidents,Naive persistence (T-1 actual),72,540.68,1038.6,0.9966,169.5,
+Fatalities,Naive persistence (T-1 actual),72,166.0,286.31,0.9977,57.0,
+Target,Method,N,MAE,RMSE,R2,MedAE,MAPE
+Accidents,Naive persistence (T-1 actual),72,540.68,1038.6,0.9966,169.5,
+Fatalities,Naive persistence (T-1 actual),72,166.0,286.31,0.9977,57.0,
