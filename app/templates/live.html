@@ -116,23 +116,23 @@
       <p class="text-[11px] text-slate-500 mt-1">Base map © OpenStreetMap contributors. Markers show condition icon + shape (print-safe). Click a marker or city chip for details.</p>
       <p class="text-[11px] text-slate-500" id="layer-ages">Freshness: weather — · traffic — · incidents —</p>
       <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-2 mt-2 text-[11px]" id="map-legend">
-        <div class="border rounded-lg p-2 bg-slate-50"><b>States</b> (fill darkness = latest recorded accidents, log scale)
+        <div class="border rounded-lg p-2 bg-slate-50" id="legend-states"><b>States</b> (fill darkness = latest recorded accidents, log scale)
           <div>Light: fewer recorded accidents · Dark: more recorded accidents</div>
           <div>Recorded counts only — <b>NOT risk</b> (no exposure denominator).</div></div>
-        <div class="border rounded-lg p-2 bg-slate-50"><b>Weather</b>
+        <div class="border rounded-lg p-2 bg-slate-50" id="legend-weather"><b>Weather</b>
           <div>☀ ○ Clear · ☁ ○ Partly cloudy · ☁ □ Overcast</div>
           <div>△ Rain · ★ Thunderstorm · ◇ Fog · ⬡ Snow</div></div>
-        <div class="border rounded-lg p-2 bg-slate-50"><b>Traffic flow</b> (TomTom relative0 tiles)
+        <div class="border rounded-lg p-2 bg-slate-50 hidden" id="legend-flow"><b>Traffic flow</b> (TomTom relative0 tiles)
           <div>Green: near free flow · Orange: slowing · Dark red: severe</div>
           <div>White: road closed · Grey/blank: no provider data (not clear)</div>
           <div>Click a road for segment speeds. Tiles show provider data only.</div></div>
-        <div class="border rounded-lg p-2 bg-slate-50"><b>Reported incidents</b> (shape + symbol)
+        <div class="border rounded-lg p-2 bg-slate-50 hidden" id="legend-inc"><b>Reported incidents</b> (shape + symbol)
           <div>▲ ! Accident report · ⬠ X Closed · ⬠ W Works</div>
           <div>■ Jam/lane · ◆ Hazard · ● Other — NOT official records</div>
           <div id="legend-inc-counts" class="mt-1 text-slate-600">Counts appear when incidents load.</div></div>
-        <div class="border rounded-lg p-2 bg-slate-50"><b>Hazards</b>
-          <div>⛔ Closure · 🚦 Heavy congestion · ⛈ Storm · 🌫 Fog · 🌧 Heavy rain</div>
-          <div>Feed-derived only, with source per item.</div></div>
+        <div class="border rounded-lg p-2 bg-slate-50 hidden" id="legend-haz"><b>Road hazards</b>
+          <div>⛔ Reported closure · 🚦 Heavy congestion (TomTom feed)</div>
+          <div>Feed-derived only, with source per item. Not official records.</div></div>
       </div>
       <div class="flex flex-wrap gap-2 mt-2 text-xs items-center">
         <label>City: <select id="flt-city" class="border rounded px-1"><option value="">All</option></select></label>
@@ -155,22 +155,37 @@
         <button id="btn-near-me" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-2 py-1.5 rounded font-bold">Use My Current Location</button>
         <div id="near-me" class="text-xs mt-1">Browser location is requested only after you click. Nothing is stored or tracked.</div>
       </div>
-      <div class="card p-4">
-        <h2 class="font-bold mb-1 text-sm">3–5 · 🚦 Traffic · 🔴 Incidents · ⚠️ Hazards</h2>
-        <div id="hazards" class="text-xs flex flex-col gap-1">Hazards will appear once weather/traffic load.</div>
-        <p class="text-[11px] text-slate-500 mt-1">Hazards are derived only from loaded live feeds (reported road closures + severe observed weather). Not official hazard records.</p>
+      <div class="card p-4 hidden" id="card-hazards">
+        <h2 class="font-bold mb-1 text-sm">3–5 · 🚦 Traffic · 🔴 Incidents · ⚠️ Road Hazards</h2>
+        <div id="hazards" class="text-xs flex flex-col gap-1">Hazards will appear once traffic loads.</div>
+        <p class="text-[11px] text-slate-500 mt-1">Reported TomTom road closures and heavy congestion only. Not official hazard records. Severe weather appears under Weather alerts in Weather &amp; Research mode.</p>
       </div>
-      <div class="card p-4">
-        <h2 class="font-bold mb-1 text-sm">7 · 📡 LIVE DATA AVAILABILITY</h2>
-        <div id="availability" class="text-xs flex flex-col gap-1">Loading…</div>
+      <div class="card p-4" id="card-wxhaz">
+        <h2 class="font-bold mb-1 text-sm">3–5 · ⛈ Weather Alerts &amp; Hazards</h2>
+        <div id="hazards-wx" class="text-xs flex flex-col gap-1">Hazards will appear once weather loads.</div>
+        <p class="text-[11px] text-slate-500 mt-1">Severe observed weather only (Open-Meteo). Not official hazard records.</p>
       </div>
-      <div class="card p-4 text-xs">
+      <div class="card p-4" id="card-avail-wx">
+        <h2 class="font-bold mb-1 text-sm">7 · 📡 Weather &amp; Research Availability</h2>
+        <div id="availability-wx" class="text-xs flex flex-col gap-1">Loading…</div>
+      </div>
+      <div class="card p-4 hidden" id="card-avail-traf">
+        <h2 class="font-bold mb-1 text-sm">7 · 📡 Traffic Service Availability</h2>
+        <div id="availability-traf" class="text-xs flex flex-col gap-1">Loading…</div>
+      </div>
+      <div class="card p-4 text-xs" id="card-sections">
         <h2 class="font-bold mb-1 text-sm">Sections</h2>
+        <div id="sections-wx">
         <div>Weather — 🟢 live below</div>
+        <div>Official accident records — 🔴 access-restricted (research section)</div>
+        <div>Weather hazards — 🟡 partial (weather-driven only)</div>
+        <div>Government Data Watch — 🟢 live below</div>
+        </div>
+        <div id="sections-traf" class="hidden">
         <div>Traffic — <span id="sec-traffic">checking…</span></div>
         <div>Reported incidents — <span id="sec-incidents">checking…</span></div>
-        <div>Hazards — 🟡 partial (weather-driven only)</div>
-        <div>Government Data Watch — 🟢 live below</div>
+        <div>Road hazards — derived from reported closures &amp; congestion</div>
+        </div>
       </div>
     </div>
   </div><!-- /grid: map + sidebar -->
@@ -207,7 +222,7 @@
     <div><a class="underline" href="/">← Research Dashboard</a></div>
   </div>
 </footer>
-<script src="/static/js/live.js?v=ph26"></script>
-<script src="/static/js/india_map.js?v=ph26"></script>
+<script src="/static/js/live.js?v=ph261"></script>
+<script src="/static/js/india_map.js?v=ph261"></script>
 </body>
 </html>

@@ -58,4 +58,4 @@ def test_live_page_serves_mode_cards(client):
     html = client.get("/live").data.decode()
     assert "Current Traffic" in html
     assert "Current Weather" in html
-    assert "v=ph26" in html
+    assert "v=ph261" in html
