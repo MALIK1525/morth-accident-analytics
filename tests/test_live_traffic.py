@@ -291,6 +291,25 @@ def test_tile_caches_and_caps(monkeypatch):
     assert a == b == b"PNGDATA"
 
 
+def test_tile_order_no_duplicates_and_clear_resets(monkeypatch):
+    def fake(req, timeout=None):
+        class R:
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self): return b"PNGDATA"
+        return R()
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    monkeypatch.setenv("TOMTOM_API_KEY", "k")
+    live_traffic._tile_cache.clear()
+    live_traffic._tile_order.clear()
+    live_traffic.fetch_tile("relative0", 7, 78, 54)
+    live_traffic.fetch_tile("relative0", 7, 78, 54)  # cache hit: no dup entry
+    assert live_traffic._tile_order.count(("relative0", 7, 78, 54)) == 1
+    live_traffic.clear_caches()
+    assert live_traffic._tile_cache == {}
+    assert live_traffic._tile_order == []
+
+
 def test_tile_route_validation(client):
     r = client.get("/api/live/traffic/tile/bogus/7/78/54.png")
     assert r.status_code == 400

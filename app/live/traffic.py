@@ -321,7 +321,8 @@ def fetch_tile(style, z, x, y):
         _record_error(e)
         raise
     _tile_cache[cache_key] = (now, body)
-    _tile_order.append(cache_key)
+    if cache_key not in _tile_order:
+        _tile_order.append(cache_key)
     while len(_tile_order) > TILE_CACHE_MAX:
         _tile_cache.pop(_tile_order.pop(0), None)
     return body
@@ -330,3 +331,5 @@ def fetch_tile(style, z, x, y):
 def clear_caches():
     _flow_cache.update(at=0.0, data=None)
     _inc_cache.update(at=0.0, data=None)
+    _tile_cache.clear()
+    _tile_order.clear()
