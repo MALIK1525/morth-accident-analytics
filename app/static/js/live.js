@@ -193,7 +193,7 @@ async function onTrafficMapClick(e) {
       `Travel time: <b>${fmt(d.travel_time_s, ' s', 0)}</b><br>` +
       `Confidence: <b>${d.confidence !== null && d.confidence !== undefined ? d.confidence : 'Not available'}</b><br>` +
       `Closure: <b>${d.road_closure ? 'YES' : 'no'}</b><br>` +
-      `<span style="color:#64748B">One sampled segment — not a whole highway. Source: TomTom, ${d.fetched_at || ''}</span>`
+      `<span style="color:#64748B">One sampled segment — not a whole highway. Source: TomTom, fetched ${d.fetched_at || ''} (fetch time; provider observation time not supplied)</span>`
     ).openOn(mapTraffic);
   } catch (err) {
     if (box) box.innerText = 'Segment details unavailable for this point. Coverage: monitored areas where the provider returns flow.';

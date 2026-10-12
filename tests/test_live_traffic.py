@@ -217,6 +217,51 @@ def test_status_reflects_key_state(client, no_key):
     assert layers["Traffic"] == "AWAITING_API_KEY"
 
 
+def test_tile_cache_expiry_evict_never_stale(monkeypatch):
+    calls = []
+
+    def fake(req, timeout=None):
+        calls.append(1)
+
+        class R:
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self): return b"PNG"
+        return R()
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    monkeypatch.setenv("TOMTOM_API_KEY", "k")
+    live_traffic._tile_cache.clear()
+    live_traffic._tile_order.clear()
+    assert live_traffic.fetch_tile("relative0", 7, 78, 54) == b"PNG"
+    assert live_traffic.fetch_tile("relative0", 7, 78, 54) == b"PNG"
+    assert len(calls) == 1  # second served from cache
+    # force expiry -> refetch
+    for k in list(live_traffic._tile_cache):
+        at, body = live_traffic._tile_cache[k]
+        live_traffic._tile_cache[k] = (at - live_traffic.TILE_TTL_S - 1, body)
+    assert live_traffic.fetch_tile("relative0", 7, 78, 54) == b"PNG"
+    assert len(calls) == 2
+    # eviction cap respected
+    assert len(live_traffic._tile_cache) <= live_traffic.TILE_CACHE_MAX
+
+
+def test_tile_upstream_failure_no_stale(monkeypatch):
+    import urllib.error
+    monkeypatch.setenv("TOMTOM_API_KEY", "k")
+    live_traffic._tile_cache.clear()
+    live_traffic._tile_order.clear()
+
+    def fake(req, timeout=None):
+        raise urllib.error.HTTPError(req.full_url, 503, "down", {}, None)
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    try:
+        live_traffic.fetch_tile("relative0", 7, 78, 54)
+        assert False, "should raise"
+    except Exception:
+        pass
+    assert live_traffic._tile_cache == {}  # failures never cached as success
+
+
 def test_tile_validation_no_provider_call(monkeypatch):
     called = []
     def fake(req, timeout=None):
