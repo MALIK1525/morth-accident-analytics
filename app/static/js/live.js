@@ -40,6 +40,17 @@ function tickAges() {
 setInterval(tickAges, 30000);
 
 function drawHazards() {
+  // Weather-derived hazards → weather card; traffic-derived → traffic card. Never mixed.
+  const wxBox = document.getElementById('hazards-wx');
+  if (wxBox) {
+    const out = [];
+    weatherPoints.forEach(p => {
+      if (p.condition === 'Thunderstorm') out.push(`⛈ Thunderstorm observed at ${p.name} (Open-Meteo)`);
+      else if (p.condition === 'Fog') out.push(`🌫 Fog observed at ${p.name} (Open-Meteo)`);
+      else if (typeof p.precipitation_mm === 'number' && p.precipitation_mm >= 5) out.push(`🌧 Heavy rain observed at ${p.name}: ${p.precipitation_mm} mm (Open-Meteo)`);
+    });
+    wxBox.innerHTML = out.length ? out.slice(0, 20).map(h => `<div>• ${h}</div>`).join('') : 'No severe weather currently observed at monitored locations.';
+  }
   const box = document.getElementById('hazards');
   if (!box) return;
   const out = [];
@@ -47,15 +58,10 @@ function drawHazards() {
     if (p.road_closure) out.push(`⛔ Reported road closure near ${p.name} (TomTom flow feed)`);
     else if (p.condition === 'Very heavy' || p.condition === 'Heavy') out.push(`🚦 ${p.condition} congestion near ${p.name} (TomTom flow feed)`);
   });
-  weatherPoints.forEach(p => {
-    if (p.condition === 'Thunderstorm') out.push(`⛈ Thunderstorm observed at ${p.name} (Open-Meteo)`);
-    else if (p.condition === 'Fog') out.push(`🌫 Fog observed at ${p.name} (Open-Meteo)`);
-    else if (typeof p.precipitation_mm === 'number' && p.precipitation_mm >= 5) out.push(`🌧 Heavy rain observed at ${p.name}: ${p.precipitation_mm} mm (Open-Meteo)`);
-  });
   incidentPoints.slice(0, 300).forEach(p => {
     if (p.category === 'Road closed' || p.category === 'Flooding') out.push(`⚠ ${p.category}: ${p.road || 'location undisclosed'} (TomTom incidents)`);
   });
-  box.innerHTML = out.length ? out.slice(0, 20).map(h => `<div>• ${h}</div>`).join('') : 'No hazards currently derived from loaded live feeds.';
+  box.innerHTML = out.length ? out.slice(0, 20).map(h => `<div>• ${h}</div>`).join('') : 'No reported closures or heavy congestion in monitored areas right now.';
 }
 
 function fmt(v, suffix, digits) {
@@ -216,22 +222,25 @@ function showTrafficDetail(html, sub) {
   if (el) el.innerHTML = html;
 }
 
+const WX_AVAIL = ['Weather', 'Official accident records', 'Hazards', 'Government data watch'];
+const TRAF_AVAIL = ['Traffic', 'Reported incidents'];
+
 function applyModePanels(which) {
-  const cw = document.getElementById('card-weather');
-  const ct = document.getElementById('card-traffic');
-  const nm = document.getElementById('card-nearme');
-  const kw = document.getElementById('live-kpis');
-  const kt = document.getElementById('live-kpis-traffic');
-  const nw = document.getElementById('kpi-note-weather');
-  const nt = document.getElementById('kpi-note-traffic');
   const traffic = which === 'traffic';
-  if (cw) cw.classList.toggle('hidden', traffic);
-  if (ct) ct.classList.toggle('hidden', !traffic);
-  if (nm) nm.classList.toggle('hidden', traffic);
-  if (kw) kw.classList.toggle('hidden', traffic);
-  if (kt) kt.classList.toggle('hidden', !traffic);
-  if (nw) nw.classList.toggle('hidden', traffic);
-  if (nt) nt.classList.toggle('hidden', !traffic);
+  const pairs = [
+    ['card-weather', traffic], ['card-traffic', !traffic], ['card-nearme', traffic],
+    ['live-kpis', traffic], ['live-kpis-traffic', !traffic],
+    ['kpi-note-weather', traffic], ['kpi-note-traffic', !traffic],
+    ['card-hazards', !traffic], ['card-wxhaz', traffic],
+    ['card-avail-wx', traffic], ['card-avail-traf', !traffic],
+    ['legend-states', traffic], ['legend-weather', traffic],
+    ['legend-flow', !traffic], ['legend-inc', !traffic], ['legend-haz', !traffic],
+    ['sections-wx', traffic], ['sections-traf', !traffic],
+  ];
+  pairs.forEach(([id, hide]) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden', hide);
+  });
 }
 
 function showTab(which) {
@@ -670,13 +679,25 @@ document.getElementById('wflt-exp').addEventListener('change', () => { watchShow
 document.getElementById('btn-watch').addEventListener('click', () => loadWatch(true));
 
 async function loadAvailability() {
+  const render = (elId, layers) => {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const dot = { AVAILABLE: '🟢', AWAITING_API_KEY: '🟡', AWAITING_API: '🟡', PARTIAL: '🟡', PLANNED: '🟡', NOT_AVAILABLE: '🔴' };
+    el.innerHTML = layers.map(
+      l => `<div>${dot[l.state] || '⚪'} <b>${l.layer}</b> — ${l.note}</div>`).join('');
+  };
   try {
     const res = await fetch('/api/live/status');
     const data = await res.json();
-    const dot = { AVAILABLE: '🟢', AWAITING_API_KEY: '🟡', AWAITING_API: '🟡', PARTIAL: '🟡', PLANNED: '🟡', NOT_AVAILABLE: '🔴' };
-    document.getElementById('availability').innerHTML = data.layers.map(
-      l => `<div>${dot[l.state] || '⚪'} <b>${l.layer}</b> — ${l.note}</div>`).join('');
-  } catch (e) { document.getElementById('availability').innerText = 'Availability unknown.'; }
+    const layers = data.layers || [];
+    render('availability-wx', layers.filter(l => WX_AVAIL.includes(l.layer)));
+    render('availability-traf', layers.filter(l => TRAF_AVAIL.includes(l.layer)));
+  } catch (e) {
+    ['availability-wx', 'availability-traf'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = 'Availability unknown.';
+    });
+  }
 }
 
 document.getElementById('btn-refresh').addEventListener('click', () => { loadLive(true); loadTraffic(true); loadIncidents(true); });

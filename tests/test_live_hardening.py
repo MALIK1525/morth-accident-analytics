@@ -15,9 +15,10 @@ def _html():
 def test_sections_and_toggles_present():
     html = _html()
     for token in ("India Live Map", "lyr-weather", "lyr-traffic", "lyr-incidents",
-                  "Current Weather", "map-legend", "Reported incidents",
-                  "Government Data Watch", "LIVE DATA AVAILABILITY",
-                  "wflt-geo", "wflt-exp", "hazards", "layer-ages"):
+                  "Current Weather", "Current Traffic", "map-legend", "Reported incidents",
+                  "Government Data Watch", "Weather &amp; Research Availability",
+                  "Traffic Service Availability",
+                  "wflt-geo", "wflt-exp", "hazards", "hazards-wx", "layer-ages"):
         assert token in html, token
 
 
