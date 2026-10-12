@@ -104,6 +104,42 @@ def live_watch_download():
                     "path": os.path.basename(dest)})
 
 
+@live_bp.route("/api/live/traffic/tile/<style>/<int:z>/<int:x>/<int:y>.png",
+                     methods=["GET"])
+def live_traffic_tile(style, z, x, y):
+    """Same-origin flow-tile proxy: the browser never sees the provider key."""
+    from flask import Response
+    try:
+        body = live_traffic.fetch_tile(style, z, x, y)
+    except ValueError as e:
+        return jsonify({"status": "error", "message": f"Invalid tile request: {e}"}), 400
+    except RuntimeError as e:
+        return jsonify({"status": "error", "message": str(e)}), 503
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Traffic tile service unavailable"}), 502
+    resp = Response(body, mimetype="image/png")
+    resp.headers["Cache-Control"] = "public, max-age=60"
+    return resp
+
+
+@live_bp.route("/api/live/traffic/segment", methods=["GET"])
+def live_traffic_segment():
+    """Point flow details for a clicked map location (speeds, confidence…)."""
+    try:
+        obs = live_traffic.fetch_flow(request.args.get("lat"),
+                                       request.args.get("lon"))
+    except (TypeError, ValueError) as e:
+        return jsonify({"status": "error",
+                        "message": f"Invalid coordinates: {e}"}), 400
+    except RuntimeError as e:
+        return jsonify({"status": "error", "message": str(e)}), 503
+    except Exception:
+        return jsonify({"status": "error",
+                        "message": "Traffic segment temporarily unavailable"}), 502
+    obs["fetched_at"] = __import__("time").strftime("%H:%M:%S IST",
+                                                     __import__("time").localtime())
+    return jsonify({"status": "success", **obs})
 @live_bp.route("/api/live/traffic/flow", methods=["GET"])
 def live_traffic_flow():
     force = (request.args.get("refresh") == "1")

@@ -123,6 +123,18 @@ def test_traffic_cluster_search_city():
         assert token in js, token
 
 
+def test_traffic_tile_layer():
+    html = open("app/templates/live.html", encoding="utf-8").read()
+    for token in ("traffic/tile/relative0", "traffic-tile-notice",
+                  "onTrafficMapClick", "traffic/segment"):
+        assert token in html or token in open(
+            "app/static/js/live.js", encoding="utf-8").read(), token
+    js = open("app/static/js/live.js", encoding="utf-8").read()
+    import re as _re
+    assert _re.search(r"(TOMTOM_API_KEY|DATA_GOV_IN_API_KEY)\s*=\s*['\"][A-Za-z0-9]", js) is None
+    assert "key=" not in js
+
+
 def test_two_map_split():
     html = open("app/templates/live.html", encoding="utf-8").read()
     for token in ("tab-weather", "tab-traffic", "map-traffic",

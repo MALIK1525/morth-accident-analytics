@@ -154,8 +154,22 @@ function ensureTrafficMap() {
     mapTraffic = L.map('map-traffic').setView([22.5, 79.5], 5);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       { maxZoom: 12, attribution: '© OpenStreetMap contributors' }).addTo(mapTraffic);
+    // Provider flow tiles via same-origin proxy (key stays server-side).
+    // relative0: green near free flow → orange/red slowing → white closed.
+    const flow = L.tileLayer('/api/live/traffic/tile/relative0/{z}/{x}/{y}.png',
+      { maxZoom: 12, opacity: 0.85,
+        attribution: 'Flow © TomTom', errorTileUrl: '' });
+    let tileErrs = 0;
+    flow.on('tileerror', () => {
+      tileErrs += 1;
+      const n = document.getElementById('traffic-tile-notice');
+      if (n && tileErrs >= 3) n.classList.remove('hidden');
+    });
+    flow.addTo(mapTraffic);
+    window._flowTiles = flow;
     trafficLayerT.addTo(mapTraffic);
     incidentLayerT.addTo(mapTraffic);
+    mapTraffic.on('click', onTrafficMapClick);
     applyToggles();
     setTimeout(() => { try { mapTraffic.invalidateSize(); } catch (e) {} }, 100);
   } catch (e) {
@@ -163,6 +177,27 @@ function ensureTrafficMap() {
     mapTraffic = null;
   }
   return mapTraffic;
+}
+
+async function onTrafficMapClick(e) {
+  if (!mapTraffic) return;
+  const box = document.getElementById('traffic-status');
+  try {
+    const res = await fetch(`/api/live/traffic/segment?lat=${e.latlng.lat.toFixed(3)}&lon=${e.latlng.lng.toFixed(3)}`);
+    const d = await res.json();
+    if (d.status !== 'success') throw new Error('empty');
+    L.popup().setLatLng(e.latlng).setContent(
+      `<b>Road segment</b> (nearest provider segment)<br>` +
+      `Current speed: <b>${fmt(d.current_speed_kmh, ' km/h', 0)}</b><br>` +
+      `Free-flow speed: <b>${fmt(d.free_flow_speed_kmh, ' km/h', 0)}</b><br>` +
+      `Travel time: <b>${fmt(d.travel_time_s, ' s', 0)}</b><br>` +
+      `Confidence: <b>${d.confidence !== null && d.confidence !== undefined ? d.confidence : 'Not available'}</b><br>` +
+      `Closure: <b>${d.road_closure ? 'YES' : 'no'}</b><br>` +
+      `<span style="color:#64748B">One sampled segment — not a whole highway. Source: TomTom, ${d.fetched_at || ''}</span>`
+    ).openOn(mapTraffic);
+  } catch (err) {
+    if (box) box.innerText = 'Segment details unavailable for this point. Coverage: monitored areas where the provider returns flow.';
+  }
 }
 
 function showTab(which) {
@@ -204,8 +239,11 @@ function applyToggles() {
     if (!w && map.hasLayer(weatherLayer)) map.removeLayer(weatherLayer);
   }
   if (mapTraffic) {
-    if (t && !mapTraffic.hasLayer(trafficLayerT)) trafficLayerT.addTo(mapTraffic);
-    if (!t && mapTraffic.hasLayer(trafficLayerT)) mapTraffic.removeLayer(trafficLayerT);
+    const fl = window._flowTiles;
+    if (fl) {
+      if (t && !mapTraffic.hasLayer(fl)) fl.addTo(mapTraffic);
+      if (!t && mapTraffic.hasLayer(fl)) mapTraffic.removeLayer(fl);
+    }
     if (ii && !mapTraffic.hasLayer(incidentLayerT)) incidentLayerT.addTo(mapTraffic);
     if (!ii && mapTraffic.hasLayer(incidentLayerT)) mapTraffic.removeLayer(incidentLayerT);
   }
@@ -213,17 +251,19 @@ function applyToggles() {
 
 function wireToggles() {
   const apply = () => { applyToggles(); };
-  ['lyr-weather', 'lyr-traffic', 'lyr-incidents'].forEach(id =>
-    document.getElementById(id).addEventListener('change', apply));
-  ['flt-city', 'flt-inc', 'flt-traf'].forEach(id =>
-    document.getElementById(id).addEventListener('change', () => { drawWeather(); drawTraffic(); drawIncidents(); }));
+  ['lyr-weather', 'lyr-traffic', 'lyr-incidents', 'flt-city', 'flt-inc'].forEach(id => {
+    const el = document.getElementById(id);
+    if (id.startsWith('flt-')) { if (el) el.addEventListener('change', () => { drawWeather(); drawTraffic(); drawIncidents(); }); }
+    else if (el) el.addEventListener('change', applyToggles);
+  });
 }
 
 function passFilters(p, kind) {
   const city = document.getElementById('flt-city').value;
   if (city && p.name !== city) return false;
   if (kind === 'traffic') {
-    const t = document.getElementById('flt-traf').value;
+    const tel = document.getElementById('flt-traf');
+    const t = tel ? tel.value : '';
     if (t && p.condition !== t) return false;
   }
   if (kind === 'incident') {
@@ -309,29 +349,9 @@ async function loadTraffic(force) {
 }
 
 function drawTraffic() {
-  trafficLayerT.clearLayers();
-  trafficPoints.filter(p => passFilters(p, 'traffic')).forEach(p => {
-    const html = `<div class="wx-marker wx-circle" title="${p.condition}"><span style="font-weight:bold">${(p.condition || '?')[0]}</span></div>`;
-    const m = L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', html, iconSize: [30, 30] }) });
-    m.bindTooltip(`<b>${p.name} — ${p.condition}</b><br>Current: ${fmt(p.current_speed_kmh, ' km/h', 0)}<br>Free-flow: ${fmt(p.free_flow_speed_kmh, ' km/h', 0)}<br>Delay: ${fmt(p.delay_s, ' s', 0)}`);
-    m.on('click', () => {
-      highlightMarker(m);
-      document.getElementById('detail-sub').innerText = '— ' + p.name + ' traffic';
-      document.getElementById('weather-detail').innerHTML =
-        `<div class="text-lg font-bold">${p.name} traffic — ${p.condition}</div>` +
-        `<div>Current speed: <b>${fmt(p.current_speed_kmh, ' km/h', 0)}</b></div>` +
-        `<div>Free-flow speed: <b>${fmt(p.free_flow_speed_kmh, ' km/h', 0)}</b></div>` +
-        `<div>Travel time: <b>${fmt(p.travel_time_s, ' s', 0)}</b></div>` +
-        `<div>Delay: <b>${fmt(p.delay_s, ' s', 0)}</b></div>` +
-        `<div>Road closure reported: <b>${p.road_closure ? 'YES' : 'no'}</b></div>` +
-        `<div>Source: <b>TomTom Traffic API</b></div>`;
-    });
-    trafficLayerT.addLayer(m);
-    if (p.current_speed_kmh !== null && p.current_speed_kmh !== undefined) {
-      L.circle([p.lat, p.lon], { radius: 22000, color: '#111827', weight: p.line_weight || 2,
-        dashArray: TRAFFIC_DASH[p.line_dash] || '', fill: false }).addTo(trafficLayerT);
-    }
-  });
+  // Flow is rendered as provider tiles on the traffic map; per-city points
+  // feed only the city selector, badges and coverage (no point markers).
+  fillTrafficCities();
 }
 
 async function loadIncidents(force) {

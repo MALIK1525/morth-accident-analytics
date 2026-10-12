@@ -217,6 +217,56 @@ def test_status_reflects_key_state(client, no_key):
     assert layers["Traffic"] == "AWAITING_API_KEY"
 
 
+def test_tile_validation_no_provider_call(monkeypatch):
+    called = []
+    def fake(req, timeout=None):
+        called.append(1)
+        return FakeResp(b"PNG")
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    with pytest.raises(ValueError):
+        live_traffic.fetch_tile("nope", 7, 78, 54)
+    with pytest.raises(ValueError):
+        live_traffic.fetch_tile("relative0", 99, 0, 0)
+    with pytest.raises(ValueError):
+        live_traffic.fetch_tile("relative0", 7, 99999, 0)
+    assert called == []
+
+
+def test_tile_caches_and_caps(monkeypatch):
+    def fake(req, timeout=None):
+        class R:
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self): return b"PNGDATA"
+        return R()
+    monkeypatch.setattr("urllib.request.urlopen", fake)
+    monkeypatch.setenv("TOMTOM_API_KEY", "k")
+    a = live_traffic.fetch_tile("relative0", 7, 78, 54)
+    b = live_traffic.fetch_tile("relative0", 7, 78, 54)
+    assert a == b == b"PNGDATA"
+
+
+def test_tile_route_validation(client):
+    r = client.get("/api/live/traffic/tile/bogus/7/78/54.png")
+    assert r.status_code == 400
+    r = client.get("/api/live/traffic/tile/relative0/99/0/0.png")
+    assert r.status_code == 400
+    r = client.get("/api/live/traffic/tile/relative0/7/99999/0.png")
+    assert r.status_code == 400
+
+
+def test_tile_route_no_key_leak(client, no_key):
+    r = client.get("/api/live/traffic/tile/relative0/7/78/54.png")
+    assert r.status_code == 503
+    assert "TOMTOM_API_KEY" not in r.get_data(as_text=True)
+
+
+def test_segment_endpoint_validation(client, monkeypatch):
+    monkeypatch.setenv("TOMTOM_API_KEY", "k")
+    r = client.get("/api/live/traffic/segment?lat=abc&lon=0")
+    assert r.status_code == 400
+
+
 def test_unknown_category_preserved_not_guessed(with_key, monkeypatch):
     _patch(monkeypatch, {"incidents": [{
         "type": 1, "geometry": {"type": "Point", "coordinates": [77.0, 28.0]},

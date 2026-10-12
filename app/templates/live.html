@@ -99,6 +99,7 @@
         </div>
         <div id="map-traffic" class="rounded-lg border border-slate-300" style="height:600px"></div>
         <p class="text-[11px] text-slate-500 mt-1" id="traffic-status">TomTom traffic flow + reported incidents (NOT official accident records). Coverage: monitored-city areas.</p>
+        <p class="text-[11px] text-amber-700 mt-1 hidden" id="traffic-tile-notice">Flow tiles are failing to load — incidents and stats below still work. The provider tile service may be rate-limited.</p>
         <div id="incident-list" class="text-xs mt-2 border rounded-lg p-2 bg-slate-50 max-h-44 overflow-auto">Incidents will appear here when the Traffic tab loads.</div>
       </div>
       <div id="boundary-status" class="text-[11px] mt-1 text-slate-500">Loading state boundaries…</div>
@@ -114,9 +115,10 @@
         <div class="border rounded-lg p-2 bg-slate-50"><b>Weather</b>
           <div>☀ ○ Clear · ☁ ○ Partly cloudy · ☁ □ Overcast</div>
           <div>△ Rain · ★ Thunderstorm · ◇ Fog · ⬡ Snow</div></div>
-        <div class="border rounded-lg p-2 bg-slate-50"><b>Traffic</b> (width + dash)
-          <div>thin solid: Free flow · medium solid: Moderate</div>
-          <div>thick solid: Slow · thick dashed: Heavy · thick dash-dot: Very heavy</div></div>
+        <div class="border rounded-lg p-2 bg-slate-50"><b>Traffic flow</b> (TomTom relative0 tiles)
+          <div>Green: near free flow · Orange: slowing · Dark red: severe</div>
+          <div>White: road closed · Grey/blank: no provider data (not clear)</div>
+          <div>Click a road for segment speeds. Tiles show provider data only.</div></div>
         <div class="border rounded-lg p-2 bg-slate-50"><b>Reported incidents</b> (shape + symbol)
           <div>▲ ! Accident report · ⬠ X Closed · ⬠ W Works</div>
           <div>■ Jam/lane · ◆ Hazard · ● Other — NOT official records</div>
@@ -128,7 +130,6 @@
       <div class="flex flex-wrap gap-2 mt-2 text-xs items-center">
         <label>City: <select id="flt-city" class="border rounded px-1"><option value="">All</option></select></label>
         <label>Incident type: <select id="flt-inc" class="border rounded px-1"><option value="">All</option></select></label>
-        <label>Traffic: <select id="flt-traf" class="border rounded px-1"><option value="">All</option><option>Free flow</option><option>Moderate</option><option>Slow</option><option>Heavy</option><option>Very heavy</option></select></label>
       </div>
     </div>
     <div class="flex flex-col gap-4">

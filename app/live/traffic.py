@@ -18,8 +18,19 @@ import urllib.request
 from app.live.weather import MONITORED_CITIES
 
 TIMEOUT_S = 10
+TILE_TIMEOUT_S = 15
 FLOW_TTL_S = 300
 INCIDENT_TTL_S = 900
+TILE_TTL_S = 120
+
+# Raster flow tiles (TomTom Traffic API v4, documented styles). relative0 is
+# the default: ratio-to-free-flow bands plus an explicit road-closed color.
+TILE_STYLES = ("relative0", "relative", "absolute")
+TILE_ZMIN, TILE_ZMAX = 0, 14
+TILE_CACHE_MAX = 150
+
+_tile_cache = {}
+_tile_order = []
 
 # Per-city incident bbox half-width in degrees (~55 km). One whole-India bbox
 # is rejected by the provider ("bbox area larger than 10,000 km2"), so the
@@ -278,6 +289,42 @@ def get_incidents(force=False):
     out = dict(data)
     out["cached"] = False
     return out
+
+
+def fetch_tile(style, z, x, y):
+    """Fetch one raster flow tile via server-side key. Returns PNG bytes.
+
+    Raises ValueError for invalid tile coordinates/style (no provider call),
+    RuntimeError/URLError otherwise. The key never leaves the server.
+    """
+    if style not in TILE_STYLES:
+        raise ValueError("unsupported style")
+    if not (TILE_ZMIN <= z <= TILE_ZMAX):
+        raise ValueError("zoom out of range")
+    if not (0 <= x < 2 ** z and 0 <= y < 2 ** z):
+        raise ValueError("tile coordinates out of range")
+    key = os.environ.get("TOMTOM_API_KEY", "")
+    if not key:
+        raise RuntimeError("missing key")
+    cache_key = (style, z, x, y)
+    now = time.time()
+    hit = _tile_cache.get(cache_key)
+    if hit and (now - hit[0]) < TILE_TTL_S:
+        return hit[1]
+    url = (f"https://api.tomtom.com/traffic/map/4/tile/flow/{style}/{z}/{x}/{y}.png"
+           + "?" + urllib.parse.urlencode({"key": key}))
+    req = urllib.request.Request(url, headers={"User-Agent": "MoRTH-Live-Monitor/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=TILE_TIMEOUT_S) as resp:
+            body = resp.read()
+    except Exception as e:
+        _record_error(e)
+        raise
+    _tile_cache[cache_key] = (now, body)
+    _tile_order.append(cache_key)
+    while len(_tile_order) > TILE_CACHE_MAX:
+        _tile_cache.pop(_tile_order.pop(0), None)
+    return body
 
 
 def clear_caches():
