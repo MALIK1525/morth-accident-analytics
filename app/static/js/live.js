@@ -236,6 +236,8 @@ function applyModePanels(which) {
     ['legend-states', traffic], ['legend-weather', traffic],
     ['legend-flow', !traffic], ['legend-inc', !traffic], ['legend-haz', !traffic],
     ['sections-wx', traffic], ['sections-traf', !traffic],
+    ['lbl-lyr-weather', traffic], ['lbl-lyr-traffic', !traffic],
+    ['lbl-lyr-incidents', !traffic], ['badge-weather', traffic], ['badge-traffic', !traffic],
   ];
   pairs.forEach(([id, hide]) => {
     const el = document.getElementById(id);

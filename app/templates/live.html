@@ -88,11 +88,11 @@
         </div>
         <label class="text-xs">State/UT: <select id="state-search" class="border rounded px-1 py-0.5"><option value="">Select state / UT…</option></select></label>
         <button id="btn-india-reset" class="text-xs bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded font-semibold">Reset to India</button>
-        <label class="text-xs"><input type="checkbox" id="lyr-weather" checked> Weather</label>
-        <label class="text-xs"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
-        <label class="text-xs"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
+        <label class="text-xs" id="lbl-lyr-weather"><input type="checkbox" id="lyr-weather" checked> Weather</label>
+        <label class="text-xs" id="lbl-lyr-traffic"><input type="checkbox" id="lyr-traffic" checked> Traffic Flow</label>
+        <label class="text-xs" id="lbl-lyr-incidents"><input type="checkbox" id="lyr-incidents" checked> Reported Incidents</label>
         <span id="badge-weather" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Weather: loading…</span>
-        <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200">⚪ Traffic: loading…</span>
+        <span id="badge-traffic" class="text-[11px] px-2 py-0.5 rounded bg-slate-200 hidden">⚪ Traffic: loading…</span>
       </div>
       <div id="map-weather-wrap">
       <div id="live-map" class="rounded-lg border border-slate-300"></div>

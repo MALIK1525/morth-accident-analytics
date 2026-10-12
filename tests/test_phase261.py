@@ -36,7 +36,9 @@ def test_all_mode_panels_toggled_by_single_function():
     assert "function applyModePanels" in JS
     body = JS.split("function applyModePanels")[1].split("\n}\n")[0]
     for el in (WX_ONLY + TRAF_ONLY + ["card-weather", "card-traffic", "card-nearme",
-               "live-kpis", "live-kpis-traffic", "kpi-note-weather", "kpi-note-traffic"]):
+               "live-kpis", "live-kpis-traffic", "kpi-note-weather", "kpi-note-traffic",
+               "lbl-lyr-weather", "lbl-lyr-traffic", "lbl-lyr-incidents",
+               "badge-weather", "badge-traffic"]):
         assert el in body, f"#{el} not driven by applyModePanels"
 
 
