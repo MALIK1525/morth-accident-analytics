@@ -69,7 +69,14 @@
     <div class="card p-3"><div class="eyebrow">Avg temp (monitored locations)</div><div class="text-2xl font-bold" id="kpi-avg">—</div></div>
     <div class="card p-3"><div class="eyebrow">Max / Min temp</div><div class="text-2xl font-bold" id="kpi-range">—</div></div>
   </div>
-  <p class="text-[11px] text-slate-500 -mt-2">Monitored-location summary only — not an "India temperature".</p>
+  <p class="text-[11px] text-slate-500 -mt-2" id="kpi-note-weather">Monitored-location summary only — not an "India temperature".</p>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 hidden" id="live-kpis-traffic">
+    <div class="card p-3"><div class="eyebrow">Traffic flow status</div><div class="text-2xl font-bold" id="kpi-tflow">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Reported incidents</div><div class="text-2xl font-bold" id="kpi-tinc">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Reported closures</div><div class="text-2xl font-bold" id="kpi-tclose">—</div></div>
+    <div class="card p-3"><div class="eyebrow">Flow coverage</div><div class="text-sm font-bold" id="kpi-tcov">—</div></div>
+  </div>
+  <p class="text-[11px] text-slate-500 -mt-2 hidden" id="kpi-note-traffic">Provider-reported incidents in monitored-city areas — not total accidents in India.</p>
 
   <div class="grid lg:grid-cols-3 gap-4">
     <div class="lg:col-span-2 card p-4">
@@ -133,12 +140,17 @@
       </div>
     </div>
     <div class="flex flex-col gap-4">
-      <div class="card p-4">
+      <div class="card p-4" id="card-weather">
         <h2 class="font-bold mb-1">2 · 🌧️ Current Weather <span class="text-xs font-normal text-slate-500" id="detail-sub">— select a marker</span></h2>
         <div id="weather-detail" class="text-sm">Click a city marker on the map.</div>
         <div class="text-[11px] text-slate-500 mt-2">Source: Open-Meteo (not official IMD measurements).</div>
       </div>
-      <div class="card p-4">
+      <div class="card p-4 hidden" id="card-traffic">
+        <h2 class="font-bold mb-1">2 · 🚦 Current Traffic <span class="text-xs font-normal text-slate-500" id="traffic-detail-sub">— select an incident or road</span></h2>
+        <div id="traffic-detail" class="text-sm">Click a traffic incident marker or a road on the Traffic map.</div>
+        <div class="text-[11px] text-slate-500 mt-2">Source: TomTom Traffic API — reported incidents, NOT official accident records.</div>
+      </div>
+      <div class="card p-4" id="card-nearme">
         <h2 class="font-bold mb-1 text-sm">📍 Weather Near Me <span class="text-xs font-normal text-slate-500">(optional)</span></h2>
         <button id="btn-near-me" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-2 py-1.5 rounded font-bold">Use My Current Location</button>
         <div id="near-me" class="text-xs mt-1">Browser location is requested only after you click. Nothing is stored or tracked.</div>
@@ -195,7 +207,7 @@
     <div><a class="underline" href="/">← Research Dashboard</a></div>
   </div>
 </footer>
-<script src="/static/js/live.js?v=ph21"></script>
-<script src="/static/js/india_map.js?v=ph21"></script>
+<script src="/static/js/live.js?v=ph26"></script>
+<script src="/static/js/india_map.js?v=ph26"></script>
 </body>
 </html>

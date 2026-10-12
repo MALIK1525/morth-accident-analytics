@@ -284,3 +284,4 @@ initIndiaMap().catch(e => {
 });
 wireStateSearch();
 wireNearMe();
+if (typeof applyModePanels === 'function') applyModePanels('weather');

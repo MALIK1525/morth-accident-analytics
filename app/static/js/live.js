@@ -186,6 +186,15 @@ async function onTrafficMapClick(e) {
     const res = await fetch(`/api/live/traffic/segment?lat=${e.latlng.lat.toFixed(3)}&lon=${e.latlng.lng.toFixed(3)}`);
     const d = await res.json();
     if (d.status !== 'success') throw new Error('empty');
+    const segHtml =
+      `<div class="text-lg font-bold">Selected road segment</div>` +
+      `<div>Current speed: <b>${fmt(d.current_speed_kmh, ' km/h', 0)}</b></div>` +
+      `<div>Free-flow speed: <b>${fmt(d.free_flow_speed_kmh, ' km/h', 0)}</b></div>` +
+      `<div>Travel time: <b>${fmt(d.travel_time_s, ' s', 0)}</b></div>` +
+      `<div>Confidence: <b>${d.confidence !== null && d.confidence !== undefined ? d.confidence : 'Not available'}</b></div>` +
+      `<div>Closure: <b>${d.road_closure ? 'YES' : 'no'}</b></div>` +
+      `<div class="text-slate-500">One sampled segment — not a whole highway. Source: TomTom, fetched ${d.fetched_at || ''} (fetch time; provider observation time not supplied)</div>`;
+    showTrafficDetail(segHtml, 'road segment');
     L.popup().setLatLng(e.latlng).setContent(
       `<b>Road segment</b> (nearest provider segment)<br>` +
       `Current speed: <b>${fmt(d.current_speed_kmh, ' km/h', 0)}</b><br>` +
@@ -200,8 +209,34 @@ async function onTrafficMapClick(e) {
   }
 }
 
+function showTrafficDetail(html, sub) {
+  const el = document.getElementById('traffic-detail');
+  const s = document.getElementById('traffic-detail-sub');
+  if (s) s.innerText = '— ' + (sub || 'selected');
+  if (el) el.innerHTML = html;
+}
+
+function applyModePanels(which) {
+  const cw = document.getElementById('card-weather');
+  const ct = document.getElementById('card-traffic');
+  const nm = document.getElementById('card-nearme');
+  const kw = document.getElementById('live-kpis');
+  const kt = document.getElementById('live-kpis-traffic');
+  const nw = document.getElementById('kpi-note-weather');
+  const nt = document.getElementById('kpi-note-traffic');
+  const traffic = which === 'traffic';
+  if (cw) cw.classList.toggle('hidden', traffic);
+  if (ct) ct.classList.toggle('hidden', !traffic);
+  if (nm) nm.classList.toggle('hidden', traffic);
+  if (kw) kw.classList.toggle('hidden', traffic);
+  if (kt) kt.classList.toggle('hidden', !traffic);
+  if (nw) nw.classList.toggle('hidden', traffic);
+  if (nt) nt.classList.toggle('hidden', !traffic);
+}
+
 function showTab(which) {
   activeTab = which;
+  applyModePanels(which);
   const w = document.getElementById('map-weather-wrap');
   const t = document.getElementById('map-traffic-wrap');
   const bw = document.getElementById('tab-weather');
@@ -340,11 +375,17 @@ async function loadTraffic(force) {
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
     badge.innerText = '🟢 LIVE Source: TomTom Updated: ' + data.fetched_at + (data.cached ? ' (cached)' : '');
     sec.innerText = '🟢 live (TomTom)';
+    const tf = document.getElementById('kpi-tflow');
+    if (tf) tf.innerText = data.points && data.points.length ? '🟢 Live' : 'Empty';
+    const tc = document.getElementById('kpi-tcov');
+    if (tc) tc.innerText = 'Monitored-city areas';
   } catch (e) {
     console.error('Live traffic failed:', e);
     badge.className = 'text-[11px] px-2 py-0.5 rounded bg-rose-100 text-rose-800';
     badge.innerText = '🔴 Traffic temporarily unavailable';
     if (sec) sec.innerText = '🔴 temporarily unavailable (weather unaffected)';
+    const tf = document.getElementById('kpi-tflow');
+    if (tf) tf.innerText = 'Unavailable';
   }
 }
 
@@ -367,9 +408,15 @@ async function loadIncidents(force) {
     layerEpoch.incidents = Date.now(); tickAges();
     fillIncidentFilter();
     if (secI) secI.innerText = `🟢 live — ${incidentPoints.length} reported incident(s) (TomTom, NOT official records)`;
+    const ti = document.getElementById('kpi-tinc');
+    if (ti) ti.innerText = incidentPoints.length;
+    const tcl = document.getElementById('kpi-tclose');
+    if (tcl) tcl.innerText = incidentPoints.filter(p => /clos/i.test(p.category || '')).length;
   } catch (e) {
     console.error('Live incidents failed:', e);
     if (secI) secI.innerText = '🔴 temporarily unavailable (weather unaffected)';
+    const ti = document.getElementById('kpi-tinc');
+    if (ti) ti.innerText = 'Unavailable';
   }
 }
 
@@ -383,16 +430,17 @@ function drawIncidents() {
     m.bindTooltip(`<b>${p.category}</b><br>${p.road || ''}`);
     m.on('click', () => {
       highlightMarker(m);
-      document.getElementById('detail-sub').innerText = '— reported incident';
-      document.getElementById('weather-detail').innerHTML =
+      showTrafficDetail(
         `<div class="text-lg font-bold">${p.symbol} ${p.category} (reported traffic incident)</div>` +
+        `<div>Type: <b>${p.category}</b></div>` +
         `<div>Description: <b>${p.description || 'Not available'}</b></div>` +
         (p.delay_label ? `<div>Severity: <b>${p.delay_label}</b> (provider-reported)</div>` : '') +
         `<div>Road: <b>${p.road || 'Not available'}</b></div>` +
         (p.near ? `<div>Nearest monitored city: <b>${p.near}</b> (query area, not exact scope)</div>` : '') +
         `<div>Start: <b>${p.start_time || 'Not available'}</b></div>` +
         `<div>Expected end: <b>${p.end_time || 'Not available'}</b></div>` +
-        `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`;
+        `<div>Source: <b>TomTom Traffic API — NOT an official accident record</b></div>`,
+        'reported incident');
     });
     window._incidentMarkers[p.id || ('n' + idx)] = m;
     incidentLayerT.addLayer(m);
